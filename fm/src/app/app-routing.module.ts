@@ -5,6 +5,8 @@ import { EducationalComponent } from './educational/educational.component';
 import { SkillsetComponent } from './skillset/skillset.component';
 import { ProfessionalComponent } from './professional/professional.component';
 import { DetailsComponent } from './details/details.component';
+import { HeaderComponent } from './header/header.component';
+// import { HeaderComponent } from 'ag-grid-community/dist/types/core/components/framework/componentTypes';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent, data: { animation: 'GeneralPage' } },
@@ -12,6 +14,7 @@ const routes: Routes = [
   { path: 'skillset', component: SkillsetComponent, data: { animation: 'SkillsetPage' } },
   { path: 'professional', component: ProfessionalComponent, data: { animation: 'ProfessionalPage' } },
   { path: 'details', component: DetailsComponent, data: { animation: 'detailsPage' } },
+  {path: 'header', component:HeaderComponent}
 
   // { path: '', redirectTo: '/general', pathMatch: 'full' }
 ];

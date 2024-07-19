@@ -1,2 +1,62 @@
-<app-header></app-header>
-
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+  <div class="header">
+    <h1 class="title">deskbird</h1>
+    <div class="toggle" (click)="handleSidebarToggle()">
+      <span class="chevron"></span>
+    </div>
+  </div>
+  <div class="content">
+    <div class="link">
+      <div class="content" >
+        <div class="icon">
+          <!-- SVG content -->
+        </div>
+        <div class="title"  (click)="headerNavigate()">Home</div>
+      </div>
+    </div>
+    <div class="link with-children">
+      <div class="content" >
+        <div class="icon">
+          <!-- SVG content -->
+        </div>
+        <div class="title">Configuration</div>
+      </div>
+      <div class="children">
+        <div class="link">
+          <div class="content">
+            <div class="icon">
+              <!-- SVG content -->
+            </div>
+            <div class="title">child 1</div>
+          </div>
+        </div>
+        <div class="link">
+          <div class="content">
+            <div class="icon">
+              <!-- SVG content -->
+            </div>
+            <div class="title">child 2</div>
+          </div>
+        </div>
+        <div class="link">
+          <div class="content">
+            <div class="icon">
+              <!-- SVG content -->
+            </div>
+            <div class="title">child 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="link">
+      <div class="content">
+        <div class="icon">
+          <!-- SVG content -->
+        </div>
+        <div class="title">Bookings</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
+<router-outlet></router-outlet>
