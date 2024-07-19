@@ -1,0 +1,78 @@
+.d-flex-gap {
+  display: flex;
+  gap: 10rem;
+}
+label{
+  font-weight: 700;
+}
+h2{
+  font-size: 1.5rem;
+  margin-top: 34px;
+  margin-bottom: 20px;
+  font-weight: lighter;
+  font-weight: 400;
+}
+.fa-user{
+  font-size: 25px;
+  height: 5px;
+  width: 30px;
+}
+.table {
+  width: 100%;
+  margin: 20px 0;
+}
+.btn {
+  margin-top: 10px;
+}
+.table-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+th{
+  background-color:#ebebeb;
+  padding: 10px;
+}
+// .label-spacing {
+//   margin-bottom: 10px;
+// }
+// .label-div{
+//   margin-top: 26px;
+// }
+.table-btn{
+  background-color:  #30a3bf;
+  color: white;
+  margin-left: 68rem;
+}
+.table-btn-1{
+  background-color:  #30a3bf;
+  color: white;
+  margin-left: 75.7rem;
+}
+.invalid-input {
+  border-color: red;
+}
+.next{
+  background-color:#8929a6 ;
+  color: white;
+  margin-left: 74.7rem;
+}
+
+.fa-chevron-right{
+  font-size: 13px;
+  padding: 4px;
+}
+
+.radio-yes .form-check-input:checked {
+  background-color: green;
+  border-color: green;
+}
+
+.radio-no .form-check-input:checked {
+  background-color: red;
+  border-color: red;
+}
+
+.input-group-text {
+  cursor: pointer;
+}
+
