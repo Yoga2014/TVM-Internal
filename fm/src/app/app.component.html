@@ -1,59 +1,43 @@
 <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
   <div class="header">
-    <h1 class="title">deskbird</h1>
+    <h1 class="title">TVM Infotech</h1>
     <div class="toggle" (click)="handleSidebarToggle()">
       <span class="chevron"></span>
     </div>
   </div>
   <div class="content">
     <div class="link">
-      <div class="content" >
+      <div class="content">
         <div class="icon">
           <!-- SVG content -->
-        </div>
-        <div class="title"  (click)="headerNavigate()">Home</div>
+        </div>  
+        <div class="title" (click)="headerNavigate()">Home</div>
       </div>
     </div>
     <div class="link with-children">
-      <div class="content" >
+      <div class="content">
         <div class="icon">
           <!-- SVG content -->
         </div>
-        <div class="title">Configuration</div>
+        <div class="title">Leave Tracker</div>
       </div>
-      <div class="children">
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 1</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 2</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 3</div>
-          </div>
-        </div>
-      </div>
+
     </div>
     <div class="link">
       <div class="content">
         <div class="icon">
           <!-- SVG content -->
         </div>
-        <div class="title">Bookings</div>
+        <div class="title">Time Tracker</div>
+      </div>
+    </div>
+    <!-- New Performance link -->
+    <div class="link">
+      <div class="content">
+        <div class="icon">
+          <!-- SVG content -->
+        </div>
+        <div class="title" (click)="navigateGolas()">Performance</div>
       </div>
     </div>
   </div>

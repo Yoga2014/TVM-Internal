@@ -1,0 +1,49 @@
+{
+  "Goals": [
+    {
+      "id": "2f16",
+      "startDate": "2024-07-12",
+      "goalName": "full stack developer",
+      "dueDate": "2024-08-29",
+      "priority": "High",
+      "description": "Test",
+      "progress": 50
+    },
+    {
+      "id": "b78d",
+      "startDate": "2024-06-06",
+      "goalName": "software engineer",
+      "dueDate": "2024-08-09",
+      "priority": "Medium",
+      "description": "test",
+      "progress": 90
+    },
+    {
+      "id": "b5bb",
+      "startDate": "2024-09-07",
+      "goalName": "full stack developer",
+      "dueDate": "2024-07-13",
+      "priority": "High",
+      "description": "Test",
+      "progress": 100
+    },
+    {
+      "id": "3340",
+      "startDate": "2024-07-24",
+      "goalName": "full stack developer",
+      "dueDate": "2024-11-20",
+      "priority": "Medium",
+      "description": "Study,Test",
+      "progress": 40
+    },
+    {
+      "id": "57c0",
+      "startDate": "2024-07-23",
+      "goalName": "software engineer",
+      "dueDate": "2024-07-18",
+      "priority": "High",
+      "description": "test",
+      "progress": 10
+    }
+  ]
+}

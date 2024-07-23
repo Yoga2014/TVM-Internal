@@ -25,6 +25,7 @@
     "ag-grid-angular": "^31.3.2",
     "ag-grid-community": "^31.3.2",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "font-awesome": "^4.7.0",
     "highcharts-angular": "^4.0.0",
     "igniteui-angular": "^17.2.1",

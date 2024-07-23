@@ -35,6 +35,8 @@ export class AppComponent {
     this.router.navigate(['/header'])
   }
 
-
+  navigateGolas(){
+    this.router.navigate(['/goals'])
+  }
 
 }

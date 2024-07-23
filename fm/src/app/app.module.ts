@@ -14,6 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DetailsComponent } from './details/details.component';
 import {AgGridModule } from 'ag-grid-angular'
+import { GoalsComponent } from './goals/goals.component';
+import { AddgoalsComponent } from './addgoals/addgoals.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -26,7 +30,9 @@ import {AgGridModule } from 'ag-grid-angular'
     SkillsetComponent,
     ProfessionalComponent,
     HeaderComponent,
-    DetailsComponent
+    DetailsComponent,
+    GoalsComponent,
+    AddgoalsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,10 @@ import {AgGridModule } from 'ag-grid-angular'
     FormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    AgGridModule
+    AgGridModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
 
 
   ],

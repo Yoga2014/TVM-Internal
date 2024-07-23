@@ -1,0 +1,92 @@
+<body>
+  <nav class="navbar navbar-expand-lg" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="showContainer(); $event.preventDefault()" >MyData</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Skill Set Matrix</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" ><i class="fas fa-search"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" ><i class="fas fa-bell"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" ><i class="fas fa-cog"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" ><i class="fas fa-user"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  
+  <div class="container" *ngIf="isContainerVisible">
+    <div class="header">
+      <a class="skill-set" href="#">Skill Set</a>
+      <a class="goals" href="#" (click)="showGoalTracker(); $event.preventDefault()">Goals</a>
+      <a class="competency" href="#">Competency</a>
+      <a class="feedback" href="#">Feedback</a>
+    </div>
+  </div>
+  
+  <div  class="goal-body" >
+    <div class="goal-tracker" *ngIf="isGoalTrackerVisible">
+      <div class="goal-header">
+        <div class="goal-filters">
+          <div class="filter" (click)="filterGoals('all')">All In-progress Goals ({{ allGoalsCount }})</div>
+          <div class="filter" (click)="filterGoals('this-week')">This Week ({{ thisWeekGoalsCount }})</div>
+          <div class="filter" (click)="filterGoals('last-week')">Last Week ({{ lastWeekGoalsCount }})</div>
+          <div class="filter" (click)="filterGoals('this-month')">This Month ({{ thisMonthGoalsCount }})</div>
+          <div class="filter" (click)="filterGoals('last-month')">Last Month ({{ lastMonthGoalsCount }})</div>
+        </div>
+        <button class="btn btn-primary" (click)="addGoal()">Add Goal</button>
+      </div>
+    
+      <div class="goal-content">
+        <div *ngIf="filteredGoals.length > 0; else noGoals">
+          <div class="row">
+            <div class="col-md-12 mb-4" *ngFor="let goal of filteredGoals">
+              <div class="card" style="width: 80rem;">
+                <div class="card-body">
+                  <div class="card-body-content">
+                    <input type="checkbox" [id]="'checkbox-' + goal.id" />
+                    <h5 class="card-title mb-0">
+                      <i class="fas fa-trophy"></i> {{ goal.goalName }}
+                    </h5>
+                    <button class="btn1" >{{ goal.priority }}</button>
+
+                  </div>
+                  <p class="card-text">{{ goal.description }}</p>
+                  <div class="progress-container">
+                    <div class="progress" style="flex: 1;">
+                      <div class="progress-bar bg-primary" [ngStyle]="{ width: goal.progress + '%' }" role="progressbar" [attr.aria-valuenow]="goal.progress" aria-valuemin="0" aria-valuemax="100">{{ goal.progress }}%</div>
+                    </div>
+                    <span class="progress-label">{{ goal.progress === 100 ? 'Completed' : 'In Progress' }}</span>
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  <button class="btn btn-danger" (click)="deleteGoal(goal.id)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noGoals>
+          <div class="text-center">
+            <img src="https://media.giphy.com/media/3o7TKS6hB1a5C42t52/giphy.gif" alt="No goals defined" class="img-fluid"> 
+            <p>No Goals defined</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</body>
