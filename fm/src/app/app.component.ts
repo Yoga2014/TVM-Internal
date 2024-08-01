@@ -35,6 +35,9 @@ export class AppComponent {
     this.router.navigate(['/header'])
   }
 
+  navigatecalendar(){
+    this.router.navigate(['calendar'])
 
+  }
 
 }
