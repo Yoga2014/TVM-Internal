@@ -1,0 +1,666 @@
+
+<form [formGroup]="personalDataForm" (ngSubmit)="onSubmit()">
+    <!-- Existing fields -->
+    <label for="postAppliedFor">Post Applied For:</label>
+    <input id="postAppliedFor" formControlName="postAppliedFor" />
+
+    <h3>Personal Data</h3>
+    <fieldset>
+        <table>
+          <tr><td><label>Photo : <input type="file" (change)="onFileSelected($event)"></label></td></tr>
+          <tr >
+            
+            <td><label for="firstName">First Name:</label></td>
+            <td><input  class="ft" id="firstName" formControlName="firstName" placeholder="Enter first name"  /></td>
+          </tr>
+          <tr>
+            <td><label for="lastName">Last Name:</label></td>
+            <td><input class="ft" id="lastName" formControlName="lastName" placeholder="Enter last name"  /></td>
+          </tr>
+          <tr>
+            <td><label for="middleName">Middle Name:</label></td>
+            <td><input class="ft" id="middleName" formControlName="middleName" placeholder="Enter middle name" /></td>
+          </tr>
+          <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input class="ft" id="email" formControlName="email" placeholder="Enter email" type="email" /></td>
+          </tr>
+          <tr>
+            <td><label for="birthDate">Birth Date:</label></td>
+            <td><input class="ft" id="birthDate" formControlName="birthDate" type="date" /></td>
+          </tr>
+          <tr>
+            <td><label for="birthPlace">Birth Place:</label></td>
+            <td><input class="ft" id="birthPlace" formControlName="birthPlace" placeholder="Enter birth place"  /></td>
+          </tr>
+          <tr>
+            <td><label for="gender">Gender:</label></td>
+            <td>
+              <select id="gender" formControlName="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="age">Age:</label></td>
+            <td><input class="ft" id="age" formControlName="age" placeholder="Enter age" typr="number"/></td>
+          </tr>
+          <tr>
+            <td><label for="maritalStatus">Marital Status:</label></td>
+            <td>
+              <select id="maritalStatus" formControlName="maritalStatus">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="marriageDate">Marriage Date:</label></td>
+            <td><input class="ft" id="marriageDate" formControlName="marriageDate" type="date" /></td>
+          </tr>
+          <tr>
+            <td><label for="nativeState">Native State:</label></td>
+            <td><input class="ft" id="nativeState" formControlName="nativeState" placeholder="Enter native state" /></td>
+          </tr>
+          <tr>
+            <td><label for="religion">Religion:</label></td>
+            <td><input class="ft" id="religion" formControlName="religion" placeholder="Enter religion" /></td>
+          </tr>
+          <tr>
+            <td><label for="nationality">Nationality:</label></td>
+            <td><input  class="ft"id="nationality" formControlName="nationality" placeholder="Enter nationality"  /></td>
+          </tr>
+          <tr>
+            <td><label for="stateOfDomicile">State of Domicile:</label></td>
+            <td><input class="ft" id="stateOfDomicile" formControlName="stateOfDomicile" placeholder="Enter state of domicile" /></td>
+          </tr>
+          <tr>
+            <td><label for="category">Category:</label></td>
+            <td>
+              <section formControlName="category">
+                <input type="radio" id="general" formControlName="category" value="General" />
+                <label for="general">General</label>
+                <input type="radio" id="obc" formControlName="category" value="OBC" />
+                <label for="obc">OBC</label>
+                <input type="radio" id="sc" formControlName="category" value="SC" />
+                <label for="sc">SC</label>
+                <input type="radio" id="st" formControlName="category" value="ST" />
+                <label for="st">ST</label>
+                <input type="radio" id="dt" formControlName="category" value="DT" />
+                <label for="dt">DT</label>
+                <input type="radio" id="nt" formControlName="category" value="NT" />
+                <label for="nt">NT</label>
+                <input type="radio" id="sBC" formControlName="category" value="SBC" />
+                <label for="sBC">SBC</label>
+              </section>
+            </td>
+          </tr>
+        </table>
+     
+    </fieldset>
+    
+    
+<fieldset>
+  <div formArrayName="familyDetails">
+    <div *ngFor="let familyMember of familyDetails.controls; let i = index;" [formGroupName]="i">
+      <table>
+        <tr>
+        <td><label for="familyDetailsfamilyMemberName">Family Member Name:</label></td>
+        <td><input  class="ft" id="familyDetailsfamilyMemberName" formControlName="name" placeholder="Enter family member's name"  /></td>
+      </tr>
+      <tr>
+        <td><label for="familyDetailsfamilyMemberRelation">Relationship:</label></td>
+        <td><input class="ft" id="familyDetailsfamilyMemberRelation" formControlName="relationship" placeholder="Enter relationship" /></td>
+      </tr> <tr>
+        <td><label for="familyDetailsfamilyMemberDateOfBirth">Date of Birth:</label></td>
+        <td><input class="ft" id="familyDetailsfamilyMemberDateOfBirth" formControlName="dateOfBirth" type="date" /></td>
+      </tr>
+      <tr>
+        <td><label for="familyDetailsfamilyMemberQualification">Qualification:</label></td>
+        <td><input  class="ft" id="familyDetailsfamilyMemberQualification" formControlName="qualification"
+        placeholder="Enter qualification" /></td>
+      </tr>
+      <tr>
+        <td><label for="familyDetailsfamilyMemberOrganization">Occupation:</label></td>
+        <td><input class="ft" id="familyDetailsfamilyMemberOrganization" formControlName="organization" placeholder="Enter occupation"  /></td>
+      </tr>
+      <tr>
+        <td><label for="familyDetailsfamilyMemberDesignationAndPosition">Designation and Position:</label></td>
+        <td><input  class="ft" id="familyDetailsfamilyMemberDesignationAndPosition" formControlName="designationAndPosition"
+        placeholder="Enter designation and position"  /></td>
+      </tr>
+      <tr>
+        <tr><td><button type="button" (click)="removeFamilyMember(i)">Remove</button></td></tr>
+      </table>
+    </div>
+  </div>
+
+
+  <button type="button" (click)="addFamilyMember()">Add Family Member</button>
+</fieldset>
+
+
+      
+      <h3>Home Mailing Addresses</h3>
+      <fieldset>
+      <h5>Present HomeMailing Address</h5>
+      <div formGroupName="presentHomeMailingAddress">
+        
+        <input  class="ft" id="presentAddress" formControlName="address" placeholder="Address"  maxlength="80">
+        <br><br>
+        <input class="ft" id="presentPinCode" formControlName="pinCode" type="number" placeholder="Pin Code" maxlength="6">
+        <input class="ft" id="presentCell" formControlName="cell" type="number" placeholder="Cell" maxlength="10">
+        <input class="ft" id="presentTelephoneCode" formControlName="telephoneCode" type="number" placeholder="Telephone Code" maxlength="3">
+        <input class="ft" id="presentTelephone" formControlName="telephone" type="number" placeholder="Telephone" maxlength="10">
+      </div>
+     </fieldset> <fieldset>
+      <h5>Permanent HomeMailing Address</h5>
+      <div formGroupName="permanentHomeMailingAddress">
+        
+        <input  class="ft" id="permanentAddress" formControlName="address" placeholder="Address">
+        <br><br>
+        <input class="ft" id="presentPinCode" formControlName="pinCode" type="number" placeholder="Pin Code" maxlength="6">
+        <input class="ft" id="presentCell" formControlName="cell" type="number" placeholder="Cell" maxlength="10">
+        <input class="ft" id="presentTelephoneCode" formControlName="telephoneCode" type="number" placeholder="Telephone Code" maxlength="3">
+        <input class="ft" id="presentTelephone" formControlName="telephone" type="number" placeholder="Telephone" maxlength="10">
+      </div>
+    </fieldset>
+    
+
+  <h3>Emergency Contact</h3>
+  <fieldset>
+    <div formGroupName="emergencyContact">
+      <table>
+        <tr>
+          <td><label for="emergencyContactName">Emergency Contact Name:</label></td>
+          <td><input class="ft" id="emergencyContactName" formControlName="name" /></td>
+        </tr>
+      
+        <tr>
+          <td><label for="emergencyContactRelation">Relation:</label></td>
+          <td><input class="ft" id="emergencyContactRelation" formControlName="relation" /></td>
+        </tr>
+      
+        <tr>
+          <td><label for="emergencyContactAddress">Address:</label></td>
+          <td> <input class="ft"  id="emergencyContactAddress" formControlName="address"  maxlength="80"/></td>
+        </tr>
+      
+        <tr>
+          <td><label for="emergencyContactTelephoneNo">Telephone No:</label></td>
+          <td> <input class="ft" id="emergencyContactTelephoneNo" type="number" formControlName="telephoneNo" maxlength="10"/></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  
+
+  <!-- Passport and Visa Section -->
+  <h3>Passport and Visa Details</h3>
+  <fieldset>
+    <table>
+      <tr>
+        <td><label for="passportNo">Passport No:</label></td>
+        <td><input class="ft" id="passportNo" formControlName="passportNo" type="number" placeholder="Enter passport number" maxlength="16"/></td>
+      </tr>
+
+      <tr>
+        <td><label for="passportIssueDate">Passport Issue Date:</label></td>
+        <td><input class="ft" id="passportIssueDate" formControlName="passportIssueDate" type="date" /></td>
+      </tr>
+
+      <tr>
+        <td><label for="validUptoDate">Valid Upto Date:</label></td>
+        <td><input class="ft" id="validUptoDate" formControlName="validUptoDate" type="date" /></td>
+      </tr>
+
+      <tr>
+        <td><label for="countryOfIssue">Country of Issue:</label></td>
+        <td><input class="ft" id="countryOfIssue" formControlName="countryOfIssue" placeholder="Enter country of issue" /></td>
+      </tr>
+
+      <tr>
+        <td><label for="validVisaDetails">Valid Visa Details:</label></td>
+        <td><input class="ft" id="validVisaDetails" formControlName="validVisaDetails" placeholder="Enter visa details" /></td>
+      </tr>
+
+      <tr>
+        <td><label for="panNumber">PAN Number:</label></td>
+        <td><input class="ft" id="panNumber" formControlName="panNumber" type="number" placeholder="Enter PAN number" maxlength="16"/></td>
+      </tr>
+
+    </table>
+  </fieldset>
+  <h3>Health Data</h3>
+  <fieldset>
+    <div formGroupName="healthData">
+      <table>
+        <tr>
+          <td><label for="healthDataHeight">Height (cm):</label></td>
+          <td><input class="ft" id="healthDataHeight" type="number" formControlName="height" placeholder="Enter height in cm" maxlength="3"/></td>
+        </tr>
+        <tr>
+          <td><label for="healthDataWeight">Weight (kg):</label></td>
+          <td><input class="ft" id="healthDataWeight" type="number" formControlName="weight" placeholder="Enter weight in kg" maxlength="3"/></td>
+        </tr>
+        <tr>
+          <td><label for="healthDataBloodGroup">Blood Group:</label></td>
+          <td><input class="ft" id="healthDataBloodGroup" formControlName="bloodGroup" placeholder="Enter blood group" maxlength="5"/></td>
+        </tr>
+        <tr>
+          <td><label for="eyesightRight">Eyesight Right:</label></td>
+          <td><input class="ft" id="eyesightRight" formControlName="eyesightRight" placeholder="Enter eyesight for right eye" /></td>
+        </tr>
+        <tr>
+          <td><label for="eyesightLeft">Eyesight Left:</label></td>
+          <td><input class="ft" id="eyesightLeft" formControlName="eyesightLeft" placeholder="Enter eyesight for left eye" /></td>
+        </tr>
+        <tr>
+          <td><label for="physicalDisability">Physical Disability:</label></td>
+          <td><input class="ft" id="physicalDisability" formControlName="physicalDisability" placeholder="Describe physical disability"  maxlength="50"/></td>
+        </tr>
+        <tr>
+          <td><label for="identificationMarks">Identification Marks:</label></td>
+          <td><input class="ft" id="identificationMarks" formControlName="identificationMarks" placeholder="Enter identification marks" /></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  
+  <h3>Education</h3>
+<fieldset>
+  <div formArrayName="education">
+    <div *ngFor="let education of educationControls.controls; let i = index" [formGroupName]="i">
+      <table>
+        <tr>
+          <td><label for="educationExaminationPassed">Examination Passed:</label></td>
+          <td>
+            <select id="educationExaminationPassed" formControlName="examinationPassed">
+              <option value="SSC">SSC</option>
+              <option value="HSC">HSC</option>
+              <option value="Diploma">Diploma</option>
+              <option value="UG">UG</option>
+              <option value="PG">PG</option>
+              <option value="B.Tech">B.Tech</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="educationSpecialisation">Specialisation:</label></td>
+          <td><input class="ft" id="educationSpecialisation" formControlName="specialisation" placeholder="Enter specialisation" /></td>
+        </tr>
+        <tr>
+          <td><label for="educationSchoolCollegeInstitution">School/College/Institution:</label></td>
+          <td><input class="ft" id="educationSchoolCollegeInstitution" formControlName="schoolCollegeInstitution" placeholder="Enter school/college/institution"  maxlength="80"/></td>
+        </tr>
+        <tr>
+          <td><label for="educationUniversityBoard">University/Board:</label></td>
+          <td><input class="ft" id="educationUniversityBoard" formControlName="universityBoard" placeholder="Enter university/board"  maxlength="80"/></td>
+        </tr>
+        <tr>
+          <td><label for="educationCourseCorres">Course Correspondence:</label></td>
+          <td><input class="ft" id="educationCourseCorres" formControlName="courseCorres" placeholder="Enter course correspondence"  maxlength="90"/></td>
+        </tr>
+        <tr>
+          <td><label for="educationDurationOfCourse">Duration of Course:</label></td>
+          <td><input class="ft" id="educationDurationOfCourse" formControlName="durationOfCourse" placeholder="Enter duration of course"  /></td>
+        </tr>
+        <tr>
+          <td><label for="educationMonthYearOfPassing">Month & Year of Passing:</label></td>
+          <td><input class="ft" id="educationMonthYearOfPassing" type="month" formControlName="monthYearOfPassing" /></td>
+        </tr>
+        <tr>
+          <td><label for="educationGradeMarks">Grade/Marks:</label></td>
+          <td><input class="ft" id="educationGradeMarks" type="number" formControlName="gradeMarks" placeholder="Enter grade or marks" maxlength="9999"/></td>
+        </tr>
+        <tr>
+          <td><label for="educationDistinctions">Distinctions:</label></td>
+          <td><input class="ft" id="educationDistinctions" formControlName="distinctions" placeholder="Enter any distinctions" /></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button type="button" (click)="removeEducation(i)">Remove</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <button type="button" (click)="addEducation()">Add Education</button>
+</fieldset>
+<h3>Language Known</h3>
+<fieldset>
+  
+<div formArrayName="languagesKnown">
+  <div *ngFor="let language of languagesKnown.controls; let i = index">
+    <div [formGroupName]="i">
+      <label for="language">Language:</label>
+      <input id="language" formControlName="languageName">
+
+      <label for="speak">Speak:</label>
+      <input type="checkbox" id="speak" formControlName="speakeLanguage">
+
+      <label for="read">Read:</label>
+      <input type="checkbox" id="read" formControlName="readLanguage">
+
+      <label for="write">Write:</label>
+      <input type="checkbox" id="write" formControlName="writeLanguage">
+
+      <button type="button" (click)="removeLanguage(i)">Remove Language</button>
+    </div>
+  </div>
+  <button type="button" (click)="addLanguage()">Add Language</button>
+</div>
+</fieldset>
+  <h3>Membership of Professional Institute</h3>
+  <fieldset>
+    <div formGroupName="membershipOfProfessionalInstitute">
+      <table>
+        <tr>
+          <td><label for="membershipNameOfInstitute">Name of Institute:</label></td>
+          <td><input class="ft" id="membershipNameOfInstitute" formControlName="nameOfInstitute" placeholder="Enter name of institute"  maxlength="100" /></td>
+        </tr>
+        <tr>
+          <td><label for="membershipTypeOfMembership">Type of Membership and Position Held:</label></td>
+          <td><input class="ft"id="membershipTypeOfMembership" formControlName="typeOfMembershipAndPositionHeld" placeholder="Enter type of membership and position held"  maxlength="200"/></td>
+        </tr>
+        <tr>
+          <td><label for="membershipPeriod">Period:</label></td>
+          <td><input class="ft" id="membershipPeriod" formControlName="period" placeholder="Enter membership period" /></td>
+        </tr>
+        <tr>
+          <td><label for="membershipFromDate">From Date:</label></td>
+          <td><input class="ft" id="membershipFromDate" formControlName="fromDate" type="date" /></td>
+        </tr>
+        <tr>
+          <td><label for="membershipToDate">To Date:</label></td>
+          <td><input class="ft" id="membershipToDate" formControlName="toDate" type="date" /></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  
+  <h3>Training Certification</h3>
+  <fieldset>
+    <div formGroupName="trainingCertification">
+      <table>
+        <tr>
+          <td><label for="trainingNameOfTrainingCourse">Name of Training Course:</label></td>
+          <td><input class="ft" id="trainingNameOfTrainingCourse" formControlName="nameOfTrainingCourse" placeholder="Enter name of training course"  maxlength="100" /></td>
+        </tr>
+        <tr>
+          <td><label for="trainingDuration">Duration:</label></td>
+          <td><input class="ft" id="trainingDuration" type="month" formControlName="duration" placeholder="Enter duration" /></td>
+        </tr>
+        <tr>
+          <td><label for="trainingYear">Year:</label></td>
+          <td><input class="ft" id="trainingYear" type="number" formControlName="year" placeholder="Enter year" maxlength="9999"/></td>
+        </tr>
+        <tr>
+          <td><label for="trainingInstituteOrganization">Institute/Organization:</label></td>
+          <td><input class="ft" id="trainingInstituteOrganization" formControlName="instituteOrganization" placeholder="Enter institute/organization"  maxlength="100"/></td>
+        </tr>
+        <tr>
+          <td><label for="trainingCertificateAwarded">Certificate Awarded:</label></td>
+          <td><input class="ft" id="trainingCertificateAwarded" formControlName="certificateAwarded" type="checkbox"  maxlength="100"/></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  
+  <h3>Extra Curricular Activity</h3>
+  <fieldset>
+    <div formGroupName="extraCurricularActivity">
+      <table>
+        <tr>
+          <td><label for="extraCurricularActivity">Activity:</label></td>
+          <td><input class="ft" id="extraCurricularActivity" formControlName="activity" placeholder="Enter activity" /></td>
+        </tr>
+        <tr>
+          <td><label for="institutionAssociationSocietyClub">Institution/Association/Society/Club:</label></td>
+          <td><input class="ft" id="institutionAssociationSocietyClub" formControlName="institutionAssociationSocietyClub" placeholder="Enter institution/association/society/club" /></td>
+        </tr>
+        <tr>
+          <td><label for="year">Year:</label></td>
+          <td><input class="ft" id="year" type="number" formControlName="year" placeholder="Enter year" maxlength="9999"/></td>
+        </tr>
+        <tr>
+          <td><label for="positionHeld">Position Held:</label></td>
+          <td><input class="ft" id="positionHeld" formControlName="positionHeld" placeholder="Enter position held" /></td>
+        </tr>
+        <tr>
+          <td><label for="prizesWon">Prizes Won:</label></td>
+          <td><input class="ft" id="prizesWon" formControlName="prizesWon" placeholder="Enter prizes won" /></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  
+  <h3>Skills Summary</h3>
+  <fieldset>
+    <div formGroupName="skillsSummary">
+      <table>
+        <tr>
+          <td><label for="projectTitle">Project Title:</label></td>
+          <td><input class="ft" id="projectTitle" formControlName="projectTitle" placeholder="Enter project title" /></td>
+        </tr>
+        <tr>
+          <td><label for="role">Role:</label></td>
+          <td><input class="ft" id="role" formControlName="role" placeholder="Enter role" /></td>
+        </tr>
+        <tr>
+          <td><label for="teamSize">Team Size:</label></td>
+          <td><input class="ft" id="teamSize" formControlName="teamSize" placeholder="Enter team size" maxlength="100" /></td>
+        </tr>
+        <tr>
+          <td><label for="duration">Duration:</label></td>
+          <td><input class="ft" id="duration" type="number" formControlName="duration" placeholder="Enter duration" /></td>
+        </tr>
+        <tr>
+          <td><label for="languagePlatformOS">Language/Platform/OS:</label></td>
+          <td><input class="ft" id="languagePlatformOS" formControlName="languagePlatformOS" placeholder="Enter language/platform/OS" maxlength="30"/></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  <h3>Work Experience</h3>
+<fieldset>
+  <div formGroupName="workExperience">
+    <table>
+      <tr>
+        <td><label for="employerNameAndAddress">Employer Name and Address:</label></td>
+        <td><input class="ft" id="employerNameAndAddress" formControlName="employerNameAndAddress" placeholder="Enter employer name and address" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="durationPeriod">Duration/Period:</label></td>
+        <td><input class="ft" id="durationPeriod" type="number" formControlName="durationPeriod" placeholder="Enter duration/period" /></td>
+      </tr>
+      <tr>
+        <td><label for="durationFrom">From Date:</label></td>
+        <td><input class="ft" id="durationFrom" formControlName="durationFrom" type="date" /></td>
+      </tr>
+      <tr>
+        <td><label for="durationTo">To Date:</label></td>
+        <td><input class="ft" id="durationTo" formControlName="durationTo" type="date" /></td>
+      </tr>
+      <tr>
+        <td><label for="lastPositionHeldDesignation">Last Position Held/Designation:</label></td>
+        <td><input class="ft" id="lastPositionHeldDesignation" formControlName="lastPositionHeldDesignation" placeholder="Enter last position held/designation" /></td>
+      </tr>
+      <tr>
+        <td><label for="natureOfDuties">Nature of Duties:</label></td>
+        <td><input class="ft" id="natureOfDuties" formControlName="natureOfDuties" placeholder="Describe nature of duties" /></td>
+      </tr>
+      <tr>
+        <td><label for="immediateSuperiorNameAndDesignation">Immediate Superior Name and Designation:</label></td>
+        <td><input class="ft" id="immediateSuperiorNameAndDesignation" formControlName="immediateSuperiorNameAndDesignation" placeholder="Enter immediate superior's name and designation" /></td>
+      </tr>
+      <tr>
+        <td colspan="2"><label>Gross Emoluments per Month</label></td>
+      </tr>
+      <tr>
+        <td><label for="atthetimeofjoining">At the Time of Joining:</label></td>
+        <td><input class="ft" id="atthetimeofjoining" formControlName="atthetimeofjoining" placeholder="Enter gross emoluments at the time of joining" /></td>
+      </tr>
+      <tr>
+        <td><label for="atpresent">At Present:</label></td>
+        <td><input class="ft" id="atpresent" formControlName="atpresent" placeholder="Enter gross emoluments at present" /></td>
+      </tr>
+      <tr>
+        <td><label for="reasonsForLeaving">Reasons for Leaving:</label></td>
+        <td><input class="ft" id="reasonsForLeaving" formControlName="reasonsForLeaving" placeholder="Enter reasons for leaving" /></td>
+      </tr>
+    </table>
+  </div>
+</fieldset>
+
+
+<h3>General Data</h3>
+<fieldset>
+  <div formGroupName="generalData">
+    <table>
+      <tr>
+        <td><label for="criminalRecord">Criminal Record:</label></td>
+        <td><input class="ftt" id="criminalRecord" formControlName="criminalRecord" /></td>
+      </tr>
+      <tr>
+        <td><label for="interviewedByTVM">Have you Interviewed by TVM:</label></td>
+        <td><input class="ft" id="interviewedByTVM" formControlName="interviewedByTVM" type="checkbox" /></td>
+      </tr>
+      <tr>
+        <td><label for="dateYear">Date/Year:</label></td>
+        <td><input class="ft" id="dateYear" formControlName="dateYear" type="date" /></td>
+      </tr>
+      <tr>
+        <td><label for="position">Position:</label></td>
+        <td><input class="ft" id="position" formControlName="position" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="companyName">Company Name:</label></td>
+        <td><input class="ft" id="companyName" formControlName="companyName" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="relativesAcquaintanceInTVM">Relatives/Acquaintance in TVM:</label></td>
+        <td><input class="ft" id="name" formControlName="name" placeholder="Enter name" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="relativesPosition">Relatives' Position:</label></td>
+        <td><input class="ft" id="relativesPosition" formControlName="relativesPosition" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="howDidYouComeToKnow">How Did You Come to Know:</label></td>
+        <td><input class="ft"id="howDidYouComeToKnow" formControlName="howDidYouComeToKnow" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="relationship">Relationship:</label></td>
+        <td><input class="ft" id="relationship" formControlName="relationship" maxlength="100"/></td>
+      </tr>
+      <tr>
+        <td><label for="companyTelephoneNos">Company Telephone Nos:</label></td>
+        <td><input class="ft" id="companyTelephoneNos" formControlName="companyTelephoneNos" type="number" maxlength="12"/></td>
+      </tr>
+      <tr>
+        <td><label for="howDidYouKnowPosition">How Did You Know the Position:</label></td>
+        <td><input class="ft" id="howDidYouKnowPosition" formControlName="howDidYouKnowPosition" /></td>
+      </tr>
+      <tr>
+        <td><label for="engagedInPersonalBusiness">Engaged in Personal Business:</label></td>
+        <td><input class="ft" id="engagedInPersonalBusiness" formControlName="engagedInPersonalBusiness" type="checkbox" /></td>
+      </tr>
+      <tr>
+        <td><label for="natureOfBusiness">Nature of Business:</label></td>
+        <td><input class="ft" id="natureOfBusiness" formControlName="natureOfBusiness" /></td>
+      </tr>
+      <tr>
+        <td><label for="hasContractBond">Has Contract Bond:</label></td>
+        <td><input class="ft" id="hasContractBond" formControlName="hasContractBond" type="checkbox" /></td>
+      </tr>
+      <tr>
+        <td><label for="contractBondDetails">Contract Bond Details:</label></td>
+        <td><input class="ft" id="contractBondDetails" formControlName="contractBondDetails" /></td>
+      </tr>
+      <tr>
+        <td><label for="whenCanYouJoin">When Can You Join:</label></td>
+        <td><input class="ft" id="whenCanYouJoin" formControlName="whenCanYouJoin" type="date"/></td>
+      </tr>
+      <tr>
+        <td><label for="superior1Name">Superior 1 Name:</label></td>
+        <td><input class="ft" id="superior1Name" formControlName="superior1Name" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior1Address">Superior 1 Address:</label></td>
+        <td><input class="ft" id="superior1Address" formControlName="superior1Address" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior1TelephoneNos">Superior 1 Telephone Nos:</label></td>
+        <td><input class="ft" id="superior1TelephoneNos" formControlName="superior1TelephoneNos" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior1Company">Superior 1 Company:</label></td>
+        <td><input class="ft" id="superior1Company" formControlName="superior1Company" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior1Position">Superior 1 Position:</label></td>
+        <td><input class="ft" id="superior1Position" formControlName="superior1Position" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior2Name">Superior 2 Name:</label></td>
+        <td><input class="ft" id="superior2Name" formControlName="superior2Name" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior2Address">Superior 2 Address:</label></td>
+        <td><input class="ft" id="superior2Address" formControlName="superior2Address" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior2TelephoneNos">Superior 2 Telephone Nos:</label></td>
+        <td><input class="ft" id="superior2TelephoneNos" formControlName="superior2TelephoneNos" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior2Company">Superior 2 Company:</label></td>
+        <td><input class="ft" id="superior2Company" formControlName="superior2Company" /></td>
+      </tr>
+      <tr>
+        <td><label for="superior2Position">Superior 2 Position:</label></td>
+        <td><input class="ft"  id="superior2Position" formControlName="superior2Position" /></td>
+      </tr>
+      <tr>
+        <td><label for="superiorEmailId1">Superior Email ID 1:</label></td>
+        <td><input class="ft" id="superiorEmailId1" formControlName="superiorEmailId1" type="email"/></td>
+      </tr>
+      <tr>
+        <td><label for="superiorEmailId2">Superior Email ID 2:</label></td>
+        <td><input class="ft" id="superiorEmailId2" formControlName="superiorEmailId2" type="email"/></td>
+      </tr>
+    </table>
+  </div>
+</fieldset>
+
+<h3>Declaration</h3>
+<fieldset>
+  <div formGroupName="declaration">
+    <table>
+      <tr>
+        <td><label for="isPartnerOrRelativeOfDirector">Is Partner or Relative of Director:</label></td>
+        <td><input class="ft" id="isPartnerOrRelativeOfDirector" formControlName="partnerOrRelativeOfDirector" type="checkbox" /></td>
+      </tr>
+      <tr>
+        <td><label for="place">Place:</label></td>
+        <td><input class="ft" id="place" formControlName="place" /></td>
+      </tr>
+      <tr>
+        <td><label for="date">Date:</label></td>
+        <td><input class="ft" id="date" formControlName="date" type="date" /></td>
+      </tr>
+      <tr>
+        <td><label for="applicantName">Applicant Name:</label></td>
+        <td><input class="ft" id="applicantName" formControlName="applicantName" /></td>
+      </tr>
+      <tr>
+        <td><label for="applicantSignature">Applicant Signature:</label></td>
+        <td><input class="ft" id="applicantSignature" formControlName="applicantSignature" type="text" /></td>
+      </tr>
+    </table>
+  </div>
+</fieldset>
+
+
+  <button type="submit">Submit</button>
+</form>

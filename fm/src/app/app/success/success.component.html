@@ -1,0 +1,138 @@
+<div *ngIf="data">
+    <h2>Submission Successful</h2>
+    <p>ID: {{ data.id }}</p>
+    <p>Post Applied For: {{ data.postAppliedFor }}</p>
+    <p>First Name: {{ data.firstName }}</p>
+    <p>Middle Name: {{ data.middleName }}</p>
+    <p>Last Name: {{ data.lastName }}</p>
+    <p>Email: {{ data.email }}</p>
+    <p>Birth Date: {{ data.birthDate | date }}</p>
+    <p>Birth Place: {{ data.birthPlace }}</p>
+    <p>Gender: {{ data.gender }}</p>
+    <p>Age: {{ data.age }}</p>
+    <p>Marital Status: {{ data.maritalStatus }}</p>
+    <p>Marriage Date: {{ data.marriageDate | date }}</p>
+    <p>Native State: {{ data.nativeState }}</p>
+    <p>Religion: {{ data.religion }}</p>
+    <p>Nationality: {{ data.nationality }}</p>
+    <p>State of Domicile: {{ data.stateOfDomicile }}</p>
+    <p>Category: {{ data.category }}</p>
+    <p>Languages Known: {{ data.languagesKnown.join(', ') }}</p>
+    <p>Height: {{ data.height }}</p>
+    <p>Weight: {{ data.weight }}</p>
+    <p>Blood Group: {{ data.bloodGroup }}</p>
+    <p>Passport No: {{ data.passportNo }}</p>
+    <p>Passport Issue Date: {{ data.passportIssueDate | date }}</p>
+    <p>Valid Upto Date: {{ data.validUptoDate | date }}</p>
+    <p>Country of Issue: {{ data.countryOfIssue }}</p>
+    <p>Valid Visa Details: {{ data.validVisaDetails }}</p>
+    <p>PAN Number: {{ data.panNumber }}</p>
+    <p>Family Details: {{ data.familyDetails.join(', ') }}</p>
+    
+    <h3>Emergency Contact</h3>
+    <p>Name: {{ data.emergencyContact.name }}</p>
+    <p>Relation: {{ data.emergencyContact.relation }}</p>
+    <p>Address: {{ data.emergencyContact.address }}</p>
+    <p>Telephone No: {{ data.emergencyContact.telephoneNo }}</p>
+    
+    <h3>Health Data</h3>
+    <p>Height: {{ data.healthData.height }}</p>
+    <p>Weight: {{ data.healthData.weight }}</p>
+    <p>Blood Group: {{ data.healthData.bloodGroup }}</p>
+    <p>Eyesight Right: {{ data.healthData.eyesightRight }}</p>
+    <p>Eyesight Left: {{ data.healthData.eyesightLeft }}</p>
+    <p>Physical Disability: {{ data.healthData.physicalDisability }}</p>
+    <p>Identification Marks: {{ data.healthData.identificationMarks }}</p>
+    
+    <h3>Education</h3>
+    <p>Examination Passed: {{ data.education.examinationPassed }}</p>
+    <p>Specialisation: {{ data.education.specialisation }}</p>
+    <p>School/College/Institution: {{ data.education.schoolCollegeInstitution }}</p>
+    <p>University/Board: {{ data.education.universityBoard }}</p>
+    <p>Course Correspondence: {{ data.education.courseCorres }}</p>
+    
+    <h3>Membership of Professional Institute</h3>
+    <p>Name of Institute: {{ data.membershipOfProfessionalInstitute.nameOfInstitute }}</p>
+    <p>Type of Membership and Position Held: {{ data.membershipOfProfessionalInstitute.typeOfMembershipAndPositionHeld }}</p>
+    <p>Period: {{ data.membershipOfProfessionalInstitute.period }}</p>
+    <p>From Date: {{ data.membershipOfProfessionalInstitute.fromDate | date }}</p>
+    <p>To Date: {{ data.membershipOfProfessionalInstitute.toDate | date }}</p>
+    
+    <h3>Training Certification</h3>
+    <p>Name of Training Course: {{ data.trainingCertification.nameOfTrainingCourse }}</p>
+    <p>Duration: {{ data.trainingCertification.duration }}</p>
+    <p>Year: {{ data.trainingCertification.year }}</p>
+    <p>Institute/Organization: {{ data.trainingCertification.instituteOrganization }}</p>
+    <p>Certificate Awarded: {{ data.trainingCertification.certificateAwarded }}</p>
+    
+    <h3>Extra Curricular Activity</h3>
+    <p>Activity: {{ data.extraCurricularActivity.activity }}</p>
+    <p>Institution/Association/Society/Club: {{ data.extraCurricularActivity.institutionAssociationSocietyClub }}</p>
+    <p>Year: {{ data.extraCurricularActivity.year }}</p>
+    <p>Position Held: {{ data.extraCurricularActivity.positionHeld }}</p>
+    <p>Prizes Won: {{ data.extraCurricularActivity.prizesWon }}</p>
+    
+    <h3>Skills Summary</h3>
+    <p>Project Title: {{ data.skillsSummary.projectTitle }}</p>
+    <p>Role: {{ data.skillsSummary.role }}</p>
+    <p>Team Size: {{ data.skillsSummary.teamSize }}</p>
+    <p>Duration: {{ data.skillsSummary.duration }}</p>
+    <p>Language/Platform/OS: {{ data.skillsSummary.languagePlatformOS }}</p>
+    
+    <h3>Work Experience</h3>
+    <p>Employer Name and Address: {{ data.workExperience.employerNameAndAddress }}</p>
+    <p>Duration/Period: {{ data.workExperience.durationPeriod }}</p>
+    <p>From Date: {{ data.workExperience.durationFrom | date }}</p>
+    <p>To Date: {{ data.workExperience.durationTo | date }}</p>
+    <p>Last Position Held/Designation: {{ data.workExperience.lastPositionHeldDesignation }}</p>
+    <p>Nature of Duties: {{ data.workExperience.natureOfDuties }}</p>
+    <p>Immediate Superior Name and Designation: {{ data.workExperience.immediateSuperiorNameAndDesignation }}</p>
+    <p>Basic at Time of Joining: {{ data.workExperience.basicAtTimeOfJoining }}</p>
+    <p>Fixed at Time of Joining: {{ data.workExperience.fixedAtTimeOfJoining }}</p>
+    <p>Variable at Time of Joining: {{ data.workExperience.variableAtTimeOfJoining }}</p>
+    <p>Gross at Time of Joining: {{ data.workExperience.grossAtTimeOfJoining }}</p>
+    <p>Last Drawn Fixed: {{ data.workExperience.lastDrawnFixed }}</p>
+    <p>Last Drawn Variable: {{ data.workExperience.lastDrawnVariable }}</p>
+    <p>Last Drawn Gross: {{ data.workExperience.lastDrawnGross }}</p>
+    <p>Significant Achievements and Suitability for Position: {{ data.workExperience.significantAchievementsAndsuitedForPosition }}</p>
+    
+    <h3>General Data</h3>
+    <p>Criminal Record: {{ data.generalData.criminalRecord }}</p>
+    <p>Interviewed by TVM: {{ data.generalData.interviewedByTVM }}</p>
+    <p>Date/Year: {{ data.generalData.dateYear | date }}</p>
+    <p>Position: {{ data.generalData.position }}</p>
+    <p>Company Name: {{ data.generalData.companyName }}</p>
+    <p>Relatives/Acquaintance in TVM: {{ data.generalData.relativesAcquaintanceInTVM }}</p>
+    <p>Name: {{ data.generalData.name }}</p>
+    <p>Relatives' Position: {{ data.generalData.relativesPosition }}</p>
+    <p>How Did You Come to Know: {{ data.generalData.howDidYouComeToKnow }}</p>
+    <p>Relationship: {{ data.generalData.relationship }}</p>
+    <p>Company Telephone Nos: {{ data.generalData.companyTelephoneNos }}</p>
+    <p>How Did You Know the Position: {{ data.generalData.howDidYouKnowPosition }}</p>
+    <p>Engaged in Personal Business: {{ data.generalData.engagedInPersonalBusiness }}</p>
+    <p>Nature of Business: {{ data.generalData.natureOfBusiness }}</p>
+    <p>Has Contract Bond: {{ data.generalData.hasContractBond }}</p>
+    <p>Contract Bond Details: {{ data.generalData.contractBondDetails }}</p>
+    <p>When Can You Join: {{ data.generalData.whenCanYouJoin | date }}</p>
+    <p>Superior 1 Name: {{ data.generalData.superior1Name }}</p>
+    <p>Superior 1 Address: {{ data.generalData.superior1Address }}</p>
+    <p>Superior 1 Telephone Nos: {{ data.generalData.superior1TelephoneNos }}</p>
+    <p>Superior 1 Company: {{ data.generalData.superior1Company }}</p>
+    <p>Superior 1 Position: {{ data.generalData.superior1Position }}</p>
+    <p>Superior 2 Name: {{ data.generalData.superior2Name }}</p>
+    <p>Superior 2 Address: {{ data.generalData.superior2Address }}</p>
+    <p>Superior 2 Telephone Nos: {{ data.generalData.superior2TelephoneNos }}</p>
+    <p>Superior 2 Company: {{ data.generalData.superior2Company }}</p>
+    <p>Superior 2 Position: {{ data.generalData.superior2Position }}</p>
+    <p>Superior 1 Email ID: {{ data.generalData.superiorEmailId1 }}</p>
+    <p>Superior 2 Email ID: {{ data.generalData.superiorEmailId2 }}</p>
+    
+    <h3>Declaration</h3>
+    <p>Is Partner or Relative of Director: {{ data.declaration.isPartnerOrRelativeOfDirector }}</p>
+    <p>Place: {{ data.declaration.place }}</p>
+    <p>Date: {{ data.declaration.date | date }}</p>
+    <p>Applicant Signature: {{ data.declaration.applicantSignature }}</p>
+    <p>Director of the Company: {{ data.declaration.directorOfTheCompany }}</p>
+    <p>Connected with Director: {{ data.declaration.connectedWithDirector }}</p>
+  </div>
+  
