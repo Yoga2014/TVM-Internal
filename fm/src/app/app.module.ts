@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DetailsComponent } from './details/details.component';
 import {AgGridModule } from 'ag-grid-angular'
+import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
 
 
 
@@ -26,7 +27,8 @@ import {AgGridModule } from 'ag-grid-angular'
     SkillsetComponent,
     ProfessionalComponent,
     HeaderComponent,
-    DetailsComponent
+    DetailsComponent,
+    PersonalDataFormComponent
   ],
   imports: [
     BrowserModule,
