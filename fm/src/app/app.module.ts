@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
 import { SkillsetComponent } from './skillset/skillset.component';
@@ -13,9 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DetailsComponent } from './details/details.component';
-import {AgGridModule } from 'ag-grid-angular'
+import {AgGridModule } from 'ag-grid-angular';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
-
 
 
 
@@ -38,12 +37,10 @@ import { PersonalDataFormComponent } from './personal-data-form/personal-data-fo
     FormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    AgGridModule
-
-
+    AgGridModule,
   ],
   providers: [
-
+  
   ],
   bootstrap: [AppComponent]
 })
