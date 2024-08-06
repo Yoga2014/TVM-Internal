@@ -1,0 +1,25 @@
+<div class="calendar-container">
+  <div class="header">
+    <button (click)="previousWeek()">&#8249;</button>
+    <div class="current-week">
+      <i class="fas fa-calendar-week" (click)="toggleCalendar()"></i>
+      {{ currentWeek }}
+    </div>
+    <button (click)="nextWeek()">&#8250;</button>
+  </div>
+  <div class="calendar">
+    <p-calendar *ngIf="isCalendarVisible" [showTime]="true" [(ngModel)]="selectedDate" (onChange)="onDateChange($event)"
+      [inline]="true">
+    </p-calendar>
+    <div class="days" *ngIf="!isCalendarVisible">
+      <div class="day" *ngFor="let day of weekDays">
+        <div class="day-label">{{ day.label }}</div>
+        <div class="day-date">{{ day.date }}</div>
+        <div class="leave-count">Leave count: {{ day.leaveCount }}</div>
+        <div class="employees" *ngFor="let employee of day.employees">
+          {{ employee.employeeName }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

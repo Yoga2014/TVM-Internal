@@ -1,0 +1,8 @@
+
+<nav class="navbar">
+    <div class="nav-item" [class.active]="activeNavItem === 'mydata'" (click)="navigateToMyData()">My Data</div>
+    <div class="nav-item" [class.active]="activeNavItem === 'teams'" (click)="navigateToTeams()">Teams</div>
+  </nav>
+  <app-my-data *ngIf="activeNavItem === 'mydata'"></app-my-data>
+  <app-teams *ngIf="activeNavItem === 'teams'"></app-teams>
+  

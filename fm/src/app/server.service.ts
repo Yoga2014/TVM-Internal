@@ -12,6 +12,7 @@ public userSubject = new BehaviorSubject<any>('Initial User');
  sendDetails = this.userSubject.asObservable();
 
 
+
   constructor(private apihttp:HttpClient) { }
 
   detailsValue(arrayValue: any){

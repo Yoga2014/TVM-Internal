@@ -1,0 +1,106 @@
+.container {
+    width: 100%;
+    max-width: 100%; /* Full width coverage */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.leave-card {
+    display: block; /* List format */
+    padding: 10px; /* Reduced padding for medium size */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Reduced margin between cards */
+    position: relative;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    width: 100%; /* Full width coverage */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.leave-card:hover {
+    background-color: #f9f9f9;
+}
+
+.leave-card:hover .apply-btn {
+    display: inline-block;
+}
+
+.icon {
+    width: 25px; /* Reduced icon size */
+    height: 25px; /* Reduced icon size */
+    margin-right: 8px; /* Adjust spacing */
+    vertical-align: middle; /* Align icons with text */
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    gap: 155px;
+    // align-items: center;
+    // justify-content: center;
+    vertical-align: auto; /* Align details with icon */
+    margin-right: 8px; /* Space between details and button */
+    width: calc(100% - 80px); /* Adjust width for a more compact card */
+}
+
+.apply-btn {
+    display: none;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 12px; /* Reduced button padding */
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; /* Align button with text */
+}
+
+.apply-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Icon classes */
+.casual {
+    background-color: lightblue;
+}
+
+.earned {
+    background-color: lightgreen;
+}
+
+.lwp {
+    background-color: lightcoral;
+}
+
+.paternity {
+    background-color: lightpink;
+}
+
+.sabbatical {
+    background-color: lightyellow;
+}
+
+.sick {
+    background-color: lightpurple;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .leave-card {
+        padding: 8px; /* Further reduced padding */
+    }
+    
+    .icon {
+        width: 20px; /* Smaller icon size */
+        height: 20px; /* Smaller icon size */
+    }
+
+    .apply-btn {
+        padding: 4px 8px; /* Smaller button padding */
+    }
+}

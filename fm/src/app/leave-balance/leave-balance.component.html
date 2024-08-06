@@ -1,0 +1,17 @@
+<div class="container">
+  <!-- <h2>Leave Balance</h2> -->
+   
+  <div class="leave-card" *ngFor="let leave of leaves">
+
+    <div class="details">
+      <h3>Siva</h3>
+      <div [ngClass]="leave.iconClass"></div>
+      <p>{{ leave.leaveType }}</p>
+      <p>Available: {{ leave.available }} days</p>
+      <p>Booked: {{ leave.booked }} days</p>
+      <button class="apply-btn" (click)="applyLeave(leave.leaveType)">Apply Leave</button>
+    </div>
+   
+  </div>
+  
+</div>
