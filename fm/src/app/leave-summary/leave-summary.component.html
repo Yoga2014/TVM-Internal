@@ -1,0 +1,10 @@
+<div class="leave-summary">
+  <div class="leave-cards">
+    <div class="leave-card" *ngFor="let leave of leaves">
+      <h4>{{leave.leaveType}}</h4>
+      <p>Available: {{leave.available}} Day(s)</p>
+      <p>Booked: {{leave.booked}} Day(s)</p>
+    </div>
+  </div>
+  <button (click)="applyLeave()">Apply Leave</button>
+</div>

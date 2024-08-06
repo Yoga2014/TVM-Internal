@@ -1,0 +1,65 @@
+.leave-requests {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+  
+      &:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+  
+    .table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+  
+        &:last-child {
+          border-right: none;
+        }
+      }
+  
+      th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+      }
+  
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+  
+      tr:hover {
+        background-color: #e9e9e9;
+      }
+    }
+  
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  
+    .total-record-count {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #333;
+    }
+  }
+  

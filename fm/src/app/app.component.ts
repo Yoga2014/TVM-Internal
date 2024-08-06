@@ -35,9 +35,19 @@ export class AppComponent {
     this.router.navigate(['/header'])
   }
 
-  navigatecalendar(){
+  dashBoardNavigate() 
+  {
+    this.router.navigate(['/dashboard']);
+  }
+
+  leaveTrackingNavigate() {
+    this.router.navigate(['/leave-tracking']);
+  }
+
+  calendarNavigate()
+  {
     this.router.navigate(['calendar'])
+  }
 
   }
 
-}
