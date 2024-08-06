@@ -1,0 +1,59 @@
+.calendar-container {
+  width: 100%;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    
+    .current-week {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+
+      .fas {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .calendar {
+    padding: 10px;
+
+    .days {
+      display: flex;
+      justify-content: space-between;
+
+      .day {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        margin: 0 5px;
+        text-align: center;
+
+        .day-label {
+          font-weight: bold;
+        }
+
+        .day-date {
+          color: #6c757d;
+          margin-bottom: 10px;
+        }
+
+        .leave-count {
+          margin-bottom: 10px;
+        }
+
+        .employees {
+          margin-top: 5px;
+          padding: 5px;
+          background-color: #f1f3f5;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}

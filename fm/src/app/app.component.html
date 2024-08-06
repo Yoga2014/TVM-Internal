@@ -1,25 +1,27 @@
-<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
-  <div class="header">
-    <h1 class="title">deskbird</h1>
-    <div class="toggle" (click)="handleSidebarToggle()">
-      <span class="chevron"></span>
+<div class="app-container">
+  <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+      <h1 class="title">deskbird</h1>
+      <div class="toggle" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
+      </div>
     </div>
-  </div>
-  <div class="content">
-    <div class="link">
-      <div class="content" >
-        <div class="icon">
-          <!-- SVG content -->
+    <div class="content">
+      <div class="link" (click)="headerNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Home</div>
         </div>
-        <div class="title"  (click)="headerNavigate()">Home</div>
       </div>
     </div>
     <div class="link with-children">
-      <div class="content" >
+      <div class="content">
         <div class="icon">
           <!-- SVG content -->
         </div>
-        <div class="title" (click)="navigatecalendar()">calendar</div>
+        <div class="title">Configuration</div>
       </div>
       <div class="children">
         <div class="link">
@@ -47,16 +49,35 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="link">
-      <div class="content">
-        <div class="icon">
-          <!-- SVG content -->
+      <div class="link" (click)="dashBoardNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Dashboard</div>
         </div>
-        <div class="title">Bookings</div>
+      </div>
+      <!-- New Leave Tracking Link -->
+      <div class="link" (click)="leaveTrackingNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Leave Tracking</div>
+        </div>
+      </div>
+      <div class="link" (click)="calendarNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Calendar</div>
+        </div>
       </div>
     </div>
+    <div class="footer"></div>
   </div>
-  <div class="footer"></div>
+  <div class="main-content" style="width: 100%;">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<router-outlet></router-outlet>
