@@ -54,6 +54,7 @@ import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval
 import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { INITIAL_EVENTS } from './calendar/event-utils';
+import { LogOutComponent } from "./log-out/log-out.component";
 
 @NgModule({
   declarations: [
@@ -107,8 +108,9 @@ import { INITIAL_EVENTS } from './calendar/event-utils';
     MatPaginatorModule,
     MatCardModule,
     FullCalendarModule,
-    INITIAL_EVENTS
-  ],
+    INITIAL_EVENTS,
+    LogOutComponent
+],
   providers: [],
   bootstrap: [AppComponent]
 })

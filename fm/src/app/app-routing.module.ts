@@ -36,6 +36,8 @@ const routes: Routes = [
   { path: 'employee-details/:id', component: EmployeeDetailsComponent },
   { path: 'edit-employee/:id', component: EditEmployeeComponent },
   { path: 'apply-leave', component: ApplyLeaveComponent } ,
+  {path:'leave-balance',component:LeaveBalanceComponent},
+  {path:'teams', component:TeamsComponent},
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
@@ -47,7 +49,7 @@ const routes: Routes = [
           { path: 'leave-summary', component: LeaveSummaryComponent },
           { path: 'leave-balance', component: LeaveBalanceComponent },
           { path: 'leave-requests', component: LeaveRequestsComponent },
-          { path: 'apply-leave', component: ApplyLeaveComponent } 
+          { path: 'apply-leave', component: ApplyLeaveComponent }
         ]
       },
       {
@@ -63,6 +65,18 @@ const routes: Routes = [
     ]
   },
   // Default redirect to 'general' if no path is matched
+// import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
+// import { AppComponent } from './app.component';
+// import { HeaderComponent } from 'ag-grid-community/dist/types/core/components/framework/componentTypes';
+
+// const routes: Routes = [
+  // { path: 'general', component: GeneralComponent, data: { animation: 'GeneralPage' } },
+  // { path: 'educational', component: EducationalComponent, data: { animation: 'EducationalPage' } },
+  // { path: 'skillset', component: SkillsetComponent, data: { animation: 'SkillsetPage' } },
+  // { path: 'professional', component: ProfessionalComponent, data: { animation: 'ProfessionalPage' } },
+  // { path: 'details', component: DetailsComponent, data: { animation: 'detailsPage' } },
+  // {path:'',component:AppComponent},
+  // {path: 'header', component:HeaderComponent,},
   // { path: '', redirectTo: '/general', pathMatch: 'full' }
 ];
 

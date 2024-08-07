@@ -1,31 +1,61 @@
-<header class="head d-flex justify-content-between align-items-center p-3 text-white">
-  <h1><img src="../../assets/images/Screenshot 2024-05-29 114456.png" alt="">CAREERS</h1>
-  <h5><i class="fa-solid fa-user"></i>Pravin</h5>
-</header>
-<h2>Update Profile</h2>
+
+<div>
+  <h2>Update Profile</h2>
+
 <div class="container mt-4">
   <nav class="nav nav-pills mb-4">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/general" routerLinkActive="active"><i class="fa-solid fa-circle"></i>General</a>
+      <a class="nav-link" (click)="setSection('general')" [class.active]="currentSection === 'general'">
+        <i class="fa-solid fa-circle"></i>General
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/educational" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Educational</a>
+      <a class="nav-link" (click)="setSection('educational')" [class.active]="currentSection === 'educational'">
+        <i class="fa-solid fa-circle"></i>Educational
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/skillset" routerLinkActive="active"><i class="fa-solid fa-square-check"></i>Skillset</a>
+      <a class="nav-link" (click)="setSection('skillset')" [class.active]="currentSection === 'skillset'">
+        <i class="fa-solid fa-square-check"></i>Skillset
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/professional" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Professional</a>
+      <a class="nav-link" (click)="setSection('professional')" [class.active]="currentSection === 'professional'">
+        <i class="fa-solid fa-circle"></i>Professional
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/details" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Deatils</a>
+      <a class="nav-link" (click)="setSection('details')" [class.active]="currentSection === 'details'">
+        <i class="fa-solid fa-circle"></i>Details
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/personalDataForm" routerLinkActive="active"><i class="fa-solid fa-circle"></i>PersonalDataForm</a>
+      <a class="nav-link" (click)="setSection('personalDataForm')" [class.active]="currentSection === 'personalDataForm'">
+        <i class="fa-solid fa-circle"></i>Personal Data Form
+      </a>
     </li>
   </nav>
   <hr>
-  <div [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
+
+  <!-- Conditional rendering based on the current section -->
+  <div *ngIf="currentSection === 'general'">
+    <app-general></app-general>
   </div>
+  <div *ngIf="currentSection === 'educational'">
+    <app-educational></app-educational>
+  </div>
+  <div *ngIf="currentSection === 'skillset'">
+    <app-skillset></app-skillset>
+  </div>
+  <div *ngIf="currentSection === 'professional'">
+    <app-professional></app-professional>
+  </div>
+  <div *ngIf="currentSection === 'details'">
+    <app-details></app-details>
+  </div>
+  <div *ngIf="currentSection === 'personalDataForm'">
+    <app-personal-data-form></app-personal-data-form>
+  </div>
+</div>
+
 </div>
