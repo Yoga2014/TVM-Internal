@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { slideInAnimation } from './animation';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +11,18 @@ import { RouterOutlet } from '@angular/router';
 
 })
 export class HeaderComponent {
+
+  constructor(public rout:Router){
+
+  }
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
+  currentSection: string = '';
+
+  setSection(section: string) {
+    this.currentSection = section;
+  }
+
 
 }

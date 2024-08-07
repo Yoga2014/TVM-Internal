@@ -68,6 +68,8 @@ b { // Used for event dates/times
   min-height: 90%;
   @include font-family($font-family-primary);
   font-size: $font-size-default;
+  padding-left: 8rem;
+}
 
   .demo-app-sidebar {
     width: 300px;
@@ -102,13 +104,13 @@ b { // Used for event dates/times
     padding: 3em;
     @include font-family($font-family-premium);
     border: #50d8d7;
-    
+
     border-radius: 70px;
     margin-top: 20px;
     background-color: $color-background;
     box-shadow: 0 4px 8px $color-box-shadow;
     padding: 30px;
-    
+
     background-image: url('./smoky\ cal.jpg');
     height: 70%;
     background-position: center;
@@ -127,7 +129,7 @@ b { // Used for event dates/times
         background-color: $color-day-bg;
         text-align: center;
         vertical-align: middle;
-        
+
         font-weight: bold;
         color: #000000;
         padding: 10px;
@@ -143,7 +145,7 @@ b { // Used for event dates/times
           text-size-adjust: 10px;
           @include font-family($font-family-premium);
         }
-        
+
         &:hover {
           background-color: $color-day-hover-bg;
           border-color: $color-secondary;
@@ -181,7 +183,7 @@ b { // Used for event dates/times
       }
     }
   }
-}
+
 
 // Container Styles
 .container {

@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
 [x: string]: any;
   title = 'fleet-management';
-
+  currentSection: string = '';
   columnDefs=[];
   rowDefs=[];
   // isExpanded = false;
-
+  showPopup:boolean=false
   isExpanded = true;
   isConfigurationExpanded = false;
 
@@ -31,23 +31,38 @@ export class AppComponent {
   //   this.router.navigate([path]);
   // }
 
-  headerNavigate(){
+  headerNavigate(values:any){
+    this.currentSection = values;
     this.router.navigate(['/header'])
   }
 
-  dashBoardNavigate() 
-  {
-    this.router.navigate(['/dashboard']);
-  }
-
-  leaveTrackingNavigate() {
-    this.router.navigate(['/leave-tracking']);
-  }
-
-  calendarNavigate()
-  {
+  navigatecalendar(){
     this.router.navigate(['calendar'])
-  }
 
   }
 
+  leaveNavigate(values:any){
+    this.currentSection = values;
+    this.router.navigate(['/apply-leave'])
+
+  }
+
+  holidaysClick(){
+    this.router.navigate(['leave-balance'])
+
+  }
+
+  teamsClick(){
+    this.router.navigate(['teams'])
+
+  }
+
+  userClick(){
+  this.showPopup=true
+  }
+
+  hideClick(my:any){
+    this.showPopup=my
+    console.log(my,'dhsdvfdvfeeyr')
+  }
+}
