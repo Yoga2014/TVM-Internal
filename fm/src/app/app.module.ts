@@ -7,7 +7,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgGridModule } from 'ag-grid-angular';
+import { CalendarModule } from 'primeng/calendar';
 
+// Angular Material Modules
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+
+// Components
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
 import { SkillsetComponent } from './skillset/skillset.component';
@@ -15,6 +32,9 @@ import { ProfessionalComponent } from './professional/professional.component';
 import { HeaderComponent } from './header/header.component';
 import { DetailsComponent } from './details/details.component';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
+
+
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { NewHiresComponent } from './new-hires-card/new-hires-card.component';
@@ -33,19 +53,8 @@ import { LeaveReportDashboardComponent } from './leave-report-dashboard/leave-re
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { CalendarModule } from 'primeng/calendar';
-
+import { INITIAL_EVENTS } from './calendar/event-utils';
+import { LogOutComponent } from "./log-out/log-out.component";
 
 @NgModule({
   declarations: [
@@ -84,20 +93,24 @@ import { CalendarModule } from 'primeng/calendar';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     AgGridModule,
-    FullCalendarModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatIconModule,
     MatSelectModule,
-    MatOptionModule,
-    MatDatepickerModule,   
-    MatNativeDateModule,   
-    CalendarModule 
-  ],
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatToolbarModule,
+    CalendarModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCardModule,
+    FullCalendarModule,
+    INITIAL_EVENTS,
+    LogOutComponent
+],
   providers: [],
   bootstrap: [AppComponent]
 })

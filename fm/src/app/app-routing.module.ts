@@ -22,6 +22,7 @@ import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { OnLeavesComponent } from './onleave/onleave.component';
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
+import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -35,7 +36,10 @@ const routes: Routes = [
   { path: 'newhires', component: NewHiresComponent },
   { path: 'employee-details/:id', component: EmployeeDetailsComponent },
   { path: 'edit-employee/:id', component: EditEmployeeComponent },
-  { path: 'apply-leave', component: ApplyLeaveComponent } ,
+  { path: 'apply-leave', component: ApplyLeaveComponent },
+  { path: 'leave-balance', component: LeaveBalanceComponent },
+  { path: 'teams', component: TeamsComponent },
+  {path:"personalDataForm",component:PersonalDataFormComponent},
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
@@ -47,7 +51,7 @@ const routes: Routes = [
           { path: 'leave-summary', component: LeaveSummaryComponent },
           { path: 'leave-balance', component: LeaveBalanceComponent },
           { path: 'leave-requests', component: LeaveRequestsComponent },
-          { path: 'apply-leave', component: ApplyLeaveComponent } 
+          { path: 'apply-leave', component: ApplyLeaveComponent }
         ]
       },
       {
@@ -63,7 +67,7 @@ const routes: Routes = [
     ]
   },
   // Default redirect to 'general' if no path is matched
-  // { path: '', redirectTo: '/general', pathMatch: 'full' }
+  { path: '', redirectTo: '/general', pathMatch: 'full' }
 ];
 
 @NgModule({
