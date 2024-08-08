@@ -13,10 +13,9 @@ h1{
   margin-left: 10rem;
 }
 .mt-4{
-  margin-right: 4rem;
+  margin-right: 19rem;
   background-color: white;
-  width: 80%;
-
+  width: 70%;
 }
 a{
   color: black;
@@ -24,7 +23,17 @@ a{
 .nav-item {
   margin-right: 30px;
 }
-
+.fa-user{
+  padding: 8px;
+    padding-top: 5px;
+    padding-left: 7px;
+    background-color: white;
+    color: #2d1bd2;
+    font-size: 30px;
+    border-radius: 44px;
+    width: 44px;
+    height: 44px;
+}
 .fa-circle{
   color:#4ba2bf;
 }
@@ -61,4 +70,3 @@ h2{
   background-color: #007bff;
   color: white;
 }
-

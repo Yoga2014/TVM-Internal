@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ServerService {
+ api:any='http://localhost:3000/educationalFrom'
 
 public userSubject = new BehaviorSubject<any>('Initial User');
 
@@ -20,8 +21,8 @@ public userSubject = new BehaviorSubject<any>('Initial User');
   }
 
   getMethod(){
-    const api='http://localhost:3000/educationalFrom'
-    return this.apihttp.get(api);
+    
+    return this.apihttp.get(this.api);
   }
 
 postMethod(data:any){

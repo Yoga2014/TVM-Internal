@@ -12,17 +12,8 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(public rout:Router){
-
-  }
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
-  currentSection: string = '';
-
-  setSection(section: string) {
-    this.currentSection = section;
-  }
-
 
 }

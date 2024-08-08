@@ -22,6 +22,7 @@ import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { OnLeavesComponent } from './onleave/onleave.component';
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
+import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -35,9 +36,10 @@ const routes: Routes = [
   { path: 'newhires', component: NewHiresComponent },
   { path: 'employee-details/:id', component: EmployeeDetailsComponent },
   { path: 'edit-employee/:id', component: EditEmployeeComponent },
-  { path: 'apply-leave', component: ApplyLeaveComponent } ,
-  {path:'leave-balance',component:LeaveBalanceComponent},
-  {path:'teams', component:TeamsComponent},
+  { path: 'apply-leave', component: ApplyLeaveComponent },
+  { path: 'leave-balance', component: LeaveBalanceComponent },
+  { path: 'teams', component: TeamsComponent },
+  {path:"personalDataForm",component:PersonalDataFormComponent},
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
@@ -65,19 +67,7 @@ const routes: Routes = [
     ]
   },
   // Default redirect to 'general' if no path is matched
-// import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
-// import { AppComponent } from './app.component';
-// import { HeaderComponent } from 'ag-grid-community/dist/types/core/components/framework/componentTypes';
-
-// const routes: Routes = [
-  // { path: 'general', component: GeneralComponent, data: { animation: 'GeneralPage' } },
-  // { path: 'educational', component: EducationalComponent, data: { animation: 'EducationalPage' } },
-  // { path: 'skillset', component: SkillsetComponent, data: { animation: 'SkillsetPage' } },
-  // { path: 'professional', component: ProfessionalComponent, data: { animation: 'ProfessionalPage' } },
-  // { path: 'details', component: DetailsComponent, data: { animation: 'detailsPage' } },
-  // {path:'',component:AppComponent},
-  // {path: 'header', component:HeaderComponent,},
-  // { path: '', redirectTo: '/general', pathMatch: 'full' }
+  { path: '', redirectTo: '/general', pathMatch: 'full' }
 ];
 
 @NgModule({

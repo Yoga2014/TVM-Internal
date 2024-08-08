@@ -1,121 +1,83 @@
-<header class="head d-flex justify-content-between align-items-center p-3 text-white">
-  <div class="tabs">
-    <div *ngIf="currentSection === 'general'">
-      <div class="d-flex tabs">
-        <ul class="custom-list">
-          <li>Dashboard</li>
-          <li (click)="teamsClick()">Team</li>
-          <li>Organization</li>
-        </ul>
+<div class="app-container">
+  <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+      <h1 class="title">deskbird</h1>
+      <div class="toggle" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
       </div>
     </div>
-    <div *ngIf="currentSection === 'leaveTracker'">
-      <div class="d-flex tabs">
-        <ul class="custom-list">
-          <li>My Data</li>
-          <li>Team</li>
-          <li (click)="holidaysClick()">Holidays</li>
-        </ul>
-      </div>
-    </div>
-    <div *ngIf="currentSection === 'reports'">
-      <div class="d-flex tabs">
-        <ul class="custom-list">
-          <li>My Reports</li>
-          <li>Team Reports</li>
-          <li>Organization Reports</li>
-          <li>Analytics</li>
-        </ul>
-      </div>
-    </div>
-    <div class="side-icons">
-      <div class="custom-list">
-        <span><i class="fa-solid fa-magnifying-glass"></i></span>
-        <span><i class="fa-regular fa-bell"></i></span>
-        <span><i class="fa-solid fa-gear"></i></span>
-        <span><i class="fa-solid fa-user" (click)="userClick()"></i></span>
-      </div>
-    </div>
-  </div>
-</header>
-<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
-  <div class="header">
-    <h1 class="title">deskbird</h1>
-    <!-- <div class="toggle" (click)="handleSidebarToggle()">
-      <span class="chevron"></span>
-    </div> -->
-  </div>
-  <div class="content">
-    <div class="link">
-      <div class="content">
-        <div class="icon">
-        </div>
-        <div class="title" (click)="headerNavigate('general')" [class.active]="currentSection === 'general'">
-          <i class="fa-solid fa-house"></i>
-          Home
+    <div class="content">
+      <div class="link" (click)="headerNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Home</div>
         </div>
       </div>
     </div>
     <div class="link with-children">
       <div class="content">
         <div class="icon">
+          <!-- SVG content -->
         </div>
-        <div class="title" (click)="navigatecalendar()">
-          <i class="fa-solid fa-calendar-days"></i>
-          Calendar
-        </div>
+        <div class="title">Configuration</div>
       </div>
       <div class="children">
         <div class="link">
           <div class="content">
             <div class="icon">
+              <!-- SVG content -->
             </div>
-            <div class="title" (click)="leaveNavigate('leaveTracker')" [class.active]="currentSection === 'leaveTracker'">
-              <i class="fa-solid fa-umbrella-beach"></i>
-              Leave
-            </div>
+            <div class="title">child 1</div>
           </div>
         </div>
         <div class="link">
           <div class="content">
             <div class="icon">
+              <!-- SVG content -->
             </div>
-            <div class="title">
-              <i class="fa-solid fa-arrows-rotate"></i>
-              Operation
-            </div>
+            <div class="title">child 2</div>
           </div>
         </div>
         <div class="link">
           <div class="content">
             <div class="icon">
+              <!-- SVG content -->
             </div>
-            <div class="title" (click)="headerNavigate('reports')" [class.active]="currentSection === 'reports'">
-              <i class="fa-solid fa-circle-half-stroke"></i>
-              Reports
-            </div>
+            <div class="title">child 3</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="link">
-      <div class="content">
-        <div class="icon">
+      <div class="link" (click)="dashBoardNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Dashboard</div>
         </div>
-        <div class="title">
-          <i class="fa-solid fa-ellipsis"></i>
-          More
+      </div>
+      <!-- New Leave Tracking Link -->
+      <div class="link" (click)="leaveTrackingNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Leave Tracking</div>
+        </div>
+      </div>
+      <div class="link" (click)="calendarNavigate()">
+        <div class="content">
+          <div class="icon">
+            <!-- SVG content -->
+          </div>
+          <div class="title">Calendar</div>
         </div>
       </div>
     </div>
+    <div class="footer"></div>
   </div>
-  <div class="footer"></div>
+  <div class="main-content" style="width: 100%;">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<div *ngIf="showPopup" class="modal fade show d-block"
-tabindex="-1"
-[@popupAnimation]>
-<app-log-out (cancel)="hideClick($event)"></app-log-out>
-</div>
-<main class="main-content">
-  <router-outlet></router-outlet>
-</main>

@@ -1,4 +1,4 @@
- <div class="container">
+ <!-- <div class="container">
   <h3>Edicational Table</h3>
 
   <table class="table">
@@ -12,6 +12,7 @@
         <th>Action</th>
 
     </thead>
+
     <tbody>
       <tr *ngFor="let person of educationDetails; let i = index">
         <td>
@@ -122,9 +123,11 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> 
 
-<!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <input formControlName="name" placeholder="Name">
   <input formControlName="pass" placeholder="Password">
   <button type="submit" *ngIf="!isEditing">Save</button>
@@ -145,5 +148,66 @@
   </tr>
 </table> -->
 
+
+<!--table-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    
+  </style>
+</head>
+<body>
+    <section class="container mt-4" >
+        <div class="btn-group mb-3">
+          <button class="btn btn-danger" (click)="deleteSelectedRows()">Delete</button>
+          <button class="btn btn-primary" (click)="filterWorkers('yes')">Active Employee</button>
+          <button class="btn btn-secondary" (click)="filterWorkers('no')">Inactive Employee</button>
+          <button class="btn btn-info" (click)="filterWorkers('all')">All Employee</button>
+        </div>
+      
+        <table class="table table-striped" >
+          <thead>
+            <tr>
+               <th >Select</th>
+              <th>FirstName</th>
+              <th>SecondName</th>
+              <th>MailId</th>
+              <th>OfficialMailId</th>
+              <th>Mobile</th>
+              <th>Onboarding Status</th>
+              <th>Department</th>
+              <th>Active</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let worker of workers; let i = index" [hidden]="worker.hidden">
+              <td><input type="checkbox" (change)="toggleSelection($event, worker)"></td>
+              <td>{{ worker.firstName }}</td>
+              <td>{{ worker.secondName }}</td>
+              <td>{{ worker.mailId }}</td>
+              <td>{{ worker.officialMailId }}</td>
+              <td>{{ worker.mobile }}</td>
+              <td>{{ worker.onboardingStatus }}</td>
+              <td>{{ worker.department }}</td>
+              <td>{{ worker.active }}</td>
+              <td><button class="btn btn-primary">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
 

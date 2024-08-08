@@ -4,10 +4,7 @@ import { AppModule } from './app/app.module';
 import '@angular/compiler';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-bootstrapApplication(AppComponent, {
-  providers: [provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync()]
-});
+bootstrapApplication(AppComponent);
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
