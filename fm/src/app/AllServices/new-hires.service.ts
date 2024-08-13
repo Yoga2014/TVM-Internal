@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class NewHiresService {
 
-  private apiUrl = 'https://your-api-endpoint.com/api/employees'; // Replace with your actual API endpoint
+  private apiUrl = 'http://localhost:3001/NewHires';
 
   constructor(private http: HttpClient) {}
 

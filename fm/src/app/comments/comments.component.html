@@ -1,0 +1,15 @@
+<div class="comments-container">
+  <div class="comments-dialog">
+    <div *ngFor="let comment of comments" class="comment-box">
+      <p>{{ comment.text }}</p>
+      <small>{{ comment.createdAt | date: 'short' }}</small>
+    </div>
+  </div>
+  <div class="input-container">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>New Comment</mat-label>
+      <input matInput [(ngModel)]="newComment" type="text" placeholder="Enter your comment">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addComment()">Send</button>
+  </div>
+</div>

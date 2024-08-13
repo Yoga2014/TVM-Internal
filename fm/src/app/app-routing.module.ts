@@ -20,9 +20,27 @@ import { LeaveRequestsComponent } from './leave-request/leave-request.component'
 import { LeaveTrackingComponent } from './leave-tracking/leave-tracking.component';
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
 import { MyDataComponent } from './my-data/my-data.component';
-import { OnLeavesComponent } from './onleave/onleave.component';
+import { OnLeaveComponent } from './onleave/onleave.component';
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
+import { TeamsDashboardComponent } from './teams-dashboard/teams-dashboard.component';
+import { TeamsSpaceComponent } from './teams-space/teams-space.component';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
+import { GoalsComponent } from './goals/goals.component';
+import { AddGoalsComponent } from './add-goals/add-goals.component';
+import { CommentsComponent } from './comments/comments.component';
+import { NewHomeComponent } from './new-home/new-home.component';
+import { HomeMyDataComponent } from './home-my-data/home-my-data.component';
+import { OverviewComponent } from './overview/overview.component';
+import { TeamReporteesComponent } from './team-reportees/team-reportees.component';
+import { TeamDepartmentComponent } from './team-department/team-department.component';
+import { TeamProjectComponent } from './team-project/team-project.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { PerformanceMyDataComponent } from './performance-my-data/performance-my-data.component';
+import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
+import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
+import { CompetencyComponent } from './competency/competency.component';
+import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -30,7 +48,6 @@ const routes: Routes = [
   { path: 'skillset', component: SkillsetComponent },
   { path: 'professional', component: ProfessionalComponent },
   { path: 'details', component: DetailsComponent },
-  { path: 'calendar', component: CalendarComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'newhires', component: NewHiresComponent },
@@ -39,7 +56,8 @@ const routes: Routes = [
   { path: 'apply-leave', component: ApplyLeaveComponent },
   { path: 'leave-balance', component: LeaveBalanceComponent },
   { path: 'teams', component: TeamsComponent },
-  {path:"personalDataForm",component:PersonalDataFormComponent},
+  { path: 'personalDataForm', component: PersonalDataFormComponent },
+
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
@@ -59,19 +77,69 @@ const routes: Routes = [
         component: TeamsComponent,
         children: [
           { path: 'leave-reportees', component: LeaveReporteesComponent },
-          { path: 'on-leave', component: OnLeavesComponent },
+          { path: 'on-leave', component: OnLeaveComponent },
           { path: 'approval-leave-request', component: ApprovalLeaveRequestComponent },
           { path: 'apply-leave', component: ApplyLeaveComponent }
+        ]
+      },
+      {
+        path: 'organization',
+        component: OrganizationComponent
+      }
+    ]
+  },
+  {
+    path: 'new-Home',
+    component: NewHomeComponent,
+    children: [
+      {
+        path: 'my-space',
+        component: HomeMyDataComponent,
+        children: [
+          { path: 'overview', component: OverviewComponent },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'calendar', component: CalendarComponent }
+        ]
+      },
+
+      {
+        path: 'teams-dashboard',
+        component: TeamsDashboardComponent,
+        children: [
+          { path: 'team-space', component: TeamsSpaceComponent },
+          { path: 'team-reportees', component: TeamReporteesComponent },
+          { path: 'department', component: TeamDepartmentComponent },
+          { path: 'projects', component: TeamProjectComponent },
+          { path: 'team-list', component: TeamListComponent }
+        ]
+      },
+    ]
+  },
+
+  {
+    path: 'perfomance-myData',
+    component: PerformanceMyDataComponent,
+    children: [
+      { path: '', 
+        component: GoalsMyDataComponent,
+        children: [
+          { path: 'goals', component: GoalsComponent },
+          { path: 'skillset', component: SkillsetPerformanceComponent},
+          { path: 'competency', component: CompetencyComponent },
+          {path: 'feedback', component: PerformanceFeedbackComponent}
         ]
       }
     ]
   },
-  // Default redirect to 'general' if no path is matched
-  { path: '', redirectTo: '/general', pathMatch: 'full' }
+
+  { path: 'add-goal', component: AddGoalsComponent },
+  { path: 'goals/:goalId/comments', component: CommentsComponent },
+  { path: 'add-goal/:id', component: AddGoalsComponent }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

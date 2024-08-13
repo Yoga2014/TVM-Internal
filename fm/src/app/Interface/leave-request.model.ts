@@ -1,7 +1,7 @@
 export interface LeaveRequest {
   employeeId?: string | any;
   employeeName?: string;
-  leaveType?: string;
+  leaveType: string;
   available?: number | any;
   booked?: number | any;
   iconClass?: string;
@@ -20,4 +20,5 @@ export interface LeaveRequest {
   comment?: string;
   reasonforRejected?: string;
   color?: string;
+  rejectionComment?: string;
 }

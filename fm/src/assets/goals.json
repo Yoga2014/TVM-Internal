@@ -1,0 +1,157 @@
+{
+  "Goals": [
+    {
+      "id": "94e8",
+      "name": "sla",
+      "description": "on time will come",
+      "priority": "Medium",
+      "startDate": "2024-08-12T18:30:00.000Z",
+      "endDate": "2024-08-13T18:30:00.000Z",
+      "progress": 13
+    },
+    {
+      "id": "5cbb",
+      "name": "sla",
+      "description": "on time will come",
+      "priority": "Medium",
+      "startDate": "2024-08-12T18:30:00.000Z",
+      "endDate": "2024-08-13T18:30:00.000Z",
+      "progress": 13
+    },
+    {
+      "id": "6900",
+      "name": "mani",
+      "description": "asdfghjklwertyui",
+      "priority": "Medium",
+      "startDate": "2024-08-26T18:30:00.000Z",
+      "endDate": "2024-08-22T18:30:00.000Z",
+      "progress": 10
+    },
+    {
+      "id": "faff",
+      "name": "uiyvuvuvg",
+      "description": "7ygyytfytfytfyrctc",
+      "priority": "Medium",
+      "startDate": "2024-08-13T18:30:00.000Z",
+      "endDate": "2024-08-29T18:30:00.000Z",
+      "progress": 34
+    }
+  ],
+  "Teams": [],
+  "Employee": [],
+  "Leave": [
+    {
+      "id": "eec2",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-23",
+      "totalDays": 10,
+      "reasonforLeave": "dvbjdvbsd",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 10,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "f77d",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-15",
+      "totalDays": 2,
+      "reasonforLeave": "rgere",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 2,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "24db",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-18",
+      "totalDays": 5,
+      "reasonforLeave": "hjhjhjjhhj",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 5,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "aa35",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-13",
+      "endDate": "2024-08-23",
+      "totalDays": 11,
+      "reasonforLeave": "sdcdscds",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 11,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "f4da",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-15",
+      "totalDays": 2,
+      "reasonforLeave": "hggc",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-13",
+      "booked": 2,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    }
+  ],
+  "NewHires": [],
+  "LeaveReportees": [
+    {
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "profilePicture": "assets/images/john_doe.jpg",
+      "leaveBooked": 10,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active"
+    },
+    {
+      "employeeId": "E002",
+      "employeeName": "Jane Smith",
+      "profilePicture": "assets/images/jane_smith.jpg",
+      "leaveBooked": 8,
+      "generalTimining": "8 AM - 5 PM",
+      "status": "on leave"
+    },
+    {
+      "employeeId": "E003",
+      "employeeName": "Robert Brown",
+      "profilePicture": "assets/images/robert_brown.jpg",
+      "leaveBooked": 5,
+      "generalTimining": "9:30 AM - 6:30 PM",
+      "status": "active"
+    },
+    {
+      "employeeId": "E004",
+      "employeeName": "Emily Davis",
+      "profilePicture": "assets/images/emily_davis.jpg",
+      "leaveBooked": 12,
+      "generalTimining": "10 AM - 7 PM",
+      "status": "on leave"
+    },
+    {
+      "employeeId": "E005",
+      "employeeName": "Michael Johnson",
+      "profilePicture": "assets/images/michael_johnson.jpg",
+      "leaveBooked": 7,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active"
+    }
+  ]
+}
