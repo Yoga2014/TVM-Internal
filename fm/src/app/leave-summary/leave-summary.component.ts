@@ -9,17 +9,33 @@ import { LeaveRequest } from '../Interface/leave-request.model';
   styleUrls: ['./leave-summary.component.scss']
 })
 export class LeaveSummaryComponent implements OnInit {
+  
   leaves: LeaveRequest[] = [];
+  loading: boolean = true; 
+  error: string | null = null; 
+  displayedColumns: string[] = ['leaveType', 'startDate', 'endDate', 'status']; 
 
   constructor(private leaveService: LeaveService, private router: Router) {}
 
   ngOnInit() {
-    this.leaveService.getLeaves().subscribe(data => {
-      this.leaves = data;
+    this.loadLeaves();
+  }
+
+  loadLeaves() {
+    this.leaveService.getLeaves().subscribe({
+      next: (data) => {
+        this.leaves = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load leaves. Please try again later.';
+        console.error('Error fetching leaves', err);
+        this.loading = false;
+      }
     });
   }
 
   applyLeave() {
-    this.router.navigate(['leave-tracking/mydata/apply-leave'], { queryParams: { returnUrl: this.router.url } });
+    this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
   }
 }

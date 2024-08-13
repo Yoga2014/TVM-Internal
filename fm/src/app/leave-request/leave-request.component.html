@@ -1,10 +1,10 @@
 <div class="leave-requests">
   <!-- Button to Add Request -->
-  <button mat-raised-button color="primary" routerLink="/apply-leave" (click)="navigate()">Add Request</button>
+  <button mat-raised-button color="primary" (click)="applyLeave()">Add Request</button>
   
   <!-- Filter Container -->
   <div class="filter-container">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Filter by Leave Type</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Leave Type">
     </mat-form-field>
@@ -50,7 +50,7 @@
     <!-- Days Column -->
     <ng-container matColumnDef="days">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
-      <td mat-cell *matCellDef="let element">{{ element.days }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.totalDays }}</td>
     </ng-container>
 
     <!-- Date of Request Column -->
@@ -59,7 +59,24 @@
       <td mat-cell *matCellDef="let element">{{ element.dateOfRequest }}</td>
     </ng-container>
 
-    <!-- Table Rows -->
+    <!-- Actions Column -->
+<ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef>Actions</th>
+  <td mat-cell *matCellDef="let element">
+    <mat-form-field appearance="fill">
+      <mat-label>Action</mat-label>
+      <mat-select (selectionChange)="onActionSelect($event.value, element)">
+        <mat-option *ngFor="let action of actions" [value]="action">{{ action }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="element.status === 'Rejected'" appearance="fill">
+      <mat-label>Rejection Reason</mat-label>
+      <textarea matInput [(ngModel)]="element.rejectionComment" placeholder="Reason for rejection"></textarea>
+    </mat-form-field>
+  </td>
+</ng-container>
+
+    <!-- Table Header and Rows -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

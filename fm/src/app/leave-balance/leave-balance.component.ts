@@ -1,4 +1,3 @@
-// src/app/leave-balance/leave-balance.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
@@ -23,20 +22,20 @@ export class LeaveBalanceComponent implements OnInit {
   }
 
   loadLeaves(): void {
-    this.leaveService.getLeaves().subscribe(
-      (data: LeaveRequest[]) => {
+    this.leaveService.getLeaves().subscribe({
+      next: (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching leave data', error);
         this.isLoading = false;
       }
-    );
+    });
   }
 
-  applyLeave(leaveType: string | any): void {
-    this.leaveService.activeTab = 'leave-balance';
-    this.router.navigate(['leave-tracking/mydata/apply-leave'], { queryParams: { leaveType, returnUrl: this.router.url } });
+  applyLeave(leaveType: string): void 
+  {
+    this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url, leaveType: leaveType } });
   }
 }

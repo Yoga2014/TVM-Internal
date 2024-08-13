@@ -5,7 +5,7 @@ import { Employee } from 'src/app/Interface/employee.model';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrl: './edit-employee.component.scss'
+  styleUrls: ['./edit-employee.component.scss']
 })
 export class EditEmployeeComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class EditEmployeeComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
+      employeeName: ['', Validators.required],
       joinDate: ['', Validators.required]
     });
   }
@@ -37,5 +37,4 @@ export class EditEmployeeComponent implements OnInit {
   onCancel(): void {
     this.cancel.emit();
   }
-
 }

@@ -1,7 +1,7 @@
-// src/app/leave-reportees/leave-reportees.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../Interface/employee.model';
 import { EmployeeService } from '../AllServices/employee.service';
+import { LeaveReporteesService } from '../AllServices/leaveReportees.service';
 
 @Component({
   selector: 'app-leave-reportees',
@@ -9,25 +9,27 @@ import { EmployeeService } from '../AllServices/employee.service';
   styleUrls: ['./leave-reportees.component.scss']
 })
 export class LeaveReporteesComponent implements OnInit {
+
   employees: Employee[] = [];
   isGridView: boolean = true;
   selectedEmployee: string | null = null;
-  isLoading: boolean = true; // Optional, to show a loading indicator
+  isLoading: boolean = true;                                 // Optional, to show a loading indicator
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private leaveReporteesService: LeaveReporteesService) {}
 
   ngOnInit(): void {
-    this.loadEmployees();
+    this.loadReportees();
   }
 
-  loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
+  loadReportees(): void {
+    const managerId = 'currentManagerId'; // Replace with actual manager ID
+    this.leaveReporteesService.getReportees(managerId).subscribe(
       (data: Employee[]) => {
         this.employees = data;
         this.isLoading = false;
       },
       (error) => {
-        console.error('Error fetching employee data', error);
+        console.error('Error fetching reportees', error);
         this.isLoading = false;
       }
     );

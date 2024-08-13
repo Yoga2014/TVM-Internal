@@ -16,6 +16,14 @@
         </div>
       </div>
     </div>
+    <div class="link" (click)="newHomeNavigate()">
+      <div class="content">
+        <div class="icon">
+          <!-- SVG content -->
+        </div>
+        <div class="title">New Home</div>
+      </div>
+    </div>
     <div class="link with-children">
       <div class="content">
         <div class="icon">
@@ -49,14 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="link" (click)="dashBoardNavigate()">
-        <div class="content">
-          <div class="icon">
-            <!-- SVG content -->
-          </div>
-          <div class="title">Dashboard</div>
-        </div>
-      </div>
+
       <!-- New Leave Tracking Link -->
       <div class="link" (click)="leaveTrackingNavigate()">
         <div class="content">
@@ -66,18 +67,20 @@
           <div class="title">Leave Tracking</div>
         </div>
       </div>
-      <div class="link" (click)="calendarNavigate()">
+
+      <div class="link" (click)="goalsNavigate()">
         <div class="content">
           <div class="icon">
             <!-- SVG content -->
           </div>
-          <div class="title">Calendar</div>
+          <div class="title">Performance</div>
         </div>
       </div>
     </div>
     <div class="footer"></div>
   </div>
   <div class="main-content" style="width: 100%;">
+    <!-- {{"test"}} -->
     <router-outlet></router-outlet>
   </div>
 </div>

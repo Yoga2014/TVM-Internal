@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgGridModule } from 'ag-grid-angular';
 import { CalendarModule } from 'primeng/calendar';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 // Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
 
 // Components
 import { EducationalComponent } from './educational/educational.component';
@@ -44,7 +47,7 @@ import { LeaveSummaryComponent } from './leave-summary/leave-summary.component';
 import { ApplyLeaveComponent } from './leave-summary/apply-leave/apply-leave.component';
 import { TeamsComponent } from './teams/teams.component';
 import { LeaveReporteesComponent } from './leave-reportees/leave-reportees.component';
-import { OnLeavesComponent } from './onleave/onleave.component';
+import { OnLeaveComponent } from './onleave/onleave.component';
 import { LeaveTrackingComponent } from './leave-tracking/leave-tracking.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { LeaveBalanceComponent } from './leave-balance/leave-balance.component';
@@ -52,9 +55,28 @@ import { LeaveRequestsComponent } from './leave-request/leave-request.component'
 import { LeaveReportDashboardComponent } from './leave-report-dashboard/leave-report-dashboard.component';
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { INITIAL_EVENTS } from './calendar/event-utils';
+import { TeamsDashboardComponent } from './teams-dashboard/teams-dashboard.component';
+import { TeamsSpaceComponent } from './teams-space/teams-space.component';
 import { LogOutComponent } from "./log-out/log-out.component";
+import { GoalsComponent } from './goals/goals.component';
+import { AddGoalsComponent } from './add-goals/add-goals.component';
+import { CommentsComponent } from './comments/comments.component';
+import { NewHomeComponent } from './new-home/new-home.component';
+import { HomeMyDataComponent } from './home-my-data/home-my-data.component';
+import { OverviewComponent } from './overview/overview.component';
+import { TeamReporteesComponent } from './team-reportees/team-reportees.component';
+import { TeamDepartmentComponent } from './team-department/team-department.component';
+import { TeamProjectComponent } from './team-project/team-project.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { DeleteGoalsComponent } from './delete-goals/delete-goals.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PerformanceMyDataComponent } from './performance-my-data/performance-my-data.component';
+import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
+import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
+import { CompetencyComponent } from './competency/competency.component';
+import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
 
 @NgModule({
   declarations: [
@@ -75,15 +97,36 @@ import { LogOutComponent } from "./log-out/log-out.component";
     ApplyLeaveComponent,
     TeamsComponent,
     LeaveReporteesComponent,
-    OnLeavesComponent,
+    OnLeaveComponent,
     LeaveTrackingComponent,
     MyDataComponent,
     LeaveBalanceComponent,
     LeaveRequestsComponent,
     LeaveReportDashboardComponent,
     ApprovalLeaveRequestComponent,
-    CalendarComponent
+    CalendarComponent,
+    TeamsDashboardComponent,
+    TeamsSpaceComponent,
+    GoalsComponent,
+    AddGoalsComponent,
+    CommentsComponent,
+    LogOutComponent,
+    NewHomeComponent,
+    HomeMyDataComponent,
+    OverviewComponent,
+    TeamReporteesComponent,
+    TeamDepartmentComponent,
+    TeamProjectComponent,
+    TeamListComponent,
+    OrganizationComponent,
+    DeleteGoalsComponent,
+    PerformanceMyDataComponent,
+    GoalsMyDataComponent,
+    SkillsetPerformanceComponent,
+    CompetencyComponent,
+    PerformanceFeedbackComponent
   ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -109,7 +152,9 @@ import { LogOutComponent } from "./log-out/log-out.component";
     MatCardModule,
     FullCalendarModule,
     INITIAL_EVENTS,
-    LogOutComponent
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatStepperModule
 ],
   providers: [],
   bootstrap: [AppComponent]

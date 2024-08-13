@@ -9,6 +9,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class BirthdayCardComponent implements OnInit {
 
+ 
   todayBirthdays: Employee[] = [];
 
   constructor(private birthdayService: BirthdayService) { }

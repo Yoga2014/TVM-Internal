@@ -35,18 +35,18 @@ export class AppComponent {
       this.router.navigate(['/header'])
     }
   
-    dashBoardNavigate() 
-    {
-      this.router.navigate(['/dashboard']);
-    }
-  
     leaveTrackingNavigate() {
       this.router.navigate(['/leave-tracking']);
     }
   
-    calendarNavigate()
-    {
-      this.router.navigate(['calendar'])
-    }
+  goalsNavigate()
+  {
+    this.router.navigate(['perfomance-myData']);
+  }
+
+  newHomeNavigate()
+  {
+    this.router.navigate(['new-Home']);
+  }
 
   }

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,9 +8,7 @@ import { LeaveRequest } from '../Interface/leave-request.model';
 })
 export class LeaveService {
 
-  activeTab: string ='';
-
-  private apiUrl = 'https://api.example.com/leaves';
+  private apiUrl = 'http://localhost:3001/Leave';
 
   constructor(private http: HttpClient) {}
 
@@ -27,10 +24,6 @@ export class LeaveService {
     return this.http.post<LeaveRequest>(`${this.apiUrl}`, request);
   }
 
-  addLeaveRequests(leaveRequest: LeaveRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/leave-requests`, leaveRequest);
-  }
-
   updateLeaveRequest(index: number, leaveRequest: Partial<LeaveRequest>): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${index}`, leaveRequest);
   }
@@ -39,5 +32,3 @@ export class LeaveService {
     return this.http.delete<void>(`${this.apiUrl}/${index}`);
   }
 }
-export { LeaveRequest };
-

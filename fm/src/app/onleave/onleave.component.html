@@ -2,15 +2,17 @@
   <div class="header">
     <button (click)="previousWeek()">&#8249;</button>
     <div class="current-week">
-      <i class="fas fa-calendar-week" (click)="toggleCalendar()"></i>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)" [value]="selectedDate" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       {{ currentWeek }}
     </div>
     <button (click)="nextWeek()">&#8250;</button>
   </div>
   <div class="calendar">
-    <p-calendar *ngIf="isCalendarVisible" [showTime]="true" [(ngModel)]="selectedDate" (onChange)="onDateChange($event)"
-      [inline]="true">
-    </p-calendar>
     <div class="days" *ngIf="!isCalendarVisible">
       <div class="day" *ngFor="let day of weekDays">
         <div class="day-label">{{ day.label }}</div>

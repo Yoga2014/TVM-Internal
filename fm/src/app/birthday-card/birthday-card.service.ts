@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Employee } from '../Interface/employee.model';
 
 
@@ -10,16 +9,13 @@ import { Employee } from '../Interface/employee.model';
 })
 export class BirthdayService {
 
-  private apiUrl = 'https://your-api-endpoint.com/api/employees';
+  private apiUrl = 'http://localhost:3001/employees';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getTodayBirthdays(): Observable<Employee[]> {
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
-
-    return this.http.get<Employee[]>(this.apiUrl).pipe(
-      map(employees => employees.filter(emp => emp.dob.slice(5) === todayStr.slice(5)))
-    );
+  getTodayBirthdays(): Observable<Employee[]> 
+  {
+    
+    return this.http.get<Employee[]>(`${this.apiUrl}?birthday=today`);
   }
 }

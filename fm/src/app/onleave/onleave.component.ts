@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../AllServices/employee.service'; // Adjust the path as needed
-import { Employee } from '../Interface/employee.model'; // Adjust the path as needed
+import { EmployeeService } from '../AllServices/employee.service';
+import { Employee } from '../Interface/employee.model';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 interface Day {
   label: string;
@@ -14,7 +15,7 @@ interface Day {
   templateUrl: './onleave.component.html',
   styleUrls: ['./onleave.component.scss']
 })
-export class OnLeavesComponent implements OnInit {
+export class OnLeaveComponent implements OnInit {
   currentWeek: string = '';
   weekDays: Day[] = [];
   isCalendarVisible: boolean = false;
@@ -46,7 +47,7 @@ export class OnLeavesComponent implements OnInit {
             leaveCount: employees.length
           });
         },
-        (error) => {
+        (error: any) => {
           console.error('Failed to fetch employees on leave', error);
         }
       );
@@ -57,16 +58,7 @@ export class OnLeavesComponent implements OnInit {
     const start = new Date(date);
     const day = start.getDay();
     const diff = start.getDate() - day + (day === 0 ? -6 : 1);
-    let weekStartDate = new Date(start.setDate(diff));
-
-    if (weekStartDate.getDay() === 6) {
-      weekStartDate.setDate(weekStartDate.getDate() - 1);
-    }
-    else if (weekStartDate.getDay() === 0) {
-      weekStartDate.setDate(weekStartDate.getDate() - 2);
-    }
-
-    return weekStartDate;
+    return new Date(start.setDate(diff)); // Start of the week is Monday
   }
 
   formatDate(date: Date): string {
@@ -78,25 +70,26 @@ export class OnLeavesComponent implements OnInit {
   }
 
   previousWeek(): void {
-    const currentStart = new Date(this.weekDays[0].date);
-    const previousWeekStart = new Date(currentStart.setDate(currentStart.getDate() - 7));
-    this.setWeek(previousWeekStart);
+    if (this.weekDays.length > 0) {
+      const currentStart = new Date(this.weekDays[0].date);
+      const previousWeekStart = new Date(currentStart.setDate(currentStart.getDate() - 7));
+      this.setWeek(previousWeekStart);
+    }
   }
 
   nextWeek(): void {
-    const currentStart = new Date(this.weekDays[0].date);
-    const nextWeekStart = new Date(currentStart.setDate(currentStart.getDate() + 7));
-    this.setWeek(nextWeekStart);
+    if (this.weekDays.length > 0) {
+      const currentStart = new Date(this.weekDays[0].date);
+      const nextWeekStart = new Date(currentStart.setDate(currentStart.getDate() + 7));
+      this.setWeek(nextWeekStart);
+    }
   }
 
-  toggleCalendar(): void {
-    this.isCalendarVisible = !this.isCalendarVisible;
-  }
-
-  onDateChange(event: any): void {
+  onDateChange(event: MatDatepickerInputEvent<Date>): void {
     const selectedDate = event.value;
     if (selectedDate) {
-      this.setWeek(new Date(selectedDate));
+      this.setWeek(selectedDate);
+      this.selectedDate = selectedDate;
     }
   }
 }
