@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TeamsComponent {
   activeNavItem: string = 'leave-reportees';
+  @Output() subNavChange = new EventEmitter<string>();
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -18,15 +19,17 @@ export class TeamsComponent {
   navigateToLeaveReportees() {
     this.activeNavItem = 'leave-reportees';
     this.router.navigate(['leave-tracking/teams/leave-reportees']);
+    this.subNavChange.emit('leave-reportees');
   }
 
   navigateToOnLeave() {
     this.activeNavItem = 'on-leave';
     this.router.navigate(['leave-tracking/teams/on-leave']);
+    this.subNavChange.emit('on-leave');
   }
 
   navigateToLeaveRequest() {
     this.activeNavItem = 'approval-leave-request';
-    this.router.navigate(['leave-tracking/teams/approval-leave-request']);
+    this.subNavChange.emit('approval-leave-request');
   }
 }

@@ -17,6 +17,7 @@
     font-weight: bold;
     position: relative;
     transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
+    border-radius: 10px;
   }
 
   .nav-item::after {

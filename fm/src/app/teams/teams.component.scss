@@ -16,6 +16,7 @@
     color: #f9f9f9;
     font-weight: bold;
     position: relative;
+    border-radius: 10px;
     transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
   }
 
@@ -103,10 +104,9 @@
     width: 100%;
   }
   
-  .nav-item:active {
-    transform: scale(0.95); /* Slight scale down on click */
-    background-color: #e0e0e0;
-    color: #123;
+  .nav-item.active {
+    background-color: #f1f1f1; /* Same as hover color */
+    color: #1e3c72; /* Same as hover color */
   }
   
   /* Push the first nav item to the far right */
