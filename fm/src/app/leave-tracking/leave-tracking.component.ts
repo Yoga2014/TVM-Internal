@@ -9,16 +9,22 @@ import { Router } from '@angular/router';
 })
 export class LeaveTrackingComponent {
   activeNavItem: string = 'mydata';
-
+  activeSubNavItem: string = 'leave-summary';
   constructor(private router: Router) {}
 
   navigateToMyData() {
     this.activeNavItem = 'mydata';
     // this.router.navigate(['mydata']);
+    this.activeSubNavItem = 'leave-summary';
   }
 
   navigateToTeams() {
     this.activeNavItem = 'teams';
     // this.router.navigate(['/teams']);
+    this.activeSubNavItem = 'leave-reportees';
+
+  }
+  updateSubBreadcrumb(subNav: string) {
+    this.activeSubNavItem = subNav;
   }
 }

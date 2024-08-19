@@ -1,6 +1,10 @@
+<!-- <nav class="breadcrumb">
+    <span class="breadcrumb-item" *ngIf="activeNavItem === 'myData'">Home > My Data</span>
+    <span class="breadcrumb-item" *ngIf="activeNavItem === 'mySkillSetMatrix'">Home > Skill Set Matrix</span>
+  </nav> -->
 <div class="navbar">
     <div class="nav-item" [class.active]="activeNavItem === 'myData'" (click)="navigateToMyData()">My Data</div>
-    <div class="nav-item" [class.active]="activeNavItem === 'myData'" (click)="navigateToMySkillSetMatrix()">Skill Set Matrix</div>
+    <div class="nav-item" [class.active]="activeNavItem === 'mySkillSetMatrix'" (click)="navigateToMySkillSetMatrix()">Skill Set Matrix</div>
 </div>
 
 <app-goals-my-data></app-goals-my-data>
