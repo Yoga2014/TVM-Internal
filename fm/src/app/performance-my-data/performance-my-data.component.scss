@@ -4,9 +4,10 @@
     flex-direction: row;
     justify-content: flex-start;
     background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
-    padding: 0.5rem 10rem;
+    padding: 0.5rem 25rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     background-size: cover;
+    border-radius: 10px;
     border-bottom: 3px solid #123; /* Darker border for a more defined look */
   }
 
@@ -16,6 +17,7 @@
     color: #f9f9f9;
     font-weight: bold;
     position: relative;
+    border-radius: 10px;
     transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
   }
 

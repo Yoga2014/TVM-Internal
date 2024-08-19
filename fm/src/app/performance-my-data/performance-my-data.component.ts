@@ -20,7 +20,7 @@ export class PerformanceMyDataComponent {
 
   navigateToMySkillSetMatrix()
   {
-    this.activeNavItem = 'myData';
+    this.activeNavItem = 'mySkillSetMatrix';
     this.router.navigate(['myData']);
   }
 

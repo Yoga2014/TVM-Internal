@@ -1,32 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-my-data',
   templateUrl: './home-my-data.component.html',
-  styleUrl: './home-my-data.component.scss'
+  styleUrls: ['./home-my-data.component.scss']
 })
 export class HomeMyDataComponent {
-
+  @Output() subNavChange = new EventEmitter<string>();  // Specify string type
   activeNavItem: string = 'overview';
 
   constructor(private router: Router) {}
 
   navigateToDashboard() {
     this.activeNavItem = 'dashboard';
-    this.router.navigate(['new-Home/my-space', 'dashboard']);
+    this.subNavChange.emit('Dashboard');  // Emit string
+    this.router.navigate(['new-home/my-space', 'dashboard']);
   }
 
-  navigateToOverview()
-  {
+  navigateToOverview() {
     this.activeNavItem = 'overview';
-    this.router.navigate(['new-Home/my-space', 'overview'])
+    this.subNavChange.emit('Overview');  // Emit string
+    this.router.navigate(['new-home/my-space', 'overview']);
   }
 
-  navigateToCalendar()
-  {
+  navigateToCalendar() {
     this.activeNavItem = 'calendar';
-    this.router.navigate(['new-Home/my-space', 'calendar'])
+    this.subNavChange.emit('Calendar');  // Emit string
+    this.router.navigate(['new-home/my-space', 'calendar']);
   }
-
 }
