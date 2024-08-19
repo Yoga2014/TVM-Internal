@@ -77,6 +77,7 @@ import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
 import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
 import { CompetencyComponent } from './competency/competency.component';
 import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
+import { NgFor, NgIf } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -154,7 +155,7 @@ import { PerformanceFeedbackComponent } from './performance-feedback/performance
     INITIAL_EVENTS,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,NgIf,NgFor
 ],
   providers: [],
   bootstrap: [AppComponent]

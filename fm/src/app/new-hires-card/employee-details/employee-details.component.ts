@@ -26,7 +26,7 @@ export class EmployeeDetailsComponent implements OnInit {
           console.error('Failed to fetch employee details', error);
         }
       );
-    } else {
+    }else{
       console.error('Employee ID is null');
     }
   }
