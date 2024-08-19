@@ -3,12 +3,13 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
-    padding: 0.5rem 25rem;
+    // background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
+    background-color: #2e3b61;
+    padding: 0.5rem 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     background-size: cover;
-    border-bottom: 3px solid #123; /* Darker border for a more defined look */
-    border-radius: 10px;
+    // border-bottom: 3px solid #123; /* Darker border for a more defined look */
+    // border-radius: 10px;
   }
 
   .nav-item {
@@ -28,24 +29,24 @@
     height: 2px; /* Reduced height */
     bottom: 0;
     left: 0;
-    background-color: #ffdd57; /* Highlight color */
+    background-color: #0088ff; /* Highlight color */
     transition: width 0.3s;
   }
 
-  .nav-item:hover {
-    background-color: #f1f1f1;
-    color: #1e3c72;
-  }
+  // .nav-item:hover {
+  //   background-color: #f1f1f1;
+  //   color: #1e3c72;
+  // }
 
   .nav-item:hover::after {
     width: 100%;
   }
 
-  .nav-item:active {
-    transform: scale(0.95); /* Slight scale down on click */
-    background-color: #e0e0e0;
-    color: #123;
-  }
+  // .nav-item:active {
+  //   transform: scale(0.95); /* Slight scale down on click */
+  //   background-color: #e0e0e0;
+  //   color: #123;
+  // }
 
   .nav-item.active {
     background-color: #f1f1f1; /* Same as hover color */

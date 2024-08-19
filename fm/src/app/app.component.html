@@ -1,78 +1,40 @@
 <div class="app-container">
   <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
     <div class="header">
-      <h1 class="title">deskbird</h1>
-      <div class="toggle" (click)="handleSidebarToggle()">
-        <span class="chevron"></span>
-      </div>
+   <img src="../assets/images/zoho_icon.png">
+
     </div>
     <div class="content">
-      <div class="link" (click)="headerNavigate()">
+      <div class="link" (click)="newHomeNavigate()">
         <div>
-          <div class="icon">
-            <!-- SVG content -->
-          </div>
-          <div class="title">Home</div>
+
+        <i class="fa-solid fa-house"></i>
+        <div class="title-home">Home</div>
         </div>
       </div>
     </div>
-    <div class="link" (click)="newHomeNavigate()">
+    <div class="link" (click)="headerNavigate()">
       <div class="content">
-        <div class="icon">
-          <!-- SVG content -->
-        </div>
-        <div class="title">New Home</div>
+
+        <i class="fa-solid fa-id-card"></i>
+        <div class="title-profile">Profile</div>
       </div>
     </div>
     <div class="link with-children">
-      <!-- <div class="content">
-        <div class="icon">
-          SVG content
-        </div>
-        <div class="title">Configuration</div>
-      </div> -->
-      <div class="children">
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 1</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 2</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 3</div>
-          </div>
-        </div>
-      </div>
+
 
       <!-- New Leave Tracking Link -->
       <div class="link" (click)="leaveTrackingNavigate()">
         <div class="content">
-          <div class="icon">
-            <!-- SVG content -->
-          </div>
-          <div class="title">Leave Tracking</div>
+          <i class="fa-solid fa-umbrella-beach fa-flip-horizontal"></i>
+          <div class="title-leave">Leave Tracking</div>
         </div>
       </div>
 
       <div class="link" (click)="goalsNavigate()">
         <div class="content">
-          <div class="icon">
-            <!-- SVG content -->
-          </div>
+
+          <i class="fa-solid fa-trophy"></i>
           <div class="title">Performance</div>
         </div>
       </div>

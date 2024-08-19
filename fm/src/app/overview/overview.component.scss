@@ -1,5 +1,6 @@
 .container {
   height: 28rem;
+  margin-top: 5rem !important;
 }
 
 
@@ -15,7 +16,7 @@
 
 .profile-set {
   color: white;
-  background-color: #aeaeae;
+  background-color: #E5E5F0;
   width: 80px;
   height: 80px;
   border-radius: 7px;
@@ -25,12 +26,12 @@
 }
 
 .profile {
-  padding-left: 9px;
-  padding-top: 5px;
+  padding-left: 4px;
+  padding-top: 4px;
   margin-top: 0rem;
   font-size: -18rem;
   color: white;
-  font-size: 71px;
+  font-size: 82px;
 }
 
 .profile-detail {
@@ -86,4 +87,13 @@
 .custom-list li.active::after {
   transform: scaleX(1);
   /* Show underline for the active tab */
+}
+
+img{
+  position: absolute;
+  left: 75px;
+  top: 156px;
+  z-index: -1;
+  width: 1205px;
+  height: 7rem;
 }
