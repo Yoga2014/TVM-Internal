@@ -95,8 +95,8 @@ export class CalendarComponent {
 
   handleEvents(events: EventApi[]) {
     this.currentEvents.set(events);
-    this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
-    this.saveEventsToLocalStorage(); // Save events to local storage
+    this.changeDetector.detectChanges();
+    this.saveEventsToLocalStorage();
   }
 
   private saveEventsToLocalStorage() {

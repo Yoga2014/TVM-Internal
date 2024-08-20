@@ -28,7 +28,7 @@ $font-size-default: 14px;
 
 
 .element.style{
-    margin-left: 150px;
+    margin-left: 70px;
     margin-top: 139px;
 }
 
@@ -69,6 +69,7 @@ b { // Used for event dates/times
   @include font-family($font-family-primary);
   font-size: $font-size-default;
   padding-left: 8rem;
+  margin-left: -95px;
 }
 
   .demo-app-sidebar {
@@ -89,7 +90,7 @@ b { // Used for event dates/times
     background-repeat: no-repeat;
     background-size: cover;
     border: 0px solid #42b7e2;
-    margin-left: 50px;
+    margin-left: 30px;
     margin-top: 10px;
 
     .demo-app-sidebar-section {

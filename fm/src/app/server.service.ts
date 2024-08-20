@@ -21,7 +21,7 @@ public userSubject = new BehaviorSubject<any>('Initial User');
   }
 
   getMethod(){
-    
+
     return this.apihttp.get(this.api);
   }
 
@@ -50,7 +50,6 @@ logingetMethod(){
 
 loginPostMethod(data:any){
   const val=" http://localhost:3000/loginFrom"
-
   return this.apihttp.post(val,data)
 }
 
@@ -73,7 +72,6 @@ loginDeleteMethod(id:any){
   const url = `${val}/${id}`
   return this.apihttp.delete(url)
 }
-
 
 detailsDeleteMethod(id:any){
   const val="http://localhost:3000/educationalFrom"
