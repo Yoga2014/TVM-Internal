@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
+    // background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
     padding: 0.5rem 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     background-size: cover;
@@ -14,7 +14,7 @@
   .nav-item {
     padding: 0.5rem 1rem; /* Reduced padding */
     cursor: pointer;
-    color: #f9f9f9;
+    color: black;
     font-weight: bold;
     position: relative;
     transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
@@ -28,7 +28,7 @@
     height: 2px; /* Reduced height */
     bottom: 0;
     left: 0;
-    background-color: #ffdd57; /* Highlight color */
+    background-color:  #0088ff; /* Highlight color */
     transition: width 0.3s;
   }
 
