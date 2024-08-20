@@ -1,0 +1,90 @@
+/* Offcanvas Styles */
+.offcanvas {
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+  }
+  
+  /* Offcanvas header and footer */
+  .offcanvas-header {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .offcanvas-footer {
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .card-body {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 1000px;
+    margin-top: -38px;
+    position: static;
+
+  }
+  .card-body .btn{
+    background-color: white;
+    color: rgb(33, 9, 121);
+    position: fixed;
+  }
+
+ .card-header {
+background-color: #1e3c72;
+  }
+  .form-check{
+    display: inline-flex;
+    margin-left: 20px;
+    padding-top: 5px;
+  }
+
+  .container {
+    margin-top: 4rem;
+  }
+  
+  .submitted-data {
+    margin-top: 1rem;
+  }
+  
+  .submitted-data .d-flex.flex-wrap p {
+    margin-right: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .submitted-data p {
+    margin-bottom: 0.5rem;
+  }
+  .projectlist{
+    color:white;
+    background-color: #1e3c72;
+    height: 40px;
+    padding: 20px;
+  }
+ .pro{
+ margin-top: -304px;
+ }
+ .container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 80px;
+}
+
+.projectlist {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #1e3c72;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.projectlist .pro {
+  margin: 0; /* Ensure no extra margin */
+  font-size: 1.2rem; /* Adjust font size if needed */
+}
+
+  
