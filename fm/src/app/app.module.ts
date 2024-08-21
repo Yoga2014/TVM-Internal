@@ -78,6 +78,11 @@ import { SkillsetPerformanceComponent } from './skillset-performance/skillset-pe
 import { CompetencyComponent } from './competency/competency.component';
 import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
 import { NgFor, NgIf } from '@angular/common';
+import { TaskNavsComponent } from './task-navs/task-navs.component';
+import { TrackTaskComponent } from './track-task/track-task.component';
+import { TaskTasksComponent } from './task-tasks/task-tasks.component';
+import { MyTaskComponent } from './my-task/my-task.component';
+import { FormViewComponent } from './form-view/form-view.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +130,12 @@ import { NgFor, NgIf } from '@angular/common';
     GoalsMyDataComponent,
     SkillsetPerformanceComponent,
     CompetencyComponent,
-    PerformanceFeedbackComponent
+    PerformanceFeedbackComponent,
+    MyTaskComponent,
+    FormViewComponent,
+    TrackTaskComponent,
+    TaskNavsComponent,
+    TaskTasksComponent,
   ],
 
   imports: [

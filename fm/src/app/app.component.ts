@@ -44,6 +44,10 @@ export class AppComponent {
     this.router.navigate(['perfomance-myData']);
   }
 
+  tasksNavigate(){
+    this.router.navigate(['task-tasks']);
+  }
+
   newHomeNavigate()
   {
     this.router.navigate(['new-Home']);

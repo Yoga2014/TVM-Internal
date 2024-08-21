@@ -41,6 +41,11 @@ import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
 import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
 import { CompetencyComponent } from './competency/competency.component';
 import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
+import { TaskTasksComponent } from './task-tasks/task-tasks.component';
+import { TaskNavsComponent } from './task-navs/task-navs.component';
+import { FormViewComponent } from './form-view/form-view.component';
+import { TrackTaskComponent } from './track-task/track-task.component';
+import { MyTaskComponent } from './my-task/my-task.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -116,6 +121,20 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: 'task-tasks',
+    component: TaskTasksComponent,
+    children: [
+      { path: '', 
+        component: TaskNavsComponent,
+        children: [
+          { path: 'my-task', component: MyTaskComponent },
+          { path: 'track-task', component: TrackTaskComponent},
+          { path: 'form-view', component: FormViewComponent },
+        ]
+      }
+    ]
+  },
   {
     path: 'perfomance-myData',
     component: PerformanceMyDataComponent,

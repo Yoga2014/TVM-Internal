@@ -1,0 +1,6 @@
+<div class="navbar">
+    <div class="nav-item" [class.active]="activeNavItem === 'tasks'" (click)="navigateTasks()">Tasks</div>
+    <div class="nav-item" [class.active]="activeNavItem === 'checkLists'" (click)="navigateCheckLists()">Checklists</div>
+</div>
+
+<app-task-navs></app-task-navs>
