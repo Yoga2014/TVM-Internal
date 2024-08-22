@@ -5,12 +5,12 @@
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
-  
+
     .team-overview {
       display: flex;
       justify-content: space-between;
       gap: 20px;
-  
+
       .card {
         flex: 1;
         padding: 15px;
@@ -20,30 +20,30 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow-y: auto;
         max-height: 200px;
-  
+
         &:hover {
           transform: translateY(-5px);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-  
+
         h3 {
           margin-bottom: 10px;
           color: #007bff;
           font-size: 1.2em;
           font-weight: bold;
         }
-  
+
         p {
           margin: 5px 0;
           color: #333;
         }
       }
     }
-  
+
     .team-details {
       display: flex;
       gap: 20px;
-  
+
       .department-wall {
         flex: 2;
         padding: 15px;
@@ -56,37 +56,37 @@
         justify-content: space-between;
         overflow-y: auto;
         max-height: 400px;
-  
+
         &:hover {
           transform: translateY(-5px);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-  
+
         .messages {
           flex-grow: 1;
           overflow-y: auto;
           margin-bottom: 10px;
           padding-right: 10px; // Add padding for scrollbar space
-  
+
           .message {
             margin-bottom: 10px;
             border-bottom: 1px solid #eee;
             padding-bottom: 5px;
-  
+
             .message-header {
               font-weight: bold;
               color: #555;
               display: flex;
               justify-content: space-between;
             }
-  
+
             .message-body {
               margin-top: 5px;
               color: #666;
             }
           }
         }
-  
+
         textarea {
           width: 100%;
           padding: 10px;
@@ -95,7 +95,7 @@
           resize: none;
           margin-bottom: 10px;
         }
-  
+
         button {
           padding: 10px 20px;
           border: none;
@@ -104,19 +104,19 @@
           color: #fff;
           cursor: pointer;
           transition: background-color 0.3s ease;
-  
+
           &:hover {
             background-color: #0056b3;
           }
         }
       }
-  
+
       .right-pane {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 20px;
-  
+
         .card {
           padding: 15px;
           border-radius: 8px;
@@ -125,31 +125,31 @@
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           overflow-y: auto;
           max-height: 150px;
-  
+
           &:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
           }
-  
+
           h3 {
             margin-bottom: 10px;
             color: #007bff;
             font-size: 1.2em;
             font-weight: bold;
           }
-  
+
           p {
             margin: 5px 0;
             color: #333;
           }
         }
-  
+
         .scrollable-card {
           .scrollable-content {
             max-height: 100px;
             overflow-y: auto;
             padding-right: 10px; // Add padding for scrollbar space
-  
+
             p {
               margin: 5px 0;
               color: #333;
@@ -159,4 +159,3 @@
       }
     }
   }
-  

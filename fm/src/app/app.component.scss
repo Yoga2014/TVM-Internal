@@ -15,8 +15,8 @@ body {
 /* Sidebar Styles */
 .sidebar {
   width: 75px;
-  min-width: 75px  ;
-  background-color:#1c2655;
+  min-width: 75px;
+  background-color: #1c2655;
   color: #fff;
   transition: width 0.3s ease;
   overflow-y: auto;
@@ -45,7 +45,6 @@ body {
 
 .content {
   padding: 15px;
-  // transition: background-color 0.3s ease;
 }
 
 
@@ -69,33 +68,34 @@ body {
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .app-container {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .sidebar {
-      width: 100%;
-      min-width: 0;
+    width: 100%;
+    min-width: 0;
   }
 }
 
-/* Customization */
 .title {
   color: white;
   font-size: 8px;
 
 }
-.title-home{
-  color: white;
-  font-size: 8px;
-  padding-left: 8px;
-}
-.title-profile{
+
+.title-home {
   color: white;
   font-size: 8px;
   padding-left: 8px;
 }
 
-.title-leave{
+.title-profile {
+  color: white;
+  font-size: 8px;
+  padding-left: 8px;
+}
+
+.title-leave {
   color: white;
   font-size: 8px;
   margin-right: -12px;
@@ -107,7 +107,7 @@ body {
 
 }
 
-i{
+i {
   background-color: #222c65;
   width: 40px;
   height: 40px;
@@ -118,11 +118,10 @@ i{
   cursor: pointer;
 }
 
-img{
+img {
   padding-left: 0px;
   position: absolute;
   left: 13px;
   top: 3px;
   width: 40px;
 }
-

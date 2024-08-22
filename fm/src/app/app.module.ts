@@ -36,8 +36,6 @@ import { HeaderComponent } from './header/header.component';
 import { DetailsComponent } from './details/details.component';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
 
-
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { NewHiresComponent } from './new-hires-card/new-hires-card.component';
@@ -58,7 +56,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { INITIAL_EVENTS } from './calendar/event-utils';
 import { TeamsDashboardComponent } from './teams-dashboard/teams-dashboard.component';
 import { TeamsSpaceComponent } from './teams-space/teams-space.component';
-import { LogOutComponent } from "./log-out/log-out.component";
+import { LogOutComponent } from './log-out/log-out.component';
 import { GoalsComponent } from './goals/goals.component';
 import { AddGoalsComponent } from './add-goals/add-goals.component';
 import { CommentsComponent } from './comments/comments.component';
@@ -78,9 +76,10 @@ import { SkillsetPerformanceComponent } from './skillset-performance/skillset-pe
 import { CompetencyComponent } from './competency/competency.component';
 import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
 import { NgFor, NgIf } from '@angular/common';
-import { TaskNavsComponent } from './task-navs/task-navs.component';
+import { MoreOptionsComponent } from './more-options/more-options.component';
 import { TrackTaskComponent } from './track-task/track-task.component';
 import { TaskTasksComponent } from './task-tasks/task-tasks.component';
+import { TaskNavsComponent } from './task-navs/task-navs.component';
 import { MyTaskComponent } from './my-task/my-task.component';
 import { FormViewComponent } from './form-view/form-view.component';
 
@@ -131,11 +130,12 @@ import { FormViewComponent } from './form-view/form-view.component';
     SkillsetPerformanceComponent,
     CompetencyComponent,
     PerformanceFeedbackComponent,
-    MyTaskComponent,
-    FormViewComponent,
+    MoreOptionsComponent,
     TrackTaskComponent,
-    TaskNavsComponent,
     TaskTasksComponent,
+    TaskNavsComponent,
+    MyTaskComponent,
+    FormViewComponent
   ],
 
   imports: [
@@ -165,9 +165,11 @@ import { FormViewComponent } from './form-view/form-view.component';
     INITIAL_EVENTS,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatStepperModule,NgIf,NgFor
-],
+    MatStepperModule,
+    NgIf,
+    NgFor,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
