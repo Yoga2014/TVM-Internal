@@ -46,6 +46,7 @@ import { TaskNavsComponent } from './task-navs/task-navs.component';
 import { FormViewComponent } from './form-view/form-view.component';
 import { TrackTaskComponent } from './track-task/track-task.component';
 import { MyTaskComponent } from './my-task/my-task.component';
+import { OnboardingComponent } from './more-options/onboarding/onboarding.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: 'leave-balance', component: LeaveBalanceComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'personalDataForm', component: PersonalDataFormComponent },
+  { path: 'onboarding', component: OnboardingComponent },
 
   {
     path: 'leave-tracking',
@@ -74,8 +76,8 @@ const routes: Routes = [
           { path: 'leave-summary', component: LeaveSummaryComponent },
           { path: 'leave-balance', component: LeaveBalanceComponent },
           { path: 'leave-requests', component: LeaveRequestsComponent },
-          { path: 'apply-leave', component: ApplyLeaveComponent }
-        ]
+          { path: 'apply-leave', component: ApplyLeaveComponent },
+        ],
       },
       {
         path: 'teams',
@@ -83,15 +85,18 @@ const routes: Routes = [
         children: [
           { path: 'leave-reportees', component: LeaveReporteesComponent },
           { path: 'on-leave', component: OnLeaveComponent },
-          { path: 'approval-leave-request', component: ApprovalLeaveRequestComponent },
-          { path: 'apply-leave', component: ApplyLeaveComponent }
-        ]
+          {
+            path: 'approval-leave-request',
+            component: ApprovalLeaveRequestComponent,
+          },
+          { path: 'apply-leave', component: ApplyLeaveComponent },
+        ],
       },
       {
         path: 'organization',
-        component: OrganizationComponent
-      }
-    ]
+        component: OrganizationComponent,
+      },
+    ],
   },
   {
     path: 'new-Home',
@@ -103,8 +108,8 @@ const routes: Routes = [
         children: [
           { path: 'overview', component: OverviewComponent },
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'calendar', component: CalendarComponent }
-        ]
+          { path: 'calendar', component: CalendarComponent },
+        ],
       },
 
       {
@@ -115,17 +120,17 @@ const routes: Routes = [
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },
           { path: 'projects', component: TeamProjectComponent },
-          { path: 'team-list', component: TeamListComponent }
-        ]
+          { path: 'team-list', component: TeamListComponent },
+        ],
       },
-    ]
+    ],
   },
 
   {
     path: 'task-tasks',
     component: TaskTasksComponent,
     children: [
-      { path: '', 
+      { path: '',
         component: TaskNavsComponent,
         children: [
           { path: 'my-task', component: MyTaskComponent },
@@ -139,26 +144,26 @@ const routes: Routes = [
     path: 'perfomance-myData',
     component: PerformanceMyDataComponent,
     children: [
-      { path: '', 
+      {
+        path: '',
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },
-          { path: 'skillset', component: SkillsetPerformanceComponent},
+          { path: 'skillset', component: SkillsetPerformanceComponent },
           { path: 'competency', component: CompetencyComponent },
-          {path: 'feedback', component: PerformanceFeedbackComponent}
-        ]
-      }
-    ]
+          { path: 'feedback', component: PerformanceFeedbackComponent },
+        ],
+      },
+    ],
   },
 
   { path: 'add-goal', component: AddGoalsComponent },
   { path: 'goals/:goalId/comments', component: CommentsComponent },
-  { path: 'add-goal/:id', component: AddGoalsComponent }
-
+  { path: 'add-goal/:id', component: AddGoalsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
