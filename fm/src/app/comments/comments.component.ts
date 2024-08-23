@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GoalService } from '../AllServices/goal.service';
 import { Comment } from '../Interface/Goals.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -11,10 +12,12 @@ import { Comment } from '../Interface/Goals.model';
 export class CommentsComponent implements OnInit {
   comments: Comment[] = [];
   newComment: string = '';
+  newAuthorType: 'user' | 'manager' = 'user';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { goalId: number },
-    private goalService: GoalService
+    private goalService: GoalService,
+    private dialogRef: MatDialogRef<CommentsComponent>
   ) {}
 
   ngOnInit(): void {
@@ -22,28 +25,40 @@ export class CommentsComponent implements OnInit {
   }
 
   loadComments(): void {
-    this.goalService.getComments(this.data.goalId).subscribe({
-      next: (data: Comment[]) => this.comments = data,
-      error: (err) => console.error(err)
-    });
+    debugger
+    this.goalService.getComments().subscribe(
+      (response: Comment[]) => {
+        this.comments = response;
+        console.log('Comments loaded:', this.comments);
+      },
+      (error) => console.error('Error loading comments:', error)
+    );
   }
 
   addComment(): void {
+    debugger
     if (this.newComment.trim()) {
       const comment: Comment = {
         id: Math.floor(Math.random() * 10000),
         text: this.newComment,
         author: 'Current User',
+        authorType: this.newAuthorType,
         createdAt: new Date()
       };
 
-      this.goalService.addComment(this.data.goalId, comment).subscribe({
-        next: (comment: Comment) => {
-          this.comments.push(comment);
+      this.goalService.addComment(comment).subscribe(
+        (response: Comment) => {
+          console.log('Comment successfully posted:', response);
+          this.comments.push(response);
           this.newComment = '';
+          this.newAuthorType = 'user';
         },
-        error: (err) => console.error(err)
-      });
+        (err) => console.error('Error posting comment:', err)
+      );
     }
+  }
+
+  oncancel() {
+    this.dialogRef.close();
   }
 }
