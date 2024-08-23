@@ -64,11 +64,11 @@ export class GoalsComponent implements OnInit, OnDestroy {
     this.step4Completed = this.goals.every(goal => goal.status === 'GoalFinished');
   }
 
-  navigateToGoalSpace(goalId: number): void {
+  navigateToGoalSpace(goalId: string): void {
     this.router.navigate(['/goal-space', goalId]);
   }
 
-  openCommentsDialog(goalId: number): void {
+  openCommentsDialog(goalId: string): void {
     const dialogRef = this.dialog.open(CommentsComponent, {
       width: '600px',
       data: { goalId }
@@ -155,7 +155,7 @@ export class GoalsComponent implements OnInit, OnDestroy {
       width: '400px',
       data: { id: goal.id, name: goal.name }
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.goalService.deleteGoal(goal.id).subscribe({
@@ -170,4 +170,5 @@ export class GoalsComponent implements OnInit, OnDestroy {
       }
     });
   }
+  
 }

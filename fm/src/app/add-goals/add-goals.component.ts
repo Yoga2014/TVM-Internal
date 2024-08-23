@@ -22,6 +22,7 @@ export class AddGoalsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Initialize the form
     this.addGoalForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
@@ -31,50 +32,67 @@ export class AddGoalsComponent implements OnInit {
       progress: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
     });
 
+    // Check if we are in edit mode
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
+        this.goalId = +id; // Convert to number
         this.isEditMode = true;
-        this.goalId = +id;
-        this.goalService.getGoalById(this.goalId).subscribe({
-          next: (goal) => this.patchGoalData(goal),
-          error: (err) => console.error('Error fetching goal:', err)
-        });
+        this.loadGoalData(this.goalId);
       }
     });
   }
 
+  loadGoalData(id: number): void {
+    this.goalService.getGoalById(id).subscribe((goal: Goal) => {
+      this.patchGoalData(goal);
+    }, (error: any) => {
+      console.error('Error fetching goal data:', error);
+    });
+  }
+  
+
   patchGoalData(goal: Goal): void {
-    if (goal) {
-      this.addGoalForm.patchValue({
-        name: goal.name,
-        description: goal.description,
-        priority: goal.priority,
-        startDate: goal.startDate,
-        endDate: goal.endDate,
-        progress: goal.progress
-      });
-    }
+    this.addGoalForm.patchValue({
+      name: goal.name,
+      description: goal.description,
+      priority: goal.priority,
+      startDate: goal.startDate,
+      endDate: goal.endDate,
+      progress: goal.progress
+    });
   }
 
   addGoal(): void {
     if (this.addGoalForm.valid) {
       const goalData: Goal = this.addGoalForm.value;
       if (this.isEditMode) {
-        this.goalService.updateGoal(this.goalId, goalData).subscribe({
-          next: () => this.router.navigate(['/goals']),
-          error: (err) => console.error('Error updating goal:', err)
-        });
+        // Update existing goal
+        this.goalService.updateGoal(this.goalId, goalData).subscribe(
+          (response) => {
+            console.log('Goal updated successfully', response);
+            this.router.navigate(['perfomance-myData/goals']);
+          },
+          (error) => {
+            console.error('Error updating goal', error);
+          }
+        );
       } else {
-        this.goalService.addGoal(goalData).subscribe({
-          next: () => this.router.navigate(['/goals']),
-          error: (err) => console.error('Error adding goal:', err)
-        });
+        // Add new goal
+        this.goalService.addGoal(goalData).subscribe(
+          (response) => {
+            console.log('Goal added successfully', response);
+            this.router.navigate(['perfomance-myData/goals']);
+          },
+          (error) => {
+            console.error('Error adding goal', error);
+          }
+        );
       }
     }
   }
-
+  
   cancel(): void {
-    this.router.navigate(['/goals']);
+    this.router.navigate(['perfomance-myData/goals']);
   }
 }
