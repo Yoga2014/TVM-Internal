@@ -1,38 +1,57 @@
 <div class="container mt-4">
   <!-- Project List Tab -->
- <div class="projectlist">
-  <div class="pro" >Project List</div>
+  <div class="projectlist">
+    <div class="pro">Project List</div>
   </div>
-
 
   <!-- Add Project Button -->
   <div class="card-body">
-    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm" >Add Project</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
   </div>
 </div>
- <table>
-  <tr>
-    <th>Project Name</th>
-    <th>Client Name</th>
-    <th>Domain</th>
-  </tr>
-  <tr *ngFor="let item of submittedData">
 
-    <td>{{item.projectname}}</td>
-    <td>{{item.clientname}}</td>
-    <td>{{item.domain}}</td>
-  </tr>
- </table>
+<!-- Table to Display Project Data -->
+<table class="project-table">
+  <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>Client Name</th>
+      <th>Domain</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of submittedData">
+      <td>{{ item.projectname }}</td>
+      <td>{{ item.clientname }}</td>
+      <td>{{ item.domain }}</td>
+      <td>1</td>
+      <td>
+        <select>
+          <option value="">--select--</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </td>
+      <td>
+        <button class="edit-btn" (click)="edit(item.id)">Edit</button>
+        <button class="delete-btn" (click)="delete(item.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
  
   
 <!-- Add Project Form -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasForm" aria-labelledby="offcanvasFormLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasFormLabel">Add Project</h5>
+    <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update() : onSubmit()">
           <!-- Project Name -->
           <div class="mb-3">
             <label for="projectname" class="form-label">Project Name</label>
@@ -148,19 +167,19 @@
           <div class="mb-3 ">
             <label class="form-label" >Asset</label>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="laptop" value="laptop" formControlName="asset" (change)="onCheckboxChange($event)"/>
+              <input type="checkbox" class="form-check-input" id="laptop" value="laptop" formControlName="asset1" (change)="onCheckboxChange($event)"/>
               <label class="form-check-label" for="laptop">Laptop</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="charger" value="charger" formControlName="asset" (change)="onCheckboxChange($event)"/>
+              <input type="checkbox" class="form-check-input" id="charger" value="charger" formControlName="asset2" (change)="onCheckboxChange($event)"/>
               <label class="form-check-label" for="charger">Charger</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="headset" value="headset" formControlName="asset" (change)="onCheckboxChange($event)">
+              <input type="checkbox" class="form-check-input" id="headset" value="headset" formControlName="asset3" (change)="onCheckboxChange($event)">
               <label class="form-check-label" for="headset">Headset</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="mouse" value="mouse" formControlName="asset" (change)="onCheckboxChange($event)">
+              <input type="checkbox" class="form-check-input" id="mouse" value="mouse" formControlName="asset4" (change)="onCheckboxChange($event)">
               <label class="form-check-label" for="mouse">Mouse</label>
             </div>
           </div>
@@ -168,7 +187,7 @@
           <!-- Submit and Cancel Buttons -->
           <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
-           <!-- <button type="button" class="btn btn-secondary" (click)="closeOffcanvas()">Cancel</button> -->
+           <button type="button" class="btn btn-secondary" (click)="update()">Update</button>
           </div>
         </form>
       </div>
