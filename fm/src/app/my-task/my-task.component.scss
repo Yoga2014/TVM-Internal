@@ -71,6 +71,10 @@ body {
   /* Task Content styles */
   .task-content {
     margin: 20px;
+    max-height: 475px; /* Adjust this value based on your design */
+    overflow-y: auto; /* Enables vertical scrolling */
+    margin-top: 20px;
+    padding-right: 10px; /* Add some padding to avoid content touching the scrollbar */
   }
   
   /* Table styles */
@@ -150,14 +154,15 @@ body {
   
   /* Modal content styling */
   .modal-content {
-    background: #fff;
+    width: 50%; /* Adjust this value to control the width of the form */
+    max-width: 600px; /* Maximum width */
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 80%; /* Adjust width as needed */
-    max-width: 600px; /* Maximum width for the modal */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
-    position: relative; /* Ensure the close button is positioned correctly */
-    margin-right: 20px; /* Gap on the right side */
+    position: relative;
+    margin: auto;
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: 80vh; /* Limit the height to 80% of the viewport height */
   }
   
   /* Close button styling */
@@ -404,39 +409,8 @@ body {
   .form-buttons button[type="button"] {
     background-color: #f44336;
     color: white;
-  }
-  
-  
-  
-  /* Loader styles */
-  .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .spinner {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .status-completed {
+  }  
+ .status-completed {
     color: green;
   }
   
@@ -456,5 +430,27 @@ body {
   .error {
     color: red;
     font-size: 0.875em;
+  }
+  
+  .input-container {
+    position: relative; /* Needed for absolute positioning of the icon */
+    width: 100%; /* Adjust width as needed */
+  }
+  
+  .input-container input {
+    width: 100%; /* Full width of the container */
+    padding: 10px 30px 10px 10px; /* Add padding to accommodate the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+  
+  .input-container i {
+    position: absolute;
+    right: 25px; /* Adjust position as needed */
+    top: 50%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    color: #aaa; /* Icon color */
+    pointer-events: none; /* Prevent icon from blocking input clicks */
   }
   

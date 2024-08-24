@@ -27,9 +27,9 @@
       <form (ngSubmit)="applyFilters()" #filterForm="ngForm">
         <div class="form-group">
           <div class="input-container">
-            <i class="fas fa-search"></i>
             <input placeholder="Task name" type="text" id="taskName" name="taskName" ngModel [(ngModel)]="filterCriteria.taskName">
-          </div>        
+            <i class="fas fa-search"></i>
+          </div>                
         </div>
         <div class="form-group">
           <label for="priority">Priority:</label>
@@ -57,45 +57,26 @@
     </div>
   </div>
   
-  <!-- Task Table -->
-  <div class="task-content" *ngIf="filteredTasks.length > 0">
-    <h3 class="table-head">Task Details</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Task Owner</th>
-          <th>Task Name</th>
-          <th>Description</th>
-          <th>Start Date</th>
-          <th>Due Date</th>
-          <th>Reminder</th> 
-          <th>Priority</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of filteredTasks">
-          <td>{{ task.taskOwner }}</td>
-          <td>{{ task.taskName }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.startDate }}</td>
-          <td>{{ task.dueDate }}</td>
-          <td>{{ task.reminder }}</td>
-          <td [ngClass]="getPriorityClass(task.priority)">{{ task.priority }}</td>
-          <td [ngClass]="getStatusClass(task.status)">{{ task.status }}</td>
-          <td>
-            <button class="icon-button edit-button" (click)="editTask(task)">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="icon-button delete-button" (click)="deleteTask(task.id)">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<!-- Task Cards -->
+<div class="task-cards" *ngIf="filteredTasks.length > 0">
+  <div class="task-card" *ngFor="let task of filteredTasks" [ngClass]="getCardClass(task.status)">
+    <div class="card-content">
+      <h4>{{ task.taskName }}</h4>
+      <p><strong>Owner:</strong> {{ task.taskOwner }}</p>
+      <p><strong>Priority:</strong> <span [ngClass]="getPriorityClass(task.priority)">{{ task.priority }}</span></p>
+      <p><strong>Status:</strong> <span [ngClass]="getStatusClass(task.status)">{{ task.status }}</span></p>
+    </div>
+    <div class="card-actions">
+      <button class="icon-button edit-button" (click)="editTask(task)">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button class="icon-button delete-button" (click)="deleteTask(task.id)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
   </div>
+</div>
+
   
   <!-- No tasks message -->
   <div class="no-tasks" *ngIf="filteredTasks.length === 0 && !showFilterPopup">
