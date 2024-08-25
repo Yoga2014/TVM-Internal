@@ -1,0 +1,47 @@
+:host ::ng-deep .p-tree {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode:last-child {
+    border-bottom: none;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-children {
+    padding-left: 20px;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-children .p-treenode {
+    padding-left: 20px;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-children .p-treenode-label {
+    font-weight: normal;
+    color: #666;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #999;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-icon.fa-folder {
+    color: #337ab7;
+  }
+  
+  :host ::ng-deep .p-tree .p-treenode-icon.fa-file {
+    color: #666;
+  }

@@ -26,7 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { TreeModule } from 'primeng/tree';
 // Components
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
@@ -82,6 +82,11 @@ import { TaskTasksComponent } from './task-tasks/task-tasks.component';
 import { TaskNavsComponent } from './task-navs/task-navs.component';
 import { MyTaskComponent } from './my-task/my-task.component';
 import { FormViewComponent } from './form-view/form-view.component';
+import { EmployeeTreeComponent } from './employee-tree/employee-tree.component';
+import { DepartmentDirectoryComponent } from './department-directory/department-directory.component';
+import { PoliciesComponent } from './policies/policies.component';
+import { DepartmentTreeComponent } from './department-tree/department-tree.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +140,13 @@ import { FormViewComponent } from './form-view/form-view.component';
     TaskTasksComponent,
     TaskNavsComponent,
     MyTaskComponent,
-    FormViewComponent
+    FormViewComponent,
+    EmployeeDetailsComponent,
+    DepartmentDirectoryComponent,
+    DepartmentTreeComponent,
+    PoliciesComponent,
+    AnnouncementsComponent,
+    EmployeeTreeComponent
   ],
 
   imports: [
@@ -168,6 +179,7 @@ import { FormViewComponent } from './form-view/form-view.component';
     MatStepperModule,
     NgIf,
     NgFor,
+    TreeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
