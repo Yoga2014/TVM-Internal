@@ -11,7 +11,7 @@ export class DeleteGoalsComponent {
  
   constructor(
     public dialogRef: MatDialogRef<DeleteGoalsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number; name: string },
+    @Inject(MAT_DIALOG_DATA) public data: { id: string; name: string },
     private goalService: GoalService
   ) { }
 

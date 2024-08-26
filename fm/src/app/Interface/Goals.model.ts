@@ -1,6 +1,6 @@
 export interface Goal 
 {
-    id: number;
+    id: string;
     name: string;
     description: string;
     priority: string;
@@ -14,6 +14,8 @@ export interface Goal
     id: number;
     text: string;
     author: string;
+    authorType: 'user' | 'manager';
     createdAt: Date;
   }
+  
   

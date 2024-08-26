@@ -1,40 +1,43 @@
 {
   "Goals": [
     {
-      "id": "94e8",
-      "name": "sla",
+      "name": "on time",
       "description": "on time will come",
       "priority": "Medium",
       "startDate": "2024-08-12T18:30:00.000Z",
       "endDate": "2024-08-13T18:30:00.000Z",
-      "progress": 13
+      "progress": 13,
+      "id": "9408"
+    }
+  ],
+  "comments": [
+    {
+      "id": "9641",
+      "text": "hi",
+      "author": "Current User",
+      "authorType": "user",
+      "createdAt": "2024-08-14T07:15:53.041Z"
     },
     {
-      "id": "5cbb",
-      "name": "sla",
-      "description": "on time will come",
-      "priority": "Medium",
-      "startDate": "2024-08-12T18:30:00.000Z",
-      "endDate": "2024-08-13T18:30:00.000Z",
-      "progress": 13
+      "id": "5333",
+      "text": "ok",
+      "author": "Current User",
+      "authorType": "manager",
+      "createdAt": "2024-08-14T07:17:05.947Z"
     },
     {
-      "id": "6900",
-      "name": "mani",
-      "description": "asdfghjklwertyui",
-      "priority": "Medium",
-      "startDate": "2024-08-26T18:30:00.000Z",
-      "endDate": "2024-08-22T18:30:00.000Z",
-      "progress": 10
+      "id": "2385",
+      "text": "but i need apprasil",
+      "author": "Current User",
+      "authorType": "user",
+      "createdAt": "2024-08-14T07:21:07.518Z"
     },
     {
-      "id": "faff",
-      "name": "uiyvuvuvg",
-      "description": "7ygyytfytfytfyrctc",
-      "priority": "Medium",
-      "startDate": "2024-08-13T18:30:00.000Z",
-      "endDate": "2024-08-29T18:30:00.000Z",
-      "progress": 34
+      "id": "7623",
+      "text": "what is your performance",
+      "author": "Current User",
+      "authorType": "manager",
+      "createdAt": "2024-08-14T07:21:27.543Z"
     }
   ],
   "Teams": [],
@@ -119,7 +122,8 @@
       "profilePicture": "assets/images/john_doe.jpg",
       "leaveBooked": 10,
       "generalTimining": "9 AM - 6 PM",
-      "status": "active"
+      "status": "active",
+      "id": "af4c"
     },
     {
       "employeeId": "E002",
@@ -127,7 +131,8 @@
       "profilePicture": "assets/images/jane_smith.jpg",
       "leaveBooked": 8,
       "generalTimining": "8 AM - 5 PM",
-      "status": "on leave"
+      "status": "on leave",
+      "id": "7d10"
     },
     {
       "employeeId": "E003",
@@ -135,7 +140,8 @@
       "profilePicture": "assets/images/robert_brown.jpg",
       "leaveBooked": 5,
       "generalTimining": "9:30 AM - 6:30 PM",
-      "status": "active"
+      "status": "active",
+      "id": "988d"
     },
     {
       "employeeId": "E004",
@@ -143,7 +149,8 @@
       "profilePicture": "assets/images/emily_davis.jpg",
       "leaveBooked": 12,
       "generalTimining": "10 AM - 7 PM",
-      "status": "on leave"
+      "status": "on leave",
+      "id": "bcb7"
     },
     {
       "employeeId": "E005",
@@ -151,7 +158,8 @@
       "profilePicture": "assets/images/michael_johnson.jpg",
       "leaveBooked": 7,
       "generalTimining": "9 AM - 6 PM",
-      "status": "active"
+      "status": "active",
+      "id": "7dff"
     }
   ]
 }
