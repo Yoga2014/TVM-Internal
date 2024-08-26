@@ -9,6 +9,10 @@ import { Announcement } from '../announcement.model';
   styleUrls: ['./announcements.component.scss']
 })
 export class AnnouncementsComponent implements OnInit {
+
+  
+  
+
   announcements: Announcement[] = [];
   announcementForm!: FormGroup;
   isAnnouncementFormVisible = false;
@@ -18,7 +22,8 @@ export class AnnouncementsComponent implements OnInit {
   searchTerm: string = '';
   selectedAnnouncementId: number | null = null;
   selectedAnnouncement: any;
-  newComment: string | undefined;
+  newComment: string = '';
+  likedAnnouncements: Set<number> = new Set();
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +51,8 @@ export class AnnouncementsComponent implements OnInit {
   loadAnnouncements(): void {
     this.announcementService.getAnnouncements().subscribe((data) => {
       this.announcements = data;
+      console.log(this.announcements);
+      
     });
   }
 
@@ -131,17 +138,6 @@ export class AnnouncementsComponent implements OnInit {
   showPopup(announcement: any) {
     this.selectedAnnouncement = announcement;
   }
-
-  addComment() {
-    // Add the new comment to the selected announcement
-    this.selectedAnnouncement.comments++;
-    // Clear the new comment input
-    this.newComment = '';
-  }
-
-  likeAnnouncement(announcement: any) {
-    announcement.likes++;
-  }
   
   closePopup() {
     this.selectedAnnouncement = null;
@@ -157,4 +153,24 @@ export class AnnouncementsComponent implements OnInit {
     });
   }
   
+  likeAnnouncement(announcement: any): void {
+    const announcementId = announcement.id; // Make sure the `id` is defined in the announcement object
+    if (this.likedAnnouncements.has(announcementId)) {
+      this.likedAnnouncements.delete(announcementId);
+      announcement.likes--;
+    } else {
+      this.likedAnnouncements.add(announcementId);
+      announcement.likes++;
+    }
+  }
+
+  addComment(): void {
+    if (this.newComment.trim()) {
+      if (!this.selectedAnnouncement.comments) {
+        this.selectedAnnouncement.comments = [];
+      }
+      this.selectedAnnouncement.comments.push(this.newComment);
+      this.newComment = '';
+    }
+  }
 }
