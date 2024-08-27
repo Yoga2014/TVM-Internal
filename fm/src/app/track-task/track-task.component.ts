@@ -159,29 +159,34 @@ export class TrackTaskComponent implements OnInit {
 
 
 
-  getPriorityClass(priority: string): string {
-    switch (priority) {
-      case 'Low':
-        return 'status-completed';
-      case 'Medium':
-        return 'status-in-progress';
-      case 'High':
-        return 'status-not-started';
-      default:
-        return '';
-    }
+ // In your component
+getCardClass(status: string): string {
+  switch (status) {
+    case 'Not Started':
+      return 'card-status-not-started';
+    case 'In Progress':
+      return 'card-status-in-progress';
+    case 'Completed':
+      return 'card-status-completed';
+    default:
+      return '';
   }
+}
 
-  getStatusClass(status: string): string {
-    switch (status) {
-      case 'Completed':
-        return 'status-completed';
-      case 'In Progress':
-        return 'status-in-progress';
-      case 'Not Started':
-        return 'status-not-started';
-      default:
-        return '';
-    }
+getPriorityClass(priority: string): string {
+  switch (priority) {
+    case 'High':
+      return 'priority-high';
+    case 'Medium':
+      return 'priority-medium';
+    case 'Low':
+      return 'priority-low';
+    default:
+      return '';
   }
+}
+
+getStatusClass(status: string): string {
+  return status.toLowerCase().replace(/ /g, '-');
+}
 }

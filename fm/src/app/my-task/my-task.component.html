@@ -26,9 +26,9 @@
     <form (ngSubmit)="applyFilters()" #filterForm="ngForm">
       <div class="form-group">
         <div class="input-container">
-          <i class="fas fa-search"></i>
           <input placeholder="Task name" type="text" id="taskName" name="taskName" ngModel [(ngModel)]="filterCriteria.taskName">
-        </div>        
+          <i class="fas fa-search"></i>
+        </div>               
       </div>
       <div class="form-group">
         <label for="priority">Priority:</label>

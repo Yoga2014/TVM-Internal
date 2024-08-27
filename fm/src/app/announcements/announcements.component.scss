@@ -1,0 +1,447 @@
+/* Ensure the nav takes up full width */
+.top-nav {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #f8f9fa; /* Example background color */
+  border-bottom: 1px solid #dee2e6; /* Example border for separation */
+  position: relative; /* For positioning of search bar */
+}
+
+/* Search Bar Container */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: absolute; /* Position absolute to cover full width */
+  top: 0;
+  left: 0;
+  background: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.search-close-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons */
+}
+
+/* General Button Styling */
+.btn-add-announcement,
+.btn-filter,
+.btn-search {
+  background-color: #007bff; /* Blue color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-add-announcement:hover,
+.btn-filter:hover,
+.btn-search:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
+
+/* Specific Button Styling */
+.btn-filter,
+.btn-search {
+  background-color: transparent;
+  color: #007bff; /* Blue color */
+  padding: 8px;
+  border: 1px solid #007bff;
+  border-radius: 50%; /* Circular button */
+}
+
+.btn-filter:hover,
+.btn-search:hover {
+  background-color: #e2e6ea; /* Light gray background on hover */
+}
+
+/* Hide Buttons When Search is Active */
+.search-bar-container.active {
+  display: block; /* Show search bar */
+}
+
+.button-group.hidden {
+  display: none; /* Hide button group */
+}
+
+/* Filter Modal */
+/* Filter Modal Styling */
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+.filter-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative; /* For positioning the close button */
+}
+
+/* Close Button Styling */
+.filter-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.filter-close-button:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+/* Form Labels and Inputs */
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+select,
+input[type="checkbox"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+select {
+  width: 100%; /* Full width for select elements */
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+/* Checkbox Group */
+.filter-checkbox-group {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.filter-checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.filter-checkbox-group input[type="checkbox"] {
+  margin-right: 10px; /* Space between checkbox and text */
+}
+
+/* Button Group */
+.filter-button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.filter-apply-button,
+.filter-reset-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-apply-button {
+  background-color: #007bff; /* Primary color */
+  color: #fff;
+}
+
+.filter-apply-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.filter-reset-button {
+  background-color: #6c757d; /* Secondary color */
+  color: #fff;
+}
+
+.filter-reset-button:hover {
+  background-color: #5a6268; /* Darker shade on hover */
+}
+
+
+/* Modal Styles */
+.announcement-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: auto; /* Allows scrolling if content is too tall */
+}
+
+.modal-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  max-height: 90vh; /* Restricts height of modal */
+  overflow-y: auto; /* Adds scrollbar if content overflows */
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-container h1 {
+  margin-top: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px 0 5px;
+}
+
+input, textarea, select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-error {
+  color: red;
+  font-size: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-label input {
+  margin-right: 10px;
+}
+
+.form-action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.announcement-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #d9534f;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.announcement-info {
+  margin-left: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.like-button,
+.comment-button {
+  background: none;
+  border: none;
+  color: #5bc0de;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.like-button i,
+.comment-button i {
+  margin-right: 5px;
+}
+.announcement-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.action-button i {
+  margin-right: 5px;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.comment-submit-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.comment-submit-button:hover {
+  background-color: #0056b3;
+}

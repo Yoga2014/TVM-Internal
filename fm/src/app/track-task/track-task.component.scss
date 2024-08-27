@@ -71,6 +71,10 @@ body {
   /* Task Content styles */
   .task-content {
     margin: 20px;
+    max-height: 475px; /* Adjust this value based on your design */
+    overflow-y: auto; /* Enables vertical scrolling */
+    margin-top: 20px;
+    padding-right: 10px; /* Add some padding to avoid content touching the scrollbar */
   }
   
   /* Table styles */
@@ -150,14 +154,15 @@ body {
   
   /* Modal content styling */
   .modal-content {
-    background: #fff;
+    width: 50%; /* Adjust this value to control the width of the form */
+    max-width: 600px; /* Maximum width */
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 80%; /* Adjust width as needed */
-    max-width: 600px; /* Maximum width for the modal */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
-    position: relative; /* Ensure the close button is positioned correctly */
-    margin-right: 20px; /* Gap on the right side */
+    position: relative;
+    margin: auto;
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: 80vh; /* Limit the height to 80% of the viewport height */
   }
   
   /* Close button styling */
@@ -464,3 +469,93 @@ body {
     margin-top: 0.5rem;
   }
   
+ /* General card styling */
+.task-cards {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap onto multiple lines */
+  overflow-x: auto; /* Scroll horizontally if needed */
+  padding: 10px;
+}
+
+.task-card {
+  flex: 0 0 calc(20% - 20px); /* Adjust card width to fit 5 cards per row */
+  margin: 10px; /* Adjust margin as needed */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.card-content {
+  margin-bottom: 10px;
+}
+
+.card-actions {
+  text-align: right;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Card color based on status */
+.card-status-not-started {
+  background-color: #f5f5f5; /* Light grey for Not Started */
+}
+
+.card-status-in-progress {
+  background-color:#7c8ff0;; /* Light yellow for In Progress */
+}
+
+.card-status-completed {
+  background-color: #d4edda; /* Light green for Completed */
+}
+
+/* Additional styles for priority */
+.card-content .priority-high {
+  color: #dc3545; /* Red for High priority */
+}
+
+.card-content .priority-medium {
+  color: #ffc107; /* Yellow for Medium priority */
+}
+
+.card-content .priority-low {
+  color: #28a745; /* Green for Low priority */
+}
+
+/* Error styling */
+.invalid {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+.input-container {
+  position: relative; /* Needed for absolute positioning of the icon */
+  width: 100%; /* Adjust width as needed */
+}
+
+.input-container input {
+  width: 100%; /* Full width of the container */
+  padding: 10px 30px 10px 10px; /* Add padding to accommodate the icon */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.input-container i {
+  position: absolute;
+  right: 25px; /* Adjust position as needed */
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  color: #aaa; /* Icon color */
+  pointer-events: none; /* Prevent icon from blocking input clicks */
+}
