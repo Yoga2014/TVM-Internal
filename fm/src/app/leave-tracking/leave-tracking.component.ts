@@ -14,13 +14,11 @@ export class LeaveTrackingComponent {
 
   navigateToMyData() {
     this.activeNavItem = 'mydata';
-    // this.router.navigate(['mydata']);
     this.activeSubNavItem = 'leave-summary';
   }
 
   navigateToTeams() {
     this.activeNavItem = 'teams';
-    // this.router.navigate(['/teams']);
     this.activeSubNavItem = 'leave-reportees';
 
   }

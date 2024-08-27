@@ -146,7 +146,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     DepartmentTreeComponent,
     PoliciesComponent,
     AnnouncementsComponent,
-    EmployeeTreeComponent
+    EmployeeTreeComponent,
   ],
 
   imports: [
