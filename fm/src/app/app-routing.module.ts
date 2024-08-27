@@ -47,6 +47,12 @@ import { FormViewComponent } from './form-view/form-view.component';
 import { TrackTaskComponent } from './track-task/track-task.component';
 import { MyTaskComponent } from './my-task/my-task.component';
 import { OnboardingComponent } from './more-options/onboarding/onboarding.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
+import { PoliciesComponent } from './policies/policies.component';
+import { EmployeeTreeComponent } from './employee-tree/employee-tree.component';
+import { DepartmentTreeComponent } from './department-tree/department-tree.component';
+import { DepartmentDirectoryComponent } from './department-directory/department-directory.component';
+import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -92,10 +98,6 @@ const routes: Routes = [
           { path: 'apply-leave', component: ApplyLeaveComponent },
         ],
       },
-      {
-        path: 'organization',
-        component: OrganizationComponent,
-      },
     ],
   },
   {
@@ -123,6 +125,19 @@ const routes: Routes = [
           { path: 'team-list', component: TeamListComponent },
         ],
       },
+      {
+        path: 'organization',
+        component: OrganizationComponent,
+        children:[
+          { path:'announcements', component: AnnouncementsComponent},
+          { path:'policies', component: PoliciesComponent},
+          { path:'employee-tree', component: EmployeeTreeComponent},
+          { path:'department-tree', component: DepartmentTreeComponent},
+          { path:'department-directory', component: DepartmentDirectoryComponent},
+          { path:'birthday-folks', component: BirthdayCardComponent},
+          { path:'new-hires', component: NewHiresComponent},
+        ]
+      },
     ],
   },
 
@@ -145,13 +160,19 @@ const routes: Routes = [
     component: PerformanceMyDataComponent,
     children: [
       {
-        path: '',
+        path: 'my-data',
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },
           { path: 'skillset', component: SkillsetPerformanceComponent },
           { path: 'competency', component: CompetencyComponent },
           { path: 'feedback', component: PerformanceFeedbackComponent },
+        ],
+      },
+      {
+        path: 'Skill-Set-Matrix',
+        component: GoalsMyDataComponent,
+        children: [
         ],
       },
     ],

@@ -21,13 +21,13 @@ export class NewHomeComponent {
   teamsDashboardNavigate() {
     this.activeNavItem = 'teams-dashboard';
     this.activeSubNavItem = 'Team Space';
-    this.router.navigate(['/teams-dashboard']);
+    this.router.navigate(['/teams-dashboard']);    
   }
 
   navigateToOrganization() {
     this.activeNavItem = 'organization';
-    this.activeSubNavItem = '';
-    this.router.navigate(['/organization']);
+    this.activeSubNavItem = 'Announcements';
+    this.router.navigate(['organization']);
   }
 
   updateBreadcrumb(subNav: any) {

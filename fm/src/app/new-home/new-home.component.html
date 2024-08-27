@@ -2,7 +2,7 @@
 <nav class="breadcrumb">
   <span class="breadcrumb-item" *ngIf="activeNavItem === 'my-space'">New Home > My Space > {{ activeSubNavItem }}</span>
   <span class="breadcrumb-item" *ngIf="activeNavItem === 'teams-dashboard'">New Home > Teams > {{ activeSubNavItem }}</span>
-  <span class="breadcrumb-item" *ngIf="activeNavItem === 'organization'">New Home > Organization</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem === 'organization'">New Home > Organization > {{ activeSubNavItem }}</span>
 </nav>
 
 <!-- Navbar -->
@@ -14,4 +14,4 @@
 
 <app-home-my-data *ngIf="activeNavItem === 'my-space'" (subNavChange)="updateBreadcrumb($event)"></app-home-my-data>
 <app-teams-dashboard *ngIf="activeNavItem === 'teams-dashboard'" (subNavChange)="updateBreadcrumb($event)"></app-teams-dashboard>
-<app-organization *ngIf="activeNavItem === 'organization'"></app-organization>
+<app-organization *ngIf="activeNavItem === 'organization'" (subNavChange)="updateBreadcrumb($event)"></app-organization>
