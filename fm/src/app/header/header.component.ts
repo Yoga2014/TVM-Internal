@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { slideInAnimation } from './animation';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,12 @@ export class HeaderComponent {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  activeTab: string = 'general';
+
+  selectTab(tabName: string) {
+    this.activeTab = tabName;
   }
 
 }
