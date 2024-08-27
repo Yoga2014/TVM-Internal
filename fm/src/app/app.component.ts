@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
 export class AppComponent {
   [x: string]: any;
   title = 'fleet-management';
-
+ activeLink: string = 'home'
   columnDefs = [];
   rowDefs = [];
   perfomance: string = 'Performance';
   icons = 'fa-solid fa-trophy';
   isExpanded = true;
   isConfigurationExpanded = false;
-  showPopup = false;
+  showPopup = true;
 
   constructor(private router: Router) {}
 
@@ -33,39 +33,45 @@ export class AppComponent {
   // }
 
   headerNavigate() {
+    this.activeLink = 'profile';
     this.router.navigate(['/header']);
   }
 
   leaveTrackingNavigate() {
+    this.activeLink = 'leave';
     this.router.navigate(['/leave-tracking']);
   }
 
   goalsNavigate() {
+    this.activeLink = 'goals';
     this.router.navigate(['perfomance-myData']);
   }
 
   tasksNavigate(){
+    this.activeLink = 'task';
     this.router.navigate(['task-tasks']);
   }
 
   newHomeNavigate() {
+    this.activeLink = 'home';
     this.router.navigate(['new-Home']);
   }
 
   OnboardingNavigate() {
+    this.activeLink = 'onboarding';
     this.router.navigate(['onboarding']);
   }
 
   taskNavigate() {
+    this.activeLink = 'task'
     this.router.navigate(['task-tasks']);
   }
   togglePopup() {
-    this.showPopup = !this.showPopup;
+    this.showPopup=false
   }
 
-  getClick(getValues: any) {
-    this.perfomance = getValues.name;
-    this.icons = getValues.icons;
-    this.router.navigate([getValues.router]);
+
+  setActiveLink(link: string) {
+    this.activeLink = link; // Set the active link based on user interaction
   }
 }

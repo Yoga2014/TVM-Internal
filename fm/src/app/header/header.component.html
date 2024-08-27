@@ -2,30 +2,58 @@
   <h1><img src="../../assets/images/Screenshot 2024-05-29 114456.png" alt="">CAREERS</h1>
   <h5><i class="fa-solid fa-user"></i>Pravin</h5>
 </header>
-<h2>Update Profile</h2>
+
 <div class="container mt-4">
   <nav class="nav nav-pills mb-4">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/general" routerLinkActive="active"><i class="fa-solid fa-circle"></i>General</a>
+      <a class="nav-link" [class.active]="activeTab === 'general'" (click)="selectTab('general')">
+        <i class="fa-solid fa-circle"></i> General
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/educational" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Educational</a>
+      <a class="nav-link" [class.active]="activeTab === 'educational'" (click)="selectTab('educational')">
+        <i class="fa-solid fa-circle"></i> Educational
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/skillset" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Skillset</a>
+      <a class="nav-link" [class.active]="activeTab === 'skillset'" (click)="selectTab('skillset')">
+        <i class="fa-solid fa-circle"></i> Skillset
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/professional" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Professional</a>
+      <a class="nav-link" [class.active]="activeTab === 'professional'" (click)="selectTab('professional')">
+        <i class="fa-solid fa-circle"></i> Professional
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/details" routerLinkActive="active"><i class="fa-solid fa-circle"></i>Details</a>
+      <a class="nav-link" [class.active]="activeTab === 'details'" (click)="selectTab('details')">
+        <i class="fa-solid fa-circle"></i> Details
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/personalDataForm" routerLinkActive="active"><i class="fa-solid fa-circle"></i>PersonalDataForm</a>
+      <a class="nav-link" [class.active]="activeTab === 'personalDataForm'" (click)="selectTab('personalDataForm')">
+        <i class="fa-solid fa-circle"></i> Personal Data Form
+      </a>
     </li>
   </nav>
   <hr>
-  <div [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
+  <!-- Conditionally Render Components with Scrollable Containers -->
+  <div class="tab-content" *ngIf="activeTab === 'general'">
+    <app-general></app-general>
+  </div>
+  <div class="tab-content" *ngIf="activeTab === 'educational'">
+    <app-educational></app-educational>
+  </div>
+  <div class="tab-content" *ngIf="activeTab === 'skillset'">
+    <app-skillset></app-skillset>
+  </div>
+  <div class="tab-content" *ngIf="activeTab === 'professional'">
+    <app-professional></app-professional>
+  </div>
+  <div class="tab-content" *ngIf="activeTab === 'details'">
+    <app-details></app-details>
+  </div>
+  <div class="tab-content" *ngIf="activeTab === 'personalDataForm'">
+    <app-personal-data-form></app-personal-data-form>
   </div>
 </div>

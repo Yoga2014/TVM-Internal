@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 })
 export class PersonalDataFormComponent {
 
+  activeTab: string = 'personal-data';
+
+  setActiveTab(tabName: string): void {
+    this.activeTab = tabName;
+    console.log(this.activeTab,'tabactive')
+  }
+
   personalDataForm: FormGroup;
   base64Image!: string | ArrayBuffer | null;
-  
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -46,7 +52,7 @@ export class PersonalDataFormComponent {
       validVisaDetails: [''],
       panNumber: [''],
       extraCurricularActivity: this.fb.group({
-      
+
         activity: [''],
         institutionAssociationSocietyClub: [''],
         year: [''],
@@ -54,7 +60,7 @@ export class PersonalDataFormComponent {
         prizesWon: ['']
       }),
       skillsSummary: this.fb.group({
-        
+
         projectTitle: [''],
         role: [''],
         teamSize: [''],
@@ -62,7 +68,7 @@ export class PersonalDataFormComponent {
         languagePlatformOS: ['']
       }),
       workExperience: this.fb.group({
-      
+
         employerNameAndAddress: [''],
         durationPeriod: [''],
         durationFrom: [''],
@@ -111,7 +117,7 @@ export class PersonalDataFormComponent {
         superiorEmailId2: ['']
       }),
       declaration: this.fb.group({
-       
+
         partnerOrRelativeOfDirector: [''],
         place: [''],
         date: [''],
@@ -120,7 +126,7 @@ export class PersonalDataFormComponent {
         directorOfTheCompany: ['']
       }),
       familyDetails: this.fb.array([this.createFamilyMember()]),
-      
+
       presentHomeMailingAddress: this.fb.group({
         address: [''],
         pinCode: [''],
@@ -202,7 +208,7 @@ export class PersonalDataFormComponent {
       reader.readAsDataURL(file); // Convert the file to base64 string
     }
   }
-  
+
   createFamilyMember(): FormGroup {
     return this.fb.group({
       name: [''],
@@ -240,7 +246,7 @@ export class PersonalDataFormComponent {
   get familyDetails(): FormArray {
     return this.personalDataForm.get('familyDetails') as FormArray;
   }
-  
+
 
   get educationControls(): FormArray {
     return this.personalDataForm.get('education') as FormArray;
