@@ -192,31 +192,32 @@
   
   
   
-<!-- announcements.component.html -->
+
+<!-- Announcement Card -->
 <div class="announcement-card" *ngFor="let announcement of announcements" (click)="showPopup(announcement)">
   <div class="card-header">
     <div class="header-left">
-      <button class="delete-button" (click)="deleteAnnouncement(announcement.id); $event.stopPropagation()">
+      <button class="delete-button" 
+              (click)="announcement.id !== undefined ? deleteAnnouncement(announcement.id) : null; $event.stopPropagation()">
         <i class="fa fa-trash" aria-hidden="true"></i> Delete
       </button>
       <div class="announcement-info">
         <h2>{{ announcement.title }}</h2>
-        <p>{{ announcement.name }} . {{ announcement.expiry | date: 'MM/dd/yyyy' }}</p>
+        <p>Posted by {{ announcement.name }}</p>
       </div>
     </div>
     <div class="header-right">
-      <button class="like-button">
+      <button class="like-button" (click)="likeAnnouncement(announcement); $event.stopPropagation()">
         <i class="fa fa-thumbs-up"></i>
         <span>{{ announcement.likes }}</span>
       </button>
-      <button class="comment-button">
-        <i class="fa fa-comment"></i>
-        <span>{{ announcement.comments }}</span>
+      <button class="comment-button" (click)="toggleCommentInput(); $event.stopPropagation()">
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <span>{{ announcement.comments.length }}</span>
       </button>
     </div>
   </div>
 </div>
-
 
 <!-- Popup Modal -->
 <div class="announcement-popup" *ngIf="selectedAnnouncement">
@@ -225,27 +226,42 @@
       <i class="fa fa-times" aria-hidden="true"></i>
     </button>
     <h2>{{ selectedAnnouncement.title }}</h2>
-    <p>{{ selectedAnnouncement.name }}{{ selectedAnnouncement.expiry| date: 'MM/dd/yyyy hh:mm a' }}</p>
+    <p>{{ selectedAnnouncement.name }}</p>
     <p>{{ selectedAnnouncement.message }}</p>
     <p>Expiry: {{ selectedAnnouncement.expiry | date: 'MM/dd/yyyy hh:mm a' }}</p>
     <p>Location: {{ selectedAnnouncement.location }}</p>
-    
+
     <!-- Action buttons -->
     <div class="action-buttons">
-      <button class="action-button like-button">
+      <button class="action-button like-button" (click)="likeAnnouncement(selectedAnnouncement); $event.stopPropagation()">
         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         <span>{{ selectedAnnouncement.likes }}</span>
       </button>
-      <button class="action-button comment-button">
+      <button class="action-button comment-button" (click)="toggleCommentInput(); $event.stopPropagation()">
         <i class="fa fa-comment" aria-hidden="true"></i>
-        <span>{{ selectedAnnouncement.comments }}</span>
+        <span>{{ selectedAnnouncement.comments.length }}</span>
       </button>
     </div>
-    
+
     <!-- Comment box -->
-    <div class="comment-section">
-      <textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
-      <button class="comment-submit-button">Comment</button>
+    <div *ngIf="selectedAnnouncement.showCommentInput" class="comment-section">
+      <textarea [(ngModel)]="selectedAnnouncement.newComment" placeholder="Add a comment..."></textarea>
+      <button class="comment-submit-button" (click)="addComment()">Comment</button>
+    </div>
+
+    <!-- Display comments -->
+    <div *ngIf="selectedAnnouncement.comments.length > 0" class="comments-list">
+      <div *ngFor="let comment of selectedAnnouncement.comments" class="comment">
+        <p>{{ comment.text }}</p>
+        <div class="comment-actions">
+          <button class="edit-button" (click)="editComment(comment)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button class="delete-button" (click)="deleteComment(comment); $event.stopPropagation()">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,18 +1,35 @@
 {
   "announcements": [
     {
-      "id": "7845",
-      "name": "DURAI RAJ",
-      "title": "New Hiring",
-      "message": "esrtgfhjk",
+      "id": "6ff5",
+      "name": "Durai",
+      "title": "Announcement",
+      "message": "welcome....",
       "attachment": null,
       "category": "updates",
-      "expiry": "2024-08-31",
+      "expiry": "2024-08-28",
       "location": "branch",
       "commentsDisabled": null,
-      "pinned": null,
+      "pinned": false,
       "notifyAll": null,
-      "notifyOthers": null
+      "notifyOthers": null,
+      "likes": 1,
+      "comments": [
+        {
+          "author": "Your Name",
+          "text": "welcome..."
+        },
+        {
+          "author": "Your Name",
+          "text": "good day...."
+        },
+        {
+          "author": "Your Name",
+          "text": "welcome1"
+        }
+      ],
+      "showCommentInput": true,
+      "newComment": ""
     }
   ]
 }
