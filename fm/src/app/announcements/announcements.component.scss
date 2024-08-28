@@ -375,14 +375,14 @@ textarea {
 }
 
 .popup-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
   position: relative;
-  max-width: 600px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
+  width: 40%; /* Adjust as needed */
+  max-height: 80vh; /* Adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .popup-close-button {
@@ -422,6 +422,53 @@ h2 {
 .comment-section {
   margin-top: 20px;
 }
+
+/* Style for the comments list */
+/* Style for the comments list */
+.comments-list {
+  max-height: 300px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+/* Style for each comment card */
+.comment {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Positioning context for action buttons */
+}
+
+/* Style for the comment actions */
+.comment-actions {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button, .delete-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #007bff; /* Color for icons */
+}
+
+.edit-button:hover, .delete-button:hover {
+  color: #0056b3; /* Darker color on hover */
+}
+
+.fa {
+  font-size: 16px; /* Adjust icon size as needed */
+}
+
+
 
 textarea {
   width: 100%;

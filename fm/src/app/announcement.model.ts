@@ -3,18 +3,24 @@ export interface Announcement {
     id?: number; // Optional for new announcements
     name: string;
     title: string;
-    message: string;
     attachment?: File; // Optional
     category: string;
     expiry: string;
-    location: string;
     commentsDisabled: boolean;
     pinned: boolean;
     notifyAll: boolean;
     notifyOthers?: string; // Optional
     timestamp?: Date; // Optional for displaying the timestamp
-    likes?: number; // Optional for like counts
-    comments?: number; // Optional for comment counts
+    likes: number;
+    comments: string[];// Optional for like counts
     date:Date;
+    showCommentInput?: boolean;
+    newComment?: string;
+    message?: string;
+    location?: string;
   }
   
+  export interface AnnouncementWithUI extends Announcement {
+    showCommentInput?: boolean;
+    newComment?: string;
+  }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnouncementService } from '../announcement.service';
-import { Announcement } from '../announcement.model';
+import { Announcement, AnnouncementWithUI } from '../announcement.model';
 
 @Component({
   selector: 'app-announcements',
@@ -24,6 +24,10 @@ export class AnnouncementsComponent implements OnInit {
   selectedAnnouncement: any;
   newComment: string = '';
   likedAnnouncements: Set<number> = new Set();
+  currentUserName: string = 'John Doe';
+  selectedCommentForEdit: any = null;
+  editingComment: any = null;
+  saveAnnouncement: any;
 
   constructor(
     private fb: FormBuilder,
@@ -48,11 +52,9 @@ export class AnnouncementsComponent implements OnInit {
     this.loadAnnouncements();
   }
 
-  loadAnnouncements(): void {
-    this.announcementService.getAnnouncements().subscribe((data) => {
+  loadAnnouncements() {
+    this.announcementService.getAnnouncements().subscribe(data => {
       this.announcements = data;
-      console.log(this.announcements);
-      
     });
   }
 
@@ -135,42 +137,78 @@ export class AnnouncementsComponent implements OnInit {
     return null;
   }
 
+
   showPopup(announcement: any) {
-    this.selectedAnnouncement = announcement;
+    this.selectedAnnouncement = { ...announcement };
   }
-  
+
   closePopup() {
     this.selectedAnnouncement = null;
   }
 
-  deleteAnnouncement(id: number | undefined): void {
-    if (id === undefined) {
-      console.error("Announcement ID is undefined");
-      return;
-    }
+  deleteAnnouncement(id: number) {
     this.announcementService.deleteAnnouncement(id).subscribe(() => {
-      this.loadAnnouncements();
+      this.announcements = this.announcements.filter(a => a.id !== id);
+      if (this.selectedAnnouncement && this.selectedAnnouncement.id === id) {
+        this.closePopup();
+      }
     });
   }
   
-  likeAnnouncement(announcement: any): void {
-    const announcementId = announcement.id; // Make sure the `id` is defined in the announcement object
-    if (this.likedAnnouncements.has(announcementId)) {
-      this.likedAnnouncements.delete(announcementId);
-      announcement.likes--;
-    } else {
-      this.likedAnnouncements.add(announcementId);
-      announcement.likes++;
+  likeAnnouncement(announcement: any) {
+    announcement.likes++;
+    this.announcementService.updateAnnouncement(announcement).subscribe(() => {
+      if (this.selectedAnnouncement && this.selectedAnnouncement.id === announcement.id) {
+        this.selectedAnnouncement.likes = announcement.likes;
+      }
+    });
+  }
+
+
+  toggleCommentInput() {
+    if (this.selectedAnnouncement) {
+      this.selectedAnnouncement.showCommentInput = !this.selectedAnnouncement.showCommentInput;
     }
   }
 
-  addComment(): void {
-    if (this.newComment.trim()) {
-      if (!this.selectedAnnouncement.comments) {
-        this.selectedAnnouncement.comments = [];
-      }
-      this.selectedAnnouncement.comments.push(this.newComment);
-      this.newComment = '';
+
+  addComment() {
+    if (this.selectedAnnouncement) {
+      this.selectedAnnouncement.comments.push({
+        author: 'Your Name',// Replace with actual author name
+        text: this.selectedAnnouncement.newComment
+      });
+      this.selectedAnnouncement.newComment = '';
     }
+  }
+
+  editComment(comment: any) {
+    this.selectedCommentForEdit = { ...comment };
+  }
+
+  // Add deleteComment method
+  deleteComment(comment: any) {
+    if (this.selectedAnnouncement) {
+      const index = this.selectedAnnouncement.comments.indexOf(comment);
+      if (index > -1) {
+        this.selectedAnnouncement.comments.splice(index, 1);
+        this.announcementService.updateAnnouncement(this.selectedAnnouncement).subscribe();
+      }
+    }
+  }
+
+  saveEditedComment(): void {
+    if (this.editingComment) {
+      const index = this.selectedAnnouncement.comments.findIndex((c: any) => c.id === this.editingComment.id);
+      if (index > -1) {
+        this.selectedAnnouncement.comments[index] = this.editingComment;
+        this.editingComment = null;
+        this.saveAnnouncement(this.selectedAnnouncement);
+      }
+    }
+  }
+
+  cancelEdit() {
+    this.selectedCommentForEdit = null;
   }
 }
