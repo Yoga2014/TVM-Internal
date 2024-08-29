@@ -4,9 +4,11 @@ span {
 
 h2 {
   font-size: 1.5rem;
-
+  margin-top: 34px;
+  color: darkblue;
+  margin-bottom: 20px;
   font-weight: lighter;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .me-2 {
@@ -23,8 +25,8 @@ th {
 .table-btn {
   background-color: #30a3bf;
   color: white;
-  margin-left: 76rem;
-  margin-bottom: 5px;
+  float: right;
+
 }
 
 
@@ -55,4 +57,11 @@ th {
   background: white;
   padding: 20px;
   border-radius: 5px;
+}
+
+.skill-page {
+  display: flex;
+}
+.table-page {
+  width: 91vw;
 }

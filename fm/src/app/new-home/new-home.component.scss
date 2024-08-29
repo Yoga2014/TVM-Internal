@@ -1,30 +1,21 @@
-/* src/app/navbar/navbar.component.scss */
 .navbar {
   display: flex;
   flex-direction: row;
+  padding: 1rem;
+  gap: 2rem;
   justify-content: flex-start;
   background-color:#2e3b61;
-  /* Gradient background */
-  // padding: 0.5rem 1rem;
-  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
-  // background-size: cover;
-  // border-bottom: 3px solid #123;
-  /* Darker border for a more defined look */
-  // border-radius: 10px;
 
 }
 
 .nav-item {
   padding: 0.5rem 1rem;
-  /* Reduced padding */
   cursor: pointer;
   color: #f9f9f9;
   font-weight: bold;
   position: relative;
   transition: color 0.3s, background-color 0.3s;
   border-radius: 10px;
-  /* Smooth transitions */
 }
 
 .nav-item::after {
@@ -32,11 +23,9 @@
   position: absolute;
   width: 0;
   height: 2px;
-  /* Reduced height */
   bottom: 0;
   left: 0;
   background-color:  #0088ff;
-  /* Highlight color */
   transition: width 0.3s;
 }
 
@@ -51,16 +40,13 @@
 
 .nav-item:active {
   transform: scale(0.95);
-  /* Slight scale down on click */
   background-color: #e0e0e0;
   color: #123;
 }
 
 .nav-item.active {
   background-color: #f1f1f1;
-  /* Same as hover color */
   color: #1e3c72;
-  /* Same as hover color */
 }
 
 .nav-item.active::after {
@@ -80,6 +66,7 @@
   }
 }
 
+<<<<<<< Updated upstream
 
   .breadcrumb {
     display: flex;
@@ -100,3 +87,22 @@
     position: relative;
     transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
   }
+=======
+.breadcrumb-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: rgb(246, 250, 253);
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s, background-color 0.3s;
+}
+.breadcrumb {
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+background: linear-gradient(90deg, #1e3c72, #2a5298);
+padding: 0.5rem 1rem;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+background-size: cover;
+}
+>>>>>>> Stashed changes
