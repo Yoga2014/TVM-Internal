@@ -206,10 +206,8 @@ input[type="checkbox"] {
 .filter-reset-button:hover {
   background-color: #5a6268; /* Darker shade on hover */
 }
-
-
-/* Modal Styles */
-.announcement-form-modal {
+/* Modal Overlay */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -217,278 +215,286 @@ input[type="checkbox"] {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
-  overflow: auto; /* Allows scrolling if content is too tall */
+  align-items: center;
+  overflow: auto; /* Allows scrolling if content overflows */
 }
 
-.modal-container {
+/* Modal Content */
+.modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  width: 90%;
-  max-width: 800px;
-  position: relative;
-  max-height: 90vh; /* Restricts height of modal */
-  overflow-y: auto; /* Adds scrollbar if content overflows */
+  max-width: 600px; /* Adjust as needed */
+  width: 100%;
+  max-height: 90vh; /* Limits the height of the modal */
+  overflow-y: auto; /* Adds vertical scrollbar if content exceeds max height */
 }
 
+/* Modal Close Button */
 .modal-close-button {
   position: absolute;
   top: 10px;
   right: 10px;
   background: transparent;
   border: none;
-  font-size: 24px;
   cursor: pointer;
 }
 
-.modal-container h1 {
-  margin-top: 0;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin: 10px 0 5px;
-}
-
-input, textarea, select {
+/* Input Styles */
+input[type="text"],
+textarea,
+select,
+input[type="file"] ,
+input[type="date"] {
+  width: 100%;
+  box-sizing: border-box; /* Includes padding and border in width */
+  margin-top: 5px;
+  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 10px;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.form-error {
+/* Error Text */
+.error-text {
   color: red;
-  font-size: 12px;
+  font-size: 0.875em;
 }
 
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.modal-buttons {
+  text-align: right; /* Aligns buttons to the right */
+  margin-top: 20px; /* Optional: Adds space above the buttons */
 }
 
-.checkbox-label input {
-  margin-right: 10px;
-}
-
-.form-action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.btn-submit {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+.modal-buttons button {
   padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.btn-cancel {
-  background-color: #6c757d;
-  color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-}
-
-.announcement-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-.delete-button {
-  background: none;
-  border: none;
-  color: #d9534f;
   font-size: 16px;
-  cursor: pointer;
-  margin-right: 15px;
+  font-weight: bold;
+  margin-left: 10px; /* Space between buttons */
 }
 
-.announcement-info {
-  margin-left: 10px;
+.modal-buttons .publish-button {
+  background-color: #007bff; /* Blue color */
+  color: white;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
+.modal-buttons .cancel-button {
+  background-color: #6c757d; /* Grey color */
+  color: white;
 }
 
-.like-button,
-.comment-button {
-  background: none;
-  border: none;
-  color: #5bc0de;
-  font-size: 16px;
-  cursor: pointer;
-  margin-left: 15px;
+.modal-buttons .publish-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
-.like-button i,
-.comment-button i {
-  margin-right: 5px;
+.modal-buttons .cancel-button:hover {
+  background-color: #5a6268; /* Darker grey on hover */
 }
-.announcement-popup {
+
+
+.filter-popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1000; /* Ensure it's above other content */
 }
 
-.popup-container {
+.filter-popup-content {
   position: relative;
-  width: 40%; /* Adjust as needed */
-  max-height: 80vh; /* Adjust as needed */
-  overflow-y: auto; /* Enable vertical scrolling */
-  background-color: #fff;
-  border-radius: 8px;
+  background: white;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.filter-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.filter-close-button i {
+  margin: 0;
+}
+.filter-buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.filter-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px; /* Add margin to create gap */
+}
+
+.filter-buttons .apply-button {
+  background-color: #007bff; /* Blue color */
+  color: white;
+}
+
+.filter-buttons .reset-button {
+  background-color: #6c757d; /* Grey color */
+  color: white;
+}
+
+.filter-buttons .apply-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.filter-buttons .reset-button:hover {
+  background-color: #5a6268; /* Darker grey on hover */
+}
+
+.announcement-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.card-left {
+  flex: 1;
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+}
+
+.card-right button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.card-right i {
+  font-size: 1.2em; /* Adjust icon size as needed */
+}
+
+.like-button, .comment-button, .delete-button {
+  color: #333; /* Adjust button colors as needed */
+}
+
+.like-button:hover, .comment-button:hover, .delete-button:hover {
+  color: #007bff; /* Change color on hover */
+}
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it is on top of other elements */
+}
+
+/* Popup Content */
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Adjust max-width as needed */
+  position: relative;
+}
+
+/* Close Button */
 .popup-close-button {
   position: absolute;
   top: 10px;
   right: 10px;
   background: none;
   border: none;
-  color: #333;
   font-size: 20px;
   cursor: pointer;
 }
 
-h2 {
-  margin-top: 0;
-}
-
-.action-buttons {
+/* Popup Actions */
+.popup-actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
+  align-items: center;
+  gap: 10px; /* Space between the buttons */
+  margin-top: 20px;
 }
 
+/* Action Button Styles */
 .action-button {
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
-  color: #007bff;
-  font-size: 16px;
   cursor: pointer;
-  margin-left: 15px;
+  font-size: 16px; /* Adjust font size as needed */
+  color: black; /* Adjust color as needed */
+  padding: 5px 10px; /* Adjust padding as needed */
 }
 
 .action-button i {
-  margin-right: 5px;
+  margin-right: 5px; /* Space between icon and text */
+  font-size: 18px; /* Adjust icon size as needed */
 }
 
+.action-button:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+/* Comment Section */
 .comment-section {
   margin-top: 20px;
 }
 
-/* Style for the comments list */
-/* Style for the comments list */
-.comments-list {
-  max-height: 300px; /* Adjust height as needed */
-  overflow-y: auto; /* Enable vertical scrolling if needed */
-  margin-top: 20px;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-}
-
-/* Style for each comment card */
-.comment {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative; /* Positioning context for action buttons */
-}
-
-/* Style for the comment actions */
-.comment-actions {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  display: flex;
-  gap: 10px;
-}
-
-.edit-button, .delete-button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #007bff; /* Color for icons */
-}
-
-.edit-button:hover, .delete-button:hover {
-  color: #0056b3; /* Darker color on hover */
-}
-
-.fa {
-  font-size: 16px; /* Adjust icon size as needed */
-}
-
-
-
-textarea {
+.comment-section textarea {
   width: 100%;
-  height: 100px;
+  height: 100px; /* Adjust height as needed */
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  resize: vertical;
+  box-sizing: border-box;
+  font-size: 14px; /* Adjust font size as needed */
 }
 
-.comment-submit-button {
-  background-color: #007bff;
-  border: none;
-  color: white;
+.submit-comment-button {
+  display: block;
+  margin-top: 10px;
   padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  font-size: 14px; /* Adjust font size as needed */
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-.comment-submit-button:hover {
-  background-color: #0056b3;
+.submit-comment-button:hover {
+  background: #0056b3; /* Change color on hover */
 }
+

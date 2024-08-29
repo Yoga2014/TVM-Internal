@@ -1,35 +1,30 @@
 {
   "announcements": [
     {
-      "id": "6ff5",
-      "name": "Durai",
+      "id": "7b35",
+      "name": "DURAI RAJ",
       "title": "Announcement",
-      "message": "welcome....",
+      "message": "Welcome....",
       "attachment": null,
       "category": "updates",
-      "expiry": "2024-08-28",
+      "expiry": "2024-08-29",
       "location": "branch",
-      "commentsDisabled": null,
-      "pinned": false,
-      "notifyAll": null,
-      "notifyOthers": null,
-      "likes": 1,
-      "comments": [
-        {
-          "author": "Your Name",
-          "text": "welcome..."
-        },
-        {
-          "author": "Your Name",
-          "text": "good day...."
-        },
-        {
-          "author": "Your Name",
-          "text": "welcome1"
-        }
-      ],
-      "showCommentInput": true,
-      "newComment": ""
+      "disableComments": true,
+      "pinAnnouncement": false,
+      "notifyAll": false
+    },
+    {
+      "id": "ff40",
+      "name": "Durai",
+      "title": "Announcement 1",
+      "message": "Welcome...",
+      "attachment": null,
+      "category": "news",
+      "expiry": "2024-08-29",
+      "location": "remote",
+      "disableComments": false,
+      "pinAnnouncement": true,
+      "notifyAll": false
     }
   ]
 }
