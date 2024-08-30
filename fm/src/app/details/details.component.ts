@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ServerService } from '../server.service';
+
 
 @Component({
   selector: 'app-details',
@@ -10,8 +9,8 @@ import { ServerService } from '../server.service';
 })
 export class DetailsComponent {
 
-  
-  
+
+
 
   workers: any[] = [
     { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false,  },
@@ -22,7 +21,7 @@ export class DetailsComponent {
     { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'no', hidden: false },
     { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
     { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false },
-    
+
   ];
 
   selectedRows: any[] = [];
@@ -71,6 +70,6 @@ export class DetailsComponent {
     const isChecked = (event.target as HTMLInputElement).checked;
     this.selectedRows = isChecked ? [...this.workers] : [];
   }
-  
+
 
 }

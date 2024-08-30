@@ -1,23 +1,23 @@
-/* src/app/navbar/navbar.component.scss */
+
 .navbar {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    // background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
     padding: 0.5rem 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-size: cover;
-    border-bottom: 3px solid #123; /* Darker border for a more defined look */
+    border-bottom: 3px solid #123;
     border-radius: 10px;
+    gap: 2rem;
   }
 
   .nav-item {
-    padding: 0.5rem 1rem; /* Reduced padding */
+    padding: 0.5rem 1rem;
     cursor: pointer;
     color: black;
     font-weight: bold;
     position: relative;
-    transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
+    transition: color 0.3s, background-color 0.3s;
     border-radius: 10px;
   }
 
@@ -25,10 +25,10 @@
     content: "";
     position: absolute;
     width: 0;
-    height: 2px; /* Reduced height */
+    height: 2px;
     bottom: 0;
     left: 0;
-    background-color:  #0088ff; /* Highlight color */
+    background-color:  #0088ff;
     transition: width 0.3s;
   }
 
@@ -42,14 +42,14 @@
   }
 
   .nav-item:active {
-    transform: scale(0.95); /* Slight scale down on click */
+    transform: scale(0.95);
     background-color: #e0e0e0;
     color: #123;
   }
 
   .nav-item.active {
-    background-color: #f1f1f1; /* Same as hover color */
-    color: #1e3c72; /* Same as hover color */
+    background-color: #f1f1f1;
+    color: #1e3c72;
   }
 
   .nav-item.active::after {

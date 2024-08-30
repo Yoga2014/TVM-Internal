@@ -1,4 +1,4 @@
-<div class="container">
+<div class="general-page">
   <h2><i class="fa-solid fa-user"></i> Basic Information</h2>
   <form [formGroup]="informationForm">
     <div class="row mt-5">
@@ -365,7 +365,7 @@
       </tbody>
     </table>
     <!-- <button class="btn btn-primary">Add Language</button> -->
+    <button class="btn next" (click)="nextClick()" [disabled]="">Next<i class="fa-solid fa-chevron-right"></i></button>
   </div>
 </form>
-<button class="btn next" (click)="nextClick()" [disabled]="">Next<i class="fa-solid fa-chevron-right"></i></button>
 </div>

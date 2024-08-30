@@ -58,7 +58,7 @@
 .custom-list li:hover,
 .custom-list li.active {
   color: #007bff;
-  /* Active or hovered tab color */
+
 }
 
 .custom-list li::after {
@@ -86,14 +86,17 @@
 
 .custom-list li.active::after {
   transform: scaleX(1);
-  /* Show underline for the active tab */
+
 }
 
 img{
-  position: absolute;
-  left: 75px;
-  top: 156px;
-  z-index: -1;
-  width: 1205px;
-  height: 7rem;
+  display: flex;
+  width: 100vw;
+  height: 20vh;
+}
+
+.overview-page {
+  display: flex;
+  flex-direction: column;
+  margin: -1rem 1rem 1rem 2rem;
 }

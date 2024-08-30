@@ -1,5 +1,5 @@
 
-<form [formGroup]="personalDataForm" (ngSubmit)="onSubmit()" class="container">
+<form [formGroup]="personalDataForm" (ngSubmit)="onSubmit()" class="personal-data-page">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
         <a class="nav-link" [ngClass]="{'active': activeTab === 'personal-data'}" (click)="setActiveTab('personal-data')" role="tab">Personal Data</a>
@@ -103,14 +103,22 @@
                   </div>
               </div>
               <div class="col-md-4">
-                  <div class="form-group">
-                      <label for="gender">Gender</label>
-                      <select id="gender" formControlName="gender" class="form-control">
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                      </select>
-                  </div>
-              </div>
+                <div class="form-group">
+                    <label for="category">Gender</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="general" formControlName="category" value="General" class="form-check-input" />
+                            <label for="general" class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="obc" formControlName="category" value="OBC" class="form-check-input" />
+                            <label for="obc" class="form-check-label">Female</label>
+                        </div>
+                        <!-- Repeat for other categories -->
+                    </div>
+                </div>
+            </div>
+
               <div class="col-md-4">
                   <div class="form-group">
                       <label for="age">Age</label>
@@ -121,15 +129,22 @@
 
           <!-- Row 4: Marital Status, Marriage Date, Native State -->
           <div class="row mb-2">
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <label for="maritalStatus">Marital Status</label>
-                      <select id="maritalStatus" formControlName="maritalStatus" class="form-control">
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                      </select>
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label for="category">Marital Status</label>
+                  <div>
+                      <div class="form-check form-check-inline">
+                          <input type="radio" id="general" formControlName="category" value="General" class="form-check-input" />
+                          <label for="general" class="form-check-label">Single</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input type="radio" id="obc" formControlName="category" value="OBC" class="form-check-input" />
+                          <label for="obc" class="form-check-label">Married</label>
+                      </div>
+                      <!-- Repeat for other categories -->
                   </div>
               </div>
+          </div>
               <div class="col-md-4">
                   <div class="form-group">
                       <label for="marriageDate">Marriage Date</label>

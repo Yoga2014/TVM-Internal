@@ -1,6 +1,9 @@
-<section class="container mt-5">
+<nav class="breadcrumb">
+  <span class="breadcrumb-item">Onboarding</span>
+</nav>
+<section class=" mt-5">
   <div class="card shadow-sm">
-    <div class="card-header text-center bg-primary text-white">
+    <div class="card-header text-center bg-primary text-white header">
       <h2>New Joiners</h2>
     </div>
     <div class="card-body">
@@ -15,7 +18,7 @@
             <label for="endDate">End Date</label>
             <input type="date" id="endDate" class="form-control" />
           </div>
-          <div class="col d-flex align-items-end">
+          <div class="btn-filter">
             <button class="btn btn-primary" (click)="filterByDate()">
               Filter
             </button>

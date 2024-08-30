@@ -12,14 +12,14 @@ import { RouterOutlet } from '@angular/router';
 })
 export class HeaderComponent {
 
+  activeNavItem: string = 'general';
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  activeTab: string = 'general';
 
   selectTab(tabName: string) {
-    this.activeTab = tabName;
+    this.activeNavItem = tabName;
   }
 
 }
