@@ -1,107 +1,110 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnouncementService } from '../announcement.service';
-import { Announcement, AnnouncementWithUI } from '../announcement.model';
+import { Announcement } from '../announcement.model';
+
 
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.scss']
 })
-export class AnnouncementsComponent implements OnInit {
+export class AnnouncementsComponent  {
 
   
-  
-
-  announcements: Announcement[] = [];
-  announcementForm!: FormGroup;
-  isAnnouncementFormVisible = false;
-  editMode = false;
-  isSearchActive = false;
-  isFilterPopupActive = false;
-  searchTerm: string = '';
-  selectedAnnouncementId: number | null = null;
+  announcements: any[] = [];
   selectedAnnouncement: any;
-  newComment: string = '';
-  likedAnnouncements: Set<number> = new Set();
-  currentUserName: string = 'John Doe';
-  selectedCommentForEdit: any = null;
-  editingComment: any = null;
-  saveAnnouncement: any;
+  isSearchActive = false;
+  searchTerm: string = '';
+  isFilterPopupActive = false;
+  isModalOpen = false;  
+  announcementForm: FormGroup;
+  showCommentBox: boolean = false;
+ commentText: string = '';
+ isPopupOpen = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private announcementService: AnnouncementService
-  ) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder, private announcementService: AnnouncementService) {
     this.announcementForm = this.fb.group({
       name: ['', Validators.required],
       title: ['', Validators.required],
       message: ['', Validators.required],
-      attachment: ['', [this.validateFile]],
+      attachment: [null],
       category: ['', Validators.required],
       expiry: ['', Validators.required],
       location: ['', Validators.required],
-      commentsDisabled: [false],
-      pinned: [false],
-      notifyAll: [false],
-      notifyOthers: ['']
+      disableComments: [false],
+      pinAnnouncement: [false],
+      notifyAll: [false]
     });
 
     this.loadAnnouncements();
   }
 
-  loadAnnouncements() {
-    this.announcementService.getAnnouncements().subscribe(data => {
-      this.announcements = data;
-    });
-  }
 
-  addAnnouncement(): void {
-    this.isAnnouncementFormVisible = true;
-    this.editMode = false;
-    this.announcementForm.reset(); // Reset the form before adding a new announcement
-  }
-
-  editAnnouncement(id: number): void {
-    this.announcementService.getAnnouncementById(id).subscribe((announcement) => {
-      this.selectedAnnouncementId = id;
-      this.announcementForm.patchValue(announcement);
-      this.isAnnouncementFormVisible = true;
-      this.editMode = true;
-    });
-  }
-
-  submitAnnouncement(): void {
-    if (this.announcementForm.valid) {
-      const announcement = this.announcementForm.value;
-
-      if (this.editMode && this.selectedAnnouncementId) {
-        announcement.id = this.selectedAnnouncementId;
-        this.announcementService.updateAnnouncement(announcement).subscribe(() => {
-          this.loadAnnouncements();
-          this.hideAnnouncementForm();
-        });
-      } else {
-        this.announcementService.addAnnouncement(announcement).subscribe(() => {
-          this.loadAnnouncements();
-          this.hideAnnouncementForm();
-        });
+  loadAnnouncements(): void {
+    this.announcementService.getAnnouncements().subscribe(
+      (announcements: Announcement[]) => {
+        this.announcements = announcements;
+      },
+      (error: any) => {
+        console.error('Error loading announcements:', error);
       }
-    } else {
-      this.announcementForm.markAllAsTouched(); // Highlight all fields with errors
-    }
-  }
-
-  hideAnnouncementForm(): void {
-    this.isAnnouncementFormVisible = false;
-    this.editMode = false;
-    this.selectedAnnouncementId = null;
+    );
   }
 
   toggleSearch(): void {
     this.isSearchActive = !this.isSearchActive;
+    if (!this.isSearchActive) {
+      this.searchTerm = ''; // Optionally clear the search term
+    }
+  }
+
+  openAnnouncementModal(announcement: any = null) {
+    this.selectedAnnouncement = announcement || {}; // Set to provided announcement or empty object
+    this.isModalOpen = true;
+  }
+  closeAnnouncementModal() {
+    this.isModalOpen = false;
+  }
+
+  submitAnnouncement(): void {
+    if (this.announcementForm.valid) {
+      const newAnnouncement = this.announcementForm.value as Announcement;
+  
+      // Log the form data (for debugging or tracking purposes)
+      console.log('Form Submitted', newAnnouncement);
+  
+      // Save the announcement using the service
+      this.announcementService.saveAnnouncement(newAnnouncement).subscribe(
+        (announcement: Announcement) => {
+          this.announcements.push(announcement);
+          this.closeAnnouncementModal();
+        },
+        (error: any) => {
+          console.error('Error saving announcement:', error);
+        }
+      );
+    } else {
+      // Mark all fields as touched to trigger validation messages
+      this.announcementForm.markAllAsTouched();
+    }
+  }
+  
+
+  
+  toggleCommentBox() {
+    this.showCommentBox = !this.showCommentBox;
+  }
+
+  deleteAnnouncement(id: number): void {
+    this.announcementService.deleteAnnouncement(id).subscribe(
+      () => {
+        this.announcements = this.announcements.filter(announcement => announcement.id !== id);
+      },
+      (error: any) => {
+        console.error('Error deleting announcement:', error);
+      }
+    );
   }
 
   toggleFilterPopup(): void {
@@ -109,106 +112,49 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   applyFilter(): void {
-    // Add filter logic here
+    // Implement filter application logic here
+    console.log('Filter applied');
+    this.toggleFilterPopup(); // Close the popup after applying
   }
 
   resetFilter(): void {
-    // Reset filter logic
+    // Implement filter reset logic here
+    console.log('Filter reset');
+    this.toggleFilterPopup(); // Close the popup after resetting
   }
 
-  onFileSelected(event: Event): void {
-    const fileInput = event.target as HTMLInputElement;
-    if (fileInput && fileInput.files && fileInput.files.length > 0) {
-      const selectedFile = fileInput.files[0];
-      this.announcementForm.patchValue({
-        attachment: selectedFile.name // Or handle file upload logic here
-      });
+  likeAnnouncement(id: number): void {
+    // Implement like functionality here
+    console.log('Like announcement with id:', id);
+  }
+
+  openCommentModal(id: number): void {
+    // Implement open comment modal functionality here
+    console.log('Open comment modal for announcement with id:', id);
+  }
+  
+  submitComment() {
+    if (this.commentText) {
+      // Add logic to submit the comment
+      console.log('Comment submitted:', this.commentText);
+      this.commentText = ''; // Clear the comment text after submission
+      this.showCommentBox = false; // Optionally close the comment box
     }
   }
 
-  validateFile(control: any): { [key: string]: boolean } | null {
-    const file = control.value;
-    if (file) {
-      const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!allowedTypes.includes(file.type)) {
-        return { invalidFileType: true };
-      }
-    }
-    return null;
+  openAnnouncementPopup(announcement: Announcement): void {
+    this.selectedAnnouncement = announcement;
+    this.isPopupOpen = true;
   }
 
-
-  showPopup(announcement: any) {
-    this.selectedAnnouncement = { ...announcement };
-  }
-
-  closePopup() {
+  closeAnnouncementPopup(): void {
+    this.isPopupOpen = false;
     this.selectedAnnouncement = null;
   }
 
-  deleteAnnouncement(id: number) {
-    this.announcementService.deleteAnnouncement(id).subscribe(() => {
-      this.announcements = this.announcements.filter(a => a.id !== id);
-      if (this.selectedAnnouncement && this.selectedAnnouncement.id === id) {
-        this.closePopup();
-      }
-    });
-  }
-  
-  likeAnnouncement(announcement: any) {
-    announcement.likes++;
-    this.announcementService.updateAnnouncement(announcement).subscribe(() => {
-      if (this.selectedAnnouncement && this.selectedAnnouncement.id === announcement.id) {
-        this.selectedAnnouncement.likes = announcement.likes;
-      }
-    });
-  }
-
-
-  toggleCommentInput() {
-    if (this.selectedAnnouncement) {
-      this.selectedAnnouncement.showCommentInput = !this.selectedAnnouncement.showCommentInput;
+  openCommentPopup(id: number | undefined): void {
+    if (id !== undefined) {
+      // Add your logic to open the comment popup
     }
-  }
-
-
-  addComment() {
-    if (this.selectedAnnouncement) {
-      this.selectedAnnouncement.comments.push({
-        author: 'Your Name',// Replace with actual author name
-        text: this.selectedAnnouncement.newComment
-      });
-      this.selectedAnnouncement.newComment = '';
-    }
-  }
-
-  editComment(comment: any) {
-    this.selectedCommentForEdit = { ...comment };
-  }
-
-  // Add deleteComment method
-  deleteComment(comment: any) {
-    if (this.selectedAnnouncement) {
-      const index = this.selectedAnnouncement.comments.indexOf(comment);
-      if (index > -1) {
-        this.selectedAnnouncement.comments.splice(index, 1);
-        this.announcementService.updateAnnouncement(this.selectedAnnouncement).subscribe();
-      }
-    }
-  }
-
-  saveEditedComment(): void {
-    if (this.editingComment) {
-      const index = this.selectedAnnouncement.comments.findIndex((c: any) => c.id === this.editingComment.id);
-      if (index > -1) {
-        this.selectedAnnouncement.comments[index] = this.editingComment;
-        this.editingComment = null;
-        this.saveAnnouncement(this.selectedAnnouncement);
-      }
-    }
-  }
-
-  cancelEdit() {
-    this.selectedCommentForEdit = null;
-  }
+}
 }

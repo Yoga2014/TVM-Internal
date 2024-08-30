@@ -1,5 +1,7 @@
 // announcement.model.ts
 export interface Announcement {
+    likeCount: any;
+    commentCount: any;
     id?: number; // Optional for new announcements
     name: string;
     title: string;
@@ -20,7 +22,3 @@ export interface Announcement {
     location?: string;
   }
   
-  export interface AnnouncementWithUI extends Announcement {
-    showCommentInput?: boolean;
-    newComment?: string;
-  }
