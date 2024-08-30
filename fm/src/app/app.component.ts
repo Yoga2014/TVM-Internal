@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   [x: string]: any;
   title = 'fleet-management';
- activeLink: string = 'home'
+  activeLink: string = 'home';
   columnDefs = [];
   rowDefs = [];
   perfomance: string = 'Performance';
@@ -47,7 +47,7 @@ export class AppComponent {
     this.router.navigate(['perfomance-myData']);
   }
 
-  tasksNavigate(){
+  tasksNavigate() {
     this.activeLink = 'task';
     this.router.navigate(['task-tasks']);
   }
@@ -63,13 +63,12 @@ export class AppComponent {
   }
 
   taskNavigate() {
-    this.activeLink = 'task'
+    this.activeLink = 'task';
     this.router.navigate(['task-tasks']);
   }
   togglePopup() {
-    this.showPopup=false
+    this.showPopup = false;
   }
-
 
   setActiveLink(link: string) {
     this.activeLink = link; // Set the active link based on user interaction

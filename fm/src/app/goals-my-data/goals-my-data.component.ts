@@ -31,7 +31,7 @@ export class GoalsMyDataComponent {
   {
     this.activeNavItem = 'competency',
     this.subNavChange.emit('Competency');  // Emit string
-    this.router.navigate(['perfomance-myData/myData', 'competency']) 
+    this.router.navigate(['perfomance-myData/myData', 'competency'])
   }
 
   navigateToFeedback()
