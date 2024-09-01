@@ -30,8 +30,8 @@
 }
 
 .nav-item:hover {
-  background-color: #f1f1f1;
-  color: #1e3c72;
+  // background-color: #f1f1f1;
+  color: #f7f8fa;
 }
 
 .nav-item:hover::after {
@@ -40,13 +40,13 @@
 
 .nav-item:active {
   transform: scale(0.95);
-  background-color: #e0e0e0;
-  color: #123;
+  // background-color: #e0e0e0;
+  // color: #123;
 }
 
 .nav-item.active {
-  background-color: #f1f1f1;
-  color: #1e3c72;
+  // background-color: #f1f1f1;
+  // color: #1e3c72;
 }
 
 .nav-item.active::after {
@@ -82,4 +82,86 @@ background: linear-gradient(90deg, #1e3c72, #2a5298);
 padding: 0.5rem 1rem;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 background-size: cover;
+}
+/* RGB EFFECT */
+
+.rgb-animate {
+	animation-iteration-count: infinite;
+	animation-duration: 10s;
+	animation-name: rgb_anim;
+}
+
+/* RGB HOVER EFFECT */
+
+.rgb-animate-hvr:hover {
+	animation-iteration-count: infinite;
+	animation-duration: 20s;
+	animation-name: rgb_anim;
+}
+
+/* RGB ANIMATION EFFECT */
+
+@keyframes rgb_anim {
+	from {
+		filter: hue-rotate(0deg);
+	}
+	50% {
+		filter: hue-rotate(360deg);
+	}
+	to {
+		filter: hue-rotate(0deg);
+	}
+}
+
+/* CSS */
+
+* {
+	margin: 0;
+	padding: 0;
+	color: white;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+}
+
+.content {
+  min-height: 10vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 1rem;
+  align-content: center;
+  align-items: start;
+}
+
+.content:last-child {
+	background: #de6161;
+	background: -webkit-linear-gradient(
+		to right bottom,
+		#2657eb,
+		#de6161
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right bottom,
+		#2657eb,
+		#de6161
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	padding: 20px 45px;
+	background: #5c258d; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right bottom,
+		#4389a2,
+		#5c258d
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right bottom,
+		#4389a2,
+		#5c258d
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

@@ -9,7 +9,6 @@ export class OverviewComponent {
   selectedTab: any = '';
   bootstrap: any;
 
-
   aditionalClick(getValues: any) {
     this.selectedTab = getValues;
   }
