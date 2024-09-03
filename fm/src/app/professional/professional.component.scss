@@ -4,8 +4,16 @@
 
 h2{
 
-  margin-top: 22px;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   margin-bottom: -7px;
+  font-size: 1.5rem;
+  margin-top: 34px;
+  color: darkblue;
+  margin-bottom: 20px;
+  font-weight: lighter;
+  font-weight: 500;
 }
 .mt-5{
   margin-top: 1rem !important;
@@ -77,9 +85,8 @@ th{
 }
 
 .add{
-  margin-top: -38px;
-  margin-left: 62rem;
   color: #30a3bf;
+  float: right;
   margin-top:-13px;
 }
 
@@ -93,5 +100,10 @@ th{
   border-color: red;
 }
 
+.proffession-page{
+  display: flex;
+  flex-direction: column;
+  width: 88vw;
+}
 
 

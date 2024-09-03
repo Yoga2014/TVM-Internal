@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ServerService } from '../server.service';
+import { Component, input } from '@angular/core';
+
 
 @Component({
   selector: 'app-details',
@@ -10,108 +9,66 @@ import { ServerService } from '../server.service';
 })
 export class DetailsComponent {
 
-  loginForm!: FormGroup;
-  fromArray: any[] = [];
-  isEditing = false;
-  editId: any = null;
-  educationDetails: any;
 
-  constructor(private formbild:FormBuilder, private serv:ServerService){
-    this.loginForm = this.formbild.group({
-      name: [''],
-      pass: ['']
+
+
+  workers: any[] = [
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false,  },
+    { firstName: 'Anbu', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'yes', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'no', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
+    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false },
+
+  ];
+
+  selectedRows: any[] = [];
+
+  constructor() {}
+
+  deleteSelectedRows() {
+    this.selectedRows.forEach(row => {
+      const index = this.workers.indexOf(row);
+      if (index !== -1) {
+        this.workers.splice(index, 1);
+      }
     });
+    this.selectedRows = [];
+    alert('Are you sure want delete this row')
   }
 
-  ngOnInit(): void {
-    this.serv.getMethod().subscribe((res)=>{
-      this.educationDetails=res;
-    })
-
-    this.serv.sendDetails.subscribe((res)=>{
-      this.educationDetails =res;
-    })
-    // console.log(this.educationDetails,'this is details value')
-    console.log(this.educationDetails,'this is res value')
-  }
-
-  getData() {
-    this.serv.logingetMethod().subscribe((res: any) => {
-      this.fromArray = res;
-      // console.log(res.value, 'res value');
-    });
-  }
-
-  // deleteRow(id: any) {
-  //   this.serv.detailsDeleteMethod(id).subscribe((res: any) => {
-  //     // this.getData();
-  //   });
-  // }
-
-  saveClick() {
-    this.serv.loginPostMethod(this.loginForm.value).subscribe((res: any) => {
-      this.getData();
-      console.log(res);
-    });
-    this.loginForm.reset();
-  }
-
-  deleteClick(id: any) {
-    this.serv.loginDeleteMethod(id).subscribe((res: any) => {
-      this.getData();
-    });
-  }
-
-  editClick(id: any) {
-    this.editId = id;
-    this.isEditing = true;
-    this.serv.logingettingMethod(id).subscribe((res: any) => {
-      this.loginForm.patchValue(res);
-      this.getData();
-    });
-  }
-
-  updateClick() {
-    this.serv.loginPutMethod(this.loginForm.value, this.editId).subscribe((res: any) => {
-      this.getData();
-      this.isEditing = false;
-      this.loginForm.reset();
-    });
-  }
-
-  onSubmit() {
-    if (this.isEditing) {
-      this.updateClick();
+  filterWorkers(activeStatus: string) {
+    if (activeStatus === 'all') {
+      // Show all workers
+      this.workers.forEach(worker => worker.hidden = false);
     } else {
-      this.saveClick();
+      // Filter based on active status
+      this.workers.forEach(worker => {
+        if (worker.active === activeStatus) {
+          worker.hidden = false;
+        } else {
+          worker.hidden = true;
+        }
+      });
     }
   }
 
-
-
-  // people = [
-  //   { fullName: 'Remesh', professionalRelationship: 'Project Manager', contactNo: '7985486439', business: 'Software', isEdit: false },
-  //   { fullName: 'Akila', professionalRelationship: 'Team Member', contactNo: '8985486439', business: 'Software', isEdit: false }
-  // ];
-
-
-  // addClick(){
-  //   alert('Extra row Added')
-  //   this.people.push({fullName:'Pravin',professionalRelationship:'Team leader',contactNo:'9876543210',business:'Software',isEdit:false})
-  // }
-
-
-  toggleEditMode(index: number) {
-    this.educationDetails[index].isEdit = !this.educationDetails[index].isEdit;
+  toggleSelection(event: Event, worker: any) {
+    if ((event.target as HTMLInputElement).checked) {
+      this.selectedRows.push(worker);
+    } else {
+      const index = this.selectedRows.indexOf(worker);
+      if (index !== -1) {
+        this.selectedRows.splice(index, 1);
+      }
+    }
   }
 
-  saveChanges(index: number) {
-    this.educationDetails[index].isEdit = false;
-  }
-
-
-  deleteRow(index: number): void {
-    this.educationDetails.splice(index, 1);
+  selectAll(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedRows = isChecked ? [...this.workers] : [];
   }
 
 

@@ -1,0 +1,165 @@
+{
+  "Goals": [
+    {
+      "name": "qweeweret",
+      "description": "ewrerrrefrrerrer",
+      "priority": "Medium",
+      "startDate": "2024-08-19T18:30:00.000Z",
+      "endDate": "2024-08-28T18:30:00.000Z",
+      "progress": 23,
+      "id": "1"
+    }
+  ],
+  "comments": [
+    {
+      "id": "9641",
+      "text": "hi",
+      "author": "Current User",
+      "authorType": "user",
+      "createdAt": "2024-08-14T07:15:53.041Z"
+    },
+    {
+      "id": "5333",
+      "text": "ok",
+      "author": "Current User",
+      "authorType": "manager",
+      "createdAt": "2024-08-14T07:17:05.947Z"
+    },
+    {
+      "id": "2385",
+      "text": "but i need apprasil",
+      "author": "Current User",
+      "authorType": "user",
+      "createdAt": "2024-08-14T07:21:07.518Z"
+    },
+    {
+      "id": "7623",
+      "text": "what is your performance",
+      "author": "Current User",
+      "authorType": "manager",
+      "createdAt": "2024-08-14T07:21:27.543Z"
+    }
+  ],
+  "Teams": [],
+  "Employee": [],
+  "Leave": [
+    {
+      "id": "eec2",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-23",
+      "totalDays": 10,
+      "reasonforLeave": "dvbjdvbsd",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 10,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "f77d",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-15",
+      "totalDays": 2,
+      "reasonforLeave": "rgere",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 2,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "24db",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-18",
+      "totalDays": 5,
+      "reasonforLeave": "hjhjhjjhhj",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 5,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "aa35",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-08-13",
+      "endDate": "2024-08-23",
+      "totalDays": 11,
+      "reasonforLeave": "sdcdscds",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-12",
+      "booked": 11,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    },
+    {
+      "id": "f4da",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-08-14",
+      "endDate": "2024-08-15",
+      "totalDays": 2,
+      "reasonforLeave": "hggc",
+      "status": "Pending",
+      "dateOfRequest": "2024-08-13",
+      "booked": 2,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
+    }
+  ],
+  "NewHires": [],
+  "LeaveReportees": [
+    {
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "profilePicture": "assets/images/john_doe.jpg",
+      "leaveBooked": 10,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active",
+      "id": "af4c"
+    },
+    {
+      "employeeId": "E002",
+      "employeeName": "Jane Smith",
+      "profilePicture": "assets/images/jane_smith.jpg",
+      "leaveBooked": 8,
+      "generalTimining": "8 AM - 5 PM",
+      "status": "on leave",
+      "id": "7d10"
+    },
+    {
+      "employeeId": "E003",
+      "employeeName": "Robert Brown",
+      "profilePicture": "assets/images/robert_brown.jpg",
+      "leaveBooked": 5,
+      "generalTimining": "9:30 AM - 6:30 PM",
+      "status": "active",
+      "id": "988d"
+    },
+    {
+      "employeeId": "E004",
+      "employeeName": "Emily Davis",
+      "profilePicture": "assets/images/emily_davis.jpg",
+      "leaveBooked": 12,
+      "generalTimining": "10 AM - 7 PM",
+      "status": "on leave",
+      "id": "bcb7"
+    },
+    {
+      "employeeId": "E005",
+      "employeeName": "Michael Johnson",
+      "profilePicture": "assets/images/michael_johnson.jpg",
+      "leaveBooked": 7,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active",
+      "id": "7dff"
+    }
+  ]
+}

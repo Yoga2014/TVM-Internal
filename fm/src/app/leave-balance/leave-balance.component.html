@@ -1,0 +1,23 @@
+<div class="container">
+  <!-- Header Section -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>Leave Balance</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Leave Cards -->
+  <mat-card *ngFor="let leave of leaves" class="leave-card">
+    <mat-card-header>
+      <mat-card-title>{{ leave.leaveType }}</mat-card-title>
+      <mat-card-subtitle>Available: {{ leave.available }} days</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="details">
+        <div class="icon" [ngClass]="leave.iconClass"></div>
+        <p>Booked: {{ leave.booked }} days</p>
+        <button mat-raised-button color="primary" (click)="applyLeave(leave.leaveType)">Apply Leave</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

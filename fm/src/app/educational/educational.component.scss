@@ -9,8 +9,11 @@ label{
 }
 h2{
   font-size: 1.5rem;
+  margin-top: 34px;
+  color: darkblue;
+  margin-bottom: 20px;
   font-weight: lighter;
-  font-weight: 400;
+  font-weight: 500;
 }
 .fa-plus{
   color: white;
@@ -21,8 +24,8 @@ h2{
   height: 25px;
 }
 h5{
-  margin-left: 76rem;
-  margin-top: -40px;
+  margin-top: -39px;
+  float: right;
   color: #30a3bf;
 }
 .text-danger{
@@ -41,13 +44,25 @@ h5{
 .next{
   background-color:#8929a6 ;
   color: white;
-  margin-left: 74.7rem;
+  float: right;
 }
 
 .fa-chevron-right{
   font-size: 13px;
   padding: 4px;
 }
+
+.education-page{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.header {
+  display: flex;
+   margin: 1rem;
+}
+
 
 
 

@@ -1,62 +1,58 @@
-<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
-  <div class="header">
-    <h1 class="title">deskbird</h1>
-    <div class="toggle" (click)="handleSidebarToggle()">
-      <span class="chevron"></span>
+<div class="app-container">
+  <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+    <div class="header">
+      <img src="../assets/images/zoho_icon.png" />
     </div>
-  </div>
-  <div class="content">
-    <div class="link">
-      <div class="content" >
-        <div class="icon">
-          <!-- SVG content -->
+    <div class="content">
+      <div class="link" (click)="newHomeNavigate()" [ngClass]="{'active': activeLink === 'home'}">
+        <div>
+          <i class="fa-solid fa-house"></i>
+          <div class="title-home">Home</div>
         </div>
-        <div class="title"  (click)="headerNavigate()">Home</div>
+      </div>
+    </div>
+    <div class="link" (click)="headerNavigate()" [ngClass]="{'active': activeLink === 'profile'}">
+      <div class="content">
+        <i class="fa-solid fa-id-card"></i>
+        <div class="title-profile">Profile</div>
       </div>
     </div>
     <div class="link with-children">
-      <div class="content" >
-        <div class="icon">
-          <!-- SVG content -->
-        </div>
-        <div class="title">Configuration</div>
-      </div>
-      <div class="children">
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 1</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 2</div>
-          </div>
-        </div>
-        <div class="link">
-          <div class="content">
-            <div class="icon">
-              <!-- SVG content -->
-            </div>
-            <div class="title">child 3</div>
-          </div>
+      <!-- New Leave Tracking Link -->
+      <div class="link" (click)="leaveTrackingNavigate()" [ngClass]="{'active': activeLink === 'leave'}">
+        <div class="content">
+          <i class="fa-solid fa-umbrella-beach fa-flip-horizontal"></i>
+          <div class="title-leave">Leave Tracking</div>
         </div>
       </div>
-    </div>
-    <div class="link">
-      <div class="content">
-        <div class="icon">
-          <!-- SVG content -->
+      <!--More Options-->
+      <div class="link" (click)="goalsNavigate()" [ngClass]="{'active': activeLink === 'goals'}">
+        <div class="content">
+          <i [class]="icons"></i>
+          <div class="title">{{ perfomance }}</div>
         </div>
-        <div class="title">Bookings</div>
+      </div>
+      <div class="link" (click)="togglePopup()" *ngIf="showPopup" [ngClass]="{'active': activeLink === 'more'}">
+        <div class="content">
+          <i class="fa-solid fa-ellipsis"></i>
+          <div class="title-home">More</div>
+        </div>
+      </div>
+      <div class="link" (click)="taskNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'task'}">
+        <div class="content">
+          <i class="fa-solid fa-list-check"></i>
+          <div class="title-home">Task</div>
+        </div>
+      </div>
+      <div class="link" (click)="OnboardingNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'onboarding'}">
+        <div class="content">
+          <i class="fa-regular fa-handshake"></i>
+          <div class="title-home">Onboarding</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="footer"></div>
+  <div class="main-content" style="width: 100%">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<router-outlet></router-outlet>

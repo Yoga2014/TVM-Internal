@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServerService } from '../server.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // Correct import here
 
 @Component({
   selector: 'app-professional',

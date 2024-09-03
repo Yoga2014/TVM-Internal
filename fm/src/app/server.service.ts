@@ -6,10 +6,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ServerService {
+ api:any='http://localhost:3000/educationalFrom'
 
 public userSubject = new BehaviorSubject<any>('Initial User');
 
  sendDetails = this.userSubject.asObservable();
+
 
 
   constructor(private apihttp:HttpClient) { }
@@ -19,8 +21,8 @@ public userSubject = new BehaviorSubject<any>('Initial User');
   }
 
   getMethod(){
-    const api='http://localhost:3000/educationalFrom'
-    return this.apihttp.get(api);
+
+    return this.apihttp.get(this.api);
   }
 
 postMethod(data:any){
@@ -48,7 +50,6 @@ logingetMethod(){
 
 loginPostMethod(data:any){
   const val=" http://localhost:3000/loginFrom"
-
   return this.apihttp.post(val,data)
 }
 
@@ -71,7 +72,6 @@ loginDeleteMethod(id:any){
   const url = `${val}/${id}`
   return this.apihttp.delete(url)
 }
-
 
 detailsDeleteMethod(id:any){
   const val="http://localhost:3000/educationalFrom"

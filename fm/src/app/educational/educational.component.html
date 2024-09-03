@@ -1,7 +1,9 @@
 
-<h2><i class="fa-solid fa-graduation-cap"></i>Educational Details</h2>
+<div class="education-page">
+<h2 class="header" ><i class="fa-solid fa-graduation-cap "></i>Educational Details</h2>
+<div class="add">
 <h5><i class="fa-solid fa-plus btn"  (click)="addedClick()"></i>Add</h5>
-<div class="container">
+</div>
   <form [formGroup]="educationGroup">
     <div class="row mt-5">
       <div class="col-md-5">
@@ -70,6 +72,6 @@
       </div>
 
     </div>
+    <button class="btn next"  (click)="nextClick()" [disabled]="educationGroup.invalid">Next<i class="fa-solid fa-chevron-right"></i></button>
   </form>
-  <button class="btn next"  (click)="nextClick()" [disabled]="educationGroup.invalid">Next<i class="fa-solid fa-chevron-right"></i></button>
 </div>

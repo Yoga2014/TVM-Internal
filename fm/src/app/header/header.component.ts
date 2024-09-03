@@ -11,8 +11,15 @@ import { RouterOutlet } from '@angular/router';
 
 })
 export class HeaderComponent {
+
+  activeNavItem: string = 'general';
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+
+  selectTab(tabName: string) {
+    this.activeNavItem = tabName;
   }
 
 }
