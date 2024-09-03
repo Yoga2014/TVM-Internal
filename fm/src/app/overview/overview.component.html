@@ -77,7 +77,6 @@
                   <i class="fa-solid fa-ellipsis"></i>
                 </li>
                 <li
-                  style="margin-left: 7rem"
                   (click)="aditionalClick('custom-tabs')"
                   [ngClass]="{ active: selectedTab === 'custom-tabs' }"
                   data-bs-toggle="tooltip"
@@ -104,8 +103,8 @@
       </div>
     </div>
     <div class="col-8">
-      <div class="card" style="margin-top: -5rem">
-        <div class="card-body" *ngIf="selectedTab === 'activities'">
+      <div class="card card-items" style="margin-top: -5rem">
+        <div class="card-body " *ngIf="selectedTab === 'activities'">
           <h5 class="card-title">Good Morning</h5>
           <p>Arul</p>
           <p>Have a productive day!</p>
