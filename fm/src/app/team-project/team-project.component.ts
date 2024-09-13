@@ -3,6 +3,8 @@
   import { ActivatedRoute, Router } from '@angular/router';
   import { TeamProjectService } from './team-project.service';
 
+  
+
   @Component({
     selector: 'app-team-project',
     templateUrl: './team-project.component.html',
@@ -20,15 +22,24 @@
       coding: ['', [Validators.required, Validators.maxLength(100)]],
       codingstartDate: ['', Validators.required],
       codingendDate: [''],
-      asset: this.fb.array([])
+      asset: this.fb.array([]),
+      projectStatus: ['', Validators.required] 
     });
-
+    @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
+    @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
+    toastTitle = '';
+    toastMessage = '';
     projects: any[] = [];
     projectId: string | null = null;
     isEditMode = false;
     submittedData: any[] = [];
     editID: any;
-
+    showToast: boolean = false; // This should be a boolean
+    updatebtn:boolean=false;
+    submit:boolean=false
+    toastTime: string = 'Just now';
+    isOffcanvasOpen = false;
+  
     constructor(
       public fb: FormBuilder,
       private route: ActivatedRoute,
@@ -38,6 +49,8 @@
     ) {}
 
     ngOnInit() {
+      
+      this.projectForm.reset();
       this.getdata();
     
       // Load the first project data into the form if available (for demonstration)
@@ -69,6 +82,11 @@
       
       
     }
+    showSuccessToast(message: string) {
+      const toastElement = new (window as any).bootstrap.Toast(this.liveToast.nativeElement);
+      toastElement.show();
+    }
+  
     
     getdata() {
       this.teams.getMethod().subscribe((response: any) => {
@@ -79,16 +97,18 @@
     
 
 
-    onSubmit() {
+    onSubmit(title: string, message: string) {
       if (this.projectForm.valid && !this.isEditMode) {
         this.teams.postMethod(this.projectForm.value).subscribe(() => {
           this.getdata();
           this.resetForm();
+          this.toast(title, message)
         });
       }
     }
 
     onCheckboxChange(e: any) {
+     
       const assets: FormArray = this.projectForm.get('asset') as FormArray;
       if (e.target.checked) {
         assets.push(new FormControl(e.target.value));
@@ -101,7 +121,8 @@
     edit(id: any) {
       this.editID = id;
       this.isEditMode = true;
-
+      this.updatebtn=false;
+      this.submit=true
       this.teams.editMethod(id).subscribe((res: any) => {
         this.projectForm.patchValue({
           projectname: res.projectname,
@@ -113,9 +134,10 @@
           voiceendDate: res.voiceendDate,
           coding: res.coding,
           codingstartDate: res.codingstartDate,
-          codingendDate: res.codingendDate
+          codingendDate: res.codingendDate,
+          projectStatus: res.projectStatus
         });
-
+    
         const assetsArray = this.projectForm.get('asset') as FormArray;
         assetsArray.clear();
         if (res.asset) {
@@ -127,35 +149,68 @@
         const offcanvas = document.getElementById('offcanvasForm');
         if (offcanvas) {
           offcanvas.classList.add('show');
+        }else{
+          document.getElementById('offcanvasForm')?.hidden
         }
+         
       });
     }
-
-    update() {
+    disable(){
+      this.projectForm.reset();
+      this.updatebtn=true
+      this.submit=false
+    }
+    update(title: string, message: string) {
       if (this.projectForm.valid && this.isEditMode) {
         this.teams.updateMethod(this.editID, this.projectForm.value).subscribe(() => {
           this.getdata();
           this.isEditMode = false;
-          this.resetForm();
+          
+          // this.showToast('Success', 'Project updated successfully!');
 
           const offcanvas = document.getElementById('offcanvasForm');
           if (offcanvas) {
             offcanvas.classList.remove('show');
           }
         });
+      
       }
-    }
+    this.toast(title, message)
+         
+      }
 
-    delete(id: any) {
+    delete(id: any,title: string, message: string) {
       this.teams.deleteMethod(id).subscribe(() => {
         this.getdata();
+        this.toast(title, message)
+        // this.showToast('Success', 'Project deleted successfully!');
       });
     }
 
     resetForm() {
-      this.projectForm.reset();
+      this.projectForm.reset(); 
       const assetsArray = this.projectForm.get('asset') as FormArray;
-      assetsArray.clear();
+      assetsArray.clear(); 
       this.isEditMode = false;
+      
+   
     }
+
+      hideToast() {
+        this.showToast = false;
+      } 
+
+      toast(title: string, message: string){
+        this.toastTitle = title;
+        this.toastMessage = message;
+        this.showToast = true;
+    
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+          this.showToast = false;
+        }, 3000);
+      }
+      closeOffcanvas() {
+        this.isOffcanvasOpen = false;
+      }
   }

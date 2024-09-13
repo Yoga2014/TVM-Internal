@@ -1,36 +1,55 @@
 {
   "project": [
     {
-      "projectname": "wertyui",
-      "clientname": "rtfyg",
-      "domain": "dfgh",
-      "startDate": "2024-07-31",
-      "voice": "rd",
-      "voicestartDate": "2024-08-05",
+      "id": "d9bd",
+      "projectname": "asss",
+      "clientname": "assss",
+      "domain": "zsss",
+      "startDate": "2024-08-08",
+      "voice": "xsss",
+      "voicestartDate": "2024-08-06",
       "voiceendDate": null,
-      "coding": "dtf",
-      "codingstartDate": "2024-08-06",
+      "coding": "zss",
+      "codingstartDate": "2024-08-23",
       "codingendDate": null,
       "asset": [
-        "laptop"
+        "charger"
       ],
-      "id": "3c74"
+      "projectStatus": "Inactive"
     },
     {
-      "id": "4b6f",
-      "projectname": "aaa",
-      "clientname": "aa",
-      "domain": "aaaa",
-      "startDate": "2024-08-14",
-      "voice": "kani",
+      "id": "5cfe",
+      "projectname": "vcgh",
+      "clientname": "hgfy",
+      "domain": "hfuh",
+      "startDate": "2024-08-27",
+      "voice": "s",
       "voicestartDate": "2024-08-22",
-      "voiceendDate": "2024-08-16",
-      "coding": "aaaa",
-      "codingstartDate": "2024-08-23",
-      "codingendDate": "",
+      "voiceendDate": null,
+      "coding": "mozhi",
+      "codingstartDate": "2024-08-15",
+      "codingendDate": null,
       "asset": [
-        "laptop"
-      ]
+        null
+      ],
+      "projectStatus": "Inactive"
+    },
+    {
+      "id": "a178",
+      "projectname": "yhn",
+      "clientname": "ryhryh",
+      "domain": "e6y",
+      "startDate": "2024-08-08",
+      "voice": "ergee",
+      "voicestartDate": "2024-08-23",
+      "voiceendDate": null,
+      "coding": "dg",
+      "codingstartDate": "2024-08-28",
+      "codingendDate": null,
+      "asset": [
+        null
+      ],
+      "projectStatus": "Inactive"
     }
   ]
 }
