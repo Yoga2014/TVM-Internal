@@ -1,0 +1,240 @@
+.card-container {
+  max-height: 400px;
+  overflow-y: auto; 
+  padding: 10px; 
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #fff;
+  position: relative;
+}
+
+.card-header {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-weight: bold;
+  background-color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  
+}
+
+.pulse-icon {
+  font-size: 24px;
+  color: #007bff; 
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.text-container {
+  font-size: 14px;
+  color: #333;
+}
+
+.info-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; 
+    margin: 20px auto;
+    padding: 16px;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .info-card-header {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .info-card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin-right: 20px; 
+  }
+  
+  .form-group:last-child {
+    margin-right: 0; 
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus {
+    border-color: #007bff; 
+    outline: none;
+  }
+  
+  @media (max-width: 768px) {
+    .form-container {
+      flex-direction: column;
+    }
+  
+    .form-group {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+  
+    .form-group:last-child {
+      margin-bottom: 0; 
+    }
+  }
+  
+
+  .experience-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 16px;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .experience-card-header {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .experience-card-body {
+    overflow-x: auto; 
+  }
+  
+  .experience-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .experience-table th,
+  .experience-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .experience-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .experience-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .experience-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-rows {
+    text-align: center;
+  }
+  
+  .no-rows td {
+    color: #888; 
+    font-style: italic;
+    padding: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .experience-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    .experience-table thead {
+      display: none;
+    }
+  
+    .experience-table, .experience-table tbody, .experience-table tr, .experience-table td {
+      display: block;
+    }
+  
+    .experience-table tr {
+      margin-bottom: 10px;
+    }
+  
+    .experience-table td {
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+    }
+  
+    .experience-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 10px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  }
+  
