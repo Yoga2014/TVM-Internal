@@ -117,7 +117,10 @@
   }
   
   input[type="text"],
-  input[type="email"] {
+  input[type="email"],
+  input[type="date"],
+  input[type="number"], 
+  input[type="text-area"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
@@ -126,7 +129,8 @@
   }
   
   input[type="text"]:focus,
-  input[type="email"]:focus {
+  input[type="email"]:focus,
+  input[type="date"]:focus{
     border-color: #007bff; 
     outline: none;
   }
@@ -238,3 +242,13 @@
     }
   }
   
+  .save-btn{
+    background-color: #007bff;
+    margin-top: 1%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-left: 1%;
+  }
+  .save-btn:hover{
+    background-color: #b5cde7;
+  }

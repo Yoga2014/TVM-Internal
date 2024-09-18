@@ -88,6 +88,7 @@ import { PoliciesComponent } from './policies/policies.component';
 import { DepartmentTreeComponent } from './department-tree/department-tree.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ShiftComponent } from './shift/shift.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { ProfileComponent } from './profile/profile.component';
     PoliciesComponent,
     AnnouncementsComponent,
     EmployeeTreeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ShiftComponent
   ],
 
   imports: [
