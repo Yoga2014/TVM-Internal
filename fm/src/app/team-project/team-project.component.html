@@ -62,7 +62,7 @@
         </select>
       </td> -->
       <td>
-        <button class="edit-btn" (click)="edit(item.id)" class="alert alert-primary" role="alert">Edit</button>
+        <button class="edit-btn" (click)="edit(item.id)" class="alert alert-primary" role="alert" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Edit</button>
         <button class="delete-btn" (click)="delete(item.id,'Success', 'Project deleted successfully!')" class="alert alert-danger" role="alert">Delete</button>
       </td>
     </tr>
@@ -76,6 +76,7 @@
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
     <button type="button" class="btn-close" data-bs-target="#offcanvasForm" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  
   </div>
   <div class="offcanvas-body">
     <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update('Success', 'Project updated successfully!') : onSubmit('Success', 'Project submitted successfully!')">

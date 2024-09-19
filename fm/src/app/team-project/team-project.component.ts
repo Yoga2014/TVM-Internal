@@ -189,7 +189,7 @@
 
     resetForm() {
       this.projectForm.reset(); 
-      const assetsArray = this.projectForm.get('asset') as FormArray;
+      const assetsArray = this.projectForm.get('ass') as FormArray;
       assetsArray.clear(); 
       this.isEditMode = false;
       

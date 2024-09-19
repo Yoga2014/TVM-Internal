@@ -98,6 +98,6 @@ img{
   padding: 2rem;
 }
 .card-items{
-overflow-y: scroll;
-max-height: 400px;
+overflow-y: auto;
+max-height: 40vh;
 }

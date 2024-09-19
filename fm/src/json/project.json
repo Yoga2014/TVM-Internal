@@ -1,26 +1,8 @@
 {
   "project": [
     {
-      "id": "d9bd",
-      "projectname": "asss",
-      "clientname": "assss",
-      "domain": "zsss",
-      "startDate": "2024-08-08",
-      "voice": "xsss",
-      "voicestartDate": "2024-08-06",
-      "voiceendDate": null,
-      "coding": "zss",
-      "codingstartDate": "2024-08-23",
-      "codingendDate": null,
-      "asset": [
-        "charger"
-      ],
-      "projectStatus": "Inactive"
-    },
-    {
-      "id": "5cfe",
-      "projectname": "vcgh",
-      "clientname": "hgfy",
+      "projectname": "subramani  jhb",
+      "clientname": "mani",
       "domain": "hfuh",
       "startDate": "2024-08-27",
       "voice": "s",
@@ -32,7 +14,8 @@
       "asset": [
         null
       ],
-      "projectStatus": "Inactive"
+      "projectStatus": "Inactive",
+      "id": "5cfe"
     },
     {
       "id": "a178",
