@@ -160,7 +160,7 @@ const routes: Routes = [
     component: PerformanceMyDataComponent,
     children: [
       {
-        path: 'my-data',
+        path: '',
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },

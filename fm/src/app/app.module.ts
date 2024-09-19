@@ -87,6 +87,7 @@ import { DepartmentDirectoryComponent } from './department-directory/department-
 import { PoliciesComponent } from './policies/policies.component';
 import { DepartmentTreeComponent } from './department-tree/department-tree.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { FeedsComponent } from './feeds/feeds.component';
 
 @NgModule({
   declarations: [
@@ -147,6 +148,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     PoliciesComponent,
     AnnouncementsComponent,
     EmployeeTreeComponent,
+    FeedsComponent
   ],
 
   imports: [
