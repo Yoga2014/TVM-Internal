@@ -50,6 +50,12 @@
           <div class="title-home">Onboarding</div>
         </div>
       </div>
+      <div class="link" (click)="operationNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'operation'}">
+        <div class="content">
+          <i class="fa-brands fa-ubuntu"></i>
+          <div class="title-home">Operation</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="main-content" style="width: 100%">
