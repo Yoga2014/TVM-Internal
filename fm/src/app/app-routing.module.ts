@@ -53,6 +53,7 @@ import { EmployeeTreeComponent } from './employee-tree/employee-tree.component';
 import { DepartmentTreeComponent } from './department-tree/department-tree.component';
 import { DepartmentDirectoryComponent } from './department-directory/department-directory.component';
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
+import { OperationComponent } from './operation/operation.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: 'teams', component: TeamsComponent },
   { path: 'personalDataForm', component: PersonalDataFormComponent },
   { path: 'onboarding', component: OnboardingComponent },
+  {path:'operation', component:OperationComponent},
 
   {
     path: 'leave-tracking',

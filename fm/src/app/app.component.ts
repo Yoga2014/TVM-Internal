@@ -62,6 +62,11 @@ export class AppComponent {
     this.router.navigate(['onboarding']);
   }
 
+  operationNavigate(){
+    this.activeLink = 'operation';
+    this.router.navigate(['operation']);
+  }
+
   taskNavigate() {
     this.activeLink = 'task';
     this.router.navigate(['task-tasks']);
