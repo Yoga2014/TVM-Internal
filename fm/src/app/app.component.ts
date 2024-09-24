@@ -66,6 +66,10 @@ export class AppComponent {
     this.activeLink = 'operation';
     this.router.navigate(['operation']);
   }
+  reportsNavigate(){
+    this.activeLink = 'reports';
+    this.router.navigate(['reports']);
+  }
 
   taskNavigate() {
     this.activeLink = 'task';
