@@ -30,13 +30,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 "Goal Component":
 "Payload" :
         {
+  "employeeId": "string",  //  
   "name": "string",        // Required, the name of the goal
   "description": "string", // Required, a brief description of the goal
   "priority": "string",    // Required, priority level: "Low", "Medium", "High"
   "startDate": "ISO date", // Required, the start date of the goal in ISO format
   "endDate": "ISO date",   // Required, the end date of the goal in ISO format
   "progress": number,      // Optional, percentage progress of the goal (0-100)
-  "id": "string"           // Optional, unique identifier for the goal
+  "goalId": "string"           // Optional, unique identifier for the goal
 }
 "Example response":
         {
@@ -223,7 +224,83 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     DELETE /NewHires/{id}: Delete a new hire entry.
 
 ---------------------------------------------------------------------------------------
+"Tasks"
 
+"tasks": [
+    {
+      "taskOwner": "String",    // Required task Owner eg.name of the project holder
+      "taskName": "String",     // Required task name eg. name of the task you done
+      "description": "String",  // Required description eg.like textarea 
+      "startDate": "date",      // Required date eg.startdate
+      "dueDate": "date",        // Required date eg.enddate
+      "reminder": "date",       // Required date eg.remainderdate
+      "priority": "string",     // Required priority eg. dropdown like medium, high, low.
+      "status": "string",       // Required status  eg.InProgrees, NotStarted, completed.
+      "id": "string"            //Required, unique ID.
+    },
+]
 
+Example response:
+"tasks": [
+    {
+      "taskOwner": "Durai",
+      "taskName": "Internal Project",
+      "description": "ongoing",
+      "startDate": "2024-08-21",
+      "dueDate": "2024-08-31",
+      "reminder": "2024-08-25",
+      "priority": "Medium",
+      "status": "In Progress",
+      "id": "b807"                     
+    },
+]
 
+"Request/Response Flow":
+   GET /task: Retrieve a list of recent task.
+    POST /task: Add a new Task.
+    PUT /task/{id}: Update information for a specific new task.
+    DELETE /task/{id}: Delete a task.
 
+---------------------------------------------------------------------------------------
+"Announcements"
+
+"announcements": [
+    {
+      "id": "string",                    //Required, unique ID.
+      "name": "String",                 //Required name eg.Announcer name.
+      "title": "string",                // Required Title of the Announcement eg.birthday.
+      "message": "string",              // Required message eg. announcer message.
+      "attachment": null,               // Required attachment eg.like photo, file
+      "category": "updates",            // Required like dropdown like update,news and alert.
+      "expiry": "2024-08-29",           // Required date like announcement date.
+      "location": "branch",             // Required location in dropwon branch, headquatres like. 
+      "disableComments": true,          // checkbox
+      "pinAnnouncement": false,         // checkbox
+      "notifyAll": false               // checkbox
+    },
+ ]
+
+Example response:
+ "announcements": [
+    {
+      "id": "7b35",
+      "name": "DURAI RAJ",
+      "title": "Announcement",
+      "message": "Welcome....",
+      "attachment": null,
+      "category": "updates",
+      "expiry": "2024-08-29",
+      "location": "branch",
+      "disableComments": true,
+      "pinAnnouncement": false,
+      "notifyAll": false
+    },
+ ]
+
+"Request/Response Flow":
+   GET /Announcements: Retrieve a list of recent Announcements.
+    POST /Announcements: Add a new Announcements.
+    PUT /Announcements/{id}: Update information for a specific new Announcements.
+    DELETE /Announcements/{id}: Delete a Announcements.
+ 
+---------------------------------------------------------------------------------------

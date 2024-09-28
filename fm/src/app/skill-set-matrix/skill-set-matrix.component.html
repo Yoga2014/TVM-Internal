@@ -1,0 +1,146 @@
+<div class="scroll-bar">
+<div class="header-container">
+    <div class="button-container">
+      <button class="btn add-btn" (click)="openModal()">
+        <i class="material-icons">add</i> Add
+      </button>
+      <button class="btn filter-btn" (click)="openFilterModal()">
+        <i class="material-icons">filter_list</i> Filter
+      </button>
+    </div>
+  </div>
+  
+  <!-- Filter Modal Popup -->
+  <div class="popup" *ngIf="isFilterModalOpen">
+    <div class="popup-content">
+      <span class="popup-close" (click)="closeFilterModal()">&times;</span>
+      <h2>Filter Skills</h2>
+      <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+        <div class="form-group">
+          <label for="filterSkillName">Skill Name:</label>
+          <input type="text" id="filterSkillName" formControlName="skillName" placeholder="Enter skill name">
+        </div>
+        <div class="button-container">
+          <button type="submit" class="popup-submit-btn">Apply</button>
+          <button type="button" class="popup-reset-btn" (click)="resetFilter()">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Skills List Section -->
+  <div class="skills-list">
+    <h2>Skills</h2>
+  
+    <!-- Display filtered skills or "No Record Found" -->
+    <div *ngIf="filteredSkills.length > 0; else noRecord">
+      <div class="skill-card" *ngFor="let skill of filteredSkills">
+        <h3>{{ skill.name }}</h3>
+        <p><strong>Description:</strong> {{ skill.description }}</p>
+        <p><strong>Status:</strong> {{ skill.status }}</p>
+        <p><strong>Target Completion Date:</strong> {{ skill.targetCompletionDate | date }}</p>
+        <p><strong>Start Date:</strong> {{ skill.startDate | date }}</p>
+        <p><strong>Category:</strong> {{ skill.category }}</p>
+        <p><strong>Weight:</strong> {{ skill.weight }}</p>
+        <p><strong>Last Update:</strong> {{ skill.lastUpdate | date }}</p>
+        <p><strong>Success Criteria:</strong> {{ skill.successCriteria }}</p>
+        <button *ngIf="skill.id" (click)="deleteSkill(skill.id)">Delete</button>
+      </div>
+    </div>
+  
+    <!-- No Record Found Message -->
+    <ng-template #noRecord>
+      <p>No Record Found</p>
+    </ng-template>
+  </div>
+  
+  
+
+<!-- Modal -->
+<div class="popup" *ngIf="isModalOpen">
+    <div class="popup-content">
+        <span class="popup-close" (click)="closeModal()">&times;</span>
+        <h2>Add Skill</h2>
+        <form [formGroup]="skillForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="skillName">Skill Name:</label>
+                <input type="text" id="skillName" formControlName="name" required>
+                <div *ngIf="skillForm.get('name')!.invalid && skillForm.get('name')!.touched" class="error">
+                    Skill Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" required></textarea>
+                <div *ngIf="skillForm.get('description')!.invalid && skillForm.get('description')!.touched" class="error">
+                    Description is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" formControlName="status" required>
+                    <option value="not-started">Not Started</option>
+                    <option value="inprogress">Inprogress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <div *ngIf="skillForm.get('status')!.invalid && skillForm.get('status')!.touched" class="error">
+                    Status is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="targetCompletionDate">Target Completion Date:</label>
+                <input type="date" id="targetCompletionDate" formControlName="targetCompletionDate" [min]="today" required>
+                <div *ngIf="skillForm.get('targetCompletionDate')!.invalid && skillForm.get('targetCompletionDate')!.touched" class="error">
+                    Target Completion Date is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" formControlName="startDate" [min]="today" required>
+                <div *ngIf="skillForm.get('startDate')!.invalid && skillForm.get('startDate')!.touched" class="error">
+                    Start Date is required.
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" formControlName="category" required>
+                    <option value="development">Development</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                </select>
+                <div *ngIf="skillForm.get('category')!.invalid && skillForm.get('category')!.touched" class="error">
+                    Category is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" formControlName="weight" [min]="1" [max]="100" required>
+                <div *ngIf="skillForm.get('weight')!.invalid && skillForm.get('weight')!.touched" class="error">
+                    Weight is required and must be between 1 and 100.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastUpdate">Last Update Date:</label>
+                <input type="date" id="lastUpdate" formControlName="lastUpdate" [min]="today" required>
+                <div *ngIf="skillForm.get('lastUpdate')!.invalid && skillForm.get('lastUpdate')!.touched" class="error">
+                    Last Update Date is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="successCriteria">Success Criteria:</label>
+                <textarea id="successCriteria" formControlName="successCriteria" maxlength="1000" required></textarea>
+                <div *ngIf="skillForm.get('successCriteria')!.invalid && skillForm.get('successCriteria')!.touched" class="error">
+                    Success Criteria is required and cannot exceed 1000 characters.
+                </div>
+                <div>
+                    <small>{{ skillForm.get('successCriteria')?.value?.length || 0 }}/1000 characters</small>
+                </div>
+            </div>
+            <button type="submit" class="popup-submit-btn" >Submit</button>
+            <button type="button" class="popup-cancel-btn" (click)="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+</div>
