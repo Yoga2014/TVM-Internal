@@ -90,6 +90,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ReportsComponent } from './reports/reports.component';
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
+    SkillSetMatrixComponent,
     ProfessionalComponent,
     HeaderComponent,
     DetailsComponent,

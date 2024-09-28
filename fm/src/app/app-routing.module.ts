@@ -168,14 +168,14 @@ const routes: Routes = [
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },
-          { path: 'skillset', component: SkillsetPerformanceComponent },
+          // { path: 'skillset', component: SkillsetComponent },
           { path: 'competency', component: CompetencyComponent },
           { path: 'feedback', component: PerformanceFeedbackComponent },
         ],
       },
       {
         path: 'Skill-Set-Matrix',
-        component: GoalsMyDataComponent,
+        component: PerformanceMyDataComponent,
         children: [
         ],
       },

@@ -1,0 +1,209 @@
+.header-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #f8f8f8; 
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px; 
+  }
+  
+  .btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn i {
+    margin-right: 5px;
+    font-size: 20px;
+  }
+  
+  .btn.add-btn {
+    background-color: #1976d2; 
+  }
+  
+  .btn.filter-btn {
+    background-color: #ff9800; 
+  }
+  
+  .btn:hover {
+    background-color: #1565c0; 
+  }
+  
+  .btn.filter-btn:hover {
+    background-color: #fb8c00; 
+  }
+  
+
+  .header-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #f8f8f8; 
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px; 
+  }
+  
+  .btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn i {
+    margin-right: 5px; 
+    font-size: 20px;
+  }
+  
+  .popup {
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Background with opacity */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.popup-content {
+    background-color: #fff; /* White background */
+    margin: 15% auto; /* Center the modal */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    width: 500px; /* Width of the modal */
+    max-height: 90%; /* Maximum height of the modal */
+    overflow-y: auto; /* Enable vertical scroll */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.popup-close {
+    cursor: pointer; /* Pointer cursor */
+    float: right; /* Align close button to the right */
+    font-size: 24px; /* Close button size */
+    margin-top: -10px; /* Adjust position */
+    margin-right: -10px; /* Adjust position */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form elements */
+}
+
+.form-group label {
+    display: block; /* Make labels block elements */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%; /* Make inputs take full width */
+    padding: 8px; /* Add padding for better aesthetics */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.popup-submit-btn {
+    background-color: #1976d2; /* Button color */
+    color: white; /* Button text color */
+    padding: 10px 15px; /* Button padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.popup-submit-btn:hover {
+    background-color: #1565c0; /* Darker shade on hover */
+}
+
+.popup-cancel-btn {
+    background-color: #f44336; /* Red color for the cancel button */
+    color: white; /* White text color */
+    margin-left: 10px; /* Space between Submit and Cancel buttons */
+    padding: 10px 15px; /* Button padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.popup-cancel-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+.error{
+    color: red;
+}
+
+.skills-list {
+    padding: 20px;
+    max-width: 800px; /* Adjust the max width as necessary */
+    margin: 0 auto; /* Center the skills list */
+}
+
+.skill-card {
+    background-color: #f9f9f9; /* Light background color */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Space inside the card */
+    margin: 10px 0; /* Space between cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.skill-card:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.skill-card h3 {
+    margin: 0 0 10px; /* Space below heading */
+    font-size: 1.5em; /* Increase heading size */
+    color: #333; /* Dark color for heading */
+}
+
+.skill-card p {
+    margin: 5px 0; /* Space between paragraphs */
+    color: #555; /* Slightly lighter color for text */
+}
+
+.skill-card strong {
+    color: #222; /* Darker color for strong text */
+}
+
+.skill-card button {
+    background-color: #d9534f; /* Bootstrap danger color */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 12px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.skill-card button:hover {
+    background-color: #c9302c; /* Darker shade on hover */
+}
+
+.scroll-bar{
+    overflow-y: auto;
+    height: 80vh;
+}
