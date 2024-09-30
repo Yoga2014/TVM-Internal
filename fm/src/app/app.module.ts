@@ -90,9 +90,11 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { NewJoinersComponent } from './new-joiners/new-joiners.component';
 
 @NgModule({
   declarations: [
+    NewJoinersComponent,
     AppComponent,
     GeneralComponent,
     EducationalComponent,

@@ -1,0 +1,93 @@
+http://localhost:8080/api/status/active :
+
+[
+    {
+        "id": 1,
+        "firstName": "DINESH",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "active",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "pending",
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": null
+    },
+    {
+        "id": 4,
+        "firstName": "DINESH",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "active",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "pending",
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": null
+    },
+    {
+        "id": 6,
+        "firstName": "Avinash",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "active",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "pending",
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": null
+    }
+]
+
+http://localhost:8080/api/status/onboard/onboarded :
+
+[
+    {
+        "id": 1,
+        "firstName": "DINESH",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "active",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "onboarded",
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": null
+    },
+    {
+        "id": 5,
+        "firstName": "Suresh",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "inactive",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "onboarded",
+        "team": null,
+        "project": null,
+        "projectDescription": "HCL product",
+        "createdDate": null
+    },
+    {
+        "id": 7,
+        "firstName": "Avinash",
+        "lastName": "kUMAR",
+        "email": "john.doe@example.com",
+        "cell": 11111,
+        "activeStatus": "",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": "onboarded",
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": null
+    }
+]
