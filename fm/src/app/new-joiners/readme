@@ -1,0 +1,18 @@
+http://localhost:8080/api/approval : 
+
+[
+    {
+        "id": 1,
+        "firstName": "subramani",
+        "lastName": "Kumar",
+        "email": "john.doe@example.com",
+        "cell": 1234567891,
+        "activeStatus": "active",
+        "positionAppliedFor": "Software Engineer",
+        "onboarding": null,
+        "team": null,
+        "project": null,
+        "projectDescription": null,
+        "createdDate": "2024-09-30"
+    }
+]

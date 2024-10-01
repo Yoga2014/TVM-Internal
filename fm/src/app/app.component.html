@@ -48,6 +48,19 @@
           <div class="title-home">Onboarding</div>
         </div>
       </div>
+      <div class="link" (click)="newHireNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'newHires'}">
+        <div class="content">
+          <i class="fa-regular fa-id-card"></i>
+          <div class="title-home">New Hires</div>
+        </div>
+      </div>
+      <div class="link" (click)="detailsNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'details'}">
+        <div class="content">
+          <i class="fa-solid fa-folder-open"></i>
+          
+          <div class="title-home">Hires Details</div>
+        </div>
+      </div>
       <div class="link" (click)="operationNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'operation'}">
         <div class="content">
           <i class="fa-brands fa-ubuntu"></i>

@@ -2,10 +2,12 @@
   <div class="nav-item" [class.active]="activeNavItem === 'leave-summary'" (click)="navigateToLeavesummary()">Leave Summary</div>
   <div class="nav-item" [class.active]="activeNavItem === 'leave-balance'" (click)="navigateToLeaveBalance()">Leave Balance</div>
   <div class="nav-item" [class.active]="activeNavItem === 'leave-requests'" (click)="navigateLeaveRequest()">Leave Request</div>
+  <div class="nav-item" [class.active]="activeNavItem === 'feedback'" (click)="navigateFeedback()">Feedback</div>
 </nav>
 
 <div class="main-content">
   <app-leave-summary *ngIf="activeNavItem === 'leave-summary'"></app-leave-summary>
   <app-leave-balance *ngIf="activeNavItem === 'leave-balance'"></app-leave-balance>
   <app-leave-request *ngIf="activeNavItem === 'leave-requests'"></app-leave-request>
+  <app-feedback *ngIf="activeNavItem === 'feedback'"></app-feedback>
 </div>

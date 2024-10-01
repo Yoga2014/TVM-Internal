@@ -40,4 +40,9 @@ export class MyDataComponent {
     this.activeNavItem = 'apply-leave';
     this.router.navigate(['leave-tracking/mydata', 'apply-leave'])
   }
+
+  navigateFeedback(){
+    this.activeNavItem='feedback';
+    this.router.navigate(['feedback/mydata','feedback'])
+  }
 }

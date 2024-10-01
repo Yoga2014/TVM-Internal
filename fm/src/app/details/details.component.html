@@ -1,47 +1,185 @@
 
-    <div class="detail-page " >
-        <div class="btn-group mb-3">
-          <button class="btn-1 btn" (click)="deleteSelectedRows()">Delete</button>
-          <button class="btn-2 btn" (click)="filterWorkers('yes')">Active Employee</button>
-          <button class="btn-1 btn" (click)="filterWorkers('no')">Inactive Employee</button>
-          <button class="btn-2 btn" (click)="filterWorkers('all')">All Employee</button>
-        </div>
 
-        <div class="table-container">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>FirstName</th>
-                <th>SecondName</th>
-                <th>MailId</th>
-                <th>OfficialMailId</th>
-                <th>Mobile</th>
-                <th>Onboarding Status</th>
-                <th>Department</th>
-                <th>Active</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let worker of workers; let i = index" [hidden]="worker.hidden">
-                <td><input type="checkbox" (change)="toggleSelection($event, worker)"></td>
-                <td>{{ worker.firstName }}</td>
-                <td>{{ worker.secondName }}</td>
-                <td>{{ worker.mailId }}</td>
-                <td>{{ worker.officialMailId }}</td>
-                <td>{{ worker.mobile }}</td>
-                <td>{{ worker.onboardingStatus }}</td>
-                <td>{{ worker.department }}</td>
-                <td>{{ worker.active }}</td>
-                <td><button class="btn btn-primary">View</button></td>
-              </tr>
-            </tbody>
-          </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <section class="container mt-4">
+    <div class="btn-group mb-3">
+      <button class="btn btn-danger" (click)="updateSelectedRows()">Delete</button>
+      <button class="btn btn-primary" (click)="filterWorkers('active')">On Training</button>
+      <button class="btn btn-info" (click)="filterWorkers('onboarded')">Onboarded Project</button>
+      <button class="btn btn-success" (click)="showAddEmployeeModal()">Add Employee</button>
+    </div>
+  
+    <!-- Active Employees Table -->
+    <table *ngIf="selectedFilter === 'active'" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Employee ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Onboarding Status</th>
+          <th>Department</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let worker of workers">
+          <td><input type="checkbox" (change)="toggleSelection($event, worker)"></td>
+          <td>{{worker.employeeid}}</td>
+          <td>{{worker.firstName}}</td>
+          <td>{{worker.lastName}}</td>
+          <td>{{worker.email}}</td>
+          <td>{{worker.cell}}</td>
+          <td>{{worker.onboarding}}</td>
+          <td>{{worker.positionAppliedFor}}</td>
+          <td><button class="btn btn-primary" (click)="openUpdateModal(worker)">Update</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Onboarded Employees Table -->
+    <table *ngIf="selectedFilter === 'onboarded'" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Team</th>
+          <th>Project</th>
+          <th>Project Description</th>
+          <th>Department</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let worker of workers">
+          <td>{{worker.id}}</td>
+          <td>{{worker.firstName}}</td>
+          <td>{{worker.lastName}}</td>
+          <td>{{worker.email}}</td>
+          <td>{{worker.cell}}</td>
+          <td>{{worker.team}}</td>
+          <td>{{worker.project}}</td>
+          <td>{{worker.projectDescription}}</td>
+          <td>{{worker.positionAppliedFor}}</td>
+          <td>{{worker.activeStatus}}</td>
+          <td><button class="btn btn-primary" (click)="openUpdateModal(worker)">Edit</button>
+            <button class="btn btn-primary" (click)="terminate(worker.id)">Terminate</button></td>
+         
+        </tr>
+      </tbody>
+    </table>
+  
+  </section>
+  
+  <!-- Add Employee Modal -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible, 'fade': isModalVisible}" style="display: block;" *ngIf="isModalVisible">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Employee</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-
+        <div class="modal-body">
+          <form [formGroup]="addEmployeeForm">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input id="firstName" formControlName="firstName" class="form-control" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" formControlName="lastName" class="form-control" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+              <label for="telephone">Mobile</label>
+              <input id="telephone" formControlName="telephone" class="form-control" placeholder="Mobile" type="number" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" formControlName="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <label for="postAppliedFor">Position</label>
+              <input id="postAppliedFor" formControlName="postAppliedFor" class="form-control" placeholder="Position" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submitAddEmployee()">Add Employee</button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Update Employee Modal -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isUpdateModalVisible, 'fade': isUpdateModalVisible}" style="display: block;" *ngIf="isUpdateModalVisible">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update {{ selectedWorker?.firstName }} {{ selectedWorker?.lastName }}</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeUpdateModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="updateEmployeeForm">
+            <div class="form-group">
+              <label for="team">Team</label>
+              <select id="team" formControlName="team" class="form-control" required>
+                <option value="" disabled selected>Select a team</option>
+                <option value="Mukesh">Mukesh</option>
+                <option value="Deepika">Deepika</option>
+                <option value="Yogarani">Yogarani</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="project">Project</label>
+              <select id="project" formControlName="project" class="form-control" required>
+                <option value="" disabled selected>Select a project</option>
+                <option value="Visa">Visa</option>
+                <option value="HCL">HCL</option>
+                <option value="L&T">L&T</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="projectDescription">projectDescription</label>
+              <input id="projectDescription" formControlName="projectDescription" class="form-control" placeholder="projectDescription" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submitUpdateEmployee()">Update Employee</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
 
