@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../Interface/Emplyee';  // Import the Employee interface
 
 @Component({
   selector: 'app-new-joiners',
@@ -8,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewJoinersComponent implements OnInit {
 
-  employee: any[] = [];
-  originalEmployee: any[] = []; // Store the original data
+  employee: Employee[] = [];
+  originalEmployee: Employee[] = []; // Store the original data
   apiUrl: string = 'http://localhost:8080/api/approval'; 
   approveUrl: string = 'http://localhost:8080/api/approval'; // URL for approval API
-  // apiUrl: string = 'http://localhost:3000/approval';
-  // approveUrl: string = 'http://localhost:3000/approval'; 
+   
   startDate: string | null = null; // To hold the selected start date
   endDate: string | null = null;   // To hold the selected end date
 
@@ -24,7 +24,7 @@ export class NewJoinersComponent implements OnInit {
   }
 
   loadInactiveWorkers(): void {
-    this.http.get<any[]>(this.apiUrl).subscribe(data => {
+    this.http.get<Employee[]>(this.apiUrl).subscribe(data => {
       this.employee = data;
       this.originalEmployee = [...data]; // Store a copy of the original data
       console.log(this.employee);

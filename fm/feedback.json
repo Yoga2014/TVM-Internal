@@ -1,0 +1,10 @@
+{
+    "feedbacks": [
+      { "type": "positive", "content": "Great work!", "providedBy": "Manager" },
+      { "type": "negative", "content": "Needs improvement.", "providedBy": "Team Leader" },
+      { "type": "training", "content": "Training required", "providedBy": "Team Member" },
+      { "type": "observation", "content": "Observed performance", "providedBy": "Manager" },
+      { "type": "reward", "content": "Excellent!", "providedBy": "Manager" }
+    ]
+  }
+  

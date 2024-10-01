@@ -1,0 +1,47 @@
+<div class="feedback-container">
+    <div class="feedback-header">
+      <button (click)="setFeedbackCategory('received')" [class.active]="selectedTab === 'received'">Received Feedback</button>
+      <button (click)="setFeedbackCategory('given')" [class.active]="selectedTab === 'given'">Given Feedback</button>
+      <input
+        type="text"
+        placeholder="Search Feedback..."
+        [(ngModel)]="searchTerm"
+        (input)="filterFeedback(searchTerm)"
+        class="search-input"
+      />
+    </div>
+    <div class="feedback-filters">
+      <div class="feedback-card all" (click)="filterFeedback('all')">
+        <h4>All Feedback</h4>
+        <p>{{ allFeedbackCount }}</p>
+      </div>
+      <div class="feedback-card positive" (click)="filterFeedback('positive')">
+        <h4>Positive</h4>
+        <p>{{ positiveFeedbackCount }}</p>
+      </div>
+      <div class="feedback-card negative" (click)="filterFeedback('negative')">
+        <h4>Negative</h4>
+        <p>{{ negativeFeedbackCount }}</p>
+      </div>
+      <div class="feedback-card training" (click)="filterFeedback('training')">
+        <h4>Training</h4>
+        <p>{{ trainingFeedbackCount }}</p>
+      </div>
+      <div class="feedback-card observation" (click)="filterFeedback('observation')">
+        <h4>Observation</h4>
+        <p>{{ observationFeedbackCount }}</p>
+      </div>
+      <div class="feedback-card reward" (click)="filterFeedback('reward')">
+        <h4>Reward</h4>
+        <p>{{ rewardFeedbackCount }}</p>
+      </div>
+    </div>
+  
+    <div class="feedback-content">
+        <p *ngIf="filteredFeedback.length === 0">No feedback available.</p>
+      <!-- Display feedback content here -->
+      <div *ngFor="let feedback of filteredFeedback">
+        <p><strong>{{ feedback.providedBy }}:</strong> {{ feedback.content }}</p>
+      </div>
+  </div>
+</div>

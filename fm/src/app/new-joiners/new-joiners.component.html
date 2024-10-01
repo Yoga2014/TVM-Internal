@@ -40,13 +40,13 @@
               <th>Email</th>
               <th>Mobile</th>
               <th>Date Of Join</th>
-              <th>Department</th>
+              <th>Position Applied For</th>
               <th>Approval</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let worker of employee">
-              <td>{{worker.id}}</td>
+              <td>{{worker.employeeId}}</td>
               <td>{{worker.firstName}}</td>
               <td>{{worker.lastName}}</td>
               <td>{{worker.email}}</td>
@@ -54,7 +54,7 @@
               <td>{{worker.createdDate | date}}</td>
               <td>{{worker.positionAppliedFor}}</td>
               <td>
-                <button class="btn btn-sm btn-info" (click)="approveEmployee(worker.id)">Approve</button>
+                <button class="btn btn-sm btn-info" (click)="approveEmployee(worker.employeeId)">Approve</button>
               </td>
             </tr>
           </tbody>
