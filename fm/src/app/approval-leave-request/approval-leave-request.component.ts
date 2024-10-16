@@ -18,6 +18,7 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     'employeeId', 'employeeName', 'email', 'designation', 'leaveType', 'teamId',
     'startDate', 'endDate', 'totalLeaveDays', 'reason', 'status', 'actions'
   ];
+  status!: 'pending' | 'approved' | 'rejected';
 
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
@@ -51,14 +52,18 @@ export class ApprovalLeaveRequestComponent implements OnInit {
   }
 
   approveRequest(request: LeaveRequest): void {
+    request.status='approved';
+    debugger
     if (confirm('Are you sure you want to approve this leave request?')) {
       this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe(() => {
         this.refreshData();
       });
+      console.log(request.employeeId)
     }
   }
 
   rejectRequest(request: LeaveRequest): void {
+    request.status='rejected';
     const comment = prompt('Please enter the reason for rejection:');
     if (comment) {
       this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Rejected', comment }).subscribe(() => {
