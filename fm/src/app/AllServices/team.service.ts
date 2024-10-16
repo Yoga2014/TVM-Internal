@@ -11,38 +11,8 @@ export class TeamService {
     constructor(private http: HttpClient) { }
 
     getEmployees(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/Employee`).pipe(
+      return this.http.get<any[]>(`${this.apiUrl}`).pipe(
         catchError(this.handleError<any[]>('getEmployees', []))
-      );
-    }
-
-    getGoals(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/Goals`).pipe(
-        catchError(this.handleError<any[]>('getGoals', []))
-      );
-    }
-
-    getLeaves(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/Leave`).pipe(
-        catchError(this.handleError<any[]>('getLeaves', []))
-      );
-    }
-
-    addEmployee(employee: any): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/Employee`, employee).pipe(
-        catchError(this.handleError<any>('addEmployee'))
-      );
-    }
-
-    addGoal(goal: any): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/Goals`, goal).pipe(
-        catchError(this.handleError<any>('addGoal'))
-      );
-    }
-
-    addLeave(leave: any): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/Leave`, leave).pipe(
-        catchError(this.handleError<any>('addLeave'))
       );
     }
 

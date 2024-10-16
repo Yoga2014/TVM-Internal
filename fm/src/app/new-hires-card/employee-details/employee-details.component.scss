@@ -1,31 +1,70 @@
-/* Add your styling here */
+.edit, .delete {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s ease-in-out;
+}
+
 .edit {
-    margin-right: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+  background-color: #007bff; /* Business blue */
+  margin-right: 12px; /* Space between buttons */
+}
+
+.edit:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Subtle shadow on hover */
+}
 
 .delete {
-    margin-right: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ff002b;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #ff002b; /* Red for delete */
+}
+
+.delete:hover {
+  background-color: #cc0024; /* Darker red on hover */
+  box-shadow: 0 4px 8px rgba(255, 0, 43, 0.2); /* Subtle shadow on hover */
+}
+
+/* Styling for H3 with Alignment */
+h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #343a40; /* Dark color for a professional look */
+}
+
+/* Wrapper to align buttons and heading in a single row */
+.action-container {
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Spread buttons and heading apart */
+  padding: 10px 0;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center; /* Ensure buttons are aligned properly */
+}
+
+@media (max-width: 768px) {
+  /* Stack heading and buttons on small screens */
+  .action-container {
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left on smaller devices */
   }
-  
-  button:hover {
-    background-color: #1e00ff;
+
+  .action-buttons {
+    margin-top: 10px; /* Add some space above the buttons */
   }
-  
+
+  .edit, .delete {
+    padding: 8px 16px; /* Adjust button size for smaller screens */
+  }
+
   h3 {
-    margin-top: 0;
+    font-size: 1.25rem; /* Reduce heading size on smaller screens */
   }
-  
+}

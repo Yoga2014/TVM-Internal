@@ -12,23 +12,21 @@ export class NewHiresComponent implements OnInit {
   
 
   employees: Employee[] = [];
-  isContentVisible: boolean = false;
-  selectedEmployee: Employee | null = null;
 
   constructor(private newHiresService: NewHiresService, private router: Router) { }
 
   ngOnInit(): void {
-    this.newHiresService.getRecentHires().subscribe((employees: Employee[]) => {
-      this.employees = employees;
-    });
+    this.newHiresService.getRecentHires().subscribe(
+      (employees: Employee[]) => {
+        this.employees = employees;
+      },
+      (error) => {
+        console.error('Failed to fetch new hires', error);
+      }
+    );
   }
 
   viewEmployeeDetails(id: number): void {
     this.router.navigate(['/employee-details', id]);
   }
-
-  toggleContent(): void {
-    this.isContentVisible = !this.isContentVisible;
-  }
-  
 }

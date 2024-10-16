@@ -117,8 +117,8 @@
         </div>
         <app-feeds class="card-body" *ngIf="selectedTab === 'feeds'"></app-feeds>
         <div class="card-body" *ngIf="selectedTab === 'profile'">2</div>
-        <div class="card-body" *ngIf="selectedTab === 'approvals'">3</div>
-        <div class="card-body" *ngIf="selectedTab === 'leave'">4</div>
+        <app-approval-leave-request class="card-body" *ngIf="selectedTab === 'approvals'">3</app-approval-leave-request>
+        <app-leave-balance *ngIf="selectedTab === 'leave'"></app-leave-balance>
         <div class="card-body" *ngIf="selectedTab === 'shift'">5</div>
         <div class="card-body" *ngIf="selectedTab === 'files'">6</div>
       </div>
