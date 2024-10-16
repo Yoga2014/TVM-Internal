@@ -90,10 +90,14 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { NewJoinersComponent } from './new-joiners/new-joiners.component';
+import { FeedbackComponent } from "./feedback/feedback.component";
 
 @NgModule({
   declarations: [
+    NewJoinersComponent,
     AppComponent,
+    FeedbackComponent,
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
@@ -185,8 +189,8 @@ import { ReportsComponent } from './reports/reports.component';
     MatStepperModule,
     NgIf,
     NgFor,
-    TreeModule,
-  ],
+    TreeModule
+],
   providers: [],
   bootstrap: [AppComponent],
 })

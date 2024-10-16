@@ -55,6 +55,8 @@ import { DepartmentDirectoryComponent } from './department-directory/department-
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { NewJoinersComponent } from './new-joiners/new-joiners.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
   { path: 'general', component: GeneralComponent },
@@ -74,6 +76,9 @@ const routes: Routes = [
   { path: 'onboarding', component: OnboardingComponent },
   {path:'operation', component:OperationComponent},
   {path:'reports',component:ReportsComponent},
+  { path: 'newHires', component: NewJoinersComponent },
+  {path:'details', component:DetailsComponent},
+  {path:'feedback', component:FeedbackComponent},
 
   {
     path: 'leave-tracking',
@@ -87,6 +92,8 @@ const routes: Routes = [
           { path: 'leave-balance', component: LeaveBalanceComponent },
           { path: 'leave-requests', component: LeaveRequestsComponent },
           { path: 'apply-leave', component: ApplyLeaveComponent },
+          { path: 'feedback', component: FeedbackComponent },
+
         ],
       },
       {

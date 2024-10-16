@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <section class="container mt-5">
+    <div class="card shadow-sm">
+      <div class="card-header text-center bg-primary text-white">
+        <h2>New Joiners</h2>
+      </div>
+      <div class="card-body">
+        <!-- Date Filter Section -->
+        <div class="mb-3">
+          <div class="form-row">
+            <div class="col">
+              <label for="startDate">Start Date</label>
+              <input type="date" id="startDate" class="form-control" [(ngModel)]="startDate">
+            </div>
+            <div class="col">
+              <label for="endDate">End Date</label>
+              <input type="date" id="endDate" class="form-control" [(ngModel)]="endDate">
+            </div>
+            <div class="col d-flex align-items-end">
+              <button class="btn btn-primary" (click)="filterByDate()">Filter</button>
+              <button class="btn btn-secondary ml-2" (click)="undoFilter()">Undo Filter</button>
+            </div>
+          </div>
+        </div>
+        <!-- Table Section -->
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Employee ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Date Of Join</th>
+              <th>Position Applied For</th>
+              <th>Approval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let worker of employee">
+              <td>{{worker.employeeId}}</td>
+              <td>{{worker.firstName}}</td>
+              <td>{{worker.lastName}}</td>
+              <td>{{worker.email}}</td>
+              <td>{{worker.cell}}</td>
+              <td>{{worker.createdDate | date}}</td>
+              <td>{{worker.positionAppliedFor}}</td>
+              <td>
+                <button class="btn btn-sm btn-info" (click)="approveEmployee(worker.employeeId)">Approve</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -61,6 +61,14 @@ export class AppComponent {
     this.activeLink = 'onboarding';
     this.router.navigate(['onboarding']);
   }
+  newHireNavigate() {
+    this.activeLink = 'newHires';
+    this.router.navigate(['newHires']);
+  }
+  detailsNavigate() {
+    this.activeLink = 'details';
+    this.router.navigate(['details']);
+  }
 
   operationNavigate(){
     this.activeLink = 'operation';
