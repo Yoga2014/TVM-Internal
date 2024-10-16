@@ -1,89 +1,89 @@
-<div class="leave-requests">
-  <!-- Button to Add Request -->
-  <button mat-raised-button color="primary" (click)="applyLeave()">Add Request</button>
-  
-  <!-- Filter Container -->
-  <div class="filter-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Filter by Leave Type</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Leave Type">
-    </mat-form-field>
+<div class="body">
+  <div class="container table-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Filter by Employee Name or Leave Type"
+          (input)="applyFilter($event)"
+        />
+      </div>
+      <div>
+        <button class="btn btn-primary me-2" (click)="applyLeave()">Add Request</button>
+        <button class="btn btn-danger" (click)="deleteSelectedRequests()">Delete Selected</button>
+      </div>
+    </div>
+
+    <!-- Leave request table -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <input type="checkbox" (change)="selectAll($event)" />
+        </th>
+        <td mat-cell *matCellDef="let request">
+          <input
+            type="checkbox"
+            (change)="onRowSelect($event, request)"
+            [(ngModel)]="request.selected"
+          />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="employeeName">
+        <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+        <td mat-cell *matCellDef="let request">{{ request.employeeName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="leaveType">
+        <th mat-header-cell *matHeaderCellDef>Leave Type</th>
+        <td mat-cell *matCellDef="let request">{{ request.leaveType }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let request">{{ request.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="leavePeriod">
+        <th mat-header-cell *matHeaderCellDef>Leave Period</th>
+        <td mat-cell *matCellDef="let request">{{ request.leavePeriod }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="days">
+        <th mat-header-cell *matHeaderCellDef>Days/Hours Taken</th>
+        <td mat-cell *matCellDef="let request">{{ request.daysTaken }} Day(s)</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfRequest">
+        <th mat-header-cell *matHeaderCellDef>Date of Request</th>
+        <td mat-cell *matCellDef="let request">{{ request.dateOfRequest }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let request" class="d-flex align-items-center">
+          <select class="form-select" (change)="onActionSelect($event, request)">
+            <option *ngFor="let action of actions" [value]="action">{{ action }}</option>
+          </select>
+          <button class="btn btn-danger ms-2" (click)="onDelete(request)">Delete</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Pagination and total record count section -->
+    <div class="pagination-container d-flex justify-content-between align-items-center mt-3">
+      <div>Total Record Count: <span>{{ dataSource.data.length }}</span></div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        [length]="dataSource.data.length"
+        [pageSize]="10"
+        showFirstLastButtons
+        (page)="setTableProperties()"
+      ></mat-paginator>
+    </div>
   </div>
-  
-  <!-- Leave Requests Table -->
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="selectAll($event.checked)"></mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-checkbox (change)="onDelete(element)"></mat-checkbox>
-      </td>
-    </ng-container>
-
-    <!-- Employee Name Column -->
-    <ng-container matColumnDef="employeeName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.employeeName }}</td>
-    </ng-container>
-
-    <!-- Leave Type Column -->
-    <ng-container matColumnDef="leaveType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.leaveType }}</td>
-    </ng-container>
-
-    <!-- Type Column -->
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-      <td mat-cell *matCellDef="let element">{{ element.type }}</td>
-    </ng-container>
-
-    <!-- Leave Period Column -->
-    <ng-container matColumnDef="leavePeriod">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Period</th>
-      <td mat-cell *matCellDef="let element">{{ element.leavePeriod }}</td>
-    </ng-container>
-
-    <!-- Days Column -->
-    <ng-container matColumnDef="days">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Days</th>
-      <td mat-cell *matCellDef="let element">{{ element.totalDays }}</td>
-    </ng-container>
-
-    <!-- Date of Request Column -->
-    <ng-container matColumnDef="dateOfRequest">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Request</th>
-      <td mat-cell *matCellDef="let element">{{ element.dateOfRequest }}</td>
-    </ng-container>
-
-    <!-- Actions Column -->
-<ng-container matColumnDef="actions">
-  <th mat-header-cell *matHeaderCellDef>Actions</th>
-  <td mat-cell *matCellDef="let element">
-    <mat-form-field appearance="fill">
-      <mat-label>Action</mat-label>
-      <mat-select (selectionChange)="onActionSelect($event.value, element)">
-        <mat-option *ngFor="let action of actions" [value]="action">{{ action }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="element.status === 'Rejected'" appearance="fill">
-      <mat-label>Rejection Reason</mat-label>
-      <textarea matInput [(ngModel)]="element.rejectionComment" placeholder="Reason for rejection"></textarea>
-    </mat-form-field>
-  </td>
-</ng-container>
-
-    <!-- Table Header and Rows -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <!-- Paginator -->
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-  <!-- Total Record Count -->
-  <div>Total Record Count: {{ dataSource.data.length || 0 }}</div>
 </div>

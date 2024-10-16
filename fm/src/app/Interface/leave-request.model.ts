@@ -1,4 +1,5 @@
 export interface LeaveRequest {
+ 
   employeeId?: string | any;
   employeeName?: string;
   leaveType: string;
@@ -21,4 +22,6 @@ export interface LeaveRequest {
   reasonforRejected?: string;
   color?: string;
   rejectionComment?: string;
+  daysTaken?: number; 
+  typeLeave?:string;
 }
