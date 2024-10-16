@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
-import { LeaveRequest } from '../Interface/leave-request.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
 
 @Component({
   selector: 'app-leave-summary',
@@ -10,32 +11,75 @@ import { LeaveRequest } from '../Interface/leave-request.model';
 })
 export class LeaveSummaryComponent implements OnInit {
   
-  leaves: LeaveRequest[] = [];
-  loading: boolean = true; 
-  error: string | null = null; 
-  displayedColumns: string[] = ['leaveType', 'startDate', 'endDate', 'status']; 
+  leaves: any[] = [];
+  upcomingLeaves: any[] = [];
+  viewMode = 'list';
+  
 
-  constructor(private leaveService: LeaveService, private router: Router) {}
+  constructor(
+    private leaveService: LeaveService, 
+    private router: Router,
+    private dialog: MatDialog // Inject MatDialog
+  ) {}
 
-  ngOnInit() {
-    this.loadLeaves();
-  }
+  ngOnInit(): void {
+    debugger
+    this.leaveService.getLeaveSummary().subscribe((leaves) => {
+      this.leaves = leaves.filter((leave) => leave && leave.typeLeave && leave.available !== undefined);
+    });
 
-  loadLeaves() {
-    this.leaveService.getLeaves().subscribe({
-      next: (data) => {
-        this.leaves = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to load leaves. Please try again later.';
-        console.error('Error fetching leaves', err);
-        this.loading = false;
+    this.leaveService.getUpcomingLeaves().subscribe((upcomingLeaves) => {
+      this.upcomingLeaves = upcomingLeaves;
+    });
+
+    this.leaveService.getLeaveApplied().subscribe((appliedLeave: any) => {
+      if (appliedLeave) {
+        this.updateLeaveCounts(appliedLeave);
       }
     });
   }
 
+  updateLeaveCounts(leaveData: any): void {
+    const leave = this.leaves.find((leave) => leave.typeLeave === leaveData.leaveType);
+    if (leave) {
+    leave.available -= leaveData.days;  
+    leave.booked += leaveData.days;     
+  }
+  }
+
+  validLeave(leave: any): boolean {
+   
+    return leave && leave.typeLeave && leave.available != null;
+  }
+
   applyLeave() {
-    this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
+    const dialogRef = this.dialog.open(ApplyLeaveComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.leaveService.bookLeave(result.leaveType, result.days).subscribe({
+          next: (response) => {
+            this.leaveService.setLeaveApplied(result);
+          },
+          error: (error) => {
+            console.error('Error applying leave', error);
+          }
+        });
+      }
+    });
+  }
+
+  toggleViewMode(): void {
+    this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
   }
 }
+
+
+
+
+// applyLeave() {
+//   debugger
+//   this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
+// }
