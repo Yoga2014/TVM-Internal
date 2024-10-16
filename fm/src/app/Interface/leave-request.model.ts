@@ -1,6 +1,7 @@
 export interface LeaveRequest {
  
   employeeId?: string | any;
+  id?: string; 
   employeeName?: string;
   leaveType: string;
   available?: number | any;

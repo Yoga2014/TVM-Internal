@@ -47,19 +47,37 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     this.setTableProperties();
   }
 
+
   loadLeaveRequests(): void {
-    debugger
+    debugger;
+
+   
+    this.leaveRequests = [];
+    this.dataSource.data = [];
+
     this.leaveService.getLeaves().subscribe({
       next: (data: LeaveRequest[]) => {
-        this.leaveRequests = data;
+   
+        console.log('Fetched leave requests:', data);
+
+        const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
+
+  
+        const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
+          index === self.findIndex((lr) => lr.id === leaveRequest.id)
+        );
+
+   
+        this.leaveRequests = uniqueLeaveRequests;
         this.dataSource.data = this.leaveRequests;
-        this.setTableProperties();
+
       },
       error: (error) => {
         console.error('Error fetching leave requests', error);
       }
     });
   }
+
 
   setTableProperties(): void {
     if (this.sort) {
@@ -87,10 +105,9 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
         };
         console.log(result)
 
-        // Push the new leave request to the table
+       
         this.leaveRequests.push(newLeaveRequest);
 
-        // Optionally, send it to the server
         this.leaveService.addLeaveRequest(newLeaveRequest).subscribe();
       }
     });

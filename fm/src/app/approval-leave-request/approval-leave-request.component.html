@@ -7,7 +7,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="leave-table">
         <ng-container matColumnDef="employeeId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee ID</th>
-            <td mat-cell *matCellDef="let element">{{element.employeeId}}</td>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
         </ng-container>
 
         <ng-container matColumnDef="employeeName">
@@ -36,18 +36,18 @@
         </ng-container>
 
         <ng-container matColumnDef="startDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
-            <td mat-cell *matCellDef="let element">{{element.startDate}}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Period</th>
+            <td mat-cell *matCellDef="let element">{{element.leavePeriod}}</td>
         </ng-container>
 
         <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
-            <td mat-cell *matCellDef="let element">{{element.endDate}}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Request</th>
+            <td mat-cell *matCellDef="let element">{{element.dateOfRequest}}</td>
         </ng-container>
 
         <ng-container matColumnDef="totalLeaveDays">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Leave Days</th>
-            <td mat-cell *matCellDef="let element">{{element.totalDays}}</td>
+            <td mat-cell *matCellDef="let element">{{element.daysTaken}}</td>
         </ng-container>
 
         <ng-container matColumnDef="reason">

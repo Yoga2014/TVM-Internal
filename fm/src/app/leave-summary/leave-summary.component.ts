@@ -19,7 +19,7 @@ export class LeaveSummaryComponent implements OnInit {
   constructor(
     private leaveService: LeaveService, 
     private router: Router,
-    private dialog: MatDialog // Inject MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
