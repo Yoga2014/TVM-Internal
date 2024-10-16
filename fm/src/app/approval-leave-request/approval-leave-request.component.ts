@@ -34,16 +34,36 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+
+
   loadLeaveRequests(): void {
-    this.leaveService.getLeaves().subscribe(
-      (data: LeaveRequest[]) => {
-        this.leaveRequests = data;
+    debugger;
+
+   
+    this.leaveRequests = [];
+    this.dataSource.data = [];
+
+    this.leaveService.getLeaves().subscribe({
+      next: (data: LeaveRequest[]) => {
+   
+        console.log('Fetched leave requests:', data);
+
+        const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
+
+  
+        const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
+          index === self.findIndex((lr) => lr.id === leaveRequest.id)
+        );
+
+   
+        this.leaveRequests = uniqueLeaveRequests;
         this.dataSource.data = this.leaveRequests;
+
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching leave requests', error);
       }
-    );
+    });
   }
 
   applyFilter(event: Event): void {

@@ -100,6 +100,10 @@ body {
 .container::-webkit-scrollbar {
   width: 10px; // Width of the scrollbar
 }
+.table-container[_ngcontent-ng-c3076248906] {
+  padding: 20px;
+  max-width: 100%;
+}
 
 .container::-webkit-scrollbar-thumb {
   background-color: #007bff; // Color of the scrollbar thumb
@@ -152,4 +156,23 @@ p {
 .btn-primary:hover {
   background-color: #0056b3; // Darker shade on hover
   transform: scale(1.05); // Slight zoom on hover
+}
+.table-container {
+  padding: 20px; /* Add padding for visual comfort */
+}
+
+.table-responsive {
+  max-height: 400px; /* Set a max height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrolling */
+}
+
+table {
+  width: 100%; /* Ensure the table takes the full width of the container */
+  table-layout: fixed; /* Make sure table layout does not change */
+}
+
+.mat-paginator {
+  margin-top: 20px; /* Add some spacing above the paginator */
+  max-width: 100%;
 }
