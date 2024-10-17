@@ -5,10 +5,8 @@
     </div>
     <div class="content">
       <div class="link" (click)="newHomeNavigate()" [ngClass]="{'active': activeLink === 'home'}">
-        <div>
           <i class="fa-solid fa-house"></i>
           <div class="title-home">Home</div>
-        </div>
       </div>
     </div>
     <div class="link" (click)="headerNavigate()" [ngClass]="{'active': activeLink === 'profile'}">
@@ -48,6 +46,18 @@
         <div class="content">
           <i class="fa-regular fa-handshake"></i>
           <div class="title-home">Onboarding</div>
+        </div>
+      </div>
+      <div class="link" (click)="operationNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'operation'}">
+        <div class="content">
+          <i class="fa-brands fa-ubuntu"></i>
+          <div class="title-home">Operation</div>
+        </div>
+      </div>
+      <div class="link" (click)="reportsNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'reports'}">
+        <div class="content">
+          <i class="fa-solid fa-chart-pie"></i>
+          <div class="title-home">Reports</div>
         </div>
       </div>
     </div>

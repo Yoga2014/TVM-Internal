@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EmployeeAuthService } from 'src/app/AllServices/authService.service';
+
 import { LeaveService } from 'src/app/AllServices/leave.service';
-import { LeaveRequest } from 'src/app/Interface/leave-request.model';
 
 @Component({
   selector: 'app-apply-leave',
@@ -10,130 +11,103 @@ import { LeaveRequest } from 'src/app/Interface/leave-request.model';
   styleUrls: ['./apply-leave.component.scss']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leaveTypes: string[] = [
-    'Casual Leave',
-    'Earned Leave',
-    'Leave Without Pay',
-    'Paternity Leave',
-    'Sabbatical Leave',
-    'Sick Leave'
-  ];
-  leaveType: string = '';
-  startDate: Date | null = null;
-  endDate: Date | null = null;
-  reason: string = '';
-  startDateError: string = '';
-  endDateError: string = '';
-  teamEmail: string = '';
+cancel() {
+  this.dialogRef.close(); 
+}
 
-  employee: any = {};
+  leaveTypes = ['Casual Leave', 'Earned Leave', 'Leave Without Pay', 'Paternity Leave', 'Sabbatical Leave', 'Sick Leave'];
+  leaveForm!: FormGroup;
+  startDateError: string | null = null;
+  endDateError: string | null = null;
+  dateForm: FormGroup | null = null;
+  today = new Date();
+  minEndDate: Date | null = null; 
+  private fb: FormBuilder;
+ 
+  
 
   constructor(
-    private router: Router,
+    fb: FormBuilder,
     private leaveService: LeaveService,
-    public location: Location
-  ) {}
+    private authService: EmployeeAuthService, 
+    public dialogRef: MatDialogRef<ApplyLeaveComponent> 
+  ) { this.fb = fb;}
 
-  ngOnInit() {
-    this.loadEmployeeDetails();
-  }
-
-  loadEmployeeDetails() {
-    this.leaveService.getEmployeeDetails().subscribe({
-      next: (data) => {
-        this.employee = data;
-      },
-      error: (err) => {
-        alert('Failed to fetch employee details');
-        console.error('Error fetching employee details', err);
-      }
+  ngOnInit(): void {
+    this.leaveForm = new FormGroup({
+      leaveType: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+      teamEmail: new FormControl('', [Validators.required, Validators.email]),
+      reason: new FormControl('', Validators.required)
+    });
+    this.dateForm = this.fb.group({
+      startDate: [null, Validators.required],
+      endDate: [{ value: null, disabled: true }, Validators.required]
     });
   }
 
-  validateDates() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  onSubmit(): void {
+    if (this.leaveForm.valid) {
+      const leaveData = this.leaveForm.value;
+      console.log(leaveData,"leave data")
 
-    if (this.startDate) {
-      const start = new Date(this.startDate);
-      this.startDateError = start < today ? 'Start date cannot be in the past.' : '';
-    }
 
-    if (this.endDate) {
-      const end = new Date(this.endDate);
-      if (end < today) {
-        this.endDateError = 'End date cannot be in the past.';
-      } else {
-        this.endDateError = this.startDate && end < new Date(this.startDate) ? 'End date cannot be before start date.' : '';
+      this.leaveService.applyLeave(leaveData).subscribe(() => {
+        console.log('Leave applied successfully');
+
+       
+        const employee = this.authService.getAuthenticatedEmployee();
+        const startDate = new Date(leaveData.startDate);
+        const endDate = startDate;
+        const diffInMs = endDate.getTime() - startDate.getTime();
+        const days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24)) + 1;
+
+
+        let leaveType;
+      switch (leaveData.leaveType) {
+        case 'Casual Leave':
+        case 'Earned Leave':
+          leaveType = 'Paid';
+          break;
+        case 'Leave Without Pay':
+          leaveType = 'Unpaid';
+          break;
+        default:
+          leaveType = 'Paid';
       }
-    }
-  }
 
-  onSubmit() {
-    if (this.isValidLeaveRequest()) {
-      const leaveDays = this.calculateLeaveDays();
-      if (leaveDays < 0) {
-        this.endDateError = 'End date cannot be before start date.';
-        return;
-      }
-
-      const leaveRequest: LeaveRequest = {
-        employeeId: this.employee.id,
-        employeeName: this.employee.name,
-        email: this.employee.email,
-        designation: this.employee.designation,
-        leaveType: this.leaveType,
-        teamId: this.employee.teamId,
-        startDate: this.startDate ? this.formatDate(this.startDate) : '',
-        endDate: this.endDate ? this.formatDate(this.endDate) : '',
-        totalDays: leaveDays + 1,
-        reasonforLeave: this.reason,
-        status: 'Pending',
-        dateOfRequest: this.formatDate(new Date()),
-        available: this.employee.availableLeave,
-        booked: leaveDays + 1,
-        comment: '',
-        reasonforRejected: '',
-        color: ''
-      };
-
-      this.leaveService.addLeaveRequest(leaveRequest).subscribe({
-        next: () => {
-          alert(`Leave applied successfully! ${leaveDays + 1} days of ${this.leaveType}`);
-          this.location.back();
-        },
-        error: (err) => {
-          alert('Failed to apply leave');
-          console.error('Error applying leave', err);
-        }
+       
+        this.dialogRef.close({
+          leaveType: leaveData.leaveType,
+          days: days 
+        });
+        
+        this.dialogRef.close({
+          employeeName: employee.employeeName, 
+          leaveType: leaveData.leaveType,
+          type: leaveType, 
+          leavePeriod: `${startDate.toDateString()} - ${endDate.toDateString()}`,
+          days: days,
+          dateOfRequest: new Date().toDateString()
+        });
       });
+    }
+  }
+  onStartDateChange(event: any) {
+    const selectedStartDate = event.value;
+
+   
+    if (selectedStartDate) {
+      this.minEndDate = selectedStartDate; 
+      this.dateForm?.get('endDate')?.enable(); 
+      this.dateForm?.get('endDate')?.setValue(null); 
     } else {
-      alert('Please fill all required fields and ensure dates are valid');
+      this.minEndDate = null;
+      this.dateForm?.get('endDate')?.disable(); 
+      this.dateForm?.get('endDate')?.setValue(null); 
     }
   }
 
-  isValidLeaveRequest(): boolean {
-    this.validateDates();
-    return Boolean(this.leaveType && this.startDate && this.endDate && !this.startDateError && !this.endDateError);
-  }
 
-  calculateLeaveDays(): number {
-    if (this.startDate && this.endDate) {
-      const start = new Date(this.startDate);
-      const end = new Date(this.endDate);
-      return Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
-    }
-    return 0;
-  }
-
-  formatDate(date: Date): string {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-    return `${year}-${month}-${day}`;
-  }
-
-  cancel(): void {
-    this.location.back();
-  }
 }

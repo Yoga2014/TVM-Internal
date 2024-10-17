@@ -94,10 +94,10 @@ img{
 .overview-page {
   display: flex;
   flex-direction: column;
-  margin: -3.5rem 5rem 1rem 2rem;
+  margin: -4.5rem 5rem 1rem 2rem;
   padding: 2rem;
 }
 .card-items{
-overflow-y: scroll;
-max-height: 300px;
+overflow-y: auto;
+max-height: 40vh;
 }

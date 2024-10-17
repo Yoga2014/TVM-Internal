@@ -1,12 +1,39 @@
+
+
+
+  <!-- Toast Notification -->
+  <div
+    class="toast"
+    [ngClass]="{'show': showToast, 'hide': !showToast}"
+    [style.position]="'fixed'"
+    [style.bottom]="'20px'"
+    [style.right]="'20px'"
+    [style.minWidth]="'250px'"
+    [style.zIndex]="'1051'"
+    role="alert"
+  >
+    <div class="toast-header">
+      <strong class="mr-auto">{{ toastTitle }}</strong>
+      <small class="text-muted">{{ toastTime }}</small>
+      <button
+        type="button"
+        class="ml-2 mb-1 close"
+        aria-label="Close"
+        (click)="hideToast()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">{{ toastMessage }}</div>
+  </div>
 <div class="container mt-4">
   <!-- Project List Tab -->
   <div class="projectlist">
     <div class="pro">Project List</div>
   </div>
-
   <!-- Add Project Button -->
   <div class="card-body">
-    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
+    <button type="button" (click)="disable()" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
   </div>
 </div>
 
@@ -26,17 +53,17 @@
       <td>{{ item.projectname }}</td>
       <td>{{ item.clientname }}</td>
       <td>{{ item.domain }}</td>
-      <td>1</td>
-      <td>
+      <td>{{item.projectStatus}}</td>
+      <!-- <td>
         <select>
           <option value="">--select--</option>
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>
-      </td>
+      </td> -->
       <td>
-        <button class="edit-btn" (click)="edit(item.id)">Edit</button>
-        <button class="delete-btn" (click)="delete(item.id)">Delete</button>
+        <button class="edit-btn" (click)="edit(item.id)" class="alert alert-primary" role="alert" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Edit</button>
+        <button class="delete-btn" (click)="delete(item.id,'Success', 'Project deleted successfully!')" class="alert alert-danger" role="alert">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -48,10 +75,11 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasForm" aria-labelledby="offcanvasFormLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-target="#offcanvasForm" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  
   </div>
   <div class="offcanvas-body">
-    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update() : onSubmit()">
+    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update('Success', 'Project updated successfully!') : onSubmit('Success', 'Project submitted successfully!')">
           <!-- Project Name -->
           <div class="mb-3">
             <label for="projectname" class="form-label">Project Name</label>
@@ -65,7 +93,7 @@
               </div>
             </div>
           </div>
-
+    
           <!-- Client Name -->
           <div class="mb-3">
             <label for="clientname" class="form-label">Client Name</label>
@@ -74,7 +102,7 @@
               Client name is required.
             </div>
           </div>
-
+    
           <!-- Domain -->
           <div class="mb-3">
             <label for="domain" class="form-label">Domain</label>
@@ -83,7 +111,7 @@
               Domain name is required.
             </div>
           </div>
-
+    
           <!-- Project Start Date -->
           <div class="mb-3">
             <label for="startDate" class="form-label">Project Start Date</label>
@@ -92,7 +120,7 @@
               Project start date is required.
             </div>
           </div>
-
+    
           <!-- Voice -->
           <div class="mb-3">
             <label for="voice" class="form-label">Voice</label>
@@ -103,7 +131,7 @@
               </div>
             </div>
           </div>
-
+    
           <!-- Voice Start Date -->
           <div class="row">
             <div class="col-md-6">
@@ -115,7 +143,7 @@
                 </div>
               </div>
             </div>
-
+    
             <!-- Voice End Date -->
             <div class="col-md-6">
               <div class="mb-3">
@@ -125,9 +153,9 @@
                   Please provide a valid Voice End Date.
                 </div>
               </div>
-            </div>
+            </div>  
           </div>
-
+    
           <!-- Coding -->
           <div class="mb-3">
             <label for="coding" class="form-label">Coding</label>
@@ -138,7 +166,7 @@
               </div>
             </div>
           </div>
-
+    
           <!-- Coding Start Date -->
           <div class="row">
             <div class="col-md-6">
@@ -150,7 +178,7 @@
                 </div>
               </div>
             </div>
-
+    
             <!-- Coding End Date -->
             <div class="col-md-6">
               <div class="mb-3">
@@ -162,7 +190,7 @@
               </div>
             </div>
           </div>
-
+    
           <!-- Asset -->
           <div class="mb-3 ">
             <label class="form-label" >Asset</label>
@@ -183,12 +211,27 @@
               <label class="form-check-label" for="mouse">Mouse</label>
             </div>
           </div>
-
+          <div class="mb-3">
+            <label for="projectStatus" class="form-label">Project Status</label>
+            <select class="form-select" id="projectStatus" formControlName="projectStatus">
+              <option value="">--Select Status--</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <div *ngIf="projectForm.get('projectStatus')?.invalid && (projectForm.get('projectStatus')?.dirty || projectForm.get('projectStatus')?.touched)" class="invalid-feedback">
+              Project status is required.
+            </div>
+          </div>
           <!-- Submit and Cancel Buttons -->
           <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary me-2">Submit</button>
-           <button type="button" class="btn btn-secondary" (click)="update()">Update</button>
+            <button type="submit" class="btn btn-primary me-2" [disabled]="submit">Submit</button>
+           <button type="button" class="btn btn-secondary" (click)="update('Success', 'Project updated successfully!')" [disabled]="updatebtn">Update</button>
           </div>
         </form>
       </div>
-    </div>
+    </div>    
+
+
+
+
