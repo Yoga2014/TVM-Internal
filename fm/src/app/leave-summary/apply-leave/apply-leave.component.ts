@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EmployeeAuthService } from 'src/app/AllServices/EmployeeAuthService';
+import { EmployeeAuthService } from 'src/app/AllServices/authService.service';
+
 import { LeaveService } from 'src/app/AllServices/leave.service';
 
 @Component({
@@ -10,17 +11,27 @@ import { LeaveService } from 'src/app/AllServices/leave.service';
   styleUrls: ['./apply-leave.component.scss']
 })
 export class ApplyLeaveComponent implements OnInit {
+cancel() {
+  this.dialogRef.close(); 
+}
 
   leaveTypes = ['Casual Leave', 'Earned Leave', 'Leave Without Pay', 'Paternity Leave', 'Sabbatical Leave', 'Sick Leave'];
   leaveForm!: FormGroup;
   startDateError: string | null = null;
   endDateError: string | null = null;
+  dateForm: FormGroup | null = null;
+  today = new Date();
+  minEndDate: Date | null = null; 
+  private fb: FormBuilder;
+ 
+  
 
   constructor(
+    fb: FormBuilder,
     private leaveService: LeaveService,
     private authService: EmployeeAuthService, 
     public dialogRef: MatDialogRef<ApplyLeaveComponent> 
-  ) { }
+  ) { this.fb = fb;}
 
   ngOnInit(): void {
     this.leaveForm = new FormGroup({
@@ -30,6 +41,10 @@ export class ApplyLeaveComponent implements OnInit {
       teamEmail: new FormControl('', [Validators.required, Validators.email]),
       reason: new FormControl('', Validators.required)
     });
+    this.dateForm = this.fb.group({
+      startDate: [null, Validators.required],
+      endDate: [{ value: null, disabled: true }, Validators.required]
+    });
   }
 
   onSubmit(): void {
@@ -37,14 +52,14 @@ export class ApplyLeaveComponent implements OnInit {
       const leaveData = this.leaveForm.value;
       console.log(leaveData,"leave data")
 
-      // Submit the leave data to the service
+
       this.leaveService.applyLeave(leaveData).subscribe(() => {
         console.log('Leave applied successfully');
 
-        // Calculate the number of days for the leave
+       
         const employee = this.authService.getAuthenticatedEmployee();
         const startDate = new Date(leaveData.startDate);
-        const endDate = new Date(leaveData.endDate);
+        const endDate = startDate;
         const diffInMs = endDate.getTime() - startDate.getTime();
         const days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24)) + 1;
 
@@ -62,16 +77,16 @@ export class ApplyLeaveComponent implements OnInit {
           leaveType = 'Paid';
       }
 
-        // Close the dialog and pass the leave data back
+       
         this.dialogRef.close({
           leaveType: leaveData.leaveType,
-          days: days // Number of days for the applied leave
+          days: days 
         });
         
         this.dialogRef.close({
-          employeeName: employee.employeeName, // Employee name
+          employeeName: employee.employeeName, 
           leaveType: leaveData.leaveType,
-          type: leaveType, // Paid or Unpaid
+          type: leaveType, 
           leavePeriod: `${startDate.toDateString()} - ${endDate.toDateString()}`,
           days: days,
           dateOfRequest: new Date().toDateString()
@@ -79,8 +94,20 @@ export class ApplyLeaveComponent implements OnInit {
       });
     }
   }
+  onStartDateChange(event: any) {
+    const selectedStartDate = event.value;
 
-  cancel(): void {
-    this.dialogRef.close(); 
+   
+    if (selectedStartDate) {
+      this.minEndDate = selectedStartDate; 
+      this.dateForm?.get('endDate')?.enable(); 
+      this.dateForm?.get('endDate')?.setValue(null); 
+    } else {
+      this.minEndDate = null;
+      this.dateForm?.get('endDate')?.disable(); 
+      this.dateForm?.get('endDate')?.setValue(null); 
+    }
   }
+
+
 }

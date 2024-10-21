@@ -92,6 +92,7 @@ import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -153,7 +154,7 @@ import { ReportsComponent } from './reports/reports.component';
     EmployeeTreeComponent,
     FeedsComponent,
     OperationComponent,
-    ReportsComponent
+    ReportsComponent,
   ],
 
   imports: [

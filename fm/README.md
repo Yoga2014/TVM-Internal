@@ -108,30 +108,42 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     "Payload" :{
   "employeeId": "string",         // Required, unique employee ID
   "employeeName": "string",       // Required, name of the employee
+  "dob": "number"                 // Required, dob of the dob
   "profilePicture": "string",     // Optional, path to the employee's profile picture
   "leaveBooked": number,          // Optional, number of leave days booked
   "generalTimining": "string",    // Optional, general working hours of the employee
   "status": "string",             // Required, e.g., "active", "on leave"
-  "id": "string"                  // Optional, unique ID for the reportee entry
+  "onLeave": false,               // Required, a person is leave or not
+  "joinDate": "2020-03-10"        // Required, a date of joining
+
+
+
+  
 }
 
 "Example Response"
   {
   "LeaveReportees": [
     {
-      "employeeId": "E001",
-      "employeeName": "John Doe",
-      "profilePicture": "assets/images/john_doe.jpg",
-      "leaveBooked": 10,
-      "generalTimining": "9 AM - 6 PM",
-      "status": "active",
-      "id": "af4c"
+       "employeeId": "E001",
+        "employeeName": "John Doe",
+        "dob": "1990-01-15",
+        "profilePicture": "https://example.com/images/john_doe.jpg",
+        "status": "Active",
+        "generalTimining": "9:00 AM - 6:00 PM",
+        "leaveBooked": 5,
+        "joinDate": "2020-03-10",
+        "onLeave": false
     },
   ]
 }
 
 "Request/Response Flow":
-     GET /LeaveReportees?managerId={managerId}: Retrieve reportees under a specific manager.
+
+GET /LeaveReportees?managerId={managerId}: Retrieve all reportees for a specific manager.
+POST /LeaveReportees: Add a new reportee entry.
+PUT /LeaveReportees/{id}: Update a reportee's information by their ID.
+DELETE /LeaveReportees/{id}: Delete a reportee entry by their ID.
 
 ----------------------------------------------------------------------------------------------------------
 

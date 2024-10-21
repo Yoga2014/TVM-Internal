@@ -1,15 +1,5 @@
 {
-  "Goals": [
-    {
-      "name": "qweeweret",
-      "description": "ewrerrrefrrerrer",
-      "priority": "Medium",
-      "startDate": "2024-08-19T18:30:00.000Z",
-      "endDate": "2024-08-28T18:30:00.000Z",
-      "progress": 23,
-      "id": "1"
-    }
-  ],
+  "Goals": [],
   "comments": [
     {
       "id": "9641",
@@ -40,7 +30,6 @@
       "createdAt": "2024-08-14T07:21:27.543Z"
     }
   ],
-
   "Teams": [
     {
       "employeeId": "E001",
@@ -128,26 +117,25 @@
       "uan": "5678901234"
     }
   ],
-
   "employees": [
     {
       "id": "1",
       "employeeName": "Vijay",
-      "dob": "2004-10-16",
+      "dob": "2004-10-17",
       "image": "https://example.com/images/vijay.jpg",
       "department": "Engineering"
     },
     {
       "id": "2",
       "employeeName": "Srini",
-      "dob": "2001-10-15",
+      "dob": "2001-10-17",
       "image": "https://example.com/images/Srini.jpg",
       "department": "Marketing"
     },
     {
       "id": "3",
       "employeeName": "Sivaneshwaran",
-      "dob": "1988-10-16",
+      "dob": "1988-10-17",
       "image": "https://example.com/images/Sivaneshwaran.jpg",
       "department": "Sales"
     },
@@ -389,6 +377,64 @@
       "available": 5,
       "booked": 1,
       "id": "6365"
+    }
+  ],
+
+  "LeaveReportees": [
+    {
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "dob": "1990-01-15",
+      "profilePicture": "https://example.com/images/john_doe.jpg",
+      "status": "Active",
+      "generalTimining": "9:00 AM - 6:00 PM",
+      "leaveBooked": 5,
+      "joinDate": "2020-03-10",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E002",
+      "employeeName": "Jane Smith",
+      "dob": "1992-05-20",
+      "profilePicture": "https://example.com/images/jane_smith.jpg",
+      "status": "On Leave",
+      "generalTimining": "10:00 AM - 7:00 PM",
+      "leaveBooked": 8,
+      "joinDate": "2018-07-15",
+      "onLeave": true
+    },
+    {
+      "employeeId": "E003",
+      "employeeName": "Michael Johnson",
+      "dob": "1988-11-23",
+      "profilePicture": "https://example.com/images/michael_johnson.jpg",
+      "status": "Active",
+      "generalTimining": "8:00 AM - 5:00 PM",
+      "leaveBooked": 3,
+      "joinDate": "2019-02-25",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E004",
+      "employeeName": "Emily Davis",
+      "dob": "1995-03-12",
+      "profilePicture": "https://example.com/images/emily_davis.jpg",
+      "status": "Active",
+      "generalTimining": "9:30 AM - 6:30 PM",
+      "leaveBooked": 4,
+      "joinDate": "2021-06-18",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E005",
+      "employeeName": "Chris Lee",
+      "dob": "1985-09-05",
+      "profilePicture": "https://example.com/images/chris_lee.jpg",
+      "status": "On Leave",
+      "generalTimining": "9:00 AM - 6:00 PM",
+      "leaveBooked": 10,
+      "joinDate": "2017-09-10",
+      "onLeave": true
     }
   ]
 }

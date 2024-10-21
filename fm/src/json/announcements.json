@@ -25,6 +25,19 @@
       "disableComments": false,
       "pinAnnouncement": true,
       "notifyAll": false
+    },
+    {
+      "id": "19a6",
+      "name": "Sivanesh M",
+      "title": "tfdsg",
+      "message": "sdfghjk",
+      "attachment": "C:\\fakepath\\Unconfirmed 992721.crdownload",
+      "category": "news",
+      "expiry": "2024-10-18",
+      "location": "hq",
+      "disableComments": false,
+      "pinAnnouncement": true,
+      "notifyAll": false
     }
   ]
 }

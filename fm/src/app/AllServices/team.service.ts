@@ -13,7 +13,7 @@ export class TeamService {
     getEmployees(): Observable<any[]> {
       return this.http.get<any[]>(`${this.apiUrl}`).pipe(
         catchError(this.handleError<any[]>('getEmployees', []))
-      );
+      ); 
     }
 
     private handleError<T>(operation = 'operation', result?: T) {

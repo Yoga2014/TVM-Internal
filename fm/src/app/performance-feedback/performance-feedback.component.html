@@ -1,1 +1,162 @@
-<p>performance-feedback works!</p>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-12 d-flex justify-content-between flex-wrap">
+      <div class="mb-2">
+        <button class="btn btn-outline-secondary me-2 mb-2"(click)="openProvideFeedbackModal()">
+          Provide Feedback
+        </button>
+        <button class="btn btn-outline-primary me-2 mb-2">
+          Received Feedback
+        </button>
+        <button class="btn btn-outline-secondary mb-2">
+          Given Feedback
+        </button>
+      </div>
+      <div class="dropdown mb-2">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ selectedRole }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" (click)="setRole('All')">All Feedback</a></li>
+          <li><a class="dropdown-item" (click)="setRole('Manager')">Manager</a></li>
+          <li><a class="dropdown-item" (click)="setRole('TL')">TL</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isFeedbackModalOpen" class="modal fade show" id="provideFeedbackModal" tabindex="-1" aria-labelledby="provideFeedbackLabel" aria-hidden="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="provideFeedbackLabel">Provide Feedback</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submitFeedback(feedbackProvider,feedbackType,feedbackDescription)">
+            <div class="mb-3">
+              <label for="feedbackProvider" class="form-label">Feedback Provider</label>
+              <select class="form-select" id="feedbackProvider" [(ngModel)]="feedbackProvider" name="feedbackProvider" required>
+                <option value="" disabled>Select Feedback Provider</option>
+                <option value="Manager">Manager</option>
+                <option value="TL">Team Lead</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="feedbackType" class="form-label">Feedback Type</label>
+              <select class="form-select" id="feedbackType" [(ngModel)]="feedbackType" name="feedbackType" required>
+                <option value="" disabled>Select Feedback Type</option>
+                <option value="Positive">Positive</option>
+                <option value="Negative">Negative</option>
+                <option value="Training">Training</option>
+                <option value="Observation">Observation</option>
+                <option value="Reward">Reward</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="feedbackDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="feedbackDescription" rows="3" [(ngModel)]="feedbackDescription" name="feedbackDescription" required></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+              <button type="submit" class="btn btn-primary">Submit Feedback</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-4 col-md-2 col-lg-2 mb-4">
+      <div class="card text-center h-100" (click)="showFeedbackDetails()">
+        <div class="card-body" (click)="filterFeedback('All')">
+          <h5>All Feedback</h5>
+          <p>{{ allFeedBackDetails.length }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2 mb-4">
+      <div class="card text-center h-100 pos" (click)="showFeedbackDetails()">
+        <div class="card-body" (click)="filterFeedback('Positive')">
+          <h5>Positive</h5>
+          <p><i class="fa-regular fa-thumbs-up"></i>  {{ positiveFeedbackCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2 mb-4">
+      <div class="card text-center h-100 neg" (click)="showFeedbackDetails()">
+        <div class="card-body"(click)="filterFeedback('Negative')">
+          <h5>Negative</h5>
+          <p><i class="fa-regular fa-thumbs-down"></i>  {{ negativeFeedbackCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2 mb-4">
+      <div class="card text-center h-100 train" (click)="showFeedbackDetails()">
+        <div class="card-body"(click)="filterFeedback('Training')">
+          <h5>Training</h5>
+          <p><i class="fa-solid fa-star"></i>  {{ trainingFeedbackCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2 mb-4">
+      <div class="card text-center h-100 eye" (click)="showFeedbackDetails()">
+        <div class="card-body"(click)="filterFeedback('Observation')">
+          <h5>Observation</h5>
+          <p><i class="fa-solid fa-eye"></i>  {{ observationFeedbackCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2 mb-4">
+      <div class="card text-center h-100 award" (click)="showFeedbackDetails()">
+        <div class="card-body"(click)="filterFeedback('Rewards')">
+          <h5>Reward</h5>
+          <p><i class="fa-solid fa-award"></i>  {{ rewardFeedbackCount }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4" *ngIf="showAllFeedbackDetails">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h4>{{ feedbackTypeTitle }} Feedback Details</h4>
+          <div class="feedback-list-scroll">
+            <ul class="list-group">
+              <li class="card mb-3" *ngFor="let feedback of allFeedbackResponse; let i = index">
+                <div class="card-body">
+                  <a (click)="getFeedbackDetails(feedback)">
+                    {{ i + 1 }} - {{ feedback.name }}
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="modal fade show" *ngIf="selectedFeedbackDetails" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalLabel">Feedback Details</h5>
+                  <button type="button" class="btn-close" (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Name: {{ selectedFeedbackDetails.name }}</p>
+                  <p>Details: {{ selectedFeedbackDetails.details }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 text-center">
+      <p *ngIf="!showAllFeedbackDetails">No Feedback given yet</p>
+    </div>
+  </div>
+</div>

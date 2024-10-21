@@ -13,7 +13,7 @@ export class TeamListComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortColumn: string = '';
 
-  currentPage: number = 1; // Initialize to the first page
+  currentPage: number = 1;
 itemsPerPage: number = 5;
 
   constructor(private teamService: TeamService) {}
@@ -26,9 +26,9 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-        this.filteredEmployees = this.employees; // Initialize filtered employees
+        this.filteredEmployees = this.employees;
       },
-      error: err => console.error('Error fetching employees:', err) // Handle error
+      error: err => console.error('Error fetching employees:', err)
     });
   }
 
@@ -38,14 +38,13 @@ itemsPerPage: number = 5;
         employee.role.toLowerCase() === this.reporteeFilter.toLowerCase()
       );
     } else {
-      this.filteredEmployees = [...this.employees]; // Reset filter
+      this.filteredEmployees = [...this.employees];
     }
   }
 
   sortBy(column: string): void {
     const direction = this.sortDirection === 'asc' ? 1 : -1;
 
-    // Ensure valid column exists
     if (this.employees.length && this.employees[0][column] !== undefined) {
       this.filteredEmployees.sort((a, b) => {
         const valA = a[column].toString().toLowerCase();
