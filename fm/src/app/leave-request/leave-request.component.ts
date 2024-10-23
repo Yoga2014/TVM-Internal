@@ -119,7 +119,7 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
   }
 
   onRowSelect(event: Event, request: LeaveRequest): void {
-    const inputElement = event.target as HTMLInputElement;  // Cast to HTMLInputElement
+    const inputElement = event.target as HTMLInputElement;  
     if (inputElement.checked !== undefined) {
       request.selected = inputElement.checked;
       if (request.selected) {
@@ -131,7 +131,7 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
   }
 
 
-  // Select or deselect all requests
+ 
   selectAll(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const checked = inputElement.checked;
@@ -170,7 +170,6 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Delete a single request directly
   onDelete(request: LeaveRequest): void {
     const confirmation = confirm('Are you sure you want to delete this leave request?');
     if (confirmation) {

@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class EmployeeService {
 
-  private apiUrl = 'http://localhost:3001/Employee'; 
+  private apiUrl = 'http://localhost:3001/employees'; 
 
   activeTab: string = '';
 
@@ -40,4 +40,5 @@ export class EmployeeService {
   {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  
 }

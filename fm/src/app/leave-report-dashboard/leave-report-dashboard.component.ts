@@ -25,7 +25,7 @@ export class LeaveReportDashboardComponent implements OnInit {
   }
 
   loadLeaveReports(): void {
-    this.leaveService.getLeaves().subscribe(
+    this.leaveService.getLeaveSummary().subscribe(
       (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;

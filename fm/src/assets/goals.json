@@ -1,15 +1,5 @@
 {
-  "Goals": [
-    {
-      "name": "qweeweret",
-      "description": "ewrerrrefrrerrer",
-      "priority": "Medium",
-      "startDate": "2024-08-19T18:30:00.000Z",
-      "endDate": "2024-08-28T18:30:00.000Z",
-      "progress": 23,
-      "id": "1"
-    }
-  ],
+  "Goals": [],
   "comments": [
     {
       "id": "9641",
@@ -40,40 +30,248 @@
       "createdAt": "2024-08-14T07:21:27.543Z"
     }
   ],
-  "Teams": [],
+  "Teams": [
+    {
+      "employeeId": "E001",
+      "firstName": "John",
+      "lastName": "Doe",
+      "nickName": "Johnny",
+      "email": "john.doe@example.com",
+      "photoUrl": "https://example.com/photos/john.jpg",
+      "department": "Engineering",
+      "designation": "Software Engineer",
+      "zohoRole": "Developer",
+      "employmentType": "Full-time",
+      "presentAddress": "123 Main St, Cityville",
+      "permanentAddress": "456 Elm St, Townsville",
+      "aadhaar": "123456789012",
+      "pan": "ABCDE1234F",
+      "uan": "1234567890"
+    },
+    {
+      "employeeId": "E002",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "nickName": "Janey",
+      "email": "jane.smith@example.com",
+      "photoUrl": "https://example.com/photos/jane.jpg",
+      "department": "Marketing",
+      "designation": "Marketing Manager",
+      "zohoRole": "Manager",
+      "employmentType": "Part-time",
+      "presentAddress": "789 Oak St, Cityville",
+      "permanentAddress": "321 Pine St, Townsville",
+      "aadhaar": "234567890123",
+      "pan": "FGHIJ4567K",
+      "uan": "2345678901"
+    },
+    {
+      "employeeId": "E003",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "nickName": "Ally",
+      "email": "alice.johnson@example.com",
+      "photoUrl": "https://example.com/photos/alice.jpg",
+      "department": "HR",
+      "designation": "HR Specialist",
+      "zohoRole": "HR",
+      "employmentType": "Full-time",
+      "presentAddress": "135 Maple St, Cityville",
+      "permanentAddress": "246 Birch St, Townsville",
+      "aadhaar": "345678901234",
+      "pan": "JKLMN5678P",
+      "uan": "3456789012"
+    },
+    {
+      "employeeId": "E004",
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "nickName": "Bobby",
+      "email": "bob.brown@example.com",
+      "photoUrl": "https://example.com/photos/bob.jpg",
+      "department": "Sales",
+      "designation": "Sales Executive",
+      "zohoRole": "Sales",
+      "employmentType": "Full-time",
+      "presentAddress": "159 Cedar St, Cityville",
+      "permanentAddress": "753 Spruce St, Townsville",
+      "aadhaar": "456789012345",
+      "pan": "QRSTU6789V",
+      "uan": "4567890123"
+    },
+    {
+      "employeeId": "E005",
+      "firstName": "Charlie",
+      "lastName": "Davis",
+      "nickName": "Chuck",
+      "email": "charlie.davis@example.com",
+      "photoUrl": "https://example.com/photos/charlie.jpg",
+      "department": "Engineering",
+      "designation": "Data Scientist",
+      "zohoRole": "Data Analyst",
+      "employmentType": "Contract",
+      "presentAddress": "357 Ash St, Cityville",
+      "permanentAddress": "951 Willow St, Townsville",
+      "aadhaar": "567890123456",
+      "pan": "VWXYZ1234A",
+      "uan": "5678901234"
+    }
+  ],
   "employees": [
     {
       "id": "1",
-      "employeeName": "John Doe",
-      "dob": "1990-10-01",
-      "image": "https://example.com/images/john.jpg",
+      "employeeName": "Vijay",
+      "dob": "2004-10-17",
+      "image": "https://example.com/images/vijay.jpg",
       "department": "Engineering"
     },
     {
       "id": "2",
-      "employeeName": "Jane Smith",
-      "dob": "1985-05-12",
-      "image": "https://example.com/images/jane.jpg",
+      "employeeName": "Srini",
+      "dob": "2001-10-17",
+      "image": "https://example.com/images/Srini.jpg",
       "department": "Marketing"
     },
     {
       "id": "3",
-      "employeeName": "Bob Johnson",
-      "dob": "1988-10-01",
-      "image": "https://example.com/images/bob.jpg",
+      "employeeName": "Sivaneshwaran",
+      "dob": "1988-10-17",
+      "image": "https://example.com/images/Sivaneshwaran.jpg",
       "department": "Sales"
     },
     {
       "id": "4",
-      "employeeName": "Alice Brown",
-      "dob": "1992-07-19",
-      "image": "https://example.com/images/alice.jpg",
+      "employeeName": "Ajith Kumar",
+      "dob": "1992-07-16",
+      "image": "https://example.com/images/Ajith.jpg",
       "department": "HR"
+    },
+    {
+      "id": "5",
+      "employeeName": "Suresh Raina",
+      "dob": "1998-10-16",
+      "image": "https://example.com/images/Suresh.jpg",
+      "department": "Sales"
+    },
+    {
+      "id": "6",
+      "employeeName": "Ajay",
+      "dob": "1968-10-16",
+      "image": "https://example.com/images/Ajay.jpg",
+      "department": "Sales"
     }
   ],
   "Leave": [
     {
-      "id": "f47b",
+      "id": "1913",
+      "leaveType": "Casual Leave",
+      "startDate": "2024-10-16T18:30:00.000Z",
+      "endDate": "2024-10-15T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "1cff",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Casual Leave",
+      "type": "Paid",
+      "leavePeriod": "Thu Oct 17 2024 - Wed Oct 16 2024",
+      "daysTaken": 0,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "ed4e",
+      "leaveType": "Sick Leave",
+      "startDate": "2024-10-15T18:30:00.000Z",
+      "endDate": "2024-10-16T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "3b98",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Sick Leave",
+      "type": "Paid",
+      "leavePeriod": "Wed Oct 16 2024 - Thu Oct 17 2024",
+      "daysTaken": 2,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "9b1f",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-10-16T18:30:00.000Z",
+      "endDate": "2024-10-17T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "bc65",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Earned Leave",
+      "type": "Paid",
+      "leavePeriod": "Thu Oct 17 2024 - Fri Oct 18 2024",
+      "daysTaken": 2,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "b8f6",
+      "leaveType": "Paternity Leave",
+      "startDate": "2024-10-17T18:30:00.000Z",
+      "endDate": "2024-10-20T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "5be8",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Paternity Leave",
+      "type": "Paid",
+      "leavePeriod": "Fri Oct 18 2024 - Mon Oct 21 2024",
+      "daysTaken": 4,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "b556",
+      "leaveType": "Sabbatical Leave",
+      "startDate": "2024-10-16T18:30:00.000Z",
+      "endDate": "2024-10-18T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "6ed1",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Sabbatical Leave",
+      "type": "Paid",
+      "leavePeriod": "Thu Oct 17 2024 - Sat Oct 19 2024",
+      "daysTaken": 3,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "a8da",
+      "leaveType": "Sick Leave",
+      "startDate": "2024-10-16T18:30:00.000Z",
+      "endDate": "2024-10-18T18:30:00.000Z",
+      "teamEmail": "siva@gmail.com",
+      "reason": "summa"
+    },
+    {
+      "id": "99e7",
+      "employeeName": "Sivaneshwaran",
+      "leaveType": "Sick Leave",
+      "type": "Paid",
+      "leavePeriod": "Thu Oct 17 2024 - Sat Oct 19 2024",
+      "daysTaken": 3,
+      "dateOfRequest": "Wed Oct 16 2024",
+      "selected": false
+    },
+    {
+      "id": "915d",
       "leaveType": "Casual Leave",
       "startDate": "2024-10-16T18:30:00.000Z",
       "endDate": "2024-10-17T18:30:00.000Z",
@@ -81,154 +279,55 @@
       "reason": "summa"
     },
     {
-      "id": "5233",
-      "employeeName": "Sivaneshwaran",
+      "id": "5440",
       "leaveType": "Casual Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Fri Oct 18 2024",
-      "daysTaken": 2,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "a91c",
-      "leaveType": "Leave Without Pay",
-      "startDate": "2024-10-15T18:30:00.000Z",
-      "endDate": "2024-10-10T18:30:00.000Z",
-      "teamEmail": "gowtham@gmail.com",
-      "reason": "h"
-    },
-    {
-      "id": "16a8",
-      "leaveType": "Casual Leave",
-      "startDate": "2024-10-07T18:30:00.000Z",
-      "endDate": "2024-10-14T18:30:00.000Z",
-      "teamEmail": "Gousen@gail.com",
-      "reason": "gbbg"
-    },
-    {
-      "id": "af30",
-      "leaveType": "Earned Leave",
-      "startDate": "2024-10-13T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "gosen@gmail.com",
-      "reason": "yes"
-    },
-    {
-      "id": "9cda",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Earned Leave",
-      "type": "Paid",
-      "leavePeriod": "Mon Oct 14 2024 - Thu Oct 17 2024",
-      "daysTaken": 4,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "85f8",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-14T18:30:00.000Z",
-      "endDate": "2024-10-25T18:30:00.000Z",
-      "teamEmail": "sen@gmail.com",
-      "reason": "test"
-    },
-    {
-      "id": "27bb",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Tue Oct 15 2024 - Sat Oct 26 2024",
-      "daysTaken": 12,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "3111",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-15T18:30:00.000Z",
-      "endDate": "2024-10-14T18:30:00.000Z",
-      "teamEmail": "gou@gmail.com",
-      "reason": "leave"
-    },
-    {
-      "id": "4cf2",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Wed Oct 16 2024 - Tue Oct 15 2024",
-      "daysTaken": 0,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "9af5",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2025-01-15T18:30:00.000Z",
-      "endDate": "2024-10-07T18:30:00.000Z",
-      "teamEmail": "fcfvg@gmail.com",
-      "reason": "test"
-    },
-    {
-      "id": "e69d",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Jan 16 2025 - Tue Oct 08 2024",
-      "daysTaken": -99,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "be00",
-      "leaveType": "Earned Leave",
-      "startDate": "2024-10-30T18:30:00.000Z",
-      "endDate": "2024-11-07T18:30:00.000Z",
-      "teamEmail": "testing@gmail.com",
-      "reason": "test"
-    },
-    {
-      "id": "3538",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Earned Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 31 2024 - Fri Nov 08 2024",
-      "daysTaken": 9,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "5b73",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-30T18:30:00.000Z",
-      "endDate": "2025-01-15T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "test"
-    },
-    {
-      "id": "8191",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 31 2024 - Thu Jan 16 2025",
-      "daysTaken": 78,
-      "dateOfRequest": "Mon Oct 14 2024",
-      "selected": false
-    },
-    {
-      "id": "a94d",
-      "leaveType": "Leave Without Pay",
-      "startDate": "2024-10-14T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "e@gmai.ocm",
-      "reason": "tsrd"
-    },
-    {
-      "id": "a0f4",
-      "leaveType": "Leave Without Pay",
-      "days": 3
+      "days": 2
     }
   ],
-  "NewHires": [],
+  "NewHires": [
+    {
+      "employeeId": "1",
+      "employeeName": "Sivaneshwaran",
+      "joinDate": "2024-10-05",
+      "dob": "1990-05-12",
+      "status": "Active"
+    },
+    {
+      "employeeId": "2",
+      "employeeName": "Gutham",
+      "joinDate": "2024-10-25",
+      "dob": "1992-07-21",
+      "status": "Active"
+    },
+    {
+      "employeeId": "3",
+      "employeeName": "Ajith Kumar",
+      "joinDate": "2024-10-11",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "4",
+      "employeeName": "Sanjay",
+      "joinDate": "2024-10-11",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "5",
+      "employeeName": "MS Dhiva",
+      "joinDate": "2024-10-15",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "6",
+      "employeeName": "Vijay",
+      "joinDate": "2024-10-16",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    }
+  ],
   "leaveRequests": [],
   "LeaveSummary": [
     {
@@ -278,6 +377,64 @@
       "available": 5,
       "booked": 1,
       "id": "6365"
+    }
+  ],
+
+  "LeaveReportees": [
+    {
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "dob": "1990-01-15",
+      "profilePicture": "https://example.com/images/john_doe.jpg",
+      "status": "Active",
+      "generalTimining": "9:00 AM - 6:00 PM",
+      "leaveBooked": 5,
+      "joinDate": "2020-03-10",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E002",
+      "employeeName": "Jane Smith",
+      "dob": "1992-05-20",
+      "profilePicture": "https://example.com/images/jane_smith.jpg",
+      "status": "On Leave",
+      "generalTimining": "10:00 AM - 7:00 PM",
+      "leaveBooked": 8,
+      "joinDate": "2018-07-15",
+      "onLeave": true
+    },
+    {
+      "employeeId": "E003",
+      "employeeName": "Michael Johnson",
+      "dob": "1988-11-23",
+      "profilePicture": "https://example.com/images/michael_johnson.jpg",
+      "status": "Active",
+      "generalTimining": "8:00 AM - 5:00 PM",
+      "leaveBooked": 3,
+      "joinDate": "2019-02-25",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E004",
+      "employeeName": "Emily Davis",
+      "dob": "1995-03-12",
+      "profilePicture": "https://example.com/images/emily_davis.jpg",
+      "status": "Active",
+      "generalTimining": "9:30 AM - 6:30 PM",
+      "leaveBooked": 4,
+      "joinDate": "2021-06-18",
+      "onLeave": false
+    },
+    {
+      "employeeId": "E005",
+      "employeeName": "Chris Lee",
+      "dob": "1985-09-05",
+      "profilePicture": "https://example.com/images/chris_lee.jpg",
+      "status": "On Leave",
+      "generalTimining": "9:00 AM - 6:00 PM",
+      "leaveBooked": 10,
+      "joinDate": "2017-09-10",
+      "onLeave": true
     }
   ]
 }
