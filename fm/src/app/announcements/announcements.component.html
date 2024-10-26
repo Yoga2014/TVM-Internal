@@ -153,10 +153,18 @@
     <p>Posted By - {{ announcement.name }}</p>
   </div>
   <div class="card-right">
-    <button class="like-button" *ngIf="announcement.id !== undefined" (click)="likeAnnouncement(announcement.id)">
-      <i class="fa fa-thumbs-up"></i> <!-- Like icon -->
-    </button>
-    <button class="comment-button" *ngIf="announcement.id !== undefined" (click)="openCommentModal(announcement.id)">
+  
+    <!-- <div *ngFor="let announcement of announcements"> -->
+   
+      
+      <button class="like-button" (click)="toggleLike(announcement.id)">
+        <i class="fa" [ngClass]="{'fa-thumbs-up': !announcement.liked, 'fa-thumbs-down': announcement.liked}"></i>
+        {{ announcement.liked ? 'Dislike' : 'Like' }}
+      </button>
+    <!-- </div> -->
+    
+    
+    <button class="comment-button" *ngIf="announcement.id !== undefined" (click)="openAnnouncementPopup(announcement)">
       <i class="fa fa-comment"></i> <!-- Comment icon -->
     </button>
     <button class="delete-button" *ngIf="announcement.id !== undefined" (click)="deleteAnnouncement(announcement.id)">
@@ -181,15 +189,17 @@
     <p>Location: {{ selectedAnnouncement?.location }}</p>
     <!-- Like and Comment section -->
     <div class="popup-actions">
-      <button class="action-button like-btn" (click)="likeAnnouncement(selectedAnnouncement?.id)">
-        <i class="fa fa-thumbs-up"></i> 
+     
+      <button class="like-button" (click)="toggleLike(selectedAnnouncement.id)">
+        <i class="fa" [ngClass]="{'fa-thumbs-up': !selectedAnnouncement.liked, 'fa-thumbs-down': selectedAnnouncement.liked}"></i>
+        {{ selectedAnnouncement.liked ? 'Dislike' : 'Like' }}
       </button>
       <button class="action-button comment-btn" (click)="openCommentPopup(selectedAnnouncement?.id)">
         <i class="fa fa-comment"></i> 
       </button>
     </div>
     <!-- Comment Box -->
-    <div class="comment-section">
+    <div *ngIf="commentSectionVisible" class="comment-section">
       <textarea [(ngModel)]="commentText" placeholder="Add your comment here..."></textarea>
       <button class="submit-comment-button" (click)="submitComment()">Submit</button>
     </div>

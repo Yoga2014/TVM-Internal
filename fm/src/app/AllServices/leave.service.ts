@@ -75,5 +75,4 @@ export class LeaveService {
   addLeaveRequest(request: LeaveRequest): Observable<LeaveRequest> {
     return this.http.post<LeaveRequest>(`${this.apiUrl}`, request);
   }
-  
 }
