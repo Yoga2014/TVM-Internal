@@ -225,5 +225,34 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ---------------------------------------------------------------------------------------
 
 
+login page instructions
+
+tart ng serve
+Run >>db.json for login credentials 
+
+First loading page 
+ Login > admin@example.com / admin123 or user@example.com / user123 
+
+Admin have all the page access 
+
+User have working new - home page only 
+
+If we need to give access for user made some changes in app.routing.module.ts file 
+
+Copy the 
+.............
+canActive : [userguard]
+ ..............
+ code and paste it for what ever page you give access for the user 
+
+
+Register page : 
+
+If the new user register after they register complete it navigate to personalform data page 
+
+Forgot password: 
+
+If the user not know about the password they can change our password usinga forgot password page , enter the email after alert show OTP copy the OTP and pasted
+
 
 

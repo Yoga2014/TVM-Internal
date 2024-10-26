@@ -57,32 +57,43 @@ import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NewJoinersComponent } from './new-joiners/new-joiners.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { AdminGuard } from './admin.guard';
+import { UserGuard } from './user.guard';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 const routes: Routes = [
-  { path: 'general', component: GeneralComponent },
-  { path: 'educational', component: EducationalComponent },
-  { path: 'skillset', component: SkillsetComponent },
-  { path: 'professional', component: ProfessionalComponent },
-  { path: 'details', component: DetailsComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'newhires', component: NewHiresComponent },
-  { path: 'employee-details/:id', component: EmployeeDetailsComponent },
-  { path: 'edit-employee/:id', component: EditEmployeeComponent },
-  { path: 'apply-leave', component: ApplyLeaveComponent },
-  { path: 'leave-balance', component: LeaveBalanceComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'personalDataForm', component: PersonalDataFormComponent },
-  { path: 'onboarding', component: OnboardingComponent },
-  {path:'operation', component:OperationComponent},
-  {path:'reports',component:ReportsComponent},
-  { path: 'newHires', component: NewJoinersComponent },
-  {path:'details', component:DetailsComponent},
-  {path:'feedback', component:FeedbackComponent},
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'general', component: GeneralComponent ,canActivate: [AdminGuard] },
+  { path: 'educational', component: EducationalComponent,canActivate: [AdminGuard] },
+  { path: 'skillset', component: SkillsetComponent,canActivate: [AdminGuard] },
+  { path: 'professional', component: ProfessionalComponent,canActivate: [AdminGuard] },
+  { path: 'details', component: DetailsComponent,canActivate: [AdminGuard] },
+  { path: 'header', component: HeaderComponent,canActivate: [AdminGuard] },
+  { path: 'dashboard', component: DashboardComponent ,canActivate: [AdminGuard]},
+  { path: 'newhires', component: NewHiresComponent ,canActivate: [AdminGuard]},
+  { path: 'employee-details/:id', component: EmployeeDetailsComponent ,canActivate: [AdminGuard]},
+  { path: 'edit-employee/:id', component: EditEmployeeComponent,canActivate: [AdminGuard]},
+  { path: 'apply-leave', component: ApplyLeaveComponent ,canActivate: [AdminGuard]},
+  { path: 'leave-balance', component: LeaveBalanceComponent,canActivate: [AdminGuard] },
+  { path: 'teams', component: TeamsComponent ,canActivate: [AdminGuard]},
+  { path: 'personalDataForm', component: PersonalDataFormComponent},
+  { path: 'onboarding', component: OnboardingComponent,canActivate: [AdminGuard] },
+  {path:'operation', component:OperationComponent ,canActivate: [AdminGuard]},
+  {path:'reports',component:ReportsComponent,canActivate: [AdminGuard]},
+  { path: 'newHires', component: NewJoinersComponent ,canActivate: [AdminGuard]  },
+  {path:'details', component:DetailsComponent,canActivate: [AdminGuard]},
+  {path:'feedback', component:FeedbackComponent,canActivate: [AdminGuard]},
 
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
+    canActivate: [AdminGuard] ,
     children: [
       {
         path: 'mydata',
@@ -155,6 +166,7 @@ const routes: Routes = [
   {
     path: 'task-tasks',
     component: TaskTasksComponent,
+    canActivate: [AdminGuard] ,
     children: [
       { path: '',
         component: TaskNavsComponent,
@@ -169,6 +181,7 @@ const routes: Routes = [
   {
     path: 'perfomance-myData',
     component: PerformanceMyDataComponent,
+    canActivate: [AdminGuard] ,
     children: [
       {
         path: '',

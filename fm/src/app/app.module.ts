@@ -92,6 +92,9 @@ import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NewJoinersComponent } from './new-joiners/new-joiners.component';
 import { FeedbackComponent } from "./feedback/feedback.component";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -156,7 +159,10 @@ import { FeedbackComponent } from "./feedback/feedback.component";
     EmployeeTreeComponent,
     FeedsComponent,
     OperationComponent,
-    ReportsComponent
+    ReportsComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent
   ],
 
   imports: [
