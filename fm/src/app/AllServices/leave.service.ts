@@ -52,14 +52,13 @@ export class LeaveService {
 
   approveLeaveRequest(employeeId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/approve/${employeeId}`, {});
-  }
+  } 
 
   // Reject leave request (assuming an API endpoint for rejection exists)
   rejectLeaveRequest(employeeId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/reject/${employeeId}`, {});
   }
 
-  
   deleteLeaveRequest(employeeId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${employeeId}`);
   }

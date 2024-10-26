@@ -8,8 +8,8 @@ export interface Announcement {
     attachment?: File; // Optional
     category: string;
     expiry: string;
-    commentsDisabled: boolean;
-    pinned: boolean;
+    disableComments: boolean;
+    pinAnnouncement: boolean;
     notifyAll: boolean;
     notifyOthers?: string; // Optional
     timestamp?: Date; // Optional for displaying the timestamp
