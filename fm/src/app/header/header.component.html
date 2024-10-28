@@ -38,6 +38,11 @@
         <i class="fa-solid fa-circle"></i> Personal Data Form
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeNavItem === 'onboarding'" (click)="selectTab('onboarding')">
+        <i class="fa-solid fa-circle"></i> onboarding
+      </a>
+    </li>
   </nav>
   <hr>
   <!-- Conditionally Render Components with Scrollable Containers -->
@@ -48,4 +53,5 @@
     <app-professional *ngIf="activeNavItem === 'professional'"></app-professional>
     <app-details *ngIf="activeNavItem === 'details'"></app-details>
     <app-personal-data-form *ngIf="activeNavItem === 'personalDataForm'"></app-personal-data-form>
+    <app-onboarding *ngIf="activeNavItem === 'onboarding'"></app-onboarding>
   </div>

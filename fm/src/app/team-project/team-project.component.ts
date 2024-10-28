@@ -12,16 +12,16 @@
   })
   export class TeamProjectComponent{
     projectForm: FormGroup = this.fb.group({
-      projectname: ['', [Validators.required, Validators.minLength(3)]],
-      clientname: ['', Validators.required],
+      projectName: ['', [Validators.required, Validators.minLength(3)]],
+      clientName: ['', Validators.required],
       domain: ['', Validators.required],
       startDate: ['', Validators.required],
       voice: ['', [Validators.required, Validators.maxLength(100)]],
-      voicestartDate: ['', Validators.required],
-      voiceendDate: [''],
+      voiceStartDate: ['', Validators.required],
+      voiceEndDate: [''],
       coding: ['', [Validators.required, Validators.maxLength(100)]],
-      codingstartDate: ['', Validators.required],
-      codingendDate: [''],
+      codingStartDate: ['', Validators.required],
+      codingEndDate: [''],
       asset: this.fb.array([]),
       projectStatus: ['', Validators.required] 
     });
@@ -68,16 +68,16 @@
     }
     populateForm(data: any) {
       this.projectForm.patchValue({
-        projectname: data.projectname,
-        clientname: data.clientname,
+        projectName: data.projectName,
+        clientName: data.clientName,
         domain: data.domain,
         startDate: data.startDate,
         voice: data.voice,
-        voicestartDate: data.voicestartDate,
-        voiceendDate: data.voiceendDate,
+        voiceStartDate: data.voiceStartDate,
+        voiceEndDate: data.voiceEndDate,
         coding: data.coding,
-        codingstartDate: data.codingstartDate,
-        codingendDate: data.codingendDate
+        codingStartDate: data.codingStartDate,
+        codingEndDate: data.codingEndDate
       });
       
       
@@ -98,13 +98,13 @@
 
 
     onSubmit(title: string, message: string) {
-      if (this.projectForm.valid && !this.isEditMode) {
+      // if (this.projectForm.valid && !this.isEditMode) {
         this.teams.postMethod(this.projectForm.value).subscribe(() => {
           this.getdata();
           this.resetForm();
           this.toast(title, message)
         });
-      }
+      // }
     }
 
     onCheckboxChange(e: any) {
@@ -125,16 +125,16 @@
       this.submit=true
       this.teams.editMethod(id).subscribe((res: any) => {
         this.projectForm.patchValue({
-          projectname: res.projectname,
-          clientname: res.clientname,
+          projectName: res.projectName,
+          clientName: res.clientName,
           domain: res.domain,
           startDate: res.startDate,
           voice: res.voice,
-          voicestartDate: res.voicestartDate,
-          voiceendDate: res.voiceendDate,
+          voiceStartDate: res.voiceStartDate,
+          voiceEndDate: res.voiceEndDate,
           coding: res.coding,
-          codingstartDate: res.codingstartDate,
-          codingendDate: res.codingendDate,
+          codingStartDate: res.codingStartDate,
+          codingEndDate: res.codingEndDate,
           projectStatus: res.projectStatus
         });
     

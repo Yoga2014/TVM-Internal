@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerModule, MatDateRangeInput } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -91,6 +91,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.component";
 
 
 @NgModule({
@@ -155,6 +156,8 @@ import { ReportsComponent } from './reports/reports.component';
     FeedsComponent,
     OperationComponent,
     ReportsComponent,
+    OnboardingComponent,
+    
   ],
 
   imports: [
@@ -188,7 +191,31 @@ import { ReportsComponent } from './reports/reports.component';
     NgIf,
     NgFor,
     TreeModule,
-  ],
+    MatDatepickerModule,
+    MatButtonModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatDatepicker,
+    MatDatepickerModule,
+    MatDateRangeInput,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatTableModule
+    
+],
   providers: [],
   bootstrap: [AppComponent],
 })
