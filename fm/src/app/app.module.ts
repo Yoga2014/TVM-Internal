@@ -91,6 +91,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { TimeLogComponent } from './time-log/time-log.component';
+import { AppraisalComponent } from './appraisal/appraisal.component';
 import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.component";
 
 
@@ -156,8 +158,6 @@ import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.componen
     FeedsComponent,
     OperationComponent,
     ReportsComponent,
-    OnboardingComponent,
-    
   ],
 
   imports: [

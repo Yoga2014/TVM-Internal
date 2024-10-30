@@ -9,7 +9,7 @@ import { LeaveRequest } from '../Interface/leave-request.model';
 export class LeaveService {
 
   private apiUrl = 'http://localhost:3001/Leave';
-  private leaveurl = 'http://localhost:3001/Leave';
+  private leaveurl = 'http://localhost:3001/LeaveSummary';
   private leaveAppliedSubject = new Subject<any>();
 
   constructor(private http: HttpClient) {}
@@ -74,5 +74,4 @@ export class LeaveService {
   addLeaveRequest(request: LeaveRequest): Observable<LeaveRequest> {
     return this.http.post<LeaveRequest>(`${this.apiUrl}`, request);
   }
-  
 }
