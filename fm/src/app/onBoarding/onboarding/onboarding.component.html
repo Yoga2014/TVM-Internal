@@ -61,36 +61,35 @@
         </div>
         <button type="button" (click)="addOnboardingTask()">Add Task</button>
     </div>
-    
-    
+
     <!-- Documents Submission -->
     <h2>Documents Submission</h2>
-    <div formGroupName="documents">
-        <mat-form-field appearance="outline">
-            <mat-label>Resume/CV</mat-label>
-            <input matInput formControlName="resume" required />
-            <mat-error *ngIf="onboardingForm.get('documents.resume')?.hasError('required')">Resume/CV is required.</mat-error>
-       </mat-form-field>
-          
-    
-      <mat-form-field appearance="outline">
-        <mat-label>Identification Documents</mat-label>
-        <input matInput formControlName="idDocuments" required />
-        <mat-error *ngIf="onboardingForm.get('documents.idDocuments')?.hasError('required')">Identification Documents are required.</mat-error>
-      </mat-form-field>
-    
-      <mat-form-field appearance="outline">
-        <mat-label>Certification/Qualification</mat-label>
-        <input matInput formControlName="certifications" required />
-        <mat-error *ngIf="onboardingForm.get('documents.certifications')?.hasError('required')">Certification/Qualification is required.</mat-error>
-      </mat-form-field>
-    
-      <mat-form-field appearance="outline">
-        <mat-label>Non-Disclosure Agreement</mat-label>
-        <input matInput formControlName="nda" required />
-        <mat-error *ngIf="onboardingForm.get('documents.nda')?.hasError('required')">Non-Disclosure Agreement is required.</mat-error>
-      </mat-form-field>
+<div formGroupName="documents">
+    <div class="file-upload">
+        <label>Resume/CV</label>
+        <input type="file" (change)="onFileSelected($event, 'resume')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.resume')?.hasError('required')">Resume/CV is required.</mat-error>
     </div>
+
+    <div class="file-upload">
+        <label>Identification Documents</label>
+        <input type="file" (change)="onFileSelected($event, 'idDocuments')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.idDocuments')?.hasError('required')">Identification Documents are required.</mat-error>
+    </div>
+
+    <div class="file-upload">
+        <label>Certification/Qualification</label>
+        <input type="file" (change)="onFileSelected($event, 'certifications')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.certifications')?.hasError('required')">Certification/Qualification is required.</mat-error>
+    </div>
+
+    <div class="file-upload">
+        <label>Non-Disclosure Agreement</label>
+        <input type="file" (change)="onFileSelected($event, 'nda')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.nda')?.hasError('required')">Non-Disclosure Agreement is required.</mat-error>
+    </div>
+</div>
+
     
     <!-- Training and Orientation -->
     <h2>Training and Orientation</h2>

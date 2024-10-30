@@ -1,12 +1,14 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatDatepicker, MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
+import { OnboardingService } from './onboarding.service';
+
 
 interface Documents {
-  resume: string;
-  idDocuments: string;
-  certifications: string;
-  nda: string;
+  resume: File | null;
+  idDocuments: File | null;
+  certifications: File | null;
+  nda: File | null;
 }
 
 interface Training {
@@ -33,12 +35,10 @@ interface OnboardingTask {
   styleUrl: './onboarding.component.scss'
 })
 export class OnboardingComponent implements OnInit {
-  @ViewChildren(MatDatepicker)
-  datePickers!: QueryList<MatDatepicker<any>> | string;
+  @ViewChildren(MatDatepicker) datePickers!: QueryList<MatDatepicker<any>>;
   onboardingForm: FormGroup;
-  dueDatePicker!: MatDatepickerPanel<MatDatepickerControl<any>, any, any>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private onboardingService: OnboardingService) {
     this.onboardingForm = this.fb.group({
       jobTitle: ['', Validators.required],
       department: ['', Validators.required],
@@ -46,10 +46,10 @@ export class OnboardingComponent implements OnInit {
       startDate: ['', Validators.required],
       onboardingTasks: this.fb.array([]),
       documents: this.fb.group({
-        resume: ['', Validators.required],
-        idDocuments: ['', Validators.required],
-        certifications: ['', Validators.required],
-        nda: ['', Validators.required],
+        resume: [null, Validators.required],
+        idDocuments: [null, Validators.required],
+        certifications: [null, Validators.required],
+        nda: [null, Validators.required]
       }),
       training: this.fb.group({
         orientationSchedule: ['', Validators.required],
@@ -95,9 +95,10 @@ export class OnboardingComponent implements OnInit {
     this.onboardingTasks.push(taskGroup);
   }
 
-  removeOnboardingTask(index: number) {
+  removeOnboardingTask(index: number): void {
     this.onboardingTasks.removeAt(index);
   }
+
   addEmergencyContact(): void {
     const contactGroup = this.fb.group({
       name: ['', Validators.required],
@@ -107,18 +108,45 @@ export class OnboardingComponent implements OnInit {
     this.emergencyContacts.push(contactGroup);
   }
 
-
-  removeEmergencyContact(index: number) {
+  removeEmergencyContact(index: number): void {
     this.emergencyContacts.removeAt(index);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.onboardingForm.valid) {
-      console.log('Form Submitted!', this.onboardingForm.value);
-      // Handle form submission, e.g., send to backend
+      // Here we call the service to submit the data
+      this.onboardingService.submitOnboardingData(this.onboardingForm.value).subscribe({
+        next: response => {
+          console.log('Form submitted successfully', response);
+          // Optionally, reset the form or show a success message
+          this.onboardingForm.reset(); // Reset the form if needed
+          this.addOnboardingTask(); // Reinitialize with one onboarding task
+          this.addEmergencyContact(); // Reinitialize with one emergency contact
+        },
+        error: error => {
+          console.error('Error submitting form', error);
+          // Handle the error accordingly, maybe show a message to the user
+        }
+      });
     } else {
-      console.log('Form not valid!');
-      this.onboardingForm.markAllAsTouched(); // Mark all fields as touched for validation feedback
+      this.onboardingForm.markAllAsTouched(); // Highlight all invalid fields
     }
   }
-}
+  
+
+  updateOnboardingData(id: string): void {
+    if (this.onboardingForm.valid) {
+      this.onboardingService.updateOnboardingData(id, this.onboardingForm.value).subscribe({
+        next: response => console.log('Form updated successfully', response),
+        error: error => console.error('Error updating form', error)
+      });
+    }
+  }
+
+  onFileSelected(event: Event, controlName: keyof Documents): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      const file = input.files[0];
+      this.onboardingForm.get(['documents', controlName])?.setValue(file);
+    }
+  }}
