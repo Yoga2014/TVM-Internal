@@ -1,0 +1,125 @@
+{
+  "appraisals": [
+    {
+      "name": "John Doe",
+      "employeeId": "12345",
+      "jobTitle": "Software Engineer",
+      "department": "Engineering",
+      "managerName": "Jane Smith",
+      "appraisalPeriod": "2024 Q3",
+      "performanceGoals": [
+        {
+          "goal": "Complete project X",
+          "goalType": "Project",
+          "completionStatus": "In Progress",
+          "comments": "On track"
+        }
+      ],
+      "selfAssessment": {
+        "strengths": "Problem-solving",
+        "accomplishments": "Successfully launched feature Y",
+        "challenges": "Tight deadlines",
+        "areasForImprovement": "Time management",
+        "overallPerformance": "Exceeds expectations"
+      },
+      "managerAssessment": {
+        "jobKnowledge": "Excellent",
+        "qualityOfWork": "Very good",
+        "productivity": "Above average",
+        "communicationSkills": "Effective",
+        "problemSolvingSkills": "Strong",
+        "teamwork": "Collaborative",
+        "initiative": "Proactive",
+        "overallRating": "4.5"
+      },
+      "strengths": {
+        "keyStrengths": "Technical expertise",
+        "examples": "Led the development of feature Z"
+      },
+      "areasForImprovement": {
+        "keyAreasForImprovement": "Work-life balance",
+        "trainingDevelopmentNeeds": "Time management training"
+      },
+      "feedback": {
+        "managerFeedback": "Outstanding performance",
+        "peerTeamFeedback": "Great team player",
+        "employeeFeedbackOnProcess": "Satisfactory"
+      },
+      "actionPlanAndGoals": [
+        {
+          "goal": "Improve time management",
+          "timeline": "Next quarter",
+          "resourcesNeeded": "Training resources"
+        }
+      ],
+      "finalPerformanceRating": "4.5",
+      "managerSignature": "Jane Smith",
+      "employeeSignature": "John Doe",
+      "date": "2024-10-28"
+    },
+    {
+      "id": "0f81",
+      "name": "DURAI RAJ",
+      "employeeId": "6556",
+      "jobTitle": "summa",
+      "department": "summa",
+      "managerName": "Don't know",
+      "appraisalPeriod": "3months",
+      "performanceGoals": [
+        {
+          "goal": "summa",
+          "goalType": "summa",
+          "completionStatus": "20%",
+          "comments": "summa"
+        },
+        {
+          "goal": "summa",
+          "goalType": "summa",
+          "completionStatus": "20%",
+          "comments": "summa"
+        }
+      ],
+      "selfAssessment": {
+        "strengths": "",
+        "accomplishments": "",
+        "challenges": "",
+        "areasForImprovement": "",
+        "overallPerformance": ""
+      },
+      "managerAssessment": {
+        "jobKnowledge": "",
+        "qualityOfWork": "",
+        "productivity": "",
+        "communicationSkills": "",
+        "problemSolvingSkills": "",
+        "teamwork": "",
+        "initiative": "",
+        "overallRating": ""
+      },
+      "strengths": {
+        "keyStrengths": "",
+        "examples": ""
+      },
+      "areasForImprovement": {
+        "keyAreasForImprovement": "",
+        "trainingDevelopmentNeeds": ""
+      },
+      "feedback": {
+        "managerFeedback": "",
+        "peerTeamFeedback": "",
+        "employeeFeedbackOnProcess": ""
+      },
+      "actionPlanAndGoals": [
+        {
+          "goal": "",
+          "timeline": "",
+          "resourcesNeeded": ""
+        }
+      ],
+      "finalPerformanceRating": "",
+      "managerSignature": "",
+      "employeeSignature": "",
+      "date": ""
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<div class="time-log-container">
+  <h2>Time Log</h2>
+  
+  <div class="controls">
+    <select [(ngModel)]="selectedProject">
+      <option value="" disabled>Select Project</option>
+      <option *ngFor="let project of projects" [value]="project.projectName">{{ project.projectName }}</option>
+    </select>
+    
+    <select [(ngModel)]="selectedJob">
+      <option value="" disabled>Select Job</option>
+      <option value="Job A">Job A</option>
+      <option value="Job B">Job B</option>
+    </select>
+    
+    <textarea [(ngModel)]="taskDescription" placeholder="Task Description"></textarea>
+    
+    <div class="log-time-dropdown">
+      <!-- <label for="logTimeSelect">Log Time:</label> -->
+      <select id="logTimeSelect" (change)="logTime($event)">
+        <option value="" disabled selected>Select Log Type</option>
+        <option value="Daily Log">Daily Log</option>
+        <option value="Weekly Log">Weekly Log</option>
+        <option value="Monthly Log">Monthly Log</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="timer">
+    <h3>Timer: {{ timerDisplay }}</h3>
+    <button (click)="toggleTimer()">{{ timerStarted ? 'Check Out' : 'Check In' }}</button>
+  </div>
+
+  <div class="logs">
+    <h3>Time Logs</h3>
+    <ul>
+      <li *ngFor="let log of logs">
+        <div>
+          <strong>Project:</strong> {{ log.project }} <br>
+          <strong>Job:</strong> {{ log.job }} <br>
+          <strong>Description:</strong> {{ log.description }} <br>
+          <strong>Start Time:</strong> {{ log.startTime }} <br>
+          <strong>End Time:</strong> {{ log.endTime }} <br>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="calendar">
+    <h3>Weekly Calendar</h3>
+    <button (click)="prevWeek()">
+      <i class="fas fa-arrow-left"></i> Previous
+    </button>
+    <button (click)="nextWeek()">
+      Next <i class="fas fa-arrow-right"></i>
+    </button>
+  
+    <div *ngIf="showWeeklyCalendar">
+      <div *ngFor="let day of weekDays" (click)="selectDate(day)" [class.selected]="selectedDate === day">
+        {{ day | date: 'fullDate' }} - 
+        <span *ngIf="getLogTimeFormatted(day)">Logged: {{ getLogTimeFormatted(day) }}</span>
+        <span *ngIf="!getLogTimeFormatted(day)">No log</span>
+      </div>
+    </div>
+  
+    <button (click)="showCalendar()">
+      <i [class]="showWeeklyCalendar ? 'fas fa-calendar-times' : 'fas fa-calendar-alt'"></i>
+      {{ showWeeklyCalendar ? 'Hide Calendar' : 'Show Calendar' }}
+    </button>
+  
+    <div *ngIf="selectedDate">
+      <h4>Logs for {{ selectedDate | date: 'fullDate' }}</h4>
+      <div *ngFor="let log of selectedDateLogs">
+        <p>Project: {{ log.project }} | Job: {{ log.job }}</p>
+        <p>Start: {{ log.startTime | date: 'shortTime' }} | End: {{ log.endTime | date: 'shortTime' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="view-toggle">
+    <button (click)="toggleView('list')">List View</button>
+    <button (click)="toggleView('grid')">Grid View</button>
+  </div>
+</div>
