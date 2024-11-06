@@ -8,10 +8,7 @@
       "attachment": null,
       "category": "updates",
       "expiry": "2024-08-29",
-      "location": "branch",
-      "disableComments": true,
-      "pinAnnouncement": false,
-      "notifyAll": false
+      "location": "branch"
     },
     {
       "id": "ff40",
@@ -21,10 +18,8 @@
       "attachment": null,
       "category": "news",
       "expiry": "2024-08-29",
-      "location": "remote",
-      "disableComments": false,
-      "pinAnnouncement": true,
-      "notifyAll": false
+      "location": "remote"
+      
     }
   ]
 }

@@ -32,9 +32,6 @@ export class AnnouncementsComponent  {
       category: ['', Validators.required],
       expiry: ['', Validators.required],
       location: ['', Validators.required],
-      disableComments: [false],
-      pinAnnouncement: [false],
-      notifyAll: [false]
     });
 
     this.loadAnnouncements();
