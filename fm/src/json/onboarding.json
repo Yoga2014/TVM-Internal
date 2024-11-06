@@ -1,0 +1,45 @@
+{
+    "jobTitle": "",
+    "department": "",
+    "manager": "",
+    "startDate": "",
+    "onboardingTasks": [
+      {
+        "taskId": "",
+        "taskDescription": "",
+        "dueDate": "",
+        "status": ""
+      }
+    ],
+    "documents": {
+      "resume": null,
+      "idDocuments": null,
+      "certifications": null,
+      "nda": null
+    },
+    "training": {
+      "orientationSchedule": "",
+      "trainingModules": "",
+      "resourcesProvided": ""
+    },
+    "systemAccess": {
+      "accountSetup": {
+        "email": "",
+        "software": ""
+      },
+      "access": ""
+    },
+    "emergencyContact": [
+      {
+        "name": "",
+        "relationship": "",
+        "phoneNumber": ""
+      }
+    ],
+    "acknowledgment": {
+      "terms": false,
+      "codeOfConduct": false,
+      "policyAgreement": false
+    }
+  }
+  

@@ -6,7 +6,8 @@ import { catchError, Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamService {
-    private apiUrl = 'http://localhost:3001/Teams';
+    private apiUrl = 'http://192.168.0.11:8080/api/teamlist';
+    // private apiUrl = 'http://localhost:8080/api/teamlist';
 
     constructor(private http: HttpClient) { }
 

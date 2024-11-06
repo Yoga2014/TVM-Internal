@@ -134,6 +134,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         "leaveBooked": 5,
         "joinDate": "2020-03-10",
         "onLeave": false
+      
     },
   ]
 }

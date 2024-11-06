@@ -33,10 +33,7 @@ announcement: any;
       attachment: [null],
       category: ['', Validators.required],
       expiry: ['', Validators.required],
-      location: ['', Validators.required],
-      disableComments: [false],
-      pinAnnouncement: [false],
-      notifyAll: [false]
+      location: ['', Validators.required]
     });
 
     this.loadAnnouncements();

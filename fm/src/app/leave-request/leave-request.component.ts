@@ -94,13 +94,13 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const newLeaveRequest: LeaveRequest = {
-          employeeId: result.id,  
-          employeeName: result.employeeName,
-          leaveType: result.leaveType,
-          type: result.type,
-          leavePeriod: result.leavePeriod,
-          daysTaken: result.days,
-          dateOfRequest: result.dateOfRequest,
+          employeeId: result?.id,  
+          employeeName: result?.employeeName,
+          leaveType: result?.leaveType,
+          type: result?.type,
+          leavePeriod: result?.leavePeriod,
+          daysTaken: result?.days,
+          dateOfRequest: result?.dateOfRequest,
           selected: false
         };
         console.log(result)

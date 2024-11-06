@@ -1,0 +1,180 @@
+<div class="watermark">TVM INFOTECH</div>
+
+<form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
+    <!-- Position Details -->
+    <h2>Position Details</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Job Title</mat-label>
+      <input matInput formControlName="jobTitle" required />
+      <mat-error *ngIf="onboardingForm.get('jobTitle')?.hasError('required')">Job Title is required.</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Department</mat-label>
+      <input matInput formControlName="department" required />
+      <mat-error *ngIf="onboardingForm.get('department')?.hasError('required')">Department is required.</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Manager/Supervisor</mat-label>
+      <input matInput formControlName="manager" required />
+      <mat-error *ngIf="onboardingForm.get('manager')?.hasError('required')">Manager/Supervisor is required.</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input matInput formControlName="startDate" [matDatepicker]="startDatePicker" />
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+      <mat-error *ngIf="onboardingForm.get('startDate')?.hasError('required')">Start Date is required.</mat-error>
+    </mat-form-field>
+    
+    <h2>Onboarding Tasks</h2>
+    <div formArrayName="onboardingTasks">
+        <div *ngFor="let task of onboardingTasks.controls; let i = index" [formGroupName]="i">
+            <h3>Task {{ i + 1 }}</h3>
+            <mat-form-field appearance="outline">
+                <mat-label>Task ID</mat-label>
+                <input matInput formControlName="taskId" required />
+                <mat-error *ngIf="task.get('taskId')?.hasError('required')">Task ID is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Task Description</mat-label>
+                <input matInput formControlName="taskDescription" required />
+                <mat-error *ngIf="task.get('taskDescription')?.hasError('required')">Task Description is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Due Date</mat-label>
+                <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" />
+                <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #dueDatePicker></mat-datepicker>
+                <mat-error *ngIf="task.get('dueDate')?.hasError('required')">Due Date is required.</mat-error>
+              </mat-form-field> 
+
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <input matInput formControlName="status" required />
+                <mat-error *ngIf="task.get('status')?.hasError('required')">Status is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <button type="button" (click)="addOnboardingTask()">Add Task</button>
+    </div>
+
+    <!-- Documents Submission -->
+    <h2>Documents Submission</h2>
+<div formGroupName="documents">
+    <div class="file-upload">
+        <label>Resume/CV</label>
+        <input type="file" (change)="onFileSelected($event, 'resume')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.resume')?.hasError('required')">Resume/CV is required.</mat-error>
+    </div>
+
+    <div class="file-upload">
+        <label>Identification Documents</label>
+        <input type="file" (change)="onFileSelected($event, 'idDocuments')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.idDocuments')?.hasError('required')">Identification Documents are required.</mat-error>
+    </div>
+
+    <div class="file-upload">
+        <label>Certification/Qualification</label>
+        <input type="file" (change)="onFileSelected($event, 'certifications')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.certifications')?.hasError('required')">Certification/Qualification is required.</mat-error>
+    </div>
+
+    <div class="file-upload">
+        <label>Non-Disclosure Agreement</label>
+        <input type="file" (change)="onFileSelected($event, 'nda')" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
+        <mat-error *ngIf="onboardingForm.get('documents.nda')?.hasError('required')">Non-Disclosure Agreement is required.</mat-error>
+    </div>
+</div>
+
+    
+    <!-- Training and Orientation -->
+    <h2>Training and Orientation</h2>
+    <div formGroupName="training">
+      <mat-form-field appearance="outline">
+        <mat-label>Orientation Schedule</mat-label>
+        <input matInput formControlName="orientationSchedule" required />
+        <mat-error *ngIf="onboardingForm.get('training.orientationSchedule')?.hasError('required')">Orientation Schedule is required.</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Training Modules</mat-label>
+        <input matInput formControlName="trainingModules" required />
+        <mat-error *ngIf="onboardingForm.get('training.trainingModules')?.hasError('required')">Training Modules are required.</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Resources Provided</mat-label>
+        <input matInput formControlName="resourcesProvided" required />
+        <mat-error *ngIf="onboardingForm.get('training.resourcesProvided')?.hasError('required')">Resources Provided is required.</mat-error>
+      </mat-form-field>
+    </div>
+    
+    <!-- System Access -->
+    <h2>System Access</h2>
+    <div formGroupName="systemAccess">
+      <mat-form-field appearance="outline">
+        <mat-label>Account Setup (Email)</mat-label>
+        <input matInput formControlName="accountSetup.email" required />
+        <mat-error *ngIf="onboardingForm.get('systemAccess.accountSetup.email')?.hasError('required')">Email is required.</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Account Setup (Software)</mat-label>
+        <input matInput formControlName="accountSetup.software" required />
+        <mat-error *ngIf="onboardingForm.get('systemAccess.accountSetup.software')?.hasError('required')">Software is required.</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Access to Tools and Platforms</mat-label>
+        <input matInput formControlName="access" required />
+        <mat-error *ngIf="onboardingForm.get('systemAccess.access')?.hasError('required')">Access to Tools and Platforms is required.</mat-error>
+      </mat-form-field>
+    </div>
+    
+    <h2>Emergency Contact Information</h2>
+    <div formArrayName="emergencyContact">
+      <div *ngFor="let contact of emergencyContacts.controls; let i = index" [formGroupName]="i">
+        <h3>Contact {{ i + 1 }}</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error *ngIf="contact.get('name')?.hasError('required')">Name is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Relationship</mat-label>
+          <input matInput formControlName="relationship" required />
+          <mat-error *ngIf="contact.get('relationship')?.hasError('required')">Relationship is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phoneNumber" required />
+          <mat-error *ngIf="contact.get('phoneNumber')?.hasError('required')">Phone Number is required.</mat-error>
+        </mat-form-field>
+      </div>
+      <button type="button" (click)="addEmergencyContact()">Add Emergency Contact</button>
+    </div>
+    
+    
+    <!-- Acknowledgment and Agreement -->
+    <h2>Acknowledgment and Agreement</h2>
+    <div formGroupName="acknowledgment">
+      <mat-checkbox formControlName="terms" required>
+        I agree to the Terms of Employment
+      </mat-checkbox>
+      <mat-checkbox formControlName="codeOfConduct" required>
+        I agree to the Code of Conduct
+      </mat-checkbox>
+      <mat-checkbox formControlName="policyAgreement" required>
+        I agree to the Policy Agreement
+      </mat-checkbox>
+    </div>
+    
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+  </form>
+  

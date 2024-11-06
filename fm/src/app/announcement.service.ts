@@ -7,7 +7,8 @@ import { Announcement } from './announcement.model'; // Adjust import as necessa
   providedIn: 'root'
 })
 export class AnnouncementService {
-  private apiUrl = 'http://localhost:3004/announcements'; // Adjust this URL to your setup
+ // Adjust this URL to your setup
+  private apiUrl = 'http://192.168.0.11:8080/announcements'; // Adjust this URL to your setup
 
   constructor(private http: HttpClient) { }
 

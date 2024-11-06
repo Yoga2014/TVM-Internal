@@ -1,4 +1,5 @@
 export interface Task {
+    taskId: number;
     id?: number;
     name: string; // Ensure 'name' property exists
     taskOwner: string;

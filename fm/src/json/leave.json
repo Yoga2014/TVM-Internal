@@ -257,6 +257,19 @@
       "daysTaken": 0,
       "dateOfRequest": "Wed Oct 16 2024",
       "selected": false
+    },
+    {
+      "id": "e3b0",
+      "leaveType": "Earned Leave",
+      "startDate": "2024-10-22T18:30:00.000Z",
+      "endDate": "2024-10-23T18:30:00.000Z",
+      "teamEmail": "3@gmail.com",
+      "reason": "gfts"
+    },
+    {
+      "id": "ad04",
+      "leaveType": "Earned Leave",
+      "days": 1
     }
   ]
 }

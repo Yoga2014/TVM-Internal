@@ -8,8 +8,8 @@ import { Goal, Comment } from '../Interface/Goals.model';
   providedIn: 'root'
 })
 export class GoalService {
-  private apiUrl = 'http://localhost:3001/Goals';
-  private commentUrl = 'http://localhost:3001/comments';
+  private apiUrl = 'http://192.168.0.11:8080/api/goal';
+  private commentUrl = 'http://192.168.0.11:8080/comments';
   private goalsUpdated = new Subject<void>();
 
   constructor(private http: HttpClient) { }

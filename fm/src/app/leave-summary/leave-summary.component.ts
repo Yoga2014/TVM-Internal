@@ -59,7 +59,7 @@ export class LeaveSummaryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.leaveService.bookLeave(result.leaveType, result.days).subscribe({
+        this.leaveService.bookLeave(result?.leaveType, result?.days).subscribe({
           next: (response) => {
             this.leaveService.setLeaveApplied(result);
           },
