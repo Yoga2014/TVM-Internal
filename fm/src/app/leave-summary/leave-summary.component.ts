@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
+import { LeaveRequest } from '../Interface/leave-request.model';
 
 @Component({
   selector: 'app-leave-summary',
@@ -11,75 +10,32 @@ import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
 })
 export class LeaveSummaryComponent implements OnInit {
   
-  leaves: any[] = [];
-  upcomingLeaves: any[] = [];
-  viewMode = 'list';
-  
+  leaves: LeaveRequest[] = [];
+  loading: boolean = true; 
+  error: string | null = null; 
+  displayedColumns: string[] = ['leaveType', 'startDate', 'endDate', 'status']; 
 
-  constructor(
-    private leaveService: LeaveService, 
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  constructor(private leaveService: LeaveService, private router: Router) {}
 
-  ngOnInit(): void {
-    debugger
-    this.leaveService.getLeaveSummary().subscribe((leaves) => {
-      this.leaves = leaves.filter((leave) => leave && leave.typeLeave && leave.available !== undefined);
-    });
+  ngOnInit() {
+    this.loadLeaves();
+  }
 
-    this.leaveService.getUpcomingLeaves().subscribe((upcomingLeaves) => {
-      this.upcomingLeaves = upcomingLeaves;
-    });
-
-    this.leaveService.getLeaveApplied().subscribe((appliedLeave: any) => {
-      if (appliedLeave) {
-        this.updateLeaveCounts(appliedLeave);
+  loadLeaves() {
+    this.leaveService.getLeaves().subscribe({
+      next: (data) => {
+        this.leaves = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load leaves. Please try again later.';
+        console.error('Error fetching leaves', err);
+        this.loading = false;
       }
     });
-  }
-
-  updateLeaveCounts(leaveData: any): void {
-    const leave = this.leaves.find((leave) => leave.typeLeave === leaveData.leaveType);
-    if (leave) {
-    leave.available -= leaveData.days;  
-    leave.booked += leaveData.days;     
-  }
-  }
-
-  validLeave(leave: any): boolean {
-   
-    return leave && leave.typeLeave && leave.available != null;
   }
 
   applyLeave() {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent, {
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.leaveService.bookLeave(result?.leaveType, result?.days).subscribe({
-          next: (response) => {
-            this.leaveService.setLeaveApplied(result);
-          },
-          error: (error) => {
-            console.error('Error applying leave', error);
-          }
-        });
-      }
-    });
-  }
-
-  toggleViewMode(): void {
-    this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
+    this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
   }
 }
-
-
-
-
-// applyLeave() {
-//   debugger
-//   this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
-// }

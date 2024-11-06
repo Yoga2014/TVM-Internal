@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepicker, MatDatepickerModule, MatDateRangeInput } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,8 +27,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TreeModule } from 'primeng/tree';
-import { MatDialogModule } from '@angular/material/dialog';
-
 // Components
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
@@ -71,6 +69,7 @@ import { TeamProjectComponent } from './team-project/team-project.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { DeleteGoalsComponent } from './delete-goals/delete-goals.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { PerformanceMyDataComponent } from './performance-my-data/performance-my-data.component';
 import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
 import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
@@ -91,10 +90,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
-import { TimeLogComponent } from './time-log/time-log.component';
-import { AppraisalComponent } from './appraisal/appraisal.component';
-import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.component";
-
+import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +98,7 @@ import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.componen
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
+    SkillSetMatrixComponent,
     ProfessionalComponent,
     HeaderComponent,
     DetailsComponent,
@@ -157,7 +154,7 @@ import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.componen
     EmployeeTreeComponent,
     FeedsComponent,
     OperationComponent,
-    ReportsComponent,
+    ReportsComponent
   ],
 
   imports: [
@@ -191,31 +188,7 @@ import { OnboardingComponent } from "./onBoarding/onboarding/onboarding.componen
     NgIf,
     NgFor,
     TreeModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatIconModule,
-    BrowserAnimationsModule,
-    MatDatepicker,
-    MatDatepickerModule,
-    MatDateRangeInput,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatTableModule
-    
-],
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

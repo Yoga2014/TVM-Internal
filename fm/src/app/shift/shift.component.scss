@@ -1,0 +1,31 @@
+.shift-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      color: #333;
+    }
+  
+    p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  
+    button {
+      padding: 10px 15px;
+      margin-right: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &:disabled {
+        background-color: #ddd;
+        cursor: not-allowed;
+      }
+    }
+  }
+  

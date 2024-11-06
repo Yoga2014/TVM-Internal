@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppraisalComponent } from './appraisal.component';
+import { SkillSetMatrixComponent } from './skill-set-matrix.component';
 
-describe('AppraisalComponent', () => {
-  let component: AppraisalComponent;
-  let fixture: ComponentFixture<AppraisalComponent>;
+describe('SkillSetMatrixComponent', () => {
+  let component: SkillSetMatrixComponent;
+  let fixture: ComponentFixture<SkillSetMatrixComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppraisalComponent]
+      imports: [SkillSetMatrixComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AppraisalComponent);
+    fixture = TestBed.createComponent(SkillSetMatrixComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

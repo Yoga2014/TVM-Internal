@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeLogComponent } from './time-log.component';
+import { ProfileComponent } from './profile.component';
 
-describe('TimeLogComponent', () => {
-  let component: TimeLogComponent;
-  let fixture: ComponentFixture<TimeLogComponent>;
+describe('ProfileComponent', () => {
+  let component: ProfileComponent;
+  let fixture: ComponentFixture<ProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimeLogComponent]
+      imports: [ProfileComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(TimeLogComponent);
+
+    fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

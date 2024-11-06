@@ -30,13 +30,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 "Goal Component":
 "Payload" :
         {
+  "employeeId": "string",  //  
   "name": "string",        // Required, the name of the goal
   "description": "string", // Required, a brief description of the goal
   "priority": "string",    // Required, priority level: "Low", "Medium", "High"
   "startDate": "ISO date", // Required, the start date of the goal in ISO format
   "endDate": "ISO date",   // Required, the end date of the goal in ISO format
   "progress": number,      // Optional, percentage progress of the goal (0-100)
-  "id": "string"           // Optional, unique identifier for the goal
+  "goalId": "string"           // Optional, unique identifier for the goal
 }
 "Example response":
         {
@@ -108,43 +109,30 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     "Payload" :{
   "employeeId": "string",         // Required, unique employee ID
   "employeeName": "string",       // Required, name of the employee
-  "dob": "number"                 // Required, dob of the dob
   "profilePicture": "string",     // Optional, path to the employee's profile picture
   "leaveBooked": number,          // Optional, number of leave days booked
   "generalTimining": "string",    // Optional, general working hours of the employee
   "status": "string",             // Required, e.g., "active", "on leave"
-  "onLeave": false,               // Required, a person is leave or not
-  "joinDate": "2020-03-10"        // Required, a date of joining
-
-
-
-  
+  "id": "string"                  // Optional, unique ID for the reportee entry
 }
 
 "Example Response"
   {
   "LeaveReportees": [
     {
-       "employeeId": "E001",
-        "employeeName": "John Doe",
-        "dob": "1990-01-15",
-        "profilePicture": "https://example.com/images/john_doe.jpg",
-        "status": "Active",
-        "generalTimining": "9:00 AM - 6:00 PM",
-        "leaveBooked": 5,
-        "joinDate": "2020-03-10",
-        "onLeave": false
-      
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "profilePicture": "assets/images/john_doe.jpg",
+      "leaveBooked": 10,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active",
+      "id": "af4c"
     },
   ]
 }
 
 "Request/Response Flow":
-
-GET /LeaveReportees?managerId={managerId}: Retrieve all reportees for a specific manager.
-POST /LeaveReportees: Add a new reportee entry.
-PUT /LeaveReportees/{id}: Update a reportee's information by their ID.
-DELETE /LeaveReportees/{id}: Delete a reportee entry by their ID.
+     GET /LeaveReportees?managerId={managerId}: Retrieve reportees under a specific manager.
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -236,7 +224,83 @@ DELETE /LeaveReportees/{id}: Delete a reportee entry by their ID.
     DELETE /NewHires/{id}: Delete a new hire entry.
 
 ---------------------------------------------------------------------------------------
+"Tasks"
 
+"tasks": [
+    {
+      "taskOwner": "String",    // Required task Owner eg.name of the project holder
+      "taskName": "String",     // Required task name eg. name of the task you done
+      "description": "String",  // Required description eg.like textarea 
+      "startDate": "date",      // Required date eg.startdate
+      "dueDate": "date",        // Required date eg.enddate
+      "reminder": "date",       // Required date eg.remainderdate
+      "priority": "string",     // Required priority eg. dropdown like medium, high, low.
+      "status": "string",       // Required status  eg.InProgrees, NotStarted, completed.
+      "id": "string"            //Required, unique ID.
+    },
+]
 
+Example response:
+"tasks": [
+    {
+      "taskOwner": "Durai",
+      "taskName": "Internal Project",
+      "description": "ongoing",
+      "startDate": "2024-08-21",
+      "dueDate": "2024-08-31",
+      "reminder": "2024-08-25",
+      "priority": "Medium",
+      "status": "In Progress",
+      "id": "b807"                     
+    },
+]
 
+"Request/Response Flow":
+   GET /task: Retrieve a list of recent task.
+    POST /task: Add a new Task.
+    PUT /task/{id}: Update information for a specific new task.
+    DELETE /task/{id}: Delete a task.
 
+---------------------------------------------------------------------------------------
+"Announcements"
+
+"announcements": [
+    {
+      "id": "string",                    //Required, unique ID.
+      "name": "String",                 //Required name eg.Announcer name.
+      "title": "string",                // Required Title of the Announcement eg.birthday.
+      "message": "string",              // Required message eg. announcer message.
+      "attachment": null,               // Required attachment eg.like photo, file
+      "category": "updates",            // Required like dropdown like update,news and alert.
+      "expiry": "2024-08-29",           // Required date like announcement date.
+      "location": "branch",             // Required location in dropwon branch, headquatres like. 
+      "disableComments": true,          // checkbox
+      "pinAnnouncement": false,         // checkbox
+      "notifyAll": false               // checkbox
+    },
+ ]
+
+Example response:
+ "announcements": [
+    {
+      "id": "7b35",
+      "name": "DURAI RAJ",
+      "title": "Announcement",
+      "message": "Welcome....",
+      "attachment": null,
+      "category": "updates",
+      "expiry": "2024-08-29",
+      "location": "branch",
+      "disableComments": true,
+      "pinAnnouncement": false,
+      "notifyAll": false
+    },
+ ]
+
+"Request/Response Flow":
+   GET /Announcements: Retrieve a list of recent Announcements.
+    POST /Announcements: Add a new Announcements.
+    PUT /Announcements/{id}: Update information for a specific new Announcements.
+    DELETE /Announcements/{id}: Delete a Announcements.
+ 
+---------------------------------------------------------------------------------------

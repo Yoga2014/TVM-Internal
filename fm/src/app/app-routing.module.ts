@@ -55,14 +55,8 @@ import { DepartmentDirectoryComponent } from './department-directory/department-
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
-import { TimeLogComponent } from './time-log/time-log.component';
-import { AppraisalComponent } from './appraisal/appraisal.component';
 
 const routes: Routes = [
-
-  { path: '', component: AppraisalComponent},
-  { path: 'test', component: TimeLogComponent},
-  
   { path: 'general', component: GeneralComponent },
   { path: 'educational', component: EducationalComponent },
   { path: 'skillset', component: SkillsetComponent },
@@ -174,14 +168,14 @@ const routes: Routes = [
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },
-          { path: 'skillset', component: SkillsetPerformanceComponent },
+          // { path: 'skillset', component: SkillsetComponent },
           { path: 'competency', component: CompetencyComponent },
           { path: 'feedback', component: PerformanceFeedbackComponent },
         ],
       },
       {
         path: 'Skill-Set-Matrix',
-        component: GoalsMyDataComponent,
+        component: PerformanceMyDataComponent,
         children: [
         ],
       },

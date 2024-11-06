@@ -1,17 +1,9 @@
 {
   "sections": [
     {
-      "employeeId": "1",
-      "employeeName": "Arul",
-      "details": "CEO details here",
-      "role":"Ceo",
-      "profile":"./img",
-      "memberId":"101",
-      "membername":"Sivaneshwaran",
-      "activeStatus":true,
-      "memberCount":"1",
-      "totalCount":"6"
-
+      "id": "1",
+      "name": "Ceo",
+      "details": "CEO details here"
     },
     {
       "id": "2",

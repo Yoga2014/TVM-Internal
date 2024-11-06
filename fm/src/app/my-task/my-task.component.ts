@@ -32,7 +32,6 @@ export class MyTaskComponent {
 
     // Initialize the Reactive Form
     this.taskForm = this.fb.group({
-      id:[],
       taskOwner: ['', Validators.required],
       taskName: ['', Validators.required],
       description: ['', Validators.required],
@@ -90,10 +89,8 @@ export class MyTaskComponent {
     if (this.taskForm.valid) {
       const taskData = this.taskForm.value;
       if (this.editingTask) {
-        taskData.id = this.editingTask.taskId;
-       
+        taskData.id = this.editingTask.id;
         this.taskService.updateTask(taskData).subscribe(() => {
-          console.log(taskData,"settting")
           this.loadTasks();
           this.closeModal();
         });
@@ -117,7 +114,6 @@ export class MyTaskComponent {
   }
 
   deleteTask(id: number | undefined): void {
-    debugger
     if (id !== undefined) {
       this.taskService.deleteTask(id).subscribe(() => {
         this.loadTasks();

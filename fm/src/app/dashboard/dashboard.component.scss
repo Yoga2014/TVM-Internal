@@ -10,8 +10,8 @@
   margin-bottom: 20px;
 }
 
-.cards app-birthday-card, .cards app-new-hires-card, .cards app-leave-report-dashboard {
-  flex: 1 1 100%;
+.cards app-birthday-card, .cards app-new-hires-card {
+  flex: 1;
 }
 
 .leave-report {
@@ -70,19 +70,4 @@
 
 .button-container .btn-primary:hover {
   background-color: #0056b3;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .cards app-birthday-card, .cards app-new-hires-card,
-  .leave-card {
-    flex: 1 1 100%; /* Take full width on smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .cards app-birthday-card, .cards app-new-hires-card,
-  .leave-card {
-    min-width: 100%; /* Take full width on extra small screens */
-  }
 }

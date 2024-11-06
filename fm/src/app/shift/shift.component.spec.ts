@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OnboardingComponent } from './onboarding.component';
+import { ShiftComponent } from './shift.component';
 
-describe('OnboardingComponent', () => {
-  let component: OnboardingComponent;
-  let fixture: ComponentFixture<OnboardingComponent>;
+describe('ShiftComponent', () => {
+  let component: ShiftComponent;
+  let fixture: ComponentFixture<ShiftComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OnboardingComponent]
+      imports: [ShiftComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(OnboardingComponent);
+
+    fixture = TestBed.createComponent(ShiftComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

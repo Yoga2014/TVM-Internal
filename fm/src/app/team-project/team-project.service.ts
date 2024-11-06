@@ -6,30 +6,30 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamProjectService {
+ 
+  api='http://localhost:3000/project'
+  constructor(private apihttp:HttpClient) { }
+  
+  getMethod(){
+      return this.apihttp.get('http://localhost:3000/project')
+    }
 
-  private api = 'http://192.168.0.11:8080/api/projects'
-  constructor(private apihttp: HttpClient) { }
+  
+  
+  postMethod(item:any){
+    return this.apihttp.post('http://localhost:3000/project',item)
+  }
 
-  getMethod() {
-    return this.apihttp.get(this.api+"/get")
+  
+  deleteMethod(id:any){
+    return this.apihttp.delete('http://localhost:3000/project'+'/'+id)
   }
 
 
-
-  postMethod(item: any) {
-    return this.apihttp.post(this.api+"/add", item)
+    editMethod(id:any){
+      return this.apihttp.get('http://localhost:3000/project'+'/'+id);
+      }
+    updateMethod(id:any,data:any){
+         return this.apihttp.put('http://localhost:3000/project'+'/'+id,data);
+       }
   }
-
-
-  deleteMethod(id: any) {
-    return this.apihttp.delete(this.api + '/' + id)
-  }
-
-
-  editMethod(id: any) {
-    return this.apihttp.get(this.api + '/' + id);
-  }
-  updateMethod(id: any, data: any) {
-    return this.apihttp.put(this.api + '/' + id, data);
-  }
-}

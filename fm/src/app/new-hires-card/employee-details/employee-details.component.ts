@@ -10,7 +10,7 @@ import { Employee } from 'src/app/Interface/employee.model';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  employee: Employee | any = null;
+  employee: Employee | null = null;
   isEditing: boolean = false;
 
   constructor(private route: ActivatedRoute, private newHiresService: NewHiresService, private router: Router) { }

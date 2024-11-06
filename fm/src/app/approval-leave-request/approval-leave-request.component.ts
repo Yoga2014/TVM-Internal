@@ -18,7 +18,6 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     'employeeId', 'employeeName', 'email', 'designation', 'leaveType', 'teamId',
     'startDate', 'endDate', 'totalLeaveDays', 'reason', 'status', 'actions'
   ];
-  status!: 'pending' | 'approved' | 'rejected';
 
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
@@ -34,36 +33,16 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-
-
   loadLeaveRequests(): void {
-    debugger;
-
-   
-    this.leaveRequests = [];
-    this.dataSource.data = [];
-
-    this.leaveService.getLeaves().subscribe({
-      next: (data: LeaveRequest[]) => {
-   
-        console.log('Fetched leave requests:', data);
-
-        const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
-
-  
-        const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
-          index === self.findIndex((lr) => lr.id === leaveRequest.id)
-        );
-
-   
-        this.leaveRequests = uniqueLeaveRequests;
+    this.leaveService.getLeaves().subscribe(
+      (data: LeaveRequest[]) => {
+        this.leaveRequests = data;
         this.dataSource.data = this.leaveRequests;
-
       },
-      error: (error) => {
+      (error) => {
         console.error('Error fetching leave requests', error);
       }
-    });
+    );
   }
 
   applyFilter(event: Event): void {
@@ -72,18 +51,14 @@ export class ApprovalLeaveRequestComponent implements OnInit {
   }
 
   approveRequest(request: LeaveRequest): void {
-    request.status='approved';
-    debugger
     if (confirm('Are you sure you want to approve this leave request?')) {
       this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe(() => {
         this.refreshData();
       });
-      console.log(request.employeeId)
     }
   }
 
   rejectRequest(request: LeaveRequest): void {
-    request.status='rejected';
     const comment = prompt('Please enter the reason for rejection:');
     if (comment) {
       this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Rejected', comment }).subscribe(() => {
