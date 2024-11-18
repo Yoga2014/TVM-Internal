@@ -1,0 +1,19 @@
+<nav class="navbar">
+    <div class="nav-item" [class.active]="activeNavItem === 'my-data'" (click)="navigateToMyData()">My Data</div>
+    <!-- <div class="nav-item" [class.active]="activeNavItem === 'team'" (click)="navigateToTeam()">Team</div> -->
+</nav>
+
+<div class="sub-navbar">
+    <div class="nav-item" [class.active]="activeSubNavItem === 'time-logs'" (click)="navigateToTimeLogs()">Time Logs
+    </div>
+    <div class="nav-item" [class.active]="activeSubNavItem === 'timesheets'" (click)="navigateToTimesheets()">Timesheets
+    </div>
+    <div class="nav-item" [class.active]="activeSubNavItem === 'appraisal'" (click)="navigateToAppraisal()">Appraisal
+    </div>
+</div>
+
+<div class="main-content">
+    <app-time-log *ngIf="activeSubNavItem === 'time-logs'"></app-time-log>
+    <app-time-sheet *ngIf="activeSubNavItem === 'time-sheets'"></app-time-sheet>
+    <app-appraisal *ngIf="activeSubNavItem === 'appraisal'"></app-appraisal>
+</div>

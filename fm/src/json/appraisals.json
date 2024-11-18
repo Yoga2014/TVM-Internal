@@ -1,0 +1,118 @@
+{
+  "appraisals": [
+    {
+      "id": "38d9",
+      "employeeName": "Sivaneshwaran",
+      "employeeId": "TVM01",
+      "jobTitle": "test",
+      "department": "test",
+      "managerName": "test",
+      "appraisalPeriod": "3 months",
+      "performanceGoals": [
+        {
+          "goal": "test",
+          "goalType": "test",
+          "completionStatus": "test",
+          "comments": "test"
+        }
+      ],
+      "selfAssessment": {
+        "strengths": "test",
+        "accomplishments": "test",
+        "challenges": "test",
+        "areasForImprovement": "test",
+        "overallPerformance": "test"
+      },
+      "managerAssessment": {
+        "jobKnowledge": "Average",
+        "qualityOfWork": "Bad",
+        "productivity": "Good",
+        "communicationSkills": "Good",
+        "problemSolvingSkills": "Excellence",
+        "teamwork": "Excellence",
+        "initiative": "Average",
+        "overallRating": "Bad"
+      },
+      "strengths": {
+        "keyStrengths": "",
+        "examples": ""
+      },
+      "areasForImprovement": {
+        "keyAreasForImprovement": "",
+        "trainingDevelopmentNeeds": ""
+      },
+      "feedback": {
+        "managerFeedback": "",
+        "peerTeamFeedback": "",
+        "employeeFeedbackOnProcess": ""
+      },
+      "actionPlanAndGoals": [
+        {
+          "action": "Action Placeholder",
+          "deadline": "2024-12-31",
+          "responsible": "John Doe"
+        }
+      ],
+      "finalPerformanceRating": "Bad",
+      "managerSignature": "test",
+      "date": "2024-11-03"
+    },
+    {
+      "id": "7df9",
+      "employeeName": "Sivaneshwaran",
+      "employeeId": "TVM01",
+      "jobTitle": "test",
+      "department": "test",
+      "managerName": "test",
+      "appraisalPeriod": "3 months",
+      "performanceGoals": [
+        {
+          "goal": "test",
+          "goalType": "test",
+          "completionStatus": "test",
+          "comments": "test"
+        }
+      ],
+      "selfAssessment": {
+        "strengths": "test",
+        "accomplishments": "test",
+        "challenges": "test",
+        "areasForImprovement": "test",
+        "overallPerformance": "test"
+      },
+      "managerAssessment": {
+        "jobKnowledge": "Bad",
+        "qualityOfWork": "Average",
+        "productivity": "Average",
+        "communicationSkills": "Average",
+        "problemSolvingSkills": "Good",
+        "teamwork": "Excellence",
+        "initiative": "Excellence",
+        "overallRating": "Excellence"
+      },
+      "strengths": {
+        "keyStrengths": "",
+        "examples": ""
+      },
+      "areasForImprovement": {
+        "keyAreasForImprovement": "",
+        "trainingDevelopmentNeeds": ""
+      },
+      "feedback": {
+        "managerFeedback": "",
+        "peerTeamFeedback": "",
+        "employeeFeedbackOnProcess": ""
+      },
+      "actionPlanAndGoals": [
+        {
+          "action": "Action Placeholder",
+          "deadline": "2024-12-31",
+          "responsible": "John Doe"
+        }
+      ],
+      "finalPerformanceRating": "Good",
+      "managerSignature": "test",
+      "date": "2024-11-29"
+    }
+  ]
+}

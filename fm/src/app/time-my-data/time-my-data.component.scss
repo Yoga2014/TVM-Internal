@@ -1,0 +1,64 @@
+/* Navbar and Sub-navbar styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #123;
+    border-bottom: 2px solid #fff;
+    background-size: cover;
+}
+ .sub-navbar {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-bottom: 2px solid #123;
+    background-size: cover;
+}
+
+.sub-navbar {
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Navbar Item styling */
+.nav-item {
+    margin-right: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+/* Hover and active state styling */
+.nav-item:hover {
+    background-color: #f1f1f1;
+    color: #1e3c72;
+}
+
+.nav-item.active {
+    background-color: #f1f1f1;
+    color: #1e3c72;
+}
+
+.nav-item::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0088ff;
+    transition: width 0.3s;
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+    width: 100%;
+}
+

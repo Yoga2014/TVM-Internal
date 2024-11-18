@@ -1,0 +1,75 @@
+<div class="time-log">
+  <h2>Time Log</h2>
+
+  <div class="controls">
+    <select [(ngModel)]="selectedProject">
+      <option value="" disabled>Select Project</option>
+      <option *ngFor="let project of projects" [value]="project.projectName">{{ project.projectName }}</option>
+    </select>
+    
+    <select [(ngModel)]="selectedJob">
+      <option value="" disabled>Select Job</option>
+      <option value="Job A">Job A</option>
+      <option value="Job B">Job B</option>
+    </select>
+    
+    <textarea [(ngModel)]="taskDescription" placeholder="What are you working on?"></textarea>
+  </div>
+
+  <div class="timer">
+    <h3>Timer: {{ timerDisplay }}</h3>
+    <button (click)="toggleTimer()">{{ timerStarted ? 'Check Out' : 'Check In' }}</button>
+  </div>
+
+  <!-- Conditional display based on timerStarted -->
+  <div class="logs" *ngIf="!timerStarted">
+    <h3> Logs</h3>
+    <div class="log-card" *ngFor="let log of logs">
+      <div class="card">
+        <div class="card-body">
+          <p><strong>Project:</strong> {{ log.project }}</p>
+          <p><strong>Job:</strong> {{ log.job }}</p>
+          <p><strong>Description:</strong> {{ log.description }}</p>
+          <p><strong>Start Time:</strong> {{ log.startTime | date: 'short' }}</p>
+          <p><strong>End Time:</strong> {{ log.endTime | date: 'short' }}</p>
+          <p><strong>Hours:</strong> {{ log.hours }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar" *ngIf="!timerStarted">
+    <h3><i class="fas fa-calendar-alt"></i> Weekly Calendar</h3>
+    <button (click)="prevWeek()">Previous</button>
+    <button (click)="showCalendar()">Show Calendar</button>
+    <button (click)="nextWeek()">Next</button>
+
+    <!-- Calendar table -->
+    <div *ngIf="showWeeklyCalendar" class="container weekly-calendar-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of weekDays" (click)="selectDate(day)" 
+              [class.table-primary]="selectedDate === day">
+            <td>{{ day | date: 'EEEE' }}</td>
+            <td>{{ day | date: 'fullDate' }}</td>
+            <td>
+              <span *ngIf="getLogTimeFormatted(day); else noLog">
+                Logged: {{ getLogTimeFormatted(day) }}
+              </span>
+              <ng-template #noLog>Not logged</ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Button to toggle calendar visibility -->
+</div>

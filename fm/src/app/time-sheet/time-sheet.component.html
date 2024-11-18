@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="header">
+    <h1>Timesheets</h1>
+    <div class="tabs">
+      <div class="active">Timesheets</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <select [(ngModel)]="selectedTimeframe" (change)="fetchTimesheetData()">
+      <option value="weekly">Weekly Timesheets</option>
+      <option value="monthly">Monthly Timesheets</option>
+      <option value="yearly">Yearly Timesheets</option>
+    </select>
+    <select [(ngModel)]="selectedDateRange">
+      <option *ngFor="let range of dateRanges">{{ range }}</option>
+    </select>
+    <select [(ngModel)]="hourFilter" (change)="applyFilters()">
+      <option value="all">All tracked hours</option>
+      <option value="above8">Above 8 hours</option>
+      <option value="below8">Below 8 hours</option>
+    </select>
+    <select [(ngModel)]="groupFilter" (change)="applyFilters()">
+      <option value="all">All Groups</option>
+      <option *ngFor="let group of groups">{{ group }}</option>
+    </select>
+    <select [(ngModel)]="scheduleFilter" (change)="applyFilters()">
+      <option value="all">All Schedules</option>
+      <option *ngFor="let schedule of schedules">{{ schedule }}</option>
+    </select>
+    <input type="text" placeholder="Search..." [(ngModel)]="searchText" (input)="applyFilters()" />
+    <button (click)="exportData()">Export</button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th *ngFor="let day of days">{{ day }}</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timesheet of filteredTimesheets">
+        <td class="name">
+          <img [src]="timesheet.imageUrl" alt="Profile picture of {{ timesheet.name }}" width="40" height="40" />
+          {{ timesheet.name }}
+        </td>
+        <td *ngFor="let hours of timesheet.weekHours" class="hours" 
+            (mouseover)="showTooltip($event, hours)" (mouseleave)="hideTooltip()">
+          <span *ngIf="hours !== '-'">{{ hours }}</span>
+          <span *ngIf="hours === '-'">-</span>
+        </td>
+        <td>{{ timesheet.totalHours | number:'1.1-1' }} hr</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tooltip" id="tooltip" *ngIf="isTooltipVisible" [ngStyle]="tooltipStyle">
+    <p>First in: 8:33 am</p>
+    <p>Last out: 6:08 pm</p>
+    <p>Regular: 8h 41m</p>
+  </div>
+</div>
