@@ -54,9 +54,9 @@ export class MyTaskComponent {
   }
 
   loadTasks(): void {
-    this.taskService.getTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-      this.filteredTasks = tasks;
+    this.taskService.getTasks().subscribe((task) => {
+      this.tasks = task;
+      this.filteredTasks = task;
     });
   }
 
@@ -89,7 +89,7 @@ export class MyTaskComponent {
     if (this.taskForm.valid) {
       const taskData = this.taskForm.value;
       if (this.editingTask) {
-        taskData.id = this.editingTask.id;
+        taskData.taskId = this.editingTask.taskId;
         this.taskService.updateTask(taskData).subscribe(() => {
           this.loadTasks();
           this.closeModal();
@@ -141,8 +141,6 @@ export class MyTaskComponent {
 
       return matchesName && matchesPriority && matchesStatus;
     });
-
-    console.log('Filters applied', this.filterCriteria);
     this.toggleFilterPopup();
   }
 

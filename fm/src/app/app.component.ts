@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  [x: string]: any;
+export class AppComponent implements OnInit {
   title = 'fleet-management';
   activeLink: string = 'home';
   columnDefs = [];
@@ -20,6 +19,38 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
+  ngOnInit() {
+    this.updateActiveLink();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateActiveLink();
+      }
+    });
+  }
+
+  updateActiveLink() {
+    const currentPath = this.router.url;
+    if (currentPath.includes('header')) {
+      this.activeLink = 'profile';
+    } else if (currentPath.includes('leave-tracking')) {
+      this.activeLink = 'leave';
+    } else if (currentPath.includes('perfomance-myData')) {
+      this.activeLink = 'goals';
+    } else if (currentPath.includes('task-tasks')) {
+      this.activeLink = 'task';
+    } else if (currentPath.includes('new-Home')) {
+      this.activeLink = 'home';
+    } else if (currentPath.includes('onboarding')) {
+      this.activeLink = 'onboarding';
+    } else if (currentPath.includes('operation')) {
+      this.activeLink = 'operation';
+    } else if (currentPath.includes('reports')) {
+      this.activeLink = 'reports';
+    } else {
+      this.activeLink = 'home';
+    }
+  }
+
   handleSidebarToggle() {
     this.isExpanded = !this.isExpanded;
   }
@@ -27,10 +58,6 @@ export class AppComponent {
   toggleConfiguration() {
     this.isConfigurationExpanded = !this.isConfigurationExpanded;
   }
-
-  // navigateTo(path: string) {
-  //   this.router.navigate([path]);
-  // }
 
   headerNavigate() {
     this.activeLink = 'profile';
@@ -62,11 +89,12 @@ export class AppComponent {
     this.router.navigate(['onboarding']);
   }
 
-  operationNavigate(){
+  operationNavigate() {
     this.activeLink = 'operation';
     this.router.navigate(['operation']);
   }
-  reportsNavigate(){
+
+  reportsNavigate() {
     this.activeLink = 'reports';
     this.router.navigate(['reports']);
   }
@@ -75,11 +103,12 @@ export class AppComponent {
     this.activeLink = 'task';
     this.router.navigate(['task-tasks']);
   }
+
   togglePopup() {
     this.showPopup = false;
   }
 
   setActiveLink(link: string) {
-    this.activeLink = link; // Set the active link based on user interaction
+    this.activeLink = link;
   }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LeaveService } from 'src/app/AllServices/leave.service';
 import { LeaveRequest } from 'src/app/Interface/leave-request.model';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-apply-leave',
@@ -27,7 +28,10 @@ export class ApplyLeaveComponent implements OnInit {
   teamEmail: string = '';
 
   employee: any = {};
-
+  leaveForm!: FormGroup;
+  dateForm: FormGroup | null = null;
+  today = new Date();
+  minEndDate: Date | null = null;
   constructor(
     private router: Router,
     private leaveService: LeaveService,
@@ -80,7 +84,7 @@ export class ApplyLeaveComponent implements OnInit {
       const leaveRequest: LeaveRequest = {
         employeeId: this.employee.id,
         employeeName: this.employee.name,
-        email: this.employee.email,
+        teamEmail: this.employee.email,
         designation: this.employee.designation,
         leaveType: this.leaveType,
         teamId: this.employee.teamId,
