@@ -47,27 +47,16 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     this.setTableProperties();
   }
 
-
   loadLeaveRequests(): void {
-    debugger;
-
-   
     this.leaveRequests = [];
     this.dataSource.data = [];
-
     this.leaveService.getLeaves().subscribe({
       next: (data: LeaveRequest[]) => {
-   
         console.log('Fetched leave requests:', data);
-
         const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
-
-  
         const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
           index === self.findIndex((lr) => lr.id === leaveRequest.id)
         );
-
-   
         this.leaveRequests = uniqueLeaveRequests;
         this.dataSource.data = this.leaveRequests;
 
@@ -90,25 +79,30 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
 
   applyLeave(): void {
     const dialogRef = this.dialog.open(ApplyLeaveComponent, {});
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const newLeaveRequest: LeaveRequest = {
-          employeeId: result.id,  
+          employeeId: result.employeeId,
           employeeName: result.employeeName,
           leaveType: result.leaveType,
-          type: result.type,
           leavePeriod: result.leavePeriod,
-          daysTaken: result.days,
           dateOfRequest: result.dateOfRequest,
-          selected: false
+          selected: false,
+          startDate: result.startDate,
+          endDate: result.endDate,
+          totalDays: result.totalDays,
+          status: result.status,
+          booked: result.booked,
+          comment: result.comment,
+          teamEmail: result.teamEmail,
+          reasonforRejected: result.reasonforRejected,
+          color: result.color
         };
         console.log(result)
-
-       
         this.leaveRequests.push(newLeaveRequest);
-
-        this.leaveService.addLeaveRequest(newLeaveRequest).subscribe();
+        this.leaveService.addLeaveRequest(newLeaveRequest).subscribe((res: any) => {
+          this.loadLeaveRequests();
+        })
       }
     });
   }
@@ -119,7 +113,7 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
   }
 
   onRowSelect(event: Event, request: LeaveRequest): void {
-    const inputElement = event.target as HTMLInputElement;  
+    const inputElement = event.target as HTMLInputElement;
     if (inputElement.checked !== undefined) {
       request.selected = inputElement.checked;
       if (request.selected) {
@@ -130,8 +124,6 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     }
   }
 
-
- 
   selectAll(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const checked = inputElement.checked;
@@ -142,72 +134,59 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
         this.selectedRequests.push(request);
       }
     });
-    this.dataSource._updateChangeSubscription();  // Trigger table update
+    this.dataSource._updateChangeSubscription();
   }
 
- 
+
   deleteSelectedRequests(): void {
     if (this.selectedRequests.length === 0) {
       alert('Please select at least one request to delete.');
       return;
     }
-
     const confirmation = confirm('Are you sure you want to delete the selected leave request(s)?');
-
     if (confirmation) {
       this.selectedRequests.forEach(request => {
-        this.leaveService.deleteLeaveRequest(request.employeeId).subscribe({
+        if (request.id) {
+          this.leaveService.deleteLeaveRequest(request.id).subscribe({
+            next: () => {
+              this.loadLeaveRequests();
+            },
+            error: (error) => {
+              console.error('Error deleting leave request', error);
+            }
+          });
+        }
+      });
+      this.selectedRequests = [];
+    }
+  }
+
+
+  onDelete(request: LeaveRequest): void {
+    const confirmation = confirm('Are you sure you want to delete this leave request?');
+    if (confirmation) {
+      if (request?.id !== undefined) {
+        this.leaveService.deleteLeaveRequest(request.id).subscribe({
           next: () => {
-            this.loadLeaveRequests();
+            this.leaveRequests = this.leaveRequests.filter(
+              (leave) => leave?.id !== request.id
+            );
+            this.dataSource.data = this.leaveRequests;
+            console.log(`Leave request with id ${request.id} deleted`);
           },
           error: (error) => {
             console.error('Error deleting leave request', error);
           }
         });
-      });
-
-      this.selectedRequests = []; 
+      } else {
+        console.error('Leave request id is undefined');
+      }
     }
   }
 
-  onDelete(request: LeaveRequest): void {
-    const confirmation = confirm('Are you sure you want to delete this leave request?');
-    if (confirmation) {
-      this.leaveService.deleteLeaveRequest(request?.employeeId).subscribe({
-        next: () => {
-          
-          this.leaveRequests = this.leaveRequests.filter(
-            (leave) => leave?.employeeId !== request?.employeeId
-          );
-          this.dataSource.data = this.leaveRequests;  
-          console.log(`Leave request with employeeId ${request.employeeId} deleted`);
-        },
-        error: (error) => {
-          console.error('Error deleting leave request', error);
-        }
-      });
-    }
-  }
-  
-  
- 
-// onDelete(request: LeaveRequest): void {
-//   const confirmation = confirm('Are you sure you want to delete this leave request?');
-//   if (confirmation) {
-//       this.leaveRequests = this.leaveRequests.filter(req => req.employeeId !== request.employeeId);
-//       console.log('Updated leaveRequests after deletion:', this.leaveRequests);
-
-     
-//       this.cd.detectChanges();
-//   }
-// }
-
-  // Add the method to handle action selection
   onActionSelect(event: Event, request: LeaveRequest): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedAction = selectElement.value;
-
-    // Handle different actions like Approve or Reject
     if (selectedAction === 'Approve') {
       this.approveLeaveRequest(request);
     } else if (selectedAction === 'Reject') {
@@ -215,13 +194,11 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Method to approve the leave request
   approveLeaveRequest(request: LeaveRequest): void {
-    // Logic to approve the request
     this.leaveService.approveLeaveRequest(request.employeeId).subscribe({
       next: () => {
         console.log(`Leave request ${request.employeeId} approved`);
-        this.loadLeaveRequests();  // Reload the leave requests after approval
+        this.loadLeaveRequests();
       },
       error: (error) => {
         console.error('Error approving leave request', error);
@@ -229,13 +206,11 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Method to reject the leave request
   rejectLeaveRequest(request: LeaveRequest): void {
-    // Logic to reject the request
     this.leaveService.rejectLeaveRequest(request.employeeId).subscribe({
       next: () => {
         console.log(`Leave request ${request.employeeId} rejected`);
-        this.loadLeaveRequests();  // Reload the leave requests after rejection
+        this.loadLeaveRequests();
       },
       error: (error) => {
         console.error('Error rejecting leave request', error);

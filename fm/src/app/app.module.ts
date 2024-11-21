@@ -10,7 +10,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
-// Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,7 +28,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { TreeModule } from 'primeng/tree';
 import { MatDialogModule } from '@angular/material/dialog';
 
-// Components
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
 import { SkillsetComponent } from './skillset/skillset.component';

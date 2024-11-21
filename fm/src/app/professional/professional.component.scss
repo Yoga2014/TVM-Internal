@@ -64,6 +64,9 @@ th{
 
 .label-spacing {
   margin-bottom: 10px;
+  span{
+    color : red
+  }
 }
 
 .table-btn{
@@ -106,4 +109,6 @@ th{
   width: 88vw;
 }
 
-
+.add h5 i {
+  margin-right: 8px;
+}

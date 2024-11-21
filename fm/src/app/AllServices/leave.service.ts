@@ -38,7 +38,7 @@ export class LeaveService {
     return this.http.post<any>(this.apiUrl, { leaveType, days, cancel: true });
   }
 
-  applyLeave(leaveData: any): Observable<any> {
+  applyLeave(leaveData: LeaveRequest): Observable<any> {
     return this.http.post<any>(this.apiUrl, leaveData);
   }
 

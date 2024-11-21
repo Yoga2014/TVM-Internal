@@ -13,7 +13,6 @@ export class NewHiresService {
   constructor(private http: HttpClient) {}
 
   getRecentHires(): Observable<Employee[]> {
-    debugger
     const today = new Date();
     const fifteenDaysAgo = new Date(today.setDate(today.getDate() - 15));
 

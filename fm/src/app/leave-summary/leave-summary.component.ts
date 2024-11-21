@@ -14,7 +14,6 @@ export class LeaveSummaryComponent implements OnInit {
   leaves: any[] = [];
   upcomingLeaves: any[] = [];
   viewMode = 'list';
-  
 
   constructor(
     private leaveService: LeaveService, 
@@ -23,15 +22,12 @@ export class LeaveSummaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
     this.leaveService.getLeaveSummary().subscribe((leaves) => {
       this.leaves = leaves.filter((leave) => leave && leave.typeLeave && leave.available !== undefined);
     });
-
     this.leaveService.getUpcomingLeaves().subscribe((upcomingLeaves) => {
       this.upcomingLeaves = upcomingLeaves;
     });
-
     this.leaveService.getLeaveApplied().subscribe((appliedLeave: any) => {
       if (appliedLeave) {
         this.updateLeaveCounts(appliedLeave);
@@ -48,7 +44,6 @@ export class LeaveSummaryComponent implements OnInit {
   }
 
   validLeave(leave: any): boolean {
-   
     return leave && leave.typeLeave && leave.available != null;
   }
 
@@ -56,7 +51,6 @@ export class LeaveSummaryComponent implements OnInit {
     const dialogRef = this.dialog.open(ApplyLeaveComponent, {
       data: {}
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.leaveService.bookLeave(result.leaveType, result.days).subscribe({
@@ -80,6 +74,5 @@ export class LeaveSummaryComponent implements OnInit {
 
 
 // applyLeave() {
-//   debugger
 //   this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
 // }

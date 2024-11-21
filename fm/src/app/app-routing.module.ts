@@ -57,6 +57,7 @@ import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
+  { path: '', component: NewHomeComponent },
   { path: 'general', component: GeneralComponent },
   { path: 'educational', component: EducationalComponent },
   { path: 'skillset', component: SkillsetComponent },
@@ -181,8 +182,6 @@ const routes: Routes = [
       },
     ],
   },
-
-  { path: 'add-goal', component: AddGoalsComponent },
   { path: 'goals/:goalId/comments', component: CommentsComponent },
   { path: 'add-goal/:id', component: AddGoalsComponent },
 ];

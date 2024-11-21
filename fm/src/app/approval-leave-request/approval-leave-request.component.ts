@@ -34,28 +34,16 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-
-
   loadLeaveRequests(): void {
-    debugger;
-
-   
     this.leaveRequests = [];
     this.dataSource.data = [];
-
     this.leaveService.getLeaves().subscribe({
       next: (data: LeaveRequest[]) => {
-   
         console.log('Fetched leave requests:', data);
-
         const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
-
-  
         const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
           index === self.findIndex((lr) => lr.id === leaveRequest.id)
         );
-
-   
         this.leaveRequests = uniqueLeaveRequests;
         this.dataSource.data = this.leaveRequests;
 
@@ -73,7 +61,6 @@ export class ApprovalLeaveRequestComponent implements OnInit {
 
   approveRequest(request: LeaveRequest): void {
     request.status='approved';
-    debugger
     if (confirm('Are you sure you want to approve this leave request?')) {
       this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe(() => {
         this.refreshData();
