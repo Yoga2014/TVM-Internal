@@ -4,7 +4,7 @@
     <div class="row mt-5">
       <div class="col-md-5">
         <div class="form-group">
-          <label for="firstName" >First name</label>
+          <label for="firstName" >First name<span>*</span></label>
           <input  class="form-control mt-3" id="firstName" placeholder="User name" formControlName="firstName"
             [ngClass]="{'invalid-input': firstName?.invalid && (firstName?.dirty || firstName?.touched)}">
           <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="text-danger">
@@ -14,7 +14,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group">
-          <label for="lastname" >Last name</label>
+          <label for="lastname" >Last name<span>*</span></label>
           <input class="form-control mt-3" id="lastname" placeholder="User name" formControlName="lastname"
             [ngClass]="{'invalid-input': lastname?.invalid && (lastname?.dirty || lastname?.touched)}">
           <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="text-danger">
@@ -25,8 +25,7 @@
       </div>
       <div class="col-md-5 mt-5">
             <div class="form-group">
-              <label for="dob" class="mt-3">Date of birth</label>
-              <i class="fa-solid fa-calendar-days"></i>
+              <label for="dob" class="mt-3">Date of birth</label><i class="fa-solid fa-calendar-days"></i><span>*</span>
               <input type="date" class="form-control mt-3" id="dob" placeholder="Date of birth" formControlName="dob"
                 [ngClass]="{'invalid-input': dob?.invalid && (dob?.dirty || dob?.touched)}">
               <div *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)" class="text-danger">
@@ -36,7 +35,7 @@
       </div>
       <div class="col-md-5  mt-5">
         <div class="form-group mt-3">
-          <label class="d-block">Gender</label>
+          <label class="d-block">Gender<span>*</span></label>
           <div class="mt-3">
 
             <div class="form-check form-check-inline">
@@ -59,7 +58,7 @@
       </div>
       <div class="col-md-5  mt-5">
         <div class="form-group">
-          <label for="position" class="mt-3">Position applied for</label>
+          <label for="position" class="mt-3">Position applied for<span>*</span></label>
           <select class="form-select mt-3" formControlName="position"
             [ngClass]="{'invalid-input': position?.invalid && (position?.dirty || position?.touched)}">
             <option value="" disabled selected>Select a Designation</option>
@@ -75,23 +74,19 @@
       <div class="col-md-5  mt-5">
         <div class="form-group">
           <label for="employeeReference" class="mt-3">Employee Reference (if any)</label>
-          <input class="form-control mt-3" id="employeeReference" placeholder="Employee Reference" formControlName="employeeReference"
-            [ngClass]="{'invalid-input': employeeReference?.invalid && (employeeReference?.dirty || employeeReference?.touched)}">
-          <div *ngIf="employeeReference?.invalid && (employeeReference?.dirty || employeeReference?.touched)" class="text-danger">
-            <!-- CGPA Obtained Name is required. -->
-          </div>
+          <input class="form-control mt-3" id="employeeReference" placeholder="Employee Reference" formControlName="employeeReference">
         </div>
-
       </div>
 
     </div>
-    <button class="" (click)="saveClick()">Save</button>
+    <br>
+    <button class="btns-general" (click)="saveClick()">Save</button>
   <div class="row  label-div mt-5">
     <hr>
-    <h2><i class="fa-sharp fa-solid fa-house"></i>Contact</h2>
+    <h2><i class="fa-sharp fa-solid fa-house"></i> Contact</h2>
     <div class="d-flex-gap mt-2 ">
       <div class="form-group me-4 col-md-2 ">
-        <label  class="label-spacing" for="mobileNumber">Mobile number</label>
+        <label  class="label-spacing" for="mobileNumber">Mobile number<span>*</span></label>
         <input class="form-control mt-2"  type="number"   id="mobileNumber" placeholder="Mobile number" formControlName="mobileNumber"
         [ngClass]="{'invalid-input': mobileNumber?.invalid && (mobileNumber?.dirty || mobileNumber?.touched)}"
 
@@ -101,7 +96,7 @@
         </div>
       </div>
       <div class="form-group me-4 col-md-2">
-        <label  class="label-spacing" for="homePhoneNumber">Home Phone number</label>
+        <label  class="label-spacing" for="homePhoneNumber">Home Phone number<span>*</span></label>
         <input class="form-control mt-2"  type="number" id="homePhoneNumber" placeholder="Home Phone number" formControlName="homeNumber"
         [ngClass]="{'invalid-input': homeNumber?.invalid && (homeNumber?.dirty || homeNumber?.touched)}">
         <div *ngIf="homeNumber?.invalid && (homeNumber?.dirty || homeNumber?.touched)" class="text-danger">
@@ -109,7 +104,7 @@
         </div>
       </div>
       <div class="form-group col-md-2">
-        <label  class="label-spacing" for="officeNumber">Office number</label>
+        <label  class="label-spacing" for="officeNumber">Office number<span>*</span></label>
         <input class="form-control mt-2"  type="number" id="officeNumber" placeholder="Office number" formControlName="officeNumber"
         [ngClass]="{'invalid-input': officeNumber?.invalid && (officeNumber?.dirty || officeNumber?.touched)}">
         <div *ngIf="officeNumber?.invalid && (officeNumber?.dirty || officeNumber?.touched)" class="text-danger">
@@ -119,7 +114,7 @@
     </div>
   </div>
   <div class="form-group label-div col-md-5 mt-5">
-    <label  class="label-spacing" for="email"> Personal Email ID </label>
+    <label  class="label-spacing" for="email"> Personal Email ID<span>*</span> </label>
     <input class="form-control mt-2" id="email" placeholder="Enter email " formControlName="email"
     [ngClass]="{'invalid-input': email?.invalid && (email?.dirty || email?.touched)}">
     <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
@@ -130,7 +125,7 @@
     <div class="row mt-5">
       <div class="col-md-5">
         <div class="form-group label-div">
-          <label  class="label-spacing" for="presentAddress">Permanent Address <input type="checkbox">Permanent address is same as Present</label>
+          <label  class="label-spacing" for="presentAddress">Permanent Address<span>*</span> <input type="checkbox">Permanent address is same as Present</label>
             <input class="form-control mt-2" style="height: 100px;     padding-bottom: 63px;" id="presentAddress" placeholder="Present Address" formControlName="presentAddress"
             [ngClass]="{'invalid-input': presentAddress?.invalid && (presentAddress?.dirty || presentAddress?.touched)}">
           <div *ngIf="presentAddress?.invalid && (presentAddress?.dirty || presentAddress?.touched)" class="text-danger">
@@ -140,7 +135,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div">
-          <label  class="label-spacing" for="city">City</label>
+          <label  class="label-spacing" for="city">City<span>*</span></label>
           <input class="form-control mt-2" id="city" placeholder="City" formControlName="city"
           [ngClass]="{'invalid-input': city?.invalid && (city?.dirty || city?.touched)}">
           <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="text-danger">
@@ -150,7 +145,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="district">District</label>
+          <label  class="label-spacing" for="district">District<span>*</span></label>
           <input class="form-control mt-2" id="district" placeholder="District" formControlName="district"
           [ngClass]="{'invalid-input': district?.invalid && (district?.dirty || district?.touched)}">
           <div *ngIf="district?.invalid && (district?.dirty || district?.touched)" class="text-danger">
@@ -160,7 +155,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="country">Country</label>
+          <label  class="label-spacing" for="country">Country<span>*</span></label>
           <input class="form-control mt-2" id="country" placeholder="Country" formControlName="country"
           [ngClass]="{'invalid-input': country?.invalid && (country?.dirty || country?.touched)}">
           <div *ngIf="country?.invalid && (country?.dirty || country?.touched)" class="text-danger">
@@ -170,7 +165,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="locality">Locality</label>
+          <label  class="label-spacing" for="locality">Locality<span>*</span></label>
           <input class="form-control mt-2" id="locality" placeholder="Locality" formControlName="locality"
           [ngClass]="{'invalid-input': locality?.invalid && (locality?.dirty || locality?.touched)}">
           <div *ngIf="locality?.invalid && (locality?.dirty || locality?.touched)" class="text-danger">
@@ -180,7 +175,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="pincode">Pincode</label>
+          <label  class="label-spacing" for="pincode">Pincode<span>*</span></label>
           <input class="form-control mt-2" id="pincode" placeholder="Pincode" formControlName="pincode"
           [ngClass]="{'invalid-input': pincode?.invalid && (pincode?.dirty || pincode?.touched)}">
           <div *ngIf="pincode?.invalid && (pincode?.dirty || pincode?.touched)" class="text-danger">
@@ -190,7 +185,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="state">State</label>
+          <label  class="label-spacing" for="state">State<span>*</span></label>
           <input class="form-control mt-2" id="state" placeholder="State" formControlName="state"
           [ngClass]="{'invalid-input': state?.invalid && (state?.dirty || state?.touched)}">
           <div *ngIf="state?.invalid && (state?.dirty || state?.touched)" class="text-danger">
@@ -201,7 +196,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="landmark">Landmark</label>
+          <label  class="label-spacing" for="landmark">Landmark<span>*</span></label>
           <input class="form-control mt-2" id="landmark" placeholder="Landmark" formControlName="landmark"
           [ngClass]="{'invalid-input': landmark?.invalid && (landmark?.dirty || landmark?.touched)}">
           <div *ngIf="landmark?.invalid && (landmark?.dirty || landmark?.touched)" class="text-danger">
@@ -212,7 +207,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-check label-div mt-5">
-          <label class="form-check-label label-spacing" for="passportYes">Do you have a passport?</label>
+          <label class="form-check-label label-spacing" for="passportYes">Do you have a passport?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
               <input class="form-check-input" type="radio" id="passportYes" name="passport" value="yes"  checked>
@@ -227,7 +222,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-check mt-3 label-div mt-5">
-          <label class="form-check-label label-spacing" for="visaYes">Do you have a visa ?</label>
+          <label class="form-check-label label-spacing" for="visaYes">Do you have a visa ?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
               <input class="form-check-input" type="radio" id="visaYes" name="visa" value="yes"  checked>
@@ -364,8 +359,6 @@
         </tr>
       </tbody>
     </table>
-    <!-- <button class="btn btn-primary">Add Language</button> -->
-    <button class="btn next" (click)="nextClick()" [disabled]="">Next<i class="fa-solid fa-chevron-right"></i></button>
   </div>
 </form>
 </div>

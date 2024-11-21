@@ -5,7 +5,7 @@ export interface LeaveRequest {
   available?: number | any;
   booked?: number | any;
   iconClass?: string;
-  email?: string;
+  teamEmail?: string;
   designation?: string;
   teamId?: string;
   type?: string;

@@ -145,10 +145,4 @@ export class GeneralComponent implements OnInit {
     return this.informationForm.get('speak');
   }
 
-  nextClick(){
-  this.route.navigate(['/educational'])
-  }
-
-
-
 }

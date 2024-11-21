@@ -8,8 +8,9 @@ import { Goal, Comment } from '../Interface/Goals.model';
   providedIn: 'root'
 })
 export class GoalService {
-  private apiUrl = 'http://localhost:3001/Goals';
-  private commentUrl = 'http://localhost:3001/comments';
+
+  private apiUrl = 'http://localhost:8080/goals';
+  private commentUrl = 'http://localhost:8080/api/comments';
   private goalsUpdated = new Subject<void>();
 
   constructor(private http: HttpClient) { }
@@ -26,8 +27,8 @@ export class GoalService {
     return this.getGoals().pipe(
       map(goals => {
         // Generate a numerical ID based on the highest existing ID
-        const newId = goals.length > 0 ? (Math.max(...goals.map(g => +g.id)) + 1).toString() : '1';
-        const newGoal = { ...goal, id: newId }; // Ensure the ID is a string
+        const newId = goals.length > 0 ? (Math.max(...goals.map(g => +g.goalId)) + 1).toString() : '1';
+        const newGoal = { ...goal, goalId: newId }; // Ensure the ID is a string
         return newGoal;
       }),
       switchMap(newGoal => this.http.post<Goal>(this.apiUrl, newGoal)),

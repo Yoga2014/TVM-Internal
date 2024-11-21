@@ -54,13 +54,7 @@ export class EducationalComponent {
     this.server.postMethod(this.educationGroup.value).subscribe((res)=>{
       this.getDataMethod()
     })
-
   }
 
-
-
-  nextClick(){
-    this.route.navigate(['/skillset'])
-    }
 }
 
