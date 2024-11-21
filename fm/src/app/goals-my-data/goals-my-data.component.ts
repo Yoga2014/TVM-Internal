@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class GoalsMyDataComponent {
   @Output() subNavChange = new EventEmitter<string>();  // Specify string type
-  activeNavItem: string = 'skillset';
+  activeNavItem: string = 'goals';
 
   constructor(private router: Router) { }
 
@@ -20,12 +20,12 @@ export class GoalsMyDataComponent {
     this.router.navigate(['perfomance-myData/myData', 'goals']);
   }
 
-  navigateToSkillSet()
-  {
-    this.activeNavItem = 'skillset',
-    this.subNavChange.emit('Skill Set');  // Emit string
-    this.router.navigate(['perfomance-myData/myData', 'skillset'])
-  }
+  // navigateToSkillSet()
+  // {
+  //   this.activeNavItem = 'skillset',
+  //   this.subNavChange.emit('Skill Set');  // Emit string
+  //   this.router.navigate(['perfomance-myData/myData', 'skillset'])
+  // }
 
   navigateToCompetency()
   {

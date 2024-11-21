@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LeaveRequest } from '../Interface/leave-request.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeaveService {
-
-  private apiUrl = 'http://localhost:8080/api/leave-requests';
-  private leaveurl = 'http://localhost:8080/api/leave-requests';
-  private leaveAppliedSubject = new Subject<any>();
+  private apiUrl = 'http://localhost:3001/Leave';
+  leaveAppliedSubject: any;
 
   constructor(private http: HttpClient) {}
 
@@ -18,16 +16,20 @@ export class LeaveService {
     return this.http.get(`${this.apiUrl}/employee-details`);
   }
 
-  getLeaveData(year: number): Observable<any> {
-    return this.http.get<any>(`/assets/data/leave-data-${year}.json`);
+  getLeaves(): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(`${this.apiUrl}`);
+  }
+
+  addLeaveRequest(request: LeaveRequest): Observable<LeaveRequest> {
+    return this.http.post<LeaveRequest>(`${this.apiUrl}`, request);
   }
 
   updateLeaveRequest(index: number, leaveRequest: Partial<LeaveRequest>): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${index}`, leaveRequest);
   }
 
-  getUpcomingLeaves(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/upcoming`);
+  deleteLeaveRequest(index: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${index}`);
   }
 
   bookLeave(leaveType: string, days: number): Observable<any> {
@@ -38,7 +40,7 @@ export class LeaveService {
     return this.http.post<any>(this.apiUrl, { leaveType, days, cancel: true });
   }
 
-  applyLeave(leaveData: any): Observable<any> {
+  applyLeave(leaveData: LeaveRequest): Observable<any> {
     return this.http.post<any>(this.apiUrl, leaveData);
   }
 
@@ -59,20 +61,9 @@ export class LeaveService {
     return this.http.put<any>(`${this.apiUrl}/reject/${employeeId}`, {});
   }
 
-  
-  deleteLeaveRequest(employeeId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${employeeId}`);
-  }
-
-  // Fetch all leave requests
-  getLeaves(): Observable<LeaveRequest[]> {
+  getLeaveSummary(): Observable<LeaveRequest[]> {
     return this.http.get<LeaveRequest[]>(this.apiUrl);
   }
-  getLeaveSummary(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.leaveurl);
-  }
 
-  addLeaveRequest(request: LeaveRequest): Observable<LeaveRequest> {
-    return this.http.post<LeaveRequest>(`${this.apiUrl}`, request);
-  }
+  
 }

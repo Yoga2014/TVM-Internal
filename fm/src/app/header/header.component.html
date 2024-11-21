@@ -49,3 +49,8 @@
     <app-details *ngIf="activeNavItem === 'details'"></app-details>
     <app-personal-data-form *ngIf="activeNavItem === 'personalDataForm'"></app-personal-data-form>
   </div>
+
+
+  <button class="btn next" (click)="nextClick()" [disabled]="isLastTab()">
+    Next <i class="fa-solid fa-chevron-right"></i>
+  </button>

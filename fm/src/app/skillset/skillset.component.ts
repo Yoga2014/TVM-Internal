@@ -67,7 +67,7 @@ export class SkillsetComponent {
     this.showPopup = false;
     this.currentIndex = null;
   }
-  addSkill() { debugger
+  addSkill() {
     this.skills.push({ name: 'Angular', yof: 22323, rating: 3,});
     console.log(this.skills,'array value')
     alert('Extra row added')

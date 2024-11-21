@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Employee } from '../Interface/employee.model';
 
 @Injectable({
@@ -13,23 +13,8 @@ export class NewHiresService {
   constructor(private http: HttpClient) {}
 
   getRecentHires(): Observable<Employee[]> {
-    debugger
-    const today = new Date();
-    const fifteenDaysAgo = new Date(today.setDate(today.getDate() - 15));
-
-    return this.http.get<Employee[]>(this.apiUrl).pipe(
-      map((employees: Employee[]) =>
-        employees.filter((employee: Employee) => {
-          if (employee.joinDate) {
-            const joinDate = new Date(employee.joinDate); // Safe cast
-            return joinDate >= fifteenDaysAgo && joinDate <= new Date();
-          }
-          return false;
-        })
-      )
-    );
+    return this.http.get<Employee[]>(this.apiUrl);
   }
-
 
   getEmployeeById(id: string): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiUrl}/${id}`);

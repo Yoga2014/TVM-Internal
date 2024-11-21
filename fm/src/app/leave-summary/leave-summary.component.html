@@ -1,41 +1,54 @@
-<div class="body">
-  <div class="container">
-    <div class="header">
-      <div class="actions">
-        <button><i class="fas fa-calendar-alt"></i></button>
-        <button (click)="toggleViewMode()">
-          <!-- Use a ternary operator inside Angular bindings for toggling icons -->
-          <i class="fas" [ngClass]="viewMode === 'list' ? 'fa-th' : 'fa-list'"></i>
-        </button>
-        <button (click)="applyLeave()">Apply Leave</button>
-      </div>
-    </div>
+<mat-card *ngIf="loading" class="loading-card">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  <p>Loading leaves...</p>
+</mat-card>
 
-    <div class="leave-summary" *ngIf="viewMode === 'list'">
-      <div class="card" *ngFor="let leave of leaves">
-        <i [class]="leave.icon" [style.color]="leave.color"></i>
-        <h3>{{ leave.typeLeave }}</h3>
-        <p>Available: {{ leave.available }}</p>
-        <p>Booked: {{ leave.booked }} <i class="fas fa-info-circle"></i></p>
-      </div>
-    </div>
-    
-    
+<mat-card *ngIf="error" class="error-card">
+  <mat-icon>error</mat-icon>
+  <p>{{ error }}</p>
+</mat-card>
 
-    <!-- Upcoming Leave Section -->
-    <div class="upcoming-leave">
-      <div class="dropdown">
-        <select>
-          <option>Upcoming Leave & Holidays</option>
-        </select>
-      </div>
+<mat-card *ngIf="!loading && !error">
+  <mat-card-header>
+    <mat-card-title>Leave Summary</mat-card-title>
+    <mat-card-subtitle>Total Leaves: {{ leaves.length }}</mat-card-subtitle>
+  </mat-card-header>
 
-      <div class="leave-item" *ngFor="let upcomingLeave of upcomingLeaves">
-        <div class="date">{{ upcomingLeave.date }}</div>
-        <div class="type">
-          <span [class]="upcomingLeave.type"></span> {{ upcomingLeave.type }} • {{ upcomingLeave.days }} day(s)
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <mat-card-content>
+    <table mat-table [dataSource]="leaves" class="mat-elevation-z8">
+
+      <!-- Leave Type Column -->
+      <ng-container matColumnDef="leaveType">
+        <mat-header-cell *matHeaderCellDef> Leave Type </mat-header-cell>
+        <mat-cell *matCellDef="let leave"> {{ leave.leaveType }} </mat-cell>
+      </ng-container>
+
+      <!-- Start Date Column -->
+      <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
+        <mat-cell *matCellDef="let leave"> {{ leave.startDate | date }} </mat-cell>
+      </ng-container>
+
+      <!-- End Date Column -->
+      <ng-container matColumnDef="endDate">
+        <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
+        <mat-cell *matCellDef="let leave"> {{ leave.endDate | date }} </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let leave"> {{ leave.status }} </mat-cell>
+      </ng-container>
+
+      <!-- Table Header -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!-- Table Row -->
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="applyLeave()">Apply Leave</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,13 +1,13 @@
 <div class="proffession-page">
   <div class="row">
     <h2 class="col-md-5"><i class="fa-solid fa-mobile-retro"></i>Professional details</h2>
-    <div>
-    <h5 class="col-md-5 add"><i class="fa-solid fa-plus btn"></i>Add</h5>
+    <div class="add">
+    <h5 class="add"><i class="fa-solid fa-plus btn"></i>Add</h5>
   </div>
   </div>
   <form [formGroup]="professionalFrom" >
     <div class="form-group  col-md-10">
-      <label  class="label-spacing" for="firstName">Company name</label>
+      <label  class="label-spacing" for="firstName">Company name<span>*</span></label>
       <input class="form-control" id="firstName" placeholder="Company name" formControlName="companyname"
       [ngClass]="{'invalid-input': companyname?.invalid && (companyname?.dirty || companyname?.touched)}">
       <div *ngIf="companyname?.invalid && (companyname?.dirty || companyname?.touched)" class="text-danger">
@@ -19,7 +19,7 @@
         <div class="d-flex">
           <div class="me-3 flex-grow-1">
             <div class="form-group div-spacing">
-              <label class="label-spacing" for="durationFrom">Duration</label>
+              <label class="label-spacing" for="durationFrom">Duration<span>*</span></label>
               <input type="text" class="form-control" id="durationFrom" placeholder="From"  formControlName="durationfrom"
               [ngClass]="{'invalid-input': durationfrom?.invalid && (durationfrom?.dirty || durationfrom?.touched)}">
               <div *ngIf="durationfrom?.invalid && (durationfrom?.dirty || durationfrom?.touched)" class="text-danger">
@@ -43,7 +43,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group div-spacing">
-          <label  class="label-spacing" for="firstNameDuplicate">Role/Title</label>
+          <label  class="label-spacing" for="firstNameDuplicate">Role/Title<span>*</span></label>
           <input class="form-control" id="firstNameDuplicate" placeholder="Designation"  formControlName="role"
           [ngClass]="{'invalid-input': role?.invalid && (role?.dirty || role?.touched)}">
           <div *ngIf="role?.invalid && (role?.dirty || role?.touched)" class="text-danger">
@@ -63,7 +63,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group div-spacing">
-          <label  class="label-spacing" for="firstNameDuplicate">Total years of experirnce</label>
+          <label  class="label-spacing" for="firstNameDuplicate">Total years of experirnce<span>*</span></label>
           <input class="form-control" id="firstNameDuplicate" placeholder="Total years of experirnce"  formControlName="tyoe"
           [ngClass]="{'invalid-input': tyoe?.invalid && (tyoe?.dirty || tyoe?.touched)}">
           <div *ngIf="tyoe?.invalid && (tyoe?.dirty || tyoe?.touched)" class="text-danger">
@@ -159,7 +159,7 @@
 <hr>
 
 <label>References(list any two prefessional reference)</label>
-<button class="btn  table-btn" (click)="addClick()">Add</button>
+<button class="btn table-btn" (click)="addClick()">Add</button>
 <table class="table">
   <thead>
     <tr>

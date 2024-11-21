@@ -7,29 +7,29 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TeamProjectService {
  
-  private api='http://localhost:3005/project'
+  api='http://localhost:3000/project'
   constructor(private apihttp:HttpClient) { }
   
   getMethod(){
-      return this.apihttp.get(this.api)
+      return this.apihttp.get('http://localhost:3000/project')
     }
 
   
   
   postMethod(item:any){
-    return this.apihttp.post(this.api,item)
+    return this.apihttp.post('http://localhost:3000/project',item)
   }
 
   
   deleteMethod(id:any){
-    return this.apihttp.delete(this.api +'/'+id)
+    return this.apihttp.delete('http://localhost:3000/project'+'/'+id)
   }
 
 
     editMethod(id:any){
-      return this.apihttp.get(this.api +'/'+id);
+      return this.apihttp.get('http://localhost:3000/project'+'/'+id);
       }
     updateMethod(id:any,data:any){
-         return this.apihttp.put(this.api +'/'+id,data);
+         return this.apihttp.put('http://localhost:3000/project'+'/'+id,data);
        }
   }

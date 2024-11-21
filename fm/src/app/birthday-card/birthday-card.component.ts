@@ -17,15 +17,7 @@ export class BirthdayCardComponent implements OnInit {
   ngOnInit(): void {
     this.birthdayService.getTodayBirthdays().subscribe(
       (employees: Employee[]) => {
-        const todayDate = new Date();
-        const todayDay = todayDate.getDate();
-        const todayMonth = todayDate.getMonth();
-
-        this.todayBirthdays = employees.filter(employee => {
-          
-          const dob = new Date(employee.dob);
-          return dob.getDate() === todayDay && dob.getMonth() === todayMonth;
-        })
+        this.todayBirthdays = employees;
       },
       (error) => {
         console.error('Failed to fetch today\'s birthdays', error);

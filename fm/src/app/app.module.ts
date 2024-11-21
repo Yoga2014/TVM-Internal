@@ -10,7 +10,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
-// Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,8 +26,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TreeModule } from 'primeng/tree';
-import { MatDialogModule } from '@angular/material/dialog';
-
 // Components
 import { EducationalComponent } from './educational/educational.component';
 import { GeneralComponent } from './general/general.component';
@@ -71,6 +68,7 @@ import { TeamProjectComponent } from './team-project/team-project.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { DeleteGoalsComponent } from './delete-goals/delete-goals.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { PerformanceMyDataComponent } from './performance-my-data/performance-my-data.component';
 import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
 import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
@@ -91,7 +89,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
-
+import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +97,7 @@ import { ReportsComponent } from './reports/reports.component';
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
+    SkillSetMatrixComponent,
     ProfessionalComponent,
     HeaderComponent,
     DetailsComponent,
@@ -154,7 +153,7 @@ import { ReportsComponent } from './reports/reports.component';
     EmployeeTreeComponent,
     FeedsComponent,
     OperationComponent,
-    ReportsComponent,
+    ReportsComponent
   ],
 
   imports: [

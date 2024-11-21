@@ -25,7 +25,6 @@ export class CommentsComponent implements OnInit {
   }
 
   loadComments(): void {
-    debugger
     this.goalService.getComments().subscribe(
       (response: Comment[]) => {
         this.comments = response;
@@ -36,7 +35,6 @@ export class CommentsComponent implements OnInit {
   }
 
   addComment(): void {
-    debugger
     if (this.newComment.trim()) {
       const comment: Comment = {
         id: Math.floor(Math.random() * 10000),
@@ -47,7 +45,7 @@ export class CommentsComponent implements OnInit {
       };
 
       this.goalService.addComment(comment).subscribe(
-        (response: Comment) => {
+        (response) => {
           console.log('Comment successfully posted:', response);
           this.comments.push(response);
           this.newComment = '';

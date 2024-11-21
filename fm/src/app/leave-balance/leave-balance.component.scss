@@ -1,128 +1,106 @@
-.body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow-y: scroll;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    overflow: hidden;
-}
-
 .container {
-    width: 80%;
-    margin: 20px auto;
-}
-
-.leave-card {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 100%; /* Full width coverage */
+    margin: 0 auto;
     padding: 20px;
 }
 
-.leave-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-}
-
-.leave-icon i {
-    font-size: 24px;
-    color: #fff;
-}
-
-.leave-details {
-    flex-grow: 1;
-}
-
-.leave-details h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.leave-status {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    /* adjust the height to your needs */
-}
-
-.leave-status p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.available {
-    color: green;
-}
-
-.booked {
-    color: #333;
-}
-
-.negative {
-    color: red;
-}
-
-.casual {
-    background-color: #a3c9ff;
-}
-
-.earned {
-    background-color: #d4e157;
-}
-
-.leave-without-pay {
-    background-color: #ff8a80;
-}
-
-.paternity {
-    background-color: #ffcc80;
-}
-
-.sabbatical {
-    background-color: #fff176;
-}
-
-.sick {
-    background-color: #ce93d8;
-}
-
-.apply-leave-btn {
-    display: none;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.leave-card:hover .apply-leave-btn {
-    display: block;
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .leave-card {
+    display: block; /* List format */
+    padding: 10px; /* Reduced padding for medium size */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Reduced margin between cards */
     position: relative;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    width: 100%; /* Full width coverage */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.leave-card:hover {
+    background-color: #f9f9f9;
+}
+
+.leave-card:hover .apply-btn {
+    display: inline-block;
+}
+
+.icon {
+    width: 25px; /* Reduced icon size */
+    height: 25px; /* Reduced icon size */
+    margin-right: 8px; /* Adjust spacing */
+    vertical-align: middle; /* Align icons with text */
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    gap: 155px;
+    // align-items: center;
+    // justify-content: center;
+    vertical-align: auto; /* Align details with icon */
+    margin-right: 8px; /* Space between details and button */
+    width: calc(100% - 80px); /* Adjust width for a more compact card */
+}
+
+.apply-btn {
+    display: none;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 12px; /* Reduced button padding */
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; /* Align button with text */
+}
+
+.apply-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Icon classes */
+.casual {
+    background-color: lightblue;
+}
+
+.earned {
+    background-color: lightgreen;
+}
+
+.lwp {
+    background-color: lightcoral;
+}
+
+.paternity {
+    background-color: lightpink;
+}
+
+.sabbatical {
+    background-color: lightyellow;
+}
+
+.sick {
+    background-color: lightpurple;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .leave-card {
+        padding: 8px; /* Further reduced padding */
+    }
+    
+    .icon {
+        width: 20px; /* Smaller icon size */
+        height: 20px; /* Smaller icon size */
+    }
+
+    .apply-btn {
+        padding: 4px 8px; /* Smaller button padding */
+    }
 }

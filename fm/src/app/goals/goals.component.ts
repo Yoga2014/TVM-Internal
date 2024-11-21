@@ -6,6 +6,7 @@ import { Goal } from '../Interface/Goals.model';
 import { Subscription } from 'rxjs';
 import { DeleteGoalsComponent } from '../delete-goals/delete-goals.component';
 import { CommentsComponent } from '../comments/comments.component';
+import { AddGoalsComponent } from '../add-goals/add-goals.component';
 
 @Component({
   selector: 'app-goals',
@@ -21,8 +22,6 @@ export class GoalsComponent implements OnInit, OnDestroy {
   thisWeekCount: number = 0;
   thisMonthCount: number = 0;
   thisYearCount: number = 0;
-
-  // Stepper State
   step1Completed: boolean = false;
   step2Completed: boolean = false;
   step3Completed: boolean = false;
@@ -52,7 +51,7 @@ export class GoalsComponent implements OnInit, OnDestroy {
     this.goalService.getGoals().subscribe(data => {
       this.goals = data;
       this.updateCounts();
-      this.filterGoals('all'); // Default filter on load
+      this.filterGoals('all');
       this.updateStepperState();
     });
   }
@@ -139,11 +138,29 @@ export class GoalsComponent implements OnInit, OnDestroy {
   }
 
   addGoal(): void {
-    this.router.navigate(['/add-goal']);
+    const dialogRef = this.dialog.open(AddGoalsComponent, {
+      width: '600px',
+      data: { goalId: null }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadGoals();
+      }
+    });
   }
 
   editGoal(goal: Goal): void {
-    this.router.navigate(['/add-goal', goal.id]);
+    const dialogRef = this.dialog.open(AddGoalsComponent, {
+      width: '600px',
+      data: { goalId: goal.goalId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadGoals();
+      }
+    });
   }
 
   deleteGoal(goal: Goal): void {
@@ -153,12 +170,12 @@ export class GoalsComponent implements OnInit, OnDestroy {
   openDeleteDialog(goal: Goal): void {
     const dialogRef = this.dialog.open(DeleteGoalsComponent, {
       width: '400px',
-      data: { id: goal.id, name: goal.name }
+      data: { id: goal.goalId, name: goal.name }
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.goalService.deleteGoal(goal.id).subscribe({
+        this.goalService.deleteGoal(goal.goalId).subscribe({
           next: () => {
             console.log('Goal deleted successfully');
             this.loadGoals();

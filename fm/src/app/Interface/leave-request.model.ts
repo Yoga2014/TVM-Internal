@@ -1,13 +1,11 @@
 export interface LeaveRequest {
- 
   employeeId?: string | any;
-  id?: string; 
   employeeName?: string;
   leaveType: string;
   available?: number | any;
   booked?: number | any;
   iconClass?: string;
-  email?: string;
+  teamEmail?: string;
   designation?: string;
   teamId?: string;
   type?: string;
@@ -23,6 +21,4 @@ export interface LeaveRequest {
   reasonforRejected?: string;
   color?: string;
   rejectionComment?: string;
-  daysTaken?: number; 
-  typeLeave?:string;
 }

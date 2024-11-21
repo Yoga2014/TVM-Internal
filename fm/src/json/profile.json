@@ -1,0 +1,59 @@
+{
+  "profile": {
+    "basicInformation": {
+      "employeeId": "12345",
+      "firstName": "John",
+      "lastName": "Doe",
+      "nickname": "john",
+      "email": "john.doe@example.com"
+    },
+    "workInformation": {
+      "department": "Engineering",
+      "location": "New York",
+      "designation": "Software Engineer",
+      "employmentType": "Full-Time",
+      "employeeStatus": "active",
+      "sourceOfHire": "ewew",
+      "dateOfJoining": "18-09-2024",
+      "currentExperience": "1",
+      "totalExperience": "4",
+      "role": "frontend deveoper"
+    },
+    "personalDetails": {
+      "dateOfBirth": "1990-01-01",
+      "age": 30,
+      "gender": "Male",
+      "maritalStatus": "Single",
+      "askMeAbout": "Ask me",
+      "aboutMe": "about me"
+    },
+    "hierarchyInformation": {
+      "reportingManager": "Durai"
+    },
+    "identityInformation": {
+      "uan": "1234567890",
+      "pan": "1234567890",
+      "aadhaar": "123456789012345"
+    },
+    "contactDetails": {
+      "workPhoneNum": "9876543210",
+      "extension": "2",
+      "seatingLocation": "5",
+      "presentAddress": "dfghjk",
+      "permanentAddress": "dsfghjbnk",
+      "personalMobileNum": 9123456780,
+      "personalEmail": "dfgbh",
+      "tags": "2"
+    },
+    "separationInformation": {
+      "dateOfExit": "19-09-2025"
+    },
+    "systemFields": {
+      "addedBy": "Durai Raj",
+      "addedTime": "12:31PM",
+      "modifiedBy": "Durai",
+      "modifiedTime": "12:32PM",
+      "onboardingStatus": "Done"
+    }
+  }
+}
