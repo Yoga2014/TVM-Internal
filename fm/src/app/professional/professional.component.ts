@@ -32,10 +32,6 @@ export class ProfessionalComponent implements OnInit {
     })
   }
 
-  people = [
-    { fullName: 'Remesh', professionalRelationship: 'Project Manager', contactNo: '7985486439', business: 'Software', isEdit: false },
-    { fullName: 'Akila', professionalRelationship: 'Team Member', contactNo: '8985486439', business: 'Software', isEdit: false }
-  ];
 
   professionalPostClick(){
     const val= this.service.professionPosttMethod(this.professionalFrom.value).subscribe((res:any)=>{
@@ -45,26 +41,6 @@ export class ProfessionalComponent implements OnInit {
     console.log(this.professionalFrom.value,'total value')
       this.professionalFrom.reset()
   }
-
-  addClick(){
-    alert('Extra row Added')
-    this.people.push({fullName:'Pravin',professionalRelationship:'Team leader',contactNo:'9876543210',business:'Software',isEdit:false})
-  }
-
-
-  toggleEditMode(index: number) {
-    this.people[index].isEdit = !this.people[index].isEdit;
-  }
-
-  saveChanges(index: number) {
-    this.people[index].isEdit = false;
-  }
-
-
-  deleteRow(index: number): void {
-    this.people.splice(index, 1);
-  }
-
   get companyname() {
     return this.professionalFrom.get('companyname');
   }

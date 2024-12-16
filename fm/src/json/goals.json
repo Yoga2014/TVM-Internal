@@ -1,0 +1,53 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [
+    {
+      "name": "typicode"
+    }
+  ],
+  "goals": [
+    {
+      "name": "testq",
+      "description": "qwertyuiopasdfghjkl",
+      "priority": "High",
+      "startDate": "2024-12-10T18:30:00.000Z",
+      "endDate": "2024-12-13T18:30:00.000Z",
+      "progress": 88,
+      "goalId": "1",
+      "id": 1
+    },
+    {
+      "name": "test2",
+      "description": "qwertyuiopn",
+      "priority": "High",
+      "startDate": "2024-12-10T18:30:00.000Z",
+      "endDate": "2024-12-13T18:30:00.000Z",
+      "progress": 88,
+      "goalId": "2",
+      "id": 2
+    },
+    {
+      "name": "trertrertr",
+      "description": "gfdfgfgfgfgfgf",
+      "priority": "High",
+      "startDate": "2024-12-10T18:30:00.000Z",
+      "endDate": "2024-12-13T18:30:00.000Z",
+      "progress": 87,
+      "goalId": "3",
+      "id": 3
+    }
+  ]
+}

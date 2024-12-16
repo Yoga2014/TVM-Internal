@@ -39,7 +39,7 @@
           <div class="mt-3">
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="genderMale" name="gender" value="male" checked>
+              <input class="form-check-input" type="radio" id="genderMale" name="gender" value="male" formControlName="gender">
               <label class="form-check-label" for="genderMale">Male</label>
             </div>
             <div class="form-check form-check-inline">
@@ -79,8 +79,9 @@
       </div>
 
     </div>
+    
     <br>
-    <button class="btns-general" (click)="saveClick()">Save</button>
+    
   <div class="row  label-div mt-5">
     <hr>
     <h2><i class="fa-sharp fa-solid fa-house"></i> Contact</h2>
@@ -210,7 +211,7 @@
           <label class="form-check-label label-spacing" for="passportYes">Do you have a passport?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
-              <input class="form-check-input" type="radio" id="passportYes" name="passport" value="yes"  checked>
+              <input class="form-check-input" type="radio" id="passportYes" name="passport" value="yes"  formControlName="passport" checked>
               <label class="form-check-label label-spacing" for="passportYes">Yes</label>
             </div>
             <div class="form-check radio-no">
@@ -225,7 +226,7 @@
           <label class="form-check-label label-spacing" for="visaYes">Do you have a visa ?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
-              <input class="form-check-input" type="radio" id="visaYes" name="visa" value="yes"  checked>
+              <input class="form-check-input" type="radio" id="visaYes" name="visa" value="yes" formControlName="visa" checked>
               <label class="form-check-label label-spacing" for="visaYes">Yes</label>
             </div>
             <div class="form-check radio-no">
@@ -240,7 +241,7 @@
   <label class="label-spacing mt-5">Marital status</label>
   <div class="d-flex">
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusSingle" name="maritalStatus" value="single"  checked>
+      <input class="form-check-input" type="radio" id="statusSingle" name="maritalStatus" value="single"  formControlName="maritalstatus" checked>
       <label class="form-check-label label-spacing" for="statusSingle">Single</label>
     </div>
     <div class="form-check me-2">
@@ -279,30 +280,30 @@
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control" type="text" placeholder="Name" formControlName="tname"
-            [ngClass]="{'invalid-input': tname?.invalid && (tname?.dirty || tname?.touched)}">
-            <div *ngIf="tname?.invalid && (tname?.dirty || tname?.touched)" class="text-danger">
+          <td><input class="form-control" type="text" placeholder="Name" formControlName="name"
+            [ngClass]="{'invalid-input': name?.invalid && (name?.dirty || name?.touched)}">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger">
                Name field should not be empty
                 </div></td>
-          <td> <select class="form-select"   formControlName="trelationship"
-            [ngClass]="{'invalid-input': trelationship?.invalid && (trelationship?.dirty || trelationship?.touched)}">
+          <td> <select class="form-select"   formControlName="relationship"
+            [ngClass]="{'invalid-input': relationship?.invalid && (relationship?.dirty || relationship?.touched)}">
             <option value="" disabled selected>--Select--</option>
               <option>--Select--</option>
               <option>Option-1</option>
               <option>Option-2</option>
               <option>Option-3</option>
             </select>
-            <div *ngIf="trelationship?.invalid && (trelationship?.dirty || trelationship?.touched)" class="text-danger">
+            <div *ngIf="relationship?.invalid && (relationship?.dirty || relationship?.touched)" class="text-danger">
               Age field is required.
                </div></td>
-          <td><input class="form-control" type="text" placeholder="Age" formControlName="tage"
-            [ngClass]="{'invalid-input': tage?.invalid && (tage?.dirty || tage?.touched)}">
-            <div *ngIf="tage?.invalid && (tage?.dirty || tage?.touched)" class="text-danger">
+          <td><input class="form-control" type="text" placeholder="Age" formControlName="age"
+            [ngClass]="{'invalid-input': age?.invalid && (age?.dirty || age?.touched)}">
+            <div *ngIf="age?.invalid && (age?.dirty || age?.touched)" class="text-danger">
                Age field is required.
                 </div></td>
-          <td><input class="form-control" type="text" placeholder="Occupation/Organization" formControlName="too"
-            [ngClass]="{'invalid-input': too?.invalid && (too?.dirty || too?.touched)}">
-            <div *ngIf="too?.invalid && (too?.dirty || too?.touched)" class="text-danger">
+          <td><input class="form-control" type="text" placeholder="Occupation/Organization" formControlName="Occupation"
+            [ngClass]="{'invalid-input': Occupation?.invalid && (Occupation?.dirty || Occupation?.touched)}">
+            <div *ngIf="Occupation?.invalid && (Occupation?.dirty || Occupation?.touched)" class="text-danger">
               Occupation/Organization field is required.
                 </div></td>
           <td>
@@ -361,4 +362,7 @@
     </table>
   </div>
 </form>
+</div>
+<div>
+  <button class="btns-general" (click)="saveClick()">Save</button>
 </div>

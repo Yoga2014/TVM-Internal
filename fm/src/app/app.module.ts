@@ -34,6 +34,7 @@ import { ProfessionalComponent } from './professional/professional.component';
 import { HeaderComponent } from './header/header.component';
 import { DetailsComponent } from './details/details.component';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
+import { ReferenceDeatilsComponent } from './reference-deatils/reference-deatils.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
@@ -90,7 +91,7 @@ import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.component';
-
+import { OnboardingComponent } from './more-options/onboarding/onboarding.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -153,7 +154,9 @@ import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.com
     EmployeeTreeComponent,
     FeedsComponent,
     OperationComponent,
-    ReportsComponent
+    ReportsComponent,
+    ReferenceDeatilsComponent,
+    OnboardingComponent,
   ],
 
   imports: [
@@ -187,6 +190,7 @@ import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.com
     NgIf,
     NgFor,
     TreeModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

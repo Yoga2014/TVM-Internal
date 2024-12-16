@@ -18,7 +18,7 @@ export class TeamsDashboardComponent {
     this.activeNavItem = 'team-space';
     this.subNavChange.emit('Team Space');
 
-    this.router.navigate(['new-Home/teams-dashboard', 'team-space']);
+    this.router?.navigate(['new-Home/teams-dashboard', 'team-space']);
   }
 
   navigateToReportees()

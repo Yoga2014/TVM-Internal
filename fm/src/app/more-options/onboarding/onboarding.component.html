@@ -1,67 +1,45 @@
 <nav class="breadcrumb">
-  <span class="breadcrumb-item">Onboarding</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem === 'general'">Onboarding > General</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem === 'educational' ">Onboarding >  Educational</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem === 'skillset'">Onboarding > Skillset</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem === 'professional' ">Onboarding > Professional</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem ==='reference-deatils'">Onboarding > Referencedetails</span>
 </nav>
-<section class=" mt-5">
-  <div class="card shadow-sm">
-    <div class="card-header text-center bg-primary text-white header">
-      <h2>New Joiners</h2>
-    </div>
-    <div class="card-body">
-      <!-- Date Filter Section -->
-      <div class="mb-3">
-        <div class="form-row">
-          <div class="col">
-            <label for="startDate">Start Date</label>
-            <input type="date" id="startDate" class="form-control" />
-          </div>
-          <div class="col">
-            <label for="endDate">End Date</label>
-            <input type="date" id="endDate" class="form-control" />
-          </div>
-          <div class="btn-filter">
-            <button class="btn btn-primary" (click)="filterByDate()">
-              Filter
-            </button>
-            <button class="btn btn-secondary ml-2" (click)="undoFilter()">
-              Undo Filter
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Table Section -->
-      <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th>Employee ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Date Of Join</th>
-            <th>Department</th>
-            <th>Approval</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let worker of employee">
-            <td>{{ worker.id }}</td>
-            <td>{{ worker.firstName }}</td>
-            <td>{{ worker.lastName }}</td>
-            <td>{{ worker.email }}</td>
-            <td>{{ worker.cell }}</td>
-            <!-- <td>{{worker.createdDate | date}}</td> -->
-            <td>{{ worker.positionAppliedFor }}</td>
-            <td>
-              <button
-                class="btn btn-sm btn-info"
-                (click)="approveEmployee(worker.id)"
-              >
-                Approve
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+<nav  class="navbar">
+
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="activeNavItem === 'general'" (click)="selectTab('general')">
+      <i class="fa-solid fa-circle"></i> General
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="activeNavItem === 'educational'" (click)="selectTab('educational')">
+      <i class="fa-solid fa-circle"></i> Educational
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="activeNavItem === 'skillset'" (click)="selectTab('skillset')">
+      <i class="fa-solid fa-circle"></i> Skillset
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="activeNavItem === 'professional'" (click)="selectTab('professional')">
+      <i class="fa-solid fa-circle"></i> Professional
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"[class.active]="activeNavItem === 'reference-deatils'" (click)="selectTab('reference-deatils')">
+      <i class="fa-solid fa-circle"></i> Referencedetails
+    </a>
+  </li>
+</nav>
+<hr>
+  <!-- Conditionally Render Components with Scrollable Containers -->
+<div class="scrollable-content">
+  <app-general *ngIf="activeNavItem === 'general'"></app-general>
+  <app-educational *ngIf="activeNavItem === 'educational'"></app-educational>
+  <app-skillset *ngIf="activeNavItem === 'skillset'"></app-skillset>
+  <app-professional *ngIf="activeNavItem === 'professional'"></app-professional>
+  <app-reference-deatils *ngIf="activeNavItem ==='reference-deatils'"></app-reference-deatils>
+
+</div>

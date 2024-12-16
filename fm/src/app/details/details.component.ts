@@ -1,75 +1,93 @@
-import { Component, input } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { details } from '../AllServices/details.service'; // Adjust the path based on your file structure
 
 @Component({
   selector: 'app-details',
-
   templateUrl: './details.component.html',
-  styleUrl: './details.component.scss'
+  styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
-
-
-
-
-  workers: any[] = [
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false,  },
-    { firstName: 'Anbu', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false },
-
-  ];
-
+export class DetailsComponent implements OnInit {
+  workers: any[] = [];
+  filteredWorkers: any[] = [];
   selectedRows: any[] = [];
 
-  constructor() {}
+  constructor(private details: details) {}
 
-  deleteSelectedRows() {
-    this.selectedRows.forEach(row => {
-      const index = this.workers.indexOf(row);
-      if (index !== -1) {
-        this.workers.splice(index, 1);
+  ngOnInit() {
+    this.fetchWorkers();
+  }
+
+  fetchWorkers() {
+    this.details.EmployeesPostMethod().subscribe(
+      (data) => {
+        this.workers = Array.isArray(data) ? data : [];
+        this.filteredWorkers = [...this.workers];  // Initialize filteredWorkers with all data
+        console.log('Workers:', this.workers);
+      },
+      (error) => {
+        console.error('Error fetching workers:', error);
       }
-    });
-    this.selectedRows = [];
-    alert('Are you sure want delete this row')
+    );
   }
 
   filterWorkers(activeStatus: string) {
+    console.log('Filtering for status:', activeStatus);
+
     if (activeStatus === 'all') {
-      // Show all workers
-      this.workers.forEach(worker => worker.hidden = false);
+      this.filteredWorkers = [...this.workers];  // Show all workers
     } else {
-      // Filter based on active status
-      this.workers.forEach(worker => {
-        if (worker.active === activeStatus) {
-          worker.hidden = false;
-        } else {
-          worker.hidden = true;
-        }
-      });
+      this.filteredWorkers = this.workers.filter(worker => worker.active === activeStatus); // Filter by active status
     }
+
+    console.log('Filtered Workers:', this.filteredWorkers);
   }
 
-  toggleSelection(event: Event, worker: any) {
-    if ((event.target as HTMLInputElement).checked) {
-      this.selectedRows.push(worker);
-    } else {
-      const index = this.selectedRows.indexOf(worker);
-      if (index !== -1) {
-        this.selectedRows.splice(index, 1);
+    // Add a getter to determine if all filtered workers are selected
+    get allSelected() {
+      return this.filteredWorkers.length > 0 && this.filteredWorkers.every(worker => this.selectedRows.includes(worker));
+    }
+  
+    toggleSelection(event: Event, worker: any) {
+      if ((event.target as HTMLInputElement).checked) {
+        this.selectedRows.push(worker);
+      } else {
+        const index = this.selectedRows.indexOf(worker);
+        if (index !== -1) {
+          this.selectedRows.splice(index, 1);
+        }
       }
     }
-  }
-
-  selectAll(event: Event) {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    this.selectedRows = isChecked ? [...this.workers] : [];
-  }
-
-
+  
+    selectAll(event: Event) {
+      const isChecked = (event.target as HTMLInputElement).checked;
+      this.selectedRows = isChecked ? [...this.filteredWorkers] : [];
+    }
+  
+    // Delete selected rows both from the UI and backend
+    deleteSelectedRows() {
+      if (confirm('Are you sure you want to delete the selected rows?')) {
+        const deleteRequests = this.selectedRows.map(worker => {
+          return this.details.deleteWorker(worker.id).toPromise(); // Send DELETE request for each selected worker
+        });
+  
+        Promise.all(deleteRequests).then(() => {
+          // After deleting from the backend, remove from the UI
+          this.selectedRows.forEach(row => {
+            const index = this.workers.indexOf(row);
+            if (index !== -1) {
+              this.workers.splice(index, 1);
+            }
+          });
+  
+          // Update filtered workers after deletion
+          this.filteredWorkers = [...this.workers];
+  
+          // Clear the selection
+          this.selectedRows = [];
+        }).catch(error => {
+          console.error('Error deleting workers:', error);
+        });
+      }
+    }
+  
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
 import { LeaveRequest } from '../Interface/leave-request.model';
+import { ApplyLeaveComponent } from '../leave-summary/apply-leave/apply-leave.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-leave-report-dashboard',
@@ -14,7 +16,8 @@ export class LeaveReportDashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private dialog : MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +38,18 @@ export class LeaveReportDashboardComponent implements OnInit {
   }
 
   applyLeave(): void {
-    this.router.navigate(['apply-leave']);
+    {
+      const dialogRef = this.dialog.open(ApplyLeaveComponent, {
+        width: '600px',
+        data: { goalId: null }
+      });
+  
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result) {
+          this.loadLeaveReports();
+        }
+      });
+    // this.router.navigate(['apply-leave']);
   }
+}
 }

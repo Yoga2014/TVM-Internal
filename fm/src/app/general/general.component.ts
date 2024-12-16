@@ -42,10 +42,10 @@ export class GeneralComponent implements OnInit {
     landmark:['',Validators.required],
     visa:['',Validators.required],
     maritalstatus:['',Validators.required],
-    tname:['',Validators.required],
-    trelationship:['',Validators.required],
-    tage:['',Validators.required],
-    too:['',Validators.required],
+    name:['',Validators.required],
+    relationship:['',Validators.required],
+    age:['',Validators.required],
+    Occupation:['',Validators.required],
     language:['',Validators.required],
     speak:['',Validators.required],
     Read:['',Validators.required],
@@ -126,17 +126,17 @@ export class GeneralComponent implements OnInit {
   get maritalstatus() {
     return this.informationForm.get('maritalstatus');
   }
-  get tname() {
-    return this.informationForm.get('tname');
+  get name() {
+    return this.informationForm.get('name');
   }
-  get trelationship() {
-    return this.informationForm.get('trelationship');
+  get relationship() {
+    return this.informationForm.get('relationship');
   }
-  get tage() {
-    return this.informationForm.get('tage');
+  get age() {
+    return this.informationForm.get('age');
   }
-  get too() {
-    return this.informationForm.get('too');
+  get Occupation() {
+    return this.informationForm.get('Occupation');
   }
   get language() {
     return this.informationForm.get('language');

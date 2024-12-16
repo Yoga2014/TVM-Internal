@@ -87,7 +87,6 @@ export class LeaveRequestsComponent implements OnInit, AfterViewInit {
           comment: result.comment,
           teamEmail: result.teamEmail,
           reasonforRejected: result.reasonforRejected,
-          color: result.color,
         };
         console.log(result)
         this.leaveRequests.push(newLeaveRequest);

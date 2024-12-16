@@ -1,0 +1,27 @@
+{
+  "Educational-detail": [
+    [
+      {
+        "coursePursued": "Option-1",
+        "institutionName": "Annamalai university",
+        "durationFrom": "2021",
+        "durationTo": "2024",
+        "cgpaObtained": "8.9"
+      },
+      {
+        "coursePursued": "Option-2",
+        "institutionName": "Annauniversity",
+        "durationFrom": "2024",
+        "durationTo": "2026",
+        "cgpaObtained": "8.8"
+      },
+      {
+        "coursePursued": "Option-3",
+        "institutionName": "anna university",
+        "durationFrom": "2026",
+        "durationTo": "2028",
+        "cgpaObtained": "8.8"
+      }
+    ]
+  ]
+}

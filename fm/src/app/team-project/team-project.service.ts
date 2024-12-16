@@ -1,35 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TeamProject } from '../Interface/team-project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamProjectService {
  
-  api='http://localhost:3000/project'
-  constructor(private apihttp:HttpClient) { }
+  api = 'http://localhost:8080/api/projects'
+  constructor(private apihttp: HttpClient) { }
   
-  getMethod(){
-      return this.apihttp.get('http://localhost:3000/project')
-    }
-
-  
-  
-  postMethod(item:any){
-    return this.apihttp.post('http://localhost:3000/project',item)
+  getMethod(): Observable<TeamProject[]> {
+    return this.apihttp.get<TeamProject[]>(this.api + '/get')
   }
 
-  
-  deleteMethod(id:any){
-    return this.apihttp.delete('http://localhost:3000/project'+'/'+id)
+  postMethod(item: TeamProject): Observable<TeamProject> {
+    return this.apihttp.post<TeamProject>(this.api + '/add', item)
   }
 
-
-    editMethod(id:any){
-      return this.apihttp.get('http://localhost:3000/project'+'/'+id);
-      }
-    updateMethod(id:any,data:any){
-         return this.apihttp.put('http://localhost:3000/project'+'/'+id,data);
-       }
+  deleteMethod(id: number): Observable<void> {
+    return this.apihttp.delete<void>(this.api + '/' + id)
   }
+
+  editMethod(id: any): Observable<TeamProject> {
+    return this.apihttp.get<TeamProject>(this.api + '/' + id);
+  }
+  updateMethod(id: any, data: any) {
+    return this.apihttp.put(this.api + '/' + id, data);
+  }
+} 
