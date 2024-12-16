@@ -1,54 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
+  import { RouterOutlet } from '@angular/router';
+  import { slideInAnimation } from './animation';
+  import { PlatformLocation } from '@angular/common';
 
-@Component({
-  selector: 'app-onboarding',
-  templateUrl: './onboarding.component.html',
-  styleUrl: './onboarding.component.scss'
-})
-export class OnboardingComponent implements OnInit {
+  @Component({
+    selector: 'app-onboarding',
+    templateUrl: './onboarding.component.html',
+    styleUrl: './onboarding.component.scss'
+  })
+  export class OnboardingComponent implements OnInit {
 
-
-  employee: any[] = [];
-  originalEmployee: any[] = []; // Store the original data
-  apiUrl: string = 'http://localhost:8080/api/approval';
-  approveUrl: string = 'http://localhost:8080/api/approval'; // URL for approval API
-
-  startDate: any | null = null; // To hold the selected start date
-  endDate: string | null = null;   // To hold the selected end date
-
-
-  ngOnInit() {
-    this.loadInactiveWorkers();
-  }
-
-  loadInactiveWorkers(): void {
-
-  }
-
-  filterByDate(): void {
-    if (this.startDate && this.endDate) {
-      const start = new Date(this.startDate);
-      const end = new Date(this.endDate);
-
-      // Check for valid date range
-      if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
-        this.employee = this.originalEmployee.filter(worker => {
-          const joinDate = new Date(worker.createdDate);
-          return joinDate >= start && joinDate <= end;
-        });
-      } else {
-        console.error('Invalid date range');
-      }
-    } else {
-      console.error('Both start date and end date must be provided');
+    constructor(private platformLocation: PlatformLocation) {
+      this.platformLocation.onPopState(() => {
+        this.goToPreviousTab();
+      });
     }
-  }
+    ngOnInit(): void {
+      throw new Error('Method not implemented.');
+    }
+    activeNavItem: string = 'general';
+    navItems = ['general', 'educational', 'skillset', 'professional', 'details', 'personalDataForm']; 
 
-  undoFilter(): void {
-    this.employee = [...this.originalEmployee]; // Restore the original data
-  }
+    selectTab(tabName: string) {
+      this.activeNavItem = tabName;
+      history.pushState(null, '', window.location.href);
+    }
 
-  approveEmployee(id: number): void {
+    prepareRoute(outlet: RouterOutlet) {
+      return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    }
+
+    goToPreviousTab() {
+      const currentIndex = this.navItems.indexOf(this.activeNavItem);
+      if (currentIndex > 0) {
+        this.activeNavItem = this.navItems[currentIndex - 1];
+      } else {
+        history.pushState(null, '', window.location.href);
+      }
+    }
 
   }
-}

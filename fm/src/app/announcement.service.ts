@@ -7,13 +7,13 @@ import { Announcement } from './announcement.model'; // Adjust import as necessa
   providedIn: 'root'
 })
 export class AnnouncementService {
-  private apiUrl = 'http://localhost:3000/announcements'; // Adjust this URL to your setup
+  private apiUrl = 'http://localhost:8080/api/announcements'; // Adjust this URL to your setup
 
   constructor(private http: HttpClient) { }
 
   // Method to save a new announcement
   saveAnnouncement(announcement: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(this.apiUrl, announcement);
+    return this.http.post<Announcement>(this.apiUrl + '/add', announcement);
   }
 
   // Method to get all announcements (if needed)

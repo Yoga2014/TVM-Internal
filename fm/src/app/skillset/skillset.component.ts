@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { ServerService } from '../server.service';
 @Component({
   selector: 'app-skillset',
 
@@ -30,24 +30,15 @@ export class SkillsetComponent {
   currentIndex: number | null = null;
 
 
-  constructor( private route:Router, private fb: FormBuilder){
+  constructor( private route:Router, private fb: FormBuilder,private server: ServerService){
     this.skillForm = this.fb.group({
       name: ['', Validators.required],
       yof: ['', Validators.required],
       rating: ['', Validators.required]
     });
   }
-  skills=[
-    {name:'Java',yof:3,rating:7},
-    {name:'python',yof:4,rating:4},
-    {name:'Angular',yof:5,rating:5},
-    {name:'SQL',yof:6,rating:6},
-    {name:'C++',yof:7,rating:2},
-    {name:'Angular',yof:8,rating:1},
-    {name:'XML',yof:9, rating:7},
-    {name:'SQL',yof:3,rating:8},
-    {name:'Window',yof:2,rating:3}
-  ]
+
+  skills: any[] = []
 
   editSkill(skill: any, index: number) {
     this.skillForm.patchValue(skill);
@@ -56,21 +47,32 @@ export class SkillsetComponent {
   }
 
   onSave() {
-    if (this.skillForm.valid && this.currentIndex !== null) {
-      this.skills[this.currentIndex] = this.skillForm.value;
-      this.showPopup = false;
-      this.currentIndex = null;
+    if (this.skillForm.valid) {
+      const skillData = this.skillForm.value;
+  
+      if (this.currentIndex !== null) {
+        // Update existing skill
+        this.skills[this.currentIndex] = skillData;
+      } else {
+        // Add new skill
+        this.skills.push(skillData);
+      }
+  
+      // Call server method to save data
+      this.server.SkillsMethod(skillData).subscribe(() => {
+        this.showPopup = false;
+        this.currentIndex = null; // Reset index after save
+      });
     }
   }
-
   onClose() {
     this.showPopup = false;
     this.currentIndex = null;
   }
   addSkill() {
-    this.skills.push({ name: 'Angular', yof: 22323, rating: 3,});
-    console.log(this.skills,'array value')
-    alert('Extra row added')
+    this.skillForm.reset(); // Reset the form
+    this.currentIndex = null; // Reset the index
+    this.showPopup = true; // Show the popup
   }
 
   deleteRow(index: number): void {
@@ -82,4 +84,3 @@ export class SkillsetComponent {
     }
 
 }
-

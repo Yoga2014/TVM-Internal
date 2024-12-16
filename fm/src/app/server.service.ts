@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ServerService {
- api:any='http://localhost:3000/educationalFrom'
+ api:any=''
 
 public userSubject = new BehaviorSubject<any>('Initial User');
 
@@ -25,18 +25,28 @@ public userSubject = new BehaviorSubject<any>('Initial User');
     return this.apihttp.get(this.api);
   }
 
+  EducationalMethod(data:any){
+    alert("data fetched")
+    const api=' http://localhost:3000/Educational-detail'
+    return this.apihttp.post(api,data)
+  }
+
+  SkillsMethod(data:any){
+    const api='http://localhost:3000/Skills'
+    return this.apihttp.post(api,data)
+  }
 postMethod(data:any){
   const api='http://localhost:3000/educationalFrom'
   return this.apihttp.post(api,data);
 }
 
 professionPosttMethod(data:any){
-  const api='http://localhost:3000/professionalForm'
+  const api='http://localhost:3000/ProfessionalData'
   return this.apihttp.post(api,data);
 }
 
 basicPosttMethod(data:any){
-  const api=' http://localhost:3000/basicFrom'
+  const api=' http://localhost:3000/profile'
   return this.apihttp.post(api,data);
 }
 
@@ -79,6 +89,9 @@ detailsDeleteMethod(id:any){
   return this.apihttp.delete(url)
 }
 
-
+ReferencePostMethod(data:any){
+  const api='http://localhost:3000/ReferenceData'
+  return this.apihttp.post(api,data);
+}
 
 }

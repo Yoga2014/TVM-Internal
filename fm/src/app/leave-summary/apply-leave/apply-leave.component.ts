@@ -11,14 +11,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./apply-leave.component.scss']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leaveTypes: string[] = [
-    'Casual Leave',
-    'Earned Leave',
-    'Leave Without Pay',
-    'Paternity Leave',
-    'Sabbatical Leave',
-    'Sick Leave'
-  ];
+  leaveTypes: string[] = [];
   leaveType: string = '';
   startDate: Date | null = null;
   endDate: Date | null = null;
@@ -40,6 +33,19 @@ export class ApplyLeaveComponent implements OnInit {
 
   ngOnInit() {
     this.loadEmployeeDetails();
+    this.loadLeaveTypes();
+  }
+
+  loadLeaveTypes() {
+    this.leaveService.getLeaveTypes().subscribe({
+      next: (data) => {
+        this.leaveTypes = data; // Assuming the API returns an array of strings
+      },
+      error: (err) => {
+        alert('Failed to fetch leave types');
+        console.error('Error fetching leave types', err);
+      }
+    });
   }
 
   loadEmployeeDetails() {
@@ -74,31 +80,25 @@ export class ApplyLeaveComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger
     if (this.isValidLeaveRequest()) {
       const leaveDays = this.calculateLeaveDays();
       if (leaveDays < 0) {
         this.endDateError = 'End date cannot be before start date.';
         return;
       }
-
       const leaveRequest: LeaveRequest = {
-        employeeId: this.employee.id,
-        employeeName: this.employee.name,
-        teamEmail: this.employee.email,
-        designation: this.employee.designation,
+        employeeId: this.employee.employeeId,
+        employeeName: this.employee.employeeName,
+        teamEmail: this.employee.teamEmail,
         leaveType: this.leaveType,
-        teamId: this.employee.teamId,
         startDate: this.startDate ? this.formatDate(this.startDate) : '',
         endDate: this.endDate ? this.formatDate(this.endDate) : '',
         totalDays: leaveDays + 1,
         reasonforLeave: this.reason,
         status: 'Pending',
         dateOfRequest: this.formatDate(new Date()),
-        available: this.employee.availableLeave,
         booked: leaveDays + 1,
-        comment: '',
-        reasonforRejected: '',
-        color: ''
       };
 
       this.leaveService.addLeaveRequest(leaveRequest).subscribe({

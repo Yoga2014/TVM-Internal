@@ -1,0 +1,36 @@
+{
+  "profile": [
+    {
+      "firstName": "Murali",
+      "dob": "2003-10-21",
+      "position": "Option-1",
+      "lastname": "Daran",
+      "gender": "male",
+      "employeeReference": "vivek",
+      "mobileNumber": 7339117589,
+      "homeNumber": 7339117589,
+      "officeNumber": 7339117589,
+      "email": "murali733911@gmail.com",
+      "presentAddress": "112, wall street new york",
+      "city": "new york",
+      "district": "new york",
+      "country": "USA",
+      "locality": "New yourk",
+      "pincode": "500001",
+      "state": "New York",
+      "passport": "yes",
+      "landmark": "Near Wall-Street",
+      "visa": "yes",
+      "maritalstatus": "single",
+      "name": "Rajaseakr ",
+      "relationship": "Option-2",
+      "age": "55",
+      "Occupation": "daily wages",
+      "language": "French",
+      "speak": true,
+      "Read": true,
+      "Write": true,
+      "id": 2
+    }
+  ]
+}

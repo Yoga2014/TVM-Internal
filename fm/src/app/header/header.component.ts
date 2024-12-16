@@ -12,8 +12,8 @@ import { SkillsetComponent } from "../skillset/skillset.component";
 })
 export class HeaderComponent {
 
-  activeNavItem: string = 'general';
-  navItems = ['general', 'educational', 'skillset', 'professional', 'details', 'personalDataForm']; 
+  activeNavItem: string = 'details';
+  navItems = ['details', 'personalDataForm']; 
 
   constructor(private platformLocation: PlatformLocation) {
     this.platformLocation.onPopState(() => {

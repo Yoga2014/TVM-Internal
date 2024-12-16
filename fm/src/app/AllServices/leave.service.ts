@@ -7,10 +7,10 @@ import { LeaveRequest } from '../Interface/leave-request.model';
   providedIn: 'root'
 })
 export class LeaveService {
-  private apiUrl = 'http://localhost:3001/Leave';
+  private apiUrl = 'http://localhost:8080/api/leave-requests';
   leaveAppliedSubject: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getEmployeeDetails(): Observable<any> {
     return this.http.get(`${this.apiUrl}/employee-details`);
@@ -65,5 +65,9 @@ export class LeaveService {
     return this.http.get<LeaveRequest[]>(this.apiUrl);
   }
 
-  
+  getLeaveTypes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/leavetype`)
+  }
+
+
 }

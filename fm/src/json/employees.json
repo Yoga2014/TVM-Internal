@@ -1,0 +1,92 @@
+{
+  "Workers": [
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "pending",
+      "department": "Software Developer",
+      "active": "yes",
+      "hidden": false
+    },
+    {
+      "firstName": "Anbu",
+      "secondName": "Krishnan",
+      "mailId": "anbu.krishnan@example.com",
+      "officialMailId": "anbu.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Active",
+      "department": "Software Developer",
+      "active": "no",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Active",
+      "department": "Software Developer",
+      "active": "yes",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Active",
+      "department": "Software Developer",
+      "active": "no",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Inactive",
+      "department": "Software Developer",
+      "active": "yes",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Inactive",
+      "department": "Software Developer",
+      "active": "no",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "Active",
+      "department": "Software Developer",
+      "active": "yes",
+      "hidden": false
+    },
+    {
+      "firstName": "Raji",
+      "secondName": "Krishnan",
+      "mailId": "raji.krishnan@example.com",
+      "officialMailId": "raji.krishnan@company.com",
+      "mobile": "987654345",
+      "onboardingStatus": "pending",
+      "department": "Software Developer",
+      "active": "yes",
+      "hidden": false
+    }
+  ]
+}

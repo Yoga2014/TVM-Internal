@@ -9,8 +9,8 @@ import { Goal, Comment } from '../Interface/Goals.model';
 })
 export class GoalService {
 
-  private apiUrl = 'http://localhost:8080/goals';
-  private commentUrl = 'http://localhost:8080/api/comments';
+  private apiUrl = 'http://localhost:3000/goals';
+  private commentUrl = 'http://localhost:3000/comments';
   private goalsUpdated = new Subject<void>();
 
   constructor(private http: HttpClient) { }

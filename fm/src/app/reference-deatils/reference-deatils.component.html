@@ -1,0 +1,123 @@
+<div class="skill-page">
+    <div class="mt-4">
+      <h2 class="label-spacing">
+        <i class="fa-solid fa-book"></i>Reference-details
+        <button class="table-btn" (click)="addPerson()">Add</button>
+      </h2>
+  
+      <div class="table-page">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Full Name<span>*</span></th>
+              <th>Professional Relationship<span>*</span></th>
+              <th>Contact No<span>*</span></th>
+              <th>Business/Occupation<span>*</span></th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let person of people; let i = index">
+              <td>{{ person.fullName }}</td>
+              <td>{{ person.relationship }}</td>
+              <td>{{ person.contactNo }}</td>
+              <td>{{ person.business }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-success me-2"
+                  (click)="editPerson(person, i)"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="deleteRow(i)"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <div
+          *ngIf="showPopup"
+          class="modal fade show d-block"
+          tabindex="-1"
+          [@popupAnimation]
+        >
+          <div class="modal-dialog ">
+            <div class="modal-content shadow">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit Person</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  (click)="onClose()"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="personForm" (ngSubmit)="onSave()">
+                  <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input
+                      id="fullName"
+                      formControlName="fullName"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="relationship" class="form-label">Professional Relationship</label>
+                    <input
+                      id="relationship"
+                      formControlName="relationship"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="contactNo" class="form-label">Contact No</label>
+                    <input
+                      id="contactNo"
+                      formControlName="contactNo"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="business" class="form-label">Business/Occupation</label>
+                    <input
+                      id="business"
+                      formControlName="business"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="personForm.invalid"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      (click)="onClose()"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -15,9 +15,15 @@
         <div class="title-profile">Profile</div>
       </div>
     </div>
+    <div class="link" (click)="OnboardingNavigate()"  [ngClass]="{'active': activeLink === 'onboarding'}">
+      <div class="content">
+        <i class="fa-regular fa-handshake"></i>
+        <div class="title-home">Onboarding</div>
+      </div>
+    </div>
     <div class="link with-children">
-      <!-- New Leave Tracking Link -->
-      <div class="link" (click)="leaveTrackingNavigate()" [ngClass]="{'active': activeLink === 'leave'}">
+       <!-- New Leave Tracking Link -->
+       <div class="link" (click)="leaveTrackingNavigate()" [ngClass]="{'active': activeLink === 'leave'}">
         <div class="content">
           <i class="fa-solid fa-umbrella-beach fa-flip-horizontal"></i>
           <div class="title-leave">Leave Tracking</div>
@@ -40,12 +46,6 @@
         <div class="content">
           <i class="fa-solid fa-list-check"></i>
           <div class="title-home">Task</div>
-        </div>
-      </div>
-      <div class="link" (click)="OnboardingNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'onboarding'}">
-        <div class="content">
-          <i class="fa-regular fa-handshake"></i>
-          <div class="title-home">Onboarding</div>
         </div>
       </div>
       <div class="link" (click)="operationNavigate()" *ngIf="!showPopup" [ngClass]="{'active': activeLink === 'operation'}">
