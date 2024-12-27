@@ -1,3 +1,4 @@
+
 span {
   color: red;
 }
@@ -60,11 +61,9 @@ th {
 }
 
 .skill-page {
-  display: flex;
+  display: inline;
 }
-.table-page {
-  width: 91vw;
-}
+
 
 .btns-general{
   background-color: #000000;
@@ -72,4 +71,9 @@ th {
   border-radius: 5px;
   float: right;
   margin-right: 150px;
+}
+.skill-page{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1rem 1rem;
 }

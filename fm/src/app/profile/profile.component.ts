@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  standalone: false,
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {

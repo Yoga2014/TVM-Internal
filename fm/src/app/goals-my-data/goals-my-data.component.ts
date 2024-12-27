@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-goals-my-data',
   templateUrl: './goals-my-data.component.html',
+  standalone: false,
   styleUrl: './goals-my-data.component.scss'
 })
 export class GoalsMyDataComponent {

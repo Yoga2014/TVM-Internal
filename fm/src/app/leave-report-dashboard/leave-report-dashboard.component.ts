@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-leave-report-dashboard',
   templateUrl: './leave-report-dashboard.component.html',
+  standalone: false,
   styleUrls: ['./leave-report-dashboard.component.scss']
 })
 export class LeaveReportDashboardComponent implements OnInit {
@@ -25,7 +26,7 @@ export class LeaveReportDashboardComponent implements OnInit {
   }
 
   loadLeaveReports(): void {
-    this.leaveService.getLeaves().subscribe(
+    this.leaveService.getLeaveSummary().subscribe(
       (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;

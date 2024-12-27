@@ -16,11 +16,12 @@
               [checked]="allSelected" 
               (change)="selectAll($event)">
           </th>
+          <th>Employee ID</th>
           <th>First Name</th>
-          <th>Second Name</th>
-          <th>Email</th>
-          <th>Official Email</th>
+          <th>Last Name</th>
+          <th>Gender</th>
           <th>Mobile</th>
+          <th>Email</th>
           <th>Onboarding Status</th>
           <th>Department</th>
           <th>Active</th>
@@ -28,17 +29,26 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let worker of filteredWorkers; let i = index" [hidden]="worker.hidden">
-          <td><input type="checkbox" (change)="toggleSelection($event, worker)" [checked]="selectedRows.includes(worker)" /></td>
-          <td>{{ worker.firstName }}</td>
-          <td>{{ worker.secondName }}</td>
-          <td>{{ worker.mailId }}</td>
-          <td>{{ worker.officialMailId }}</td>
-          <td>{{ worker.mobile }}</td>
-          <td>{{ worker.onboardingStatus }}</td>
-          <td>{{ worker.department }}</td>
-          <td>{{ worker.active }}</td>
-          <td><button class="btn btn-primary">View</button></td>
+        <tr *ngFor="let profile of filteredProfiles; let i = index">
+          <td>
+            <input
+              type="checkbox"
+              (change)="toggleSelection($event, profile)"
+              [checked]="selectedRows.includes(profile)"
+            />
+          </td>
+          <td>{{profile.id}}</td>
+          <td>{{profile.firstName}}</td>
+          <td>{{profile.lastName}}</td>
+          <td>{{profile.gender}}</td>
+          <td>{{profile.mobileNumber}}</td>
+          <td>{{profile.email}}</td>
+          <td>{{profile.onboardingStatus}}</td>
+          <td>{{profile.department}}</td>
+          <td>{{profile.active}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="viewProfile(profile)">View</button>
+          </td>
         </tr>
       </tbody>
     </table>

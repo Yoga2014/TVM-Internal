@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
+  standalone: false,
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent {

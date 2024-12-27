@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-// import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
+  standalone: false,
   styleUrl: './overview.component.scss',
 })
 export class OverviewComponent {

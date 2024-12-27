@@ -4,6 +4,7 @@ import { CheckinCheckoutService } from '../checkin-checkout.service';
 @Component({
   selector: 'app-shift',
   templateUrl: './shift.component.html',
+  standalone: false,
   styleUrls: ['./shift.component.scss']
 })
 export class ShiftComponent implements OnInit {

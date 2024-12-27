@@ -1,93 +1,86 @@
 import { Component, OnInit } from '@angular/core';
-import { details } from '../AllServices/details.service'; // Adjust the path based on your file structure
-
+import { HttpClient } from '@angular/common/http';
+//import { Profile } from '../interfaces/profile.interface';
+import { Profile,FamilyMember,Language } from '../Interface/workers';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  workers: any[] = [];
-  filteredWorkers: any[] = [];
-  selectedRows: any[] = [];
+  profiles: Profile[] = []; 
+  filteredProfiles: Profile[] = []; 
+  selectedRows: Profile[] = []; 
+  apiUrl: string = 'http://localhost:8080/api/profile';
 
-  constructor(private details: details) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.fetchWorkers();
+  ngOnInit(): void {
+    this.fetchProfiles();
   }
 
-  fetchWorkers() {
-    this.details.EmployeesPostMethod().subscribe(
+  
+  fetchProfiles(): void {
+    this.http.get<Profile[]>(this.apiUrl).subscribe(
       (data) => {
-        this.workers = Array.isArray(data) ? data : [];
-        this.filteredWorkers = [...this.workers];  // Initialize filteredWorkers with all data
-        console.log('Workers:', this.workers);
+        this.profiles = data;
+        this.filteredProfiles = [...this.profiles]; 
       },
-      (error) => {
-        console.error('Error fetching workers:', error);
-      }
+      (error) => console.error('Error fetching profiles:', error)
     );
   }
 
-  filterWorkers(activeStatus: string) {
-    console.log('Filtering for status:', activeStatus);
 
+  filterWorkers(activeStatus: string): void {
     if (activeStatus === 'all') {
-      this.filteredWorkers = [...this.workers];  // Show all workers
+      this.filteredProfiles = [...this.profiles];
     } else {
-      this.filteredWorkers = this.workers.filter(worker => worker.active === activeStatus); // Filter by active status
+      this.filteredProfiles = this.profiles.filter(profile => 
+        profile.maritalStatus === activeStatus 
+      );
     }
-
-    console.log('Filtered Workers:', this.filteredWorkers);
   }
 
-    // Add a getter to determine if all filtered workers are selected
-    get allSelected() {
-      return this.filteredWorkers.length > 0 && this.filteredWorkers.every(worker => this.selectedRows.includes(worker));
-    }
   
-    toggleSelection(event: Event, worker: any) {
-      if ((event.target as HTMLInputElement).checked) {
-        this.selectedRows.push(worker);
-      } else {
-        const index = this.selectedRows.indexOf(worker);
-        if (index !== -1) {
-          this.selectedRows.splice(index, 1);
-        }
-      }
+  toggleSelection(event: Event, profile: Profile): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      this.selectedRows.push(profile);
+    } else {
+      this.selectedRows = this.selectedRows.filter(row => row.id !== profile.id);
     }
+  }
+
   
-    selectAll(event: Event) {
-      const isChecked = (event.target as HTMLInputElement).checked;
-      this.selectedRows = isChecked ? [...this.filteredWorkers] : [];
-    }
-  
-    // Delete selected rows both from the UI and backend
-    deleteSelectedRows() {
-      if (confirm('Are you sure you want to delete the selected rows?')) {
-        const deleteRequests = this.selectedRows.map(worker => {
-          return this.details.deleteWorker(worker.id).toPromise(); // Send DELETE request for each selected worker
+  selectAll(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedRows = isChecked ? [...this.filteredProfiles] : [];
+  }
+
+ 
+  deleteSelectedRows(): void {
+    if (confirm('Are you sure you want to delete the selected rows?')) {
+      const deleteRequests = this.selectedRows.map(profile => 
+        this.http.delete(`${this.apiUrl}/${profile.id}`).toPromise()
+      );
+
+      Promise.all(deleteRequests).then(() => {
+        this.selectedRows.forEach(row => {
+          this.profiles = this.profiles.filter(profile => profile.id !== row.id);
         });
-  
-        Promise.all(deleteRequests).then(() => {
-          // After deleting from the backend, remove from the UI
-          this.selectedRows.forEach(row => {
-            const index = this.workers.indexOf(row);
-            if (index !== -1) {
-              this.workers.splice(index, 1);
-            }
-          });
-  
-          // Update filtered workers after deletion
-          this.filteredWorkers = [...this.workers];
-  
-          // Clear the selection
-          this.selectedRows = [];
-        }).catch(error => {
-          console.error('Error deleting workers:', error);
-        });
-      }
+        this.filteredProfiles = [...this.profiles];
+        this.selectedRows = [];
+      }).catch(error => console.error('Error deleting profiles:', error));
     }
-  
+  }
+
+ 
+  get allSelected(): boolean {
+    return this.selectedRows.length === this.filteredProfiles.length && this.selectedRows.length > 0;
+  }
+
+ 
+  viewProfile(profile: Profile): void {
+    console.log('Viewing profile:', profile);
+  }
 }

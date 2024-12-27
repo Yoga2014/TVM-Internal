@@ -13,6 +13,7 @@ interface Day {
 @Component({
   selector: 'app-onleave',
   templateUrl: './onleave.component.html',
+  standalone: false,
   styleUrls: ['./onleave.component.scss']
 })
 export class OnLeaveComponent implements OnInit {

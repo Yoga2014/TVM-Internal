@@ -26,13 +26,12 @@ public userSubject = new BehaviorSubject<any>('Initial User');
   }
 
   EducationalMethod(data:any){
-    alert("data fetched")
-    const api=' http://localhost:3000/Educational-detail'
+    const api='http://localhost:8080/api/education'
     return this.apihttp.post(api,data)
   }
 
   SkillsMethod(data:any){
-    const api='http://localhost:3000/Skills'
+    const api='http://localhost:8080/api/skill'
     return this.apihttp.post(api,data)
   }
 postMethod(data:any){
@@ -41,13 +40,19 @@ postMethod(data:any){
 }
 
 professionPosttMethod(data:any){
-  const api='http://localhost:3000/ProfessionalData'
+  const api='http://localhost:8080/api/professionaldata'
   return this.apihttp.post(api,data);
 }
 
-basicPosttMethod(data:any){
-  const api=' http://localhost:3000/profile'
+AccountPostMethod(data:any){
+  const api='http://localhost:4005/account-details'
   return this.apihttp.post(api,data);
+}
+
+basicPostMethod(data: any) {
+  const api = 'http://localhost:8080/api/profile/clob';
+console.log(data,"datassssssssssssss")
+  return this.apihttp.post(api, data);
 }
 
 
@@ -89,9 +94,6 @@ detailsDeleteMethod(id:any){
   return this.apihttp.delete(url)
 }
 
-ReferencePostMethod(data:any){
-  const api='http://localhost:3000/ReferenceData'
-  return this.apihttp.post(api,data);
-}
+
 
 }

@@ -55,9 +55,20 @@ import { DepartmentDirectoryComponent } from './department-directory/department-
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { TimeTrackingComponent } from './time-tracking/time-tracking.component';
+import { TimeTrackingMyDataComponent } from './time-tracking-my-data/time-tracking-my-data.component';
+import { TimeSheetComponent } from './time-sheet/time-sheet.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
 
 const routes: Routes = [
-  { path: '', component: NewHomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'forgot-password', component: ForgetPasswordComponent },
+  { path: 'home', component: NewHomeComponent },
   { path: 'general', component: GeneralComponent },
   { path: 'educational', component: EducationalComponent },
   { path: 'skillset', component: SkillsetComponent },
@@ -158,6 +169,20 @@ const routes: Routes = [
           { path: 'form-view', component: FormViewComponent },
         ]
       }
+    ]
+  },
+  {
+    path: 'time-tracking',
+    component: TimeTrackingComponent,
+    children: [
+      {
+        path: 'my-data',
+        component: TimeTrackingMyDataComponent,
+        children: [
+         { path: 'time-sheet', component: TimeSheetComponent},
+         { path: 'appraisal', component: AppraisalFormComponent}
+        ],
+      },
     ]
   },
   {

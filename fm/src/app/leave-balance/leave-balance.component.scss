@@ -1,106 +1,97 @@
-.container {
-    width: 100%;
-    max-width: 100%; /* Full width coverage */
-    margin: 0 auto;
-    padding: 20px;
-}
+.container-fluid {
+  display: flex;
+  flex-direction: column; /* Display cards in a list format */
+  gap: 1.5rem;
+  height: 75vh;
+  overflow-y: auto;
+  background-color: #f4f6f9;
+  padding: 1rem;
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.leave-card {
-    display: block; /* List format */
-    padding: 10px; /* Reduced padding for medium size */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px; /* Reduced margin between cards */
+  .leave-summary-card {
     position: relative;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
-    width: 100%; /* Full width coverage */
-    box-sizing: border-box; /* Include padding in width calculation */
-}
-
-.leave-card:hover {
-    background-color: #f9f9f9;
-}
-
-.leave-card:hover .apply-btn {
-    display: inline-block;
-}
-
-.icon {
-    width: 25px; /* Reduced icon size */
-    height: 25px; /* Reduced icon size */
-    margin-right: 8px; /* Adjust spacing */
-    vertical-align: middle; /* Align icons with text */
-}
-
-.details {
     display: flex;
-    flex-direction: row;
-    gap: 155px;
-    // align-items: center;
-    // justify-content: center;
-    vertical-align: auto; /* Align details with icon */
-    margin-right: 8px; /* Space between details and button */
-    width: calc(100% - 80px); /* Adjust width for a more compact card */
-}
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
 
-.apply-btn {
-    display: none;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 6px 12px; /* Reduced button padding */
-    border-radius: 4px;
-    cursor: pointer;
-    vertical-align: middle; /* Align button with text */
-}
+    &:hover {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
 
-.apply-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Icon classes */
-.casual {
-    background-color: lightblue;
-}
-
-.earned {
-    background-color: lightgreen;
-}
-
-.lwp {
-    background-color: lightcoral;
-}
-
-.paternity {
-    background-color: lightpink;
-}
-
-.sabbatical {
-    background-color: lightyellow;
-}
-
-.sick {
-    background-color: lightpurple;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .leave-card {
-        padding: 8px; /* Further reduced padding */
+      .apply-btn {
+        opacity: 1;
+        visibility: visible;
+      }
     }
-    
-    .icon {
-        width: 20px; /* Smaller icon size */
-        height: 20px; /* Smaller icon size */
+
+    .leave-icon {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #ffffff;
+      background-color: #6c757d; /* Neutral color for icons */
+      border-radius: 50%;
+      margin-right: 1.5rem;
+    }
+
+    .leave-details {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      align-items: center;
+      flex-grow: 1;
+      gap: 2rem;
+
+      h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555555;
+        display: flex;
+        gap: 1rem;
+
+        .available {
+          font-weight: 600;
+          color: #28a745;
+        }
+
+        .booked {
+          font-weight: 600;
+          color: #dc3545;
+        }
+      }
     }
 
     .apply-btn {
-        padding: 4px 8px; /* Smaller button padding */
+      flex: 0 0 auto;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #0056b3;
+      }
     }
+  }
 }

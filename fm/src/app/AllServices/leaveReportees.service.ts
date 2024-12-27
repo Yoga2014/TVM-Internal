@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class LeaveReporteesService {
 
-  private apiUrl = 'http://localhost:3001/LeaveReportees'; // Replace with actual API endpoint
+  private apiUrl = 'http://localhost:3007/leaveReportees';
 
   constructor(private http: HttpClient) { }
 

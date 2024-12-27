@@ -5,6 +5,7 @@ import { FeedsService } from '../feeds.service';
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
+  standalone: false,
   styleUrl: './feeds.component.scss'
 })
 export class FeedsComponent implements OnInit {

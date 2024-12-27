@@ -1,25 +1,38 @@
 {
   "announcements": [
     {
-      "id": "7b35",
-      "name": "DURAI RAJ",
-      "title": "Announcement",
-      "message": "Welcome....",
-      "attachment": null,
+      "id": "7d2a",
+      "name": "Sivaneshwaran M",
+      "title": "Batch_12",
+      "message": "Test",
+      "attachment": "C:\\fakepath\\Unconfirmed 992721.crdownload",
       "category": "updates",
-      "expiry": "2024-08-29",
-      "location": "branch"
+      "expiry": "2024-10-24",
+      "location": "branch",
+      "disableComments": false,
+      "pinAnnouncement": true,
+      "likes": 0,
+      "liked": false,
+      "notifyAll": true
     },
     {
-      "id": "ff40",
-      "name": "Durai",
-      "title": "Announcement 1",
-      "message": "Welcome...",
-      "attachment": null,
+      "id": "c1d2",
+      "name": "Sivaneshwaran M",
+      "title": "test",
+      "message": "test",
+      "attachment": "C:\\fakepath\\Unconfirmed 992721.crdownload",
       "category": "news",
-      "expiry": "2024-08-29",
-      "location": "remote"
-      
+      "expiry": "2024-10-24",
+      "location": "hq",
+      "disableComments": false,
+      "pinAnnouncement": true,
+      "notifyAll": false
+    }
+  ],
+  "likeData": [
+    {
+      "id": "id",
+      "liked": "liked"
     }
   ]
 }

@@ -7,6 +7,7 @@ import { SkillsetComponent } from "../skillset/skillset.component";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  standalone: false,
   styleUrl: './header.component.scss',
   animations: [slideInAnimation],
 })

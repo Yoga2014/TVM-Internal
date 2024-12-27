@@ -7,7 +7,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="leave-table">
         <ng-container matColumnDef="employeeId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee ID</th>
-            <td mat-cell *matCellDef="let element">{{element.employeeId}}</td>
+            <td mat-cell *matCellDef="let element">{{element.employeeId }}</td>
         </ng-container>
 
         <ng-container matColumnDef="employeeName">
@@ -15,15 +15,16 @@
             <td mat-cell *matCellDef="let element">{{element.employeeName}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-            <td mat-cell *matCellDef="let element">{{element.email}}</td>
-        </ng-container>
-
         <ng-container matColumnDef="designation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
-            <td mat-cell *matCellDef="let element">{{element.designation}}</td>
-        </ng-container>
+            <td mat-cell *matCellDef="let element">{{ element.designation || 'N/A' }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email || 'N/A' }}</td>
+          </ng-container>
+          
 
         <ng-container matColumnDef="leaveType">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Type</th>
@@ -32,8 +33,8 @@
 
         <ng-container matColumnDef="teamId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Team ID</th>
-            <td mat-cell *matCellDef="let element">{{element.teamId}}</td>
-        </ng-container>
+            <td mat-cell *matCellDef="let element">{{ element.teamId || 'N/A' }}</td>
+          </ng-container>
 
         <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
@@ -52,7 +53,7 @@
 
         <ng-container matColumnDef="reason">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason</th>
-            <td mat-cell *matCellDef="let element">{{element.reasonforRejected}}</td>
+            <td mat-cell *matCellDef="let element">{{element.reasonforLeave}}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">

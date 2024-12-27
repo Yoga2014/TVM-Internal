@@ -6,6 +6,7 @@ import { Task } from '../task.model';
 @Component({
   selector: 'app-form-view',
   templateUrl: './form-view.component.html',
+  standalone: false,
   styleUrl: './form-view.component.scss'
 })
 export class FormViewComponent {

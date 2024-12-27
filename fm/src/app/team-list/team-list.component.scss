@@ -1,43 +1,163 @@
-$icon-color: #333;
-$icon-hover-color: #555;
-$button-bg: #f9f9f9;
-$button-hover-bg: #eaeaea;
-
-.top-bar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
 }
 
-.buttons {
-  display: flex;
-  gap: 0.5rem;
+.container-fluid {
+    //padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 80%; 
+    margin: 20px auto;
+    width: 100%;
+   
 }
 
-.icon-button {
-  background: $button-bg;
-  border: none;
-  border-radius: 50%;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.icon-button:hover {
-  background-color: $button-hover-bg;
+.header select, 
+.header button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.mat-icon {
-  font-size: 1.5rem;
-  color: $icon-color;
-  transition: color 0.3s;
+.header button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.icon-button:hover .mat-icon {
-  color: $icon-hover-color;
+.header button:hover {
+    background-color: #0056b3;
+}
+
+.header .right-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.header .right-buttons button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header .right-buttons button:hover {
+    background-color: #5a6268;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    max-width: fit-content;
+}
+
+th, 
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #f8f9fa;
+    cursor: pointer; 
+}
+
+th i {
+    margin-left: 5px;
+    color: #888;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* Footer select box styling */
+.footer select {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Footer text styling */
+.footer span {
+    font-size: 14px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header .right-buttons {
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer select {
+        margin-bottom: 10px;
+    }
 }

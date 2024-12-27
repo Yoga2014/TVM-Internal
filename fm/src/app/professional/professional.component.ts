@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // Correct 
   selector: 'app-professional',
 
   templateUrl: './professional.component.html',
+  standalone: false,
   styleUrl: './professional.component.scss'
 })
 export class ProfessionalComponent implements OnInit {
@@ -17,13 +18,13 @@ export class ProfessionalComponent implements OnInit {
 
   ngOnInit(): void {
     this.professionalFrom=this.pfbuilder.group({
-      companyname:['',Validators.required],
-      durationfrom:['',Validators.required],
-      durationto:['',Validators.required],
-      empreference:['',Validators.required],
+      companyName:['',Validators.required],
+      durationFrom:['',Validators.required],
+      durationTo:['',Validators.required],
+      empPreference:['',Validators.required],
       role:['',Validators.required],
-      tyoe:['',Validators.required],
-      achivements:['',Validators.required],
+      wExperience:['',Validators.required],
+      achievements:['',Validators.required],
       physical:['',Validators.required],
       arrest:['',Validators.required],
       employment:['',Validators.required],
@@ -41,26 +42,26 @@ export class ProfessionalComponent implements OnInit {
     console.log(this.professionalFrom.value,'total value')
       this.professionalFrom.reset()
   }
-  get companyname() {
-    return this.professionalFrom.get('companyname');
+  get companyName() {
+    return this.professionalFrom.get('companyName');
   }
-  get durationfrom() {
-    return this.professionalFrom.get('durationfrom');
+  get durationFrom() {
+    return this.professionalFrom.get('durationFrom');
   }
-  get durationto() {
-    return this.professionalFrom.get('durationto');
+  get durationTo() {
+    return this.professionalFrom.get('durationTo');
   }
-  get empreference() {
-    return this.professionalFrom.get('empreference');
+  get empPreference() {
+    return this.professionalFrom.get('empPreference');
   }
   get role() {
     return this.professionalFrom.get('role');
   }
-  get tyoe() {
-    return this.professionalFrom.get('tyoe');
+  get wExperience() {
+    return this.professionalFrom.get('wExperience');
   }
-  get achivements() {
-    return this.professionalFrom.get('achivements');
+  get achievements() {
+    return this.professionalFrom.get('achievements');
   }
   get physical() {
     return this.professionalFrom.get('physical');

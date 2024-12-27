@@ -2,8 +2,9 @@
     <h3 class="leave-report-title">Leave Report</h3>
     <div class="leave-cards">
       <div class="leave-card" *ngFor="let leave of leaves">
-        <div class="leave-icon" [ngStyle]="{'background-color': leave.color}">
-          <span>{{ leave.available }}</span>
+        <div class="leave-icon" [class]="leave.iconClass" [style.color]="leave.color">
+        <!-- <i [class]="leave.iconClass" [style.color]="leave.color"></i> -->
+        <!--<span>{{ leave.iconClass }}</span>-->
         </div>
         <div class="leave-details">
           <div class="leave-type">{{ leave.leaveType }}</div>

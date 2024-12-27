@@ -49,5 +49,142 @@
       "authorType": "manager",
       "createdAt": "2024-08-14T07:21:27.543Z"
     }
+  ],
+
+  "employees": [
+    {
+      "id": "1",
+      "employeeName": "Vijay",
+      "dob": "2004-10-16",
+      "image": "https://example.com/images/vijay.jpg",
+      "department": "Engineering"
+    },
+    {
+      "id": "2",
+      "employeeName": "Srini",
+      "dob": "2001-10-15",
+      "image": "https://example.com/images/Srini.jpg",
+      "department": "Marketing"
+    },
+    {
+      "id": "3",
+      "employeeName": "Sivaneshwaran",
+      "dob": "1988-10-16",
+      "image": "https://example.com/images/Sivaneshwaran.jpg",
+      "department": "Sales"
+    },
+    {
+      "id": "4",
+      "employeeName": "Ajith Kumar",
+      "dob": "1992-07-16",
+      "image": "https://example.com/images/Ajith.jpg",
+      "department": "HR"
+    },
+    {
+      "id": "5",
+      "employeeName": "Suresh Raina",
+      "dob": "1998-10-16",
+      "image": "https://example.com/images/Suresh.jpg",
+      "department": "Sales"
+    },
+    {
+      "id": "6",
+      "employeeName": "Ajay",
+      "dob": "1968-10-16",
+      "image": "https://example.com/images/Ajay.jpg",
+      "department": "Sales"
+    }
+  ],
+  "NewHires": [
+    {
+      "employeeId": "1",
+      "employeeName": "Sivaneshwaran",
+      "joinDate": "2024-10-05",
+      "dob": "1990-05-12",
+      "status": "Active"
+    },
+    {
+      "employeeId": "2",
+      "employeeName": "Gutham",
+      "joinDate": "2024-10-25",
+      "dob": "1992-07-21",
+      "status": "Active"
+    },
+    {
+      "employeeId": "3",
+      "employeeName": "Ajith Kumar",
+      "joinDate": "2024-10-11",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "4",
+      "employeeName": "Sanjay",
+      "joinDate": "2024-10-11",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "5",
+      "employeeName": "MS Dhiva",
+      "joinDate": "2024-10-15",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    },
+    {
+      "employeeId": "6",
+      "employeeName": "Vijay",
+      "joinDate": "2024-10-16",
+      "dob": "1985-03-08",
+      "status": "Inactive"
+    }
+  ],
+  "leaveRequests": [],
+  "LeaveSummary": [
+    {
+      "employeeId": "E001",
+      "employeeName": "John Doe",
+      "profilePicture": "assets/images/john_doe.jpg",
+      "leaveBooked": 10,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active",
+      "id": "af4c"
+    },
+    {
+      "employeeId": "E002",
+      "employeeName": "Jane Smith",
+      "profilePicture": "assets/images/jane_smith.jpg",
+      "leaveBooked": 8,
+      "generalTimining": "8 AM - 5 PM",
+      "status": "on leave",
+      "id": "7d10"
+    },
+    {
+      "employeeId": "E003",
+      "employeeName": "Robert Brown",
+      "profilePicture": "assets/images/robert_brown.jpg",
+      "leaveBooked": 5,
+      "generalTimining": "9:30 AM - 6:30 PM",
+      "status": "active",
+      "id": "988d"
+    },
+    {
+      "employeeId": "E004",
+      "employeeName": "Emily Davis",
+      "profilePicture": "assets/images/emily_davis.jpg",
+      "leaveBooked": 12,
+      "generalTimining": "10 AM - 7 PM",
+      "status": "on leave",
+      "id": "bcb7"
+    },
+    {
+      "employeeId": "E005",
+      "employeeName": "Michael Johnson",
+      "profilePicture": "assets/images/michael_johnson.jpg",
+      "leaveBooked": 7,
+      "generalTimining": "9 AM - 6 PM",
+      "status": "active",
+      "id": "7dff"
+    }
   ]
 }

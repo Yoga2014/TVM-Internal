@@ -1,34 +1,22 @@
 {
   "Skills": [
     {
-      "name": "Angular",
-      "yof": 1,
-      "rating": 8,
-      "id": 1
-    },
-    {
-      "name": "git",
-      "yof": 1,
-      "rating": 10,
-      "id": 2
-    },
-    {
-      "name": "Java",
-      "yof": 0.6,
-      "rating": 3,
-      "id": 3
-    },
-    {
-      "name": "java",
-      "yof": 7,
-      "rating": 9,
-      "id": 4
-    },
-    {
-      "name": "java",
-      "yof": 7,
-      "rating": 7,
-      "id": 5
+      "0": {
+        "name": "git",
+        "experience": 1,
+        "rating": 10
+      },
+      "1": {
+        "name": "Java",
+        "experience": 10,
+        "rating": 10
+      },
+      "2": {
+        "name": "angular ",
+        "experience": 2,
+        "rating": 10
+      },
+      "id": "8271"
     }
   ]
 }
