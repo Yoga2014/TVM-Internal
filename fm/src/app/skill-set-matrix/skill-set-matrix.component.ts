@@ -5,6 +5,7 @@ import { Skill, SkillsService } from '../skills.service';
 @Component({
   selector: 'app-skill-set-matrix',
   templateUrl: './skill-set-matrix.component.html',
+  standalone: false,
   styleUrl: './skill-set-matrix.component.scss'
 })
 export class SkillSetMatrixComponent {

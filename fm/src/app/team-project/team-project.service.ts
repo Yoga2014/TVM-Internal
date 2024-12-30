@@ -8,7 +8,7 @@ import { TeamProject } from '../Interface/team-project';
 })
 export class TeamProjectService {
  
-  api = 'http://localhost:8080/api/projects'
+  api = 'http://localhost:3015/project'
   constructor(private apihttp: HttpClient) { }
   
   getMethod(): Observable<TeamProject[]> {

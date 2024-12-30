@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-teams-dashboard',
   templateUrl: './teams-dashboard.component.html',
+  standalone: false,
   styleUrl: './teams-dashboard.component.scss'
 })
 export class TeamsDashboardComponent {

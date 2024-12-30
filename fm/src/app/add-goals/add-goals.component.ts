@@ -7,6 +7,7 @@ import { Goal } from '../Interface/Goals.model';
 @Component({
   selector: 'app-add-goals',
   templateUrl: './add-goals.component.html',
+  standalone: false,
   styleUrls: ['./add-goals.component.scss']
 })
 export class AddGoalsComponent implements OnInit {

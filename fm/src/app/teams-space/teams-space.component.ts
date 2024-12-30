@@ -11,6 +11,7 @@ interface Message {
 @Component({
   selector: 'app-teams-space',
   templateUrl: './teams-space.component.html',
+  standalone: false,
   styleUrl: './teams-space.component.scss'
 })
 export class TeamsSpaceComponent implements OnInit {

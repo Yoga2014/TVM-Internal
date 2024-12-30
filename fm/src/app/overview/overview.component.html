@@ -5,16 +5,13 @@
   <div class="row">
     <div class="col-4">
       <div class="card">
-        <div
-          class="card-body d-flex justify-content-center align-items-center"
-          style="height: 9rem"
-        >
+        <div class="card-body d-flex justify-content-center align-items-center" style="height: 9rem">
           <span class="profile-set">
             <i class="fa-solid fa-user profile"></i>
           </span>
         </div>
         <div class="profile-detail">
-          <h5>1 - Arul</h5>
+          <h5>1 - Arul</h5> 
           <h5>CEO</h5>
         </div>
       </div>
@@ -117,8 +114,8 @@
         </div>
         <div class="card-body" *ngIf="selectedTab === 'feeds'">1</div>
         <div class="card-body" *ngIf="selectedTab === 'profile'">2</div>
-        <div class="card-body" *ngIf="selectedTab === 'approvals'">3</div>
-        <div class="card-body" *ngIf="selectedTab === 'leave'">4</div>
+        <app-approval-leave-request class="card-body" *ngIf="selectedTab === 'approvals'">3</app-approval-leave-request>
+        <app-leave-balance *ngIf="selectedTab === 'leave'"></app-leave-balance>
         <div class="card-body" *ngIf="selectedTab === 'shift'">5</div>
         <div class="card-body" *ngIf="selectedTab === 'files'">6</div>
       </div>

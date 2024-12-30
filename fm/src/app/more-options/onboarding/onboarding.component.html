@@ -3,7 +3,7 @@
   <span class="breadcrumb-item" *ngIf="activeNavItem === 'educational' ">Onboarding >  Educational</span>
   <span class="breadcrumb-item" *ngIf="activeNavItem === 'skillset'">Onboarding > Skillset</span>
   <span class="breadcrumb-item" *ngIf="activeNavItem === 'professional' ">Onboarding > Professional</span>
-  <span class="breadcrumb-item" *ngIf="activeNavItem ==='reference-deatils'">Onboarding > Referencedetails</span>
+  <span class="breadcrumb-item" *ngIf="activeNavItem ==='account-details'">Onboarding > Account-Details</span>
 </nav>
 <nav  class="navbar">
 
@@ -28,8 +28,8 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link"[class.active]="activeNavItem === 'reference-deatils'" (click)="selectTab('reference-deatils')">
-      <i class="fa-solid fa-circle"></i> Referencedetails
+    <a class="nav-link"[class.active]="activeNavItem === 'account-details'" (click)="selectTab('account-details')">
+      <i class="fa-solid fa-circle"></i> Account-Details
     </a>
   </li>
 </nav>
@@ -40,6 +40,5 @@
   <app-educational *ngIf="activeNavItem === 'educational'"></app-educational>
   <app-skillset *ngIf="activeNavItem === 'skillset'"></app-skillset>
   <app-professional *ngIf="activeNavItem === 'professional'"></app-professional>
-  <app-reference-deatils *ngIf="activeNavItem ==='reference-deatils'"></app-reference-deatils>
-
+  <app-account-details *ngIf="activeNavItem === 'account-details'"></app-account-details>
 </div>

@@ -1,9 +1,9 @@
 export interface LeaveRequest {
-  employeeId?: string | any;
+  employeeId?: string;
   employeeName?: string;
-  leaveType: string;
-  available?: number | any;
-  booked?: number | any;
+  leaveType?: any;
+  available?: number;
+  booked?: number;
   iconClass?: string;
   teamEmail?: string;
   designation?: string;
@@ -14,11 +14,13 @@ export interface LeaveRequest {
   endDate?: string;
   totalDays?: number;
   reasonforLeave?: string;
-  status?: string;
+  status?: 'Pending' | 'Approved' | 'Rejected' | 'Upcoming';
   dateOfRequest?: string;
   selected?: boolean;
   comment?: string;
   reasonforRejected?: string;
   color?: string;
   rejectionComment?: string;
+  typeLeave?: string;
+  email?: string;
 }

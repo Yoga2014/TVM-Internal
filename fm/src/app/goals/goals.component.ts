@@ -11,6 +11,7 @@ import { AddGoalsComponent } from '../add-goals/add-goals.component';
 @Component({
   selector: 'app-goals',
   templateUrl: './goals.component.html',
+  standalone: false,
   styleUrls: ['./goals.component.scss']
 })
 export class GoalsComponent implements OnInit, OnDestroy {

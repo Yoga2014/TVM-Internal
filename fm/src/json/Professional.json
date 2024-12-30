@@ -1,32 +1,18 @@
 {
   "ProfessionalData": [
     {
-      "companyname": "TVM infotech",
-      "durationfrom": "2024",
-      "durationto": "2026",
-      "empreference": "Mukesh",
-      "role": "webDeveloper",
-      "tyoe": "2",
-      "achivements": "no",
+      "id": "fb56",
+      "companyName": "Tvm info tech ",
+      "durationFrom": "2018",
+      "durationTo": "2019",
+      "empPreference": "no reference",
+      "role": "web-developer",
+      "wExperience": "1",
+      "achievements": "yes i severed as president ",
       "physical": "no",
       "arrest": "no",
       "employment": "no",
-      "surgical": "no",
-      "id": 1
-    },
-    {
-      "companyname": "TVM INFO TECH",
-      "durationfrom": "2024",
-      "durationto": "2026",
-      "empreference": "NO",
-      "role": "WEB DEVELOPERQ",
-      "tyoe": "2",
-      "achivements": "NO",
-      "physical": "no",
-      "arrest": "no",
-      "employment": "no",
-      "surgical": "no",
-      "id": 2
+      "surgical": "no"
     }
   ]
 }

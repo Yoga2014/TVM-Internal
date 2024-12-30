@@ -6,44 +6,49 @@ import { TeamProject } from '../Interface/team-project';
 
 
 
-@Component({
-  selector: 'app-team-project',
-  templateUrl: './team-project.component.html',
-  styleUrls: ['./team-project.component.scss']
-})
-export class TeamProjectComponent {
-  projectForm: FormGroup = this.fb.group({
-    projectName: ['', [Validators.required, Validators.minLength(3)]],
-    clientName: ['', Validators.required],
-    domain: ['', Validators.required],
-    startDate: ['', Validators.required],
-    voice: ['', [Validators.maxLength(100)]],
-    voiceStartDate: [''],
-    voiceEndDate: [''],
-    coding: ['', [Validators.maxLength(100)]],
-    codingStartDate: [''],
-    codingEndDate: [''],
-    asset: this.fb.array([]),
-    projectStatus: ['', Validators.required],
-  });
-  @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
-  @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
-  projects: TeamProject[] = [];
-  isEditMode: boolean = false;
-  submittedData: TeamProject[] = [];
-  editID: any;
-  showToast: boolean = false; // This should be a boolean
-  updatebtn: boolean = false;
-  submit: boolean = false
-  isOffcanvasOpen = false;
-
-  constructor(
-    public fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private renderer: Renderer2,
-    private teams: TeamProjectService
-  ) { }
+  @Component({
+    selector: 'app-team-project',
+    templateUrl: './team-project.component.html',
+    standalone: false,
+    styleUrls: ['./team-project.component.scss']
+  })
+  export class TeamProjectComponent{
+    projectForm: FormGroup = this.fb.group({
+      projectname: ['', [Validators.required, Validators.minLength(3)]],
+      clientname: ['', Validators.required],
+      domain: ['', Validators.required],
+      startDate: ['', Validators.required],
+      voice: ['', [Validators.required, Validators.maxLength(100)]],
+      voicestartDate: ['', Validators.required],
+      voiceendDate: [''],
+      coding: ['', [Validators.required, Validators.maxLength(100)]],
+      codingstartDate: ['', Validators.required],
+      codingendDate: [''],
+      asset: this.fb.array([]),
+      projectStatus: ['', Validators.required] 
+    });
+    @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
+    @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
+    toastTitle = '';
+    toastMessage = '';
+    projects: any[] = [];
+    projectId: string | null = null;
+    isEditMode = false;
+    submittedData: any[] = [];
+    editID: any;
+    showToast: boolean = false; // This should be a boolean
+    updatebtn:boolean=false;
+    submit:boolean=false
+    toastTime: string = 'Just now';
+    isOffcanvasOpen = false;
+  
+    constructor(
+      public fb: FormBuilder,
+      private route: ActivatedRoute,
+      private router: Router,
+      private renderer: Renderer2,
+      private teams: TeamProjectService
+    ) {}
 
   ngOnInit() {
     this.getdata();

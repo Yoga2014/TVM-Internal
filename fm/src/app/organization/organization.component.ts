@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
+  standalone: false,
   styleUrl: './organization.component.scss'
 })
 export class OrganizationComponent {

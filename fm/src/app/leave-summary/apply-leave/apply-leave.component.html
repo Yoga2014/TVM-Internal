@@ -1,7 +1,7 @@
 <div class="apply-leave">
   <mat-card class="form-card">
     <mat-card-header>
-      <mat-card-title style="display: flex; justify-content: center;">Apply Leave</mat-card-title>
+      <mat-card-title>Apply Leave</mat-card-title>
       <button mat-icon-button class="close-icon" (click)="cancel()">
         <mat-icon>close</mat-icon>
       </button>
@@ -38,9 +38,6 @@
           <mat-error *ngIf="endDateError">{{ endDateError }}</mat-error>
         </mat-form-field>
 
-
-
-
         <!-- Team Email ID -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Team Email ID</mat-label>
@@ -49,7 +46,6 @@
         </mat-form-field>
 
         <!-- Reason for Leave -->
-
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Reason for Leave</mat-label>
           <textarea matInput [(ngModel)]="reason" name="reason" placeholder="Reason for leave" required></textarea>
@@ -57,8 +53,6 @@
         </mat-form-field>
 
         <!-- Buttons -->
-
-
         <div class="button-group">
           <button mat-raised-button color="primary" type="submit">Submit</button>
           <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>

@@ -1,1 +1,60 @@
-<p>team-reportees works!</p>
+<div class="view-toggle">
+    <div class="empName">
+      <i class="fa fa-user-circle profile-icon"></i>
+      {{employeeName}}
+    </div> 
+    <button (click)="toggleView()" [ngClass]="{ 'active': isGridView }">
+      <i class="fa fa-th" *ngIf="isGridView"></i>
+      <i class="fa fa-th-list" *ngIf="!isGridView"></i>
+    </button>
+  </div>
+  
+  <div *ngIf="isGridView; else listView" class="grid-container">
+    <div *ngFor="let employee of employees" class="grid-item">
+      <div class="icons" (mouseover)="hoverOptions(employee.employeeId)" (mouseleave)="hoverOptions(null)">
+        <button mat-icon-button class="phone-icon">📞</button>
+        <div *ngIf="hoveredEmployee === employee.employeeId" class="options">
+          <button (click)="chat(employee.employeeId)">Chat</button>
+          <button (click)="audioCall(employee.employeeId)">Audio Call</button>
+          <button (click)="videoCall(employee.employeeId)">Video Call</button>
+        </div>
+      </div>
+      <div class="profile-picture">
+        <img *ngIf="employee.profilePicture" [src]="employee.profilePicture" alt="Profile Picture">
+        <i *ngIf="!employee.profilePicture" class="fa fa-user-circle default-profile-icon"></i>
+      </div>
+      <div class="employee-details">
+        <div class="name">{{ employee.employeeName }}</div>
+        <div>Leave booked this year: {{ employee.leaveBooked }}</div>
+        <div>General Timing: {{ employee.generalTiming || 'N/A' }}</div>
+        <div class="status">
+          <span [ngClass]="employee.status">{{ employee.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #listView>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Status</th>
+          <th>Leave Booked This Year</th>
+          <th>Shift</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>
+            <img *ngIf="employee.profilePicture" [src]="employee.profilePicture" alt="Profile Picture">
+            <i *ngIf="!employee.profilePicture" class="fa fa-user-circle default-profile-icon"></i>
+            {{ employee.employeeName }}
+          </td>
+          <td>{{ employee.status }}</td>
+          <td>{{ employee.leaveBooked }}</td>
+          <td>{{ employee.generalTiming }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>

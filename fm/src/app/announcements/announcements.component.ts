@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnouncementService } from '../announcement.service';
 import { Announcement } from '../announcement.model';
@@ -7,9 +7,10 @@ import { Announcement } from '../announcement.model';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
+  standalone: false,
   styleUrls: ['./announcements.component.scss']
 })
-export class AnnouncementsComponent  {
+export class AnnouncementsComponent implements OnInit {
 
   
   announcements: any[] = [];
@@ -19,9 +20,11 @@ export class AnnouncementsComponent  {
   isFilterPopupActive = false;
   isModalOpen = false;  
   announcementForm: FormGroup;
-  showCommentBox: boolean = false;
+  showCommentBox: boolean = true;
  commentText: string = '';
  isPopupOpen = false;
+ commentSectionVisible: boolean = true;
+announcement: any;
 
   constructor(private fb: FormBuilder, private announcementService: AnnouncementService) {
     this.announcementForm = this.fb.group({
@@ -35,6 +38,19 @@ export class AnnouncementsComponent  {
     });
 
     this.loadAnnouncements();
+  }
+
+  ngOnInit(){
+    this.announcements.forEach(announcement => {
+      const savedLikeData = localStorage.getItem('announcement_' + announcement.id);
+      if (savedLikeData) {
+        const likeData = JSON.parse(savedLikeData);
+        announcement.liked = likeData.liked;
+        if (likeData.liked) {
+          announcement.likes++;
+        }
+      }
+    });
   }
 
 
@@ -121,9 +137,19 @@ export class AnnouncementsComponent  {
   }
 
   likeAnnouncement(id: number): void {
-    // Implement like functionality here
-    console.log('Like announcement with id:', id);
+ 
+    const announcement = this.announcements.find(a => a.id === id);
+    if (announcement) {
+      if (!announcement.liked) {
+        announcement.likes++;
+        announcement.liked = true;
+      } else {
+        announcement.likes--;
+        announcement.liked = false;
+      }
+    }
   }
+  
 
   openCommentModal(id: number): void {
     // Implement open comment modal functionality here
@@ -136,6 +162,9 @@ export class AnnouncementsComponent  {
       console.log('Comment submitted:', this.commentText);
       this.commentText = ''; // Clear the comment text after submission
       this.showCommentBox = false; // Optionally close the comment box
+      this.commentSectionVisible = false;
+    }else {
+      console.log('Comment is empty');
     }
   }
 
@@ -153,5 +182,37 @@ export class AnnouncementsComponent  {
     if (id !== undefined) {
       // Add your logic to open the comment popup
     }
+}
+toggleLike(id: number) {
+  const announcement = this.announcements.find(a => a.id === id);
+  if (announcement) {
+    if (!announcement.liked) {
+      // If the announcement is not liked, increase the like count and mark it as liked
+      announcement.likes++;
+      announcement.liked = true;
+      this.saveLikeData(id, true); // Save like to backend or local storage
+    } else {
+      // If the announcement is already liked, decrease the like count and mark it as unliked
+      announcement.likes--;
+      announcement.liked = false;
+      this.saveLikeData(id, false); // Save unlike to backend or local storage
+    }
+  }
+}
+
+// Save like data to JSON (you could send this to an API or save it locally)
+saveLikeData(id: number, liked: boolean) {
+  const likeData = {
+    id: id,
+    liked: liked
+  };
+  // You can send this data to your server or local storage dynamically
+  // For this example, we will just log the output:
+  console.log('Like Data Saved:', likeData);
+  // Example: Send this data to a backend API or update a JSON file.
+  // this.http.post('your-api-endpoint', likeData).subscribe(response => {
+  //   console.log('Response:', response);
+  // });
+  localStorage.setItem('announcement_' + id, JSON.stringify(likeData));
 }
 }

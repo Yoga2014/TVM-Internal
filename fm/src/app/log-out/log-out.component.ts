@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output, output } from '@angular/core';
 @Component({
   selector: 'app-log-out',
   templateUrl: './log-out.component.html',
+  standalone: false,
   styleUrl: './log-out.component.scss'
 })
 export class LogOutComponent {

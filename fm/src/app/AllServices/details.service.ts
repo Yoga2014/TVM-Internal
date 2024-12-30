@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class details {
-  private apiUrl = 'http://localhost:3000/Workers';
+  private apiUrl = 'http://localhost:8080/api/profile';
 
   private userRole =  'http://localhost:8080/api';
 

@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-team-department',
   templateUrl: './team-department.component.html',
+  standalone: false,
   styleUrl: './team-department.component.scss'
 })
 export class TeamDepartmentComponent implements OnInit {

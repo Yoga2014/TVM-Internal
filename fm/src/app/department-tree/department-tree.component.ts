@@ -4,6 +4,7 @@ import { details } from '../AllServices/details.service';
 @Component({
   selector: 'app-department-tree',
   templateUrl: './department-tree.component.html',
+  standalone: false,
   styleUrls: ['./department-tree.component.scss']
 })
 export class DepartmentTreeComponent implements OnInit {

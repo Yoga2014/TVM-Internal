@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
+  standalone: false,
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {

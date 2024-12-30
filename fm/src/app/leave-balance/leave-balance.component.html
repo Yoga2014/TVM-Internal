@@ -1,23 +1,30 @@
-<div class="container">
-  <!-- Header Section -->
-  <mat-card class="header-card">
-    <mat-card-header>
-      <mat-card-title>Leave Balance</mat-card-title>
-    </mat-card-header>
-  </mat-card>
-
-  <!-- Leave Cards -->
-  <mat-card *ngFor="let leave of leaves" class="leave-card">
-    <mat-card-header>
-      <mat-card-title>{{ leave.leaveType }}</mat-card-title>
-      <mat-card-subtitle>Available: {{ leave.available }} days</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="details">
-        <div class="icon" [ngClass]="leave.iconClass"></div>
-        <p>Booked: {{ leave.booked }} days</p>
-        <button mat-raised-button color="primary" (click)="applyLeave(leave.leaveType)">Apply Leave</button>
+<div class="container-fluid">
+  <ng-container *ngIf="!isLoading; else loading">
+    <div 
+      *ngFor="let leave of leaves" 
+      class="leave-summary-card" 
+      [ngStyle]="{'border-color': leave.color}"
+    >
+      <div class="leave-icon" [ngStyle]="{'background-color': leave.color}">
+        <i [class]="leave.iconClass"></i>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div class="leave-details">
+        <h5>{{ leave.typeLeave }}</h5>
+        <p>
+          <span class="available">Available: {{ leave.available }} days</span>
+          <span class="booked">Booked: {{ leave.booked }} days</span>
+        </p>
+      </div>
+      <button 
+        class="btn btn-primary apply-btn" 
+        (click)="applyLeave()"
+      >
+        Apply Leave
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Loading leave summary...</p>
+  </ng-template>
 </div>

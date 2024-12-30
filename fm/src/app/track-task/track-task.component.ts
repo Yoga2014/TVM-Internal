@@ -6,6 +6,7 @@ import { Task } from '../task.model';
 @Component({
   selector: 'app-track-task',
   templateUrl: './track-task.component.html',
+   standalone: false,
   styleUrls: ['./track-task.component.scss']
 })
 export class TrackTaskComponent implements OnInit {

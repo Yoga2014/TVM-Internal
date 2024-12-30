@@ -5,6 +5,7 @@ import { details } from '../AllServices/details.service';
 @Component({
   selector: 'app-department-directory',
   templateUrl: './department-directory.component.html',
+  standalone: false,
   styleUrls: ['./department-directory.component.scss']
 })
 export class DepartmentDirectoryComponent {

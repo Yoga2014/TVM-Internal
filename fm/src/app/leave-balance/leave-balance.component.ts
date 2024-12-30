@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
 import { LeaveRequest } from '../Interface/leave-request.model';
 import { ApplyLeaveComponent } from '../leave-summary/apply-leave/apply-leave.component';
@@ -8,24 +7,21 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-leave-balance',
   templateUrl: './leave-balance.component.html',
-  styleUrls: ['./leave-balance.component.scss']
+  standalone: false,
+  styleUrls: ['./leave-balance.component.scss'],
 })
 export class LeaveBalanceComponent implements OnInit {
   leaves: LeaveRequest[] = [];
-  isLoading: boolean = true; // Optional, to show a loading indicator
+  isLoading: boolean = true;
 
-  constructor(
-    private router: Router,
-    private leaveService: LeaveService,
-    private dialog : MatDialog
-  ) {}
+  constructor(private leaveService: LeaveService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loadLeaves();
+    this.loadLeaveSummary();
   }
 
-  loadLeaves(): void {
-    this.leaveService.getLeaves().subscribe({
+  loadLeaveSummary(): void {
+    this.leaveService.getLeaveSummary().subscribe({
       next: (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;
@@ -33,22 +29,19 @@ export class LeaveBalanceComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching leave data', error);
         this.isLoading = false;
-      }
+      },
     });
   }
-
-  applyLeave(leaveType: string): void 
-  {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent, {
-      width: '600px',
-      data: { goalId: null }
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
+  
+  applyLeave(): void {
+    const dialogRef = this.dialog.open(ApplyLeaveComponent);
+    dialogRef.afterClosed().subscribe((result: LeaveRequest | undefined) => {
       if (result) {
-        this.loadLeaves();
+        this.leaveService.addLeaveRequest(result).subscribe({
+          next: () => this.leaveService.setLeaveApplied(result),
+          error: (err) => console.error('Error applying leave', err),
+        });
       }
     });
-    // this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url, leaveType: leaveType } });
   }
 }

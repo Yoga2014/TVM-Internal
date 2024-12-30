@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-leave-tracking',
   templateUrl: './leave-tracking.component.html',
+  standalone: false,
   styleUrls: ['./leave-tracking.component.scss']
 })
 export class LeaveTrackingComponent {

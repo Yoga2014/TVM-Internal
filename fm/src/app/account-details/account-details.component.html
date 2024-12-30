@@ -1,0 +1,187 @@
+<div class="Account-page">
+    <h2 class="header">
+        <i class="fa-solid fa-building-columns"></i>  Bank-Details
+    </h2>
+    <form [formGroup]="bankDetailsGroup">
+      <div formArrayName="bankDetailsArray">
+        <div
+          class="row mt-3"
+          *ngFor="let detailGroup of bankDetailsArray.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="aadharNumber">Aadhar Number<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="aadharNumber"
+                placeholder="Enter Aadhar Number"
+                formControlName="aadharNumber"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('aadharNumber')?.invalid &&
+                    (detailGroup.get('aadharNumber')?.dirty || detailGroup.get('aadharNumber')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('aadharNumber')?.invalid &&
+                (detailGroup.get('aadharNumber')?.dirty || detailGroup.get('aadharNumber')?.touched)"
+                class="text-danger"
+              >
+                Aadhar Number is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="panNumber">PAN Number<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="panNumber"
+                placeholder="Enter PAN Number"
+                formControlName="panNumber"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('panNumber')?.invalid &&
+                    (detailGroup.get('panNumber')?.dirty || detailGroup.get('panNumber')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('panNumber')?.invalid &&
+                (detailGroup.get('panNumber')?.dirty || detailGroup.get('panNumber')?.touched)"
+                class="text-danger"
+              >
+                PAN Number is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="name">Name<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Enter Name"
+                formControlName="name"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('name')?.invalid &&
+                    (detailGroup.get('name')?.dirty || detailGroup.get('name')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('name')?.invalid &&
+                (detailGroup.get('name')?.dirty || detailGroup.get('name')?.touched)"
+                class="text-danger"
+              >
+                Name is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="bankAccountNumber">Bank Account Number<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="bankAccountNumber"
+                placeholder="Enter Bank Account Number"
+                formControlName="bankAccountNumber"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('bankAccountNumber')?.invalid &&
+                    (detailGroup.get('bankAccountNumber')?.dirty || detailGroup.get('bankAccountNumber')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('bankAccountNumber')?.invalid &&
+                (detailGroup.get('bankAccountNumber')?.dirty || detailGroup.get('bankAccountNumber')?.touched)"
+                class="text-danger"
+              >
+                Bank Account Number is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="bankIFSCCode">Bank IFSC Code<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="bankIFSCCode"
+                placeholder="Enter Bank IFSC Code"
+                formControlName="bankIFSCCode"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('bankIFSCCode')?.invalid &&
+                    (detailGroup.get('bankIFSCCode')?.dirty || detailGroup.get('bankIFSCCode')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('bankIFSCCode')?.invalid &&
+                (detailGroup.get('bankIFSCCode')?.dirty || detailGroup.get('bankIFSCCode')?.touched)"
+                class="text-danger"
+              >
+                Bank IFSC Code is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="bankName">Bank Name<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="bankName"
+                placeholder="Enter Bank Name"
+                formControlName="bankName"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('bankName')?.invalid &&
+                    (detailGroup.get('bankName')?.dirty || detailGroup.get('bankName')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('bankName')?.invalid &&
+                (detailGroup.get('bankName')?.dirty || detailGroup.get('bankName')?.touched)"
+                class="text-danger"
+              >
+                Bank Name is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-group div-spacing">
+              <label class="label-spacing" for="branchName">Branch Name<span>*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="branchName"
+                placeholder="Enter Branch Name"
+                formControlName="branchName"
+                [ngClass]="{
+                  'invalid-input': detailGroup.get('branchName')?.invalid &&
+                    (detailGroup.get('branchName')?.dirty || detailGroup.get('branchName')?.touched)
+                }"
+              />
+              <div
+                *ngIf="detailGroup.get('branchName')?.invalid &&
+                (detailGroup.get('branchName')?.dirty || detailGroup.get('branchName')?.touched)"
+                class="text-danger"
+              >
+                Branch Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  
+    <div>
+      <button class="btns-general" (click)="saveClick()">Save</button>
+    </div>
+  </div>
+  

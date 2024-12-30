@@ -9,6 +9,7 @@ import { createEventId } from './event-utils';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
+  standalone: false,
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent {

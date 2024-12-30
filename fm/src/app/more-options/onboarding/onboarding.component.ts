@@ -3,12 +3,13 @@
   import { slideInAnimation } from './animation';
   import { PlatformLocation } from '@angular/common';
 
-  @Component({
-    selector: 'app-onboarding',
-    templateUrl: './onboarding.component.html',
-    styleUrl: './onboarding.component.scss'
-  })
-  export class OnboardingComponent implements OnInit {
+@Component({
+  selector: 'app-onboarding',
+  templateUrl: './onboarding.component.html',
+  standalone: false,
+  styleUrl: './onboarding.component.scss'
+})
+export class OnboardingComponent implements OnInit {
 
     constructor(private platformLocation: PlatformLocation) {
       this.platformLocation.onPopState(() => {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
+  standalone: false,
   styleUrls: ['./new-home.component.scss']
 })
 export class NewHomeComponent {
