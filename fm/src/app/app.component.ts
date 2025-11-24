@@ -12,19 +12,16 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
 
   activeLink: string = 'home';
-  isExpanded = true;
-  showPopup = true;
-  private routerSubscription: Subscription | undefined;
-
   dropdownOpen = false;
-
   isLoggedIn = false;
+  showLayout: boolean = true;
 
-  userName: string = 'User'; // Add this property with a default value
-  userInitial: string = '';  // Add this property to store the initial
-  showLayout: boolean = true; // Default value for showLayout
+  userName: string = 'User';         // Displayed in header
+  userInitial: string = '';          // First letter for avatar
 
-  // Removed duplicate handleLoginSuccess method
+  private routerSubscription!: Subscription;
+
+  // Sidebar Menu Items
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
     { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
@@ -39,49 +36,67 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    // Set user initial
+    this.userInitial = this.userName.charAt(0).toUpperCase();
+
+    // Detect active menu item based on URL
     this.updateActiveLink();
+
+    // Listen to router changes
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateActiveLink();
       }
     });
-
-    // Generate initial automatically
-    this.userInitial = this.userName.charAt(0).toUpperCase();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
   }
 
-  updateActiveLink() {
+  // Determine current active link
+  updateActiveLink(): void {
     const currentPath = this.router.url;
-    const activeItem = this.menuItems.find((item) => currentPath.includes(item.path));
+    const activeItem = this.menuItems.find(item => currentPath.includes(item.path));
     this.activeLink = activeItem ? activeItem.link : 'home';
   }
 
-  navigateTo(link: string, path: string) {
+  // Navigate to selected menu item
+  navigateTo(link: string, path: string): void {
     this.activeLink = link;
-    this.router.navigate([path]).catch((err) => console.error('Navigation error:', err));
+    this.router.navigate([path]).catch(err => console.error('Navigation error:', err));
   }
 
-  logout() {
+  // Toggle dropdown only when clicking inside avatar section
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  // Close dropdown when clicking anywhere outside
+  @HostListener('document:click')
+  closeDropdown(): void {
+    this.dropdownOpen = false;
+  }
+
+  // Logout function
+  logout(): void {
     localStorage.clear();
     this.dropdownOpen = false;
     this.router.navigate(['/login']);
   }
 
-  @HostListener('document:click')
-  closeDropdown() {
-    this.dropdownOpen = false;
-  }
-
-  handleLoginSuccess() {
+  // After login from <app-login>
+  handleLoginSuccess(): void {
     this.isLoggedIn = true;
+    this.showLayout = true;
     localStorage.setItem('token', 'logged-in');
     this.router.navigate(['/home']);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
   }
 }
