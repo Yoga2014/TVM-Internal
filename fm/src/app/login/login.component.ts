@@ -17,31 +17,42 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    if (!this.emailOrPhone || !this.password) {
-      this.errorMessage = 'Email/Phone and password are required';
-      return;
-    }
-
-    this.authService.login(this.emailOrPhone, this.password).subscribe(
-      (user) => {
-        if (user) {
-          localStorage.setItem('userRole', user.role);
-          this.emailOrPhone = '';
-          this.password = '';
-
-          this.loginSuccess.emit(); // Emit event after successful login
-          this.router.navigate(['/new-Home']);
-        } else {
-          this.errorMessage = 'Invalid credentials';
-        }
-      },
-      (error) => {
-        console.error('Login error:', error);
-        this.errorMessage = 'Error logging in. Please try again.';
-      }
-    );
+login() {
+  if (!this.emailOrPhone || !this.password) {
+    this.errorMessage = 'Email/Phone and password are required';
+    return;
   }
+
+  this.authService.login(this.emailOrPhone, this.password).subscribe(
+    (user) => {
+      if (user) {
+        // Save logged-in data
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('useremail', user.useremail);
+        localStorage.setItem('userRole', user.role);
+        localStorage.setItem('token', user.token);
+
+        // Reset form
+        this.emailOrPhone = '';
+        this.password = '';
+
+        // Emit success event
+        this.loginSuccess.emit();
+
+        // Navigate to Home
+        this.router.navigate(['/new-Home']);
+      } else {
+        this.errorMessage = 'Invalid credentials';
+      }
+    },
+    (error) => {
+      console.error('Login error:', error);
+      this.errorMessage = 'Error logging in. Please try again.';
+    }
+  );
+}
+
 
   navigateToRegister() {
     this.router.navigate(['/register']);
