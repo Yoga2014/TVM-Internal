@@ -11,14 +11,20 @@ export class OverviewComponent {
   bootstrap: any;
   isPopupVisible = false;
 
+  // Add missing properties with default values
+  totalEmployees: number = 0;
+  presentToday: number = 0;
+  absentToday: number = 0;
+  leaveToday: number = 0;
+  newJoinees: number = 0;
+  resignations: number = 0;
+  departmentCount: number = 0;
+
   aditionalClick(getValues: any) {
     this.selectedTab = getValues;
   }
 
-
   togglePopup() {
     this.isPopupVisible = !this.isPopupVisible;
   }
-
-
 }

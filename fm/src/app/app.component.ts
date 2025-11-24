@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -14,13 +14,17 @@ export class AppComponent implements OnInit, OnDestroy {
   activeLink: string = 'home';
   isExpanded = true;
   showPopup = true;
-  showLayout = true;
+  private routerSubscription: Subscription | undefined;
+
+  dropdownOpen = false;
+
   isLoggedIn = false;
 
-  private routerSubscription!: Subscription;
+  userName: string = 'User'; // Add this property with a default value
+  userInitial: string = '';  // Add this property to store the initial
+  showLayout: boolean = true; // Default value for showLayout
 
-  userRole: string | null = null;
-
+  // Removed duplicate handleLoginSuccess method
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
     { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
@@ -36,61 +40,43 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Login check
-    this.isLoggedIn = !!localStorage.getItem('token');
-
-    // Get role
-    this.userRole = localStorage.getItem('userRole');
-    this.filterMenuByRole();
-
-    // Listen to route changes (for hiding layout)
-    this.routerSubscription = this.router.events.subscribe(event => {
+    this.updateActiveLink();
+    this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noLayoutRoutes = ['/login'];
-        this.showLayout = !noLayoutRoutes.includes(event.urlAfterRedirects);
-
         this.updateActiveLink();
       }
     });
+
+    // Generate initial automatically
+    this.userInitial = this.userName.charAt(0).toUpperCase();
   }
 
   ngOnDestroy() {
-    this.routerSubscription?.unsubscribe();
-  }
-
-  // Filter based on role
-  filterMenuByRole() {
-    if (this.userRole === 'admin') return;
-
-    if (this.userRole === 'user') {
-      this.menuItems = this.menuItems.filter(item =>
-        ['task', 'time', 'leave'].includes(item.link)
-      );
-      return;
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
-  
-    this.menuItems = this.menuItems.filter(item => item.link === 'time');
   }
 
   updateActiveLink() {
     const currentPath = this.router.url;
-    const activeItem = this.menuItems.find(item =>
-      currentPath.includes(item.path)
-    );
+    const activeItem = this.menuItems.find((item) => currentPath.includes(item.path));
     this.activeLink = activeItem ? activeItem.link : 'home';
   }
 
   navigateTo(link: string, path: string) {
     this.activeLink = link;
-    this.router.navigate([path]).catch(err => console.error('Navigation error:', err));
+    this.router.navigate([path]).catch((err) => console.error('Navigation error:', err));
   }
 
-  handleSidebarToggle() {
-    this.isExpanded = !this.isExpanded;
+  logout() {
+    localStorage.clear();
+    this.dropdownOpen = false;
+    this.router.navigate(['/login']);
   }
 
-  togglePopup() {
-    this.showPopup = false;
+  @HostListener('document:click')
+  closeDropdown() {
+    this.dropdownOpen = false;
   }
 
   handleLoginSuccess() {

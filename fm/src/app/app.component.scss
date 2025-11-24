@@ -1,169 +1,6 @@
-// $primary-color: #004085;
-// $secondary-color: #f8f9fa;
-// $hover-color: #0056b3;
-// $background-color: #e9ecef;
-// $text-color: #343a40;
-// $border-color: #ced4da;
-// $focus-color: #ffc107;
-// $transition-speed: 0.3s;
-
-
-// .app-container {
-//   display: flex;
-//   height: 100vh;
-//   font-family: "Arial", sans-serif;
-//   background-color: $background-color;
-
-//   .sidebar {
-//     background: $primary-color;
-//     color: $secondary-color;
-//     width: 250px;
-//     transition: width $transition-speed ease, height $transition-speed ease;
-//     overflow: hidden;
-
-//     &.expanded {
-//       width: 300px;
-//     }
-
-//     .header {
-//       padding: 1rem;
-//       text-align: center;
-//       img {
-//         width: 80%;
-//         border-radius: 5px;
-//         transition: transform $transition-speed ease;
-
-//         &:hover {
-//           transform: scale(1.05);
-//         }
-//       }
-//     }
-
-//     .content {
-//       .link {
-//         display: flex;
-//         align-items: center;
-//         gap: 1rem;
-//         padding: 1rem 1.5rem;
-//         color: $secondary-color;
-//         text-decoration: none;
-//         cursor: pointer;
-//         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-//         transition: background $transition-speed ease, transform $transition-speed ease;
-//         will-change: transform;
-
-//         i {
-//           font-size: 1.5rem;
-//         }
-
-//         .title-home {
-//           font-size: 1rem;
-//           font-weight: bold;
-//           white-space: nowrap;
-//         }
-
-//         &:hover {
-//           background: $hover-color;
-//           transform: translateX(5px);
-//         }
-
-//         &.active {
-//           background: lighten($hover-color, 10%);
-//           border-left: 4px solid $secondary-color;
-//         }
-
-//         &:focus {
-//           outline: none;
-//           box-shadow: 0 0 0 2px $focus-color;
-//         }
-//       }
-//     }
-//   }
-
-//   .main-content {
-//     flex: 1;
-//     background: $secondary-color;
-//     padding: 2rem;
-//     overflow-y: auto;
-//     transition: padding $transition-speed ease;
-
-//     h1 {
-//       font-size: 2rem;
-//       color: $text-color;
-//     }
-
-//     p {
-//       font-size: 1rem;
-//       line-height: 1.6;
-//       color: darken($text-color, 10%);
-//     }
-//   }
-// }
-
-
-// @media (max-width: 768px) {
-//   .app-container {
-//     flex-direction: column;
-
-//     .sidebar {
-//       width: 100%;
-//       position: fixed;
-//       z-index: 10;
-//       bottom: 0;
-//       left: 0;
-//       height: auto;
-
-//       &.expanded {
-//         height: 60vh;
-//       }
-
-//       .content .link {
-//         justify-content: center;
-
-//         .title-home {
-//           display: none;
-//         }
-//       }
-//     }
-
-//     .main-content {
-//       padding: 1rem;
-//       margin-top: 50px;
-//     }
-//   }
-// }
-
-// @keyframes slideIn {
-//   0% {
-//     transform: translateX(-100%);
-//     opacity: 0;
-//   }
-//   100% {
-//     transform: translateX(0);
-//     opacity: 1;
-//   }
-// }
-
-// @keyframes fadeIn {
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }
-
-// .sidebar {
-//   animation: slideIn $transition-speed ease;
-// }
-
-// .main-content {
-//   animation: fadeIn $transition-speed ease;
-// }
-
-
-
-// Variables for colors
+/* ===============================
+   THEME COLORS
+================================= */
 $primary-color: #2b2d42;
 $secondary-color: #8d99ae;
 $accent-color: #ef233c;
@@ -171,21 +8,26 @@ $background-color: #edf2f4;
 $text-color: #ffffff;
 $hover-color: #d90429;
 
-// Base styles for the container
+/* ===============================
+   APP CONTAINER
+================================= */
 .app-container {
   display: flex;
   flex-direction: row;
   height: 100vh;
   background-color: $background-color;
 
+  /* Sidebar */
   .sidebar {
+    width: 250px;  
+    min-width: 250px;
     background-color: $primary-color;
     color: $text-color;
     transition: width 0.3s ease;
-    width: 250px;
 
     &.expanded {
-      width: 300px;
+      width: 280px;
+      min-width: 280px;
     }
 
     .header {
@@ -205,6 +47,7 @@ $hover-color: #d90429;
 
     .content {
       margin-top: 1rem;
+
       .link {
         display: flex;
         align-items: center;
@@ -220,82 +63,121 @@ $hover-color: #d90429;
 
         &.active {
           background-color: $accent-color;
-          color: $text-color;
         }
 
         i {
           margin-right: 1rem;
           font-size: 1.2rem;
-          animation: fade-in 0.5s ease;
-        }
-
-        .title-home,
-        .title-profile,
-        .title-leave {
-          font-weight: bold;
-          font-size: 1rem;
-        }
-      }
-
-      .with-children {
-        margin-top: 1rem;
-        .link {
-          &:not(:last-child) {
-            margin-bottom: 0.5rem;
-          }
         }
       }
     }
   }
 
+  /* Main content */
   .main-content {
     flex-grow: 1;
-    padding: 2rem;
     background-color: $background-color;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    animation: slide-in 0.5s ease forwards;
   }
 }
 
-// Responsive styles
+/* ===============================
+   TOP HEADER BAR
+================================= */
+.top-header {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Avatar & Dropdown */
+.avatar-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 1000; // Important for dropdown visibility
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #4A90E2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .initials {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+.user-name {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Dropdown Box */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 150px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  padding: 10px 0;
+  z-index: 2000;
+
+  p {
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f3f3f3;
+    }
+  }
+}
+
+.page-content {
+  padding: 20px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
 
     .sidebar {
       width: 100%;
-      height: auto;
-
-      &.expanded {
-        height: 250px;
-      }
+      min-width: 100%;
     }
 
     .main-content {
       width: 100%;
-      padding: 1rem;
     }
-  }
-}
-
-// Animations
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
   }
 }
