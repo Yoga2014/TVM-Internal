@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ServerService {
- api:any='http://localhost:3000/educationalFrom'
+ api:any=''
 
 public userSubject = new BehaviorSubject<any>('Initial User');
 
@@ -25,19 +25,34 @@ public userSubject = new BehaviorSubject<any>('Initial User');
     return this.apihttp.get(this.api);
   }
 
+  EducationalMethod(data:any){
+    const api='http://localhost:8080/api/education'
+    return this.apihttp.post(api,data)
+  }
+
+  SkillsMethod(data:any){
+    const api='http://localhost:8080/api/skill'
+    return this.apihttp.post(api,data)
+  }
 postMethod(data:any){
   const api='http://localhost:3000/educationalFrom'
   return this.apihttp.post(api,data);
 }
 
 professionPosttMethod(data:any){
-  const api='http://localhost:3000/professionalForm'
+  const api='http://localhost:8080/api/professionaldata'
   return this.apihttp.post(api,data);
 }
 
-basicPosttMethod(data:any){
-  const api=' http://localhost:3000/basicFrom'
+AccountPostMethod(data:any){
+  const api='http://localhost:4005/account-details'
   return this.apihttp.post(api,data);
+}
+
+basicPostMethod(data: any) {
+  const api = 'http://localhost:8080/api/profile/clob';
+console.log(data,"datassssssssssssss")
+  return this.apihttp.post(api, data);
 }
 
 

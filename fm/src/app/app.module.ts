@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+// UI Libraries
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgGridModule } from 'ag-grid-angular';
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
-// Angular Material Modules
+// Angular Material Imports
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,18 +27,22 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
-import { TreeModule } from 'primeng/tree';
 import { MatDialogModule } from '@angular/material/dialog';
 
+// PrimeNG Tree Module
+import { TreeModule } from 'primeng/tree';
+
 // Components
-import { EducationalComponent } from './educational/educational.component';
+import { AppComponent } from './app.component';
 import { GeneralComponent } from './general/general.component';
+import { EducationalComponent } from './educational/educational.component';
 import { SkillsetComponent } from './skillset/skillset.component';
+import { SkillSetMatrixComponent } from './skill-set-matrix/skill-set-matrix.component';
 import { ProfessionalComponent } from './professional/professional.component';
 import { HeaderComponent } from './header/header.component';
 import { DetailsComponent } from './details/details.component';
 import { PersonalDataFormComponent } from './personal-data-form/personal-data-form.component';
-
+import { AccountDetailsComponent } from './account-details/account-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BirthdayCardComponent } from './birthday-card/birthday-card.component';
 import { NewHiresComponent } from './new-hires-card/new-hires-card.component';
@@ -55,7 +60,6 @@ import { LeaveRequestsComponent } from './leave-request/leave-request.component'
 import { LeaveReportDashboardComponent } from './leave-report-dashboard/leave-report-dashboard.component';
 import { ApprovalLeaveRequestComponent } from './approval-leave-request/approval-leave-request.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { INITIAL_EVENTS } from './calendar/event-utils';
 import { TeamsDashboardComponent } from './teams-dashboard/teams-dashboard.component';
 import { TeamsSpaceComponent } from './teams-space/teams-space.component';
 import { LogOutComponent } from './log-out/log-out.component';
@@ -76,7 +80,6 @@ import { GoalsMyDataComponent } from './goals-my-data/goals-my-data.component';
 import { SkillsetPerformanceComponent } from './skillset-performance/skillset-performance.component';
 import { CompetencyComponent } from './competency/competency.component';
 import { PerformanceFeedbackComponent } from './performance-feedback/performance-feedback.component';
-import { NgFor, NgIf } from '@angular/common';
 import { MoreOptionsComponent } from './more-options/more-options.component';
 import { TrackTaskComponent } from './track-task/track-task.component';
 import { TaskTasksComponent } from './task-tasks/task-tasks.component';
@@ -91,6 +94,14 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { FeedsComponent } from './feeds/feeds.component';
 import { OperationComponent } from './operation/operation.component';
 import { ReportsComponent } from './reports/reports.component';
+import { OnboardingComponent } from './more-options/onboarding/onboarding.component';
+import { TimeSheetComponent } from './time-sheet/time-sheet.component';
+import { TimeTrackingComponent } from './time-tracking/time-tracking.component';
+import { TimeTrackingMyDataComponent } from './time-tracking-my-data/time-tracking-my-data.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
 
 
 @NgModule({
@@ -99,6 +110,7 @@ import { ReportsComponent } from './reports/reports.component';
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
+    SkillSetMatrixComponent,
     ProfessionalComponent,
     HeaderComponent,
     DetailsComponent,
@@ -114,7 +126,7 @@ import { ReportsComponent } from './reports/reports.component';
     LeaveReporteesComponent,
     OnLeaveComponent,
     LeaveTrackingComponent,
-    MyDataComponent,
+    
     LeaveBalanceComponent,
     LeaveRequestsComponent,
     LeaveReportDashboardComponent,
@@ -122,10 +134,10 @@ import { ReportsComponent } from './reports/reports.component';
     CalendarComponent,
     TeamsDashboardComponent,
     TeamsSpaceComponent,
+    LogOutComponent,
     GoalsComponent,
     AddGoalsComponent,
     CommentsComponent,
-    LogOutComponent,
     NewHomeComponent,
     HomeMyDataComponent,
     OverviewComponent,
@@ -146,23 +158,31 @@ import { ReportsComponent } from './reports/reports.component';
     TaskNavsComponent,
     MyTaskComponent,
     FormViewComponent,
-    EmployeeDetailsComponent,
-    DepartmentDirectoryComponent,
-    DepartmentTreeComponent,
-    PoliciesComponent,
-    AnnouncementsComponent,
     EmployeeTreeComponent,
+    DepartmentDirectoryComponent,
+    PoliciesComponent,
+    DepartmentTreeComponent,
+    AnnouncementsComponent,
     FeedsComponent,
     OperationComponent,
     ReportsComponent,
+    MyDataComponent,
+    AccountDetailsComponent,
+    OnboardingComponent,
+    TimeSheetComponent,
+    TimeTrackingComponent,
+    TimeTrackingMyDataComponent,
+    LoginComponent,
+    RegistrationComponent,
+    ForgetPasswordComponent,
+    AppraisalFormComponent,
   ],
-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     AgGridModule,
@@ -174,20 +194,18 @@ import { ReportsComponent } from './reports/reports.component';
     MatNativeDateModule,
     MatIconModule,
     MatToolbarModule,
-    CalendarModule,
     MatCheckboxModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatCardModule,
-    FullCalendarModule,
-    INITIAL_EVENTS,
     MatProgressSpinnerModule,
-    MatDialogModule,
     MatStepperModule,
-    NgIf,
-    NgFor,
+    MatDialogModule,
+    CalendarModule,
+    FullCalendarModule,
     TreeModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

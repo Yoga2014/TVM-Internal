@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GoalService } from '../AllServices/goal.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Goal } from '../Interface/Goals.model';
 
 @Component({
   selector: 'app-add-goals',
   templateUrl: './add-goals.component.html',
+  standalone: false,
   styleUrls: ['./add-goals.component.scss']
 })
 export class AddGoalsComponent implements OnInit {
@@ -17,12 +18,11 @@ export class AddGoalsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private goalService: GoalService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    public dialogRef: MatDialogRef<AddGoalsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { goalId?: number }
+  ) {}
 
   ngOnInit(): void {
-    // Initialize the form
     this.addGoalForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
@@ -31,26 +31,23 @@ export class AddGoalsComponent implements OnInit {
       endDate: ['', Validators.required],
       progress: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
     });
-
-    // Check if we are in edit mode
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.goalId = +id; // Convert to number
-        this.isEditMode = true;
-        this.loadGoalData(this.goalId);
-      }
-    });
+    if (this.data.goalId) {
+      this.goalId = this.data.goalId;
+      this.isEditMode = true;
+      this.loadGoalData(this.goalId);
+    }
   }
 
   loadGoalData(id: number): void {
-    this.goalService.getGoalById(id).subscribe((goal: Goal) => {
-      this.patchGoalData(goal);
-    }, (error: any) => {
-      console.error('Error fetching goal data:', error);
-    });
+    this.goalService.getGoalById(id).subscribe(
+      (goal: Goal) => {
+        this.patchGoalData(goal);
+      },
+      (error: any) => {
+        console.error('Error fetching goal data:', error);
+      }
+    );
   }
-  
 
   patchGoalData(goal: Goal): void {
     this.addGoalForm.patchValue({
@@ -67,22 +64,20 @@ export class AddGoalsComponent implements OnInit {
     if (this.addGoalForm.valid) {
       const goalData: Goal = this.addGoalForm.value;
       if (this.isEditMode) {
-        // Update existing goal
         this.goalService.updateGoal(this.goalId, goalData).subscribe(
           (response) => {
             console.log('Goal updated successfully', response);
-            this.router.navigate(['perfomance-myData/goals']);
+            this.dialogRef.close(true);
           },
           (error) => {
             console.error('Error updating goal', error);
           }
         );
       } else {
-        // Add new goal
         this.goalService.addGoal(goalData).subscribe(
           (response) => {
             console.log('Goal added successfully', response);
-            this.router.navigate(['perfomance-myData/goals']);
+            this.dialogRef.close(true);
           },
           (error) => {
             console.error('Error adding goal', error);
@@ -91,8 +86,8 @@ export class AddGoalsComponent implements OnInit {
       }
     }
   }
-  
+
   cancel(): void {
-    this.router.navigate(['perfomance-myData/goals']);
+    this.dialogRef.close();
   }
 }

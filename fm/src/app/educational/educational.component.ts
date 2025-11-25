@@ -1,66 +1,66 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-educational',
-
   templateUrl: './educational.component.html',
-  styleUrl: './educational.component.scss'
+  standalone: false,
+  styleUrls: ['./educational.component.scss']
 })
 export class EducationalComponent {
-  educationGroup!:FormGroup
+  educationGroup!: FormGroup;
 
-  arrayValue:any=[]
-
-  constructor(private fb: FormBuilder,  private route:Router , private server:ServerService) {}
-
+  constructor(private fb: FormBuilder, private route: Router, private server: ServerService) {}
+ // isSaveEnabled: boolean = false;
   ngOnInit() {
     this.educationGroup = this.fb.group({
-      coursePursued: ['', Validators.required],
-      durationFrom: ['', Validators.required],
-      durationTo: ['', Validators.required],
-      institutionName: ['', Validators.required],
-      cgpaObtained: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      educationArray: this.fb.array([this.createEducationFormGroup()]), 
     });
   }
 
-  get coursePursued() {
-    return this.educationGroup.get('coursePursued');
-  }
-  get durationFrom() {
-    return this.educationGroup.get('durationFrom');
-  }
-  get durationTo() {
-    return this.educationGroup.get('durationTo');
-  }
-  get institutionName() {
-    return this.educationGroup.get('institutionName');
-  }
-  get cgpaObtained() {
-    return this.educationGroup.get('cgpaObtained');
+  get educationArray(): FormArray {
+    return this.educationGroup.get('educationArray') as FormArray;
   }
 
-  getDataMethod(){
-    this.server.getMethod().subscribe((res:any)=>{
-      this.arrayValue=res
-     this.server.userSubject.next(this.arrayValue)
-
-    })
-  }
-  addedClick(){
-    console.log(this.educationGroup.value,'efwefweewf')
-    this.server.postMethod(this.educationGroup.value).subscribe((res)=>{
-      this.getDataMethod()
-    })
-
+  createEducationFormGroup(): FormGroup {
+    return this.fb.group({
+      coursePursued: ['', Validators.required],
+      specialization: ['', Validators.required],
+      institutionName: ['', Validators.required],
+      durationFrom: ['', Validators.required],
+      durationTo: ['', Validators.required],
+      cgpaObtained: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      percentage: ['', Validators.required],
+      studyMode:['',Validators.required]
+    });
   }
 
+  addRow(): void {
+    this.educationArray.push(this.createEducationFormGroup());
+  }
 
-
-  nextClick(){
-    this.route.navigate(['/skillset'])
+  saveClick(): void {
+    if (this.educationGroup.valid) {
+      this.server.EducationalMethod(this.educationGroup.value.educationArray).subscribe((res: any) => {
+        console.log('Form saved successfully', res);
+      });
+    } else {
+      console.log('Form is invalid');
     }
-}
+  }
 
+  removeRow(index: number): void {
+    this.educationArray.removeAt(index);
+  }
+
+  isSaveEnabled(): boolean {
+    const requiredCourses = ['SSLC', 'HSC', 'UG'];
+    const completedCourses = this.educationArray.controls
+      .map(group => group.get('coursePursued')?.value)
+      .filter(value => requiredCourses.includes(value));
+
+    return requiredCourses.every(course => completedCourses.includes(course)) && this.educationGroup.valid;
+  }
+}

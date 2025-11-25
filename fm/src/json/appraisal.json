@@ -1,0 +1,41 @@
+{
+  "appraisals": [
+    {
+      "id": "2e97",
+      "employeeName": "Sivaneshwaran",
+      "employeeId": "TVM01",
+      "jobTitle": "test",
+      "department": "test",
+      "managerName": "test",
+      "appraisalPeriod": "3 months",
+      "performanceGoals": [
+        {
+          "goal": "test",
+          "goalType": "test",
+          "completionStatus": "test",
+          "comments": "test"
+        }
+      ],
+      "selfAssessment": {
+        "strengths": "test",
+        "accomplishments": "test",
+        "challenges": "test",
+        "areasForImprovement": "test",
+        "overallPerformance": "test"
+      },
+      "managerAssessment": {
+        "jobKnowledge": "test",
+        "qualityOfWork": "test",
+        "productivity": "test",
+        "communicationSkills": "test",
+        "problemSolvingSkills": "test",
+        "teamwork": "test",
+        "initiative": "test",
+        "overallRating": "test"
+      },
+      "finalPerformanceRating": "test",
+      "managerSignature": "test",
+      "date": "2022-11-22"
+    }
+  ]
+}

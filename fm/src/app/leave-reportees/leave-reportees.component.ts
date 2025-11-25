@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../Interface/employee.model';
 import { EmployeeService } from '../AllServices/employee.service';
 import { LeaveReporteesService } from '../AllServices/leaveReportees.service';
+import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 
 @Component({
   selector: 'app-leave-reportees',
   templateUrl: './leave-reportees.component.html',
+  standalone: false,
   styleUrls: ['./leave-reportees.component.scss']
 })
 export class LeaveReporteesComponent implements OnInit {
@@ -13,11 +15,16 @@ export class LeaveReporteesComponent implements OnInit {
   employees: Employee[] = [];
   isGridView: boolean = true;
   selectedEmployee: string | null = null;
-  isLoading: boolean = true;                                 // Optional, to show a loading indicator
+  isLoading: boolean = true;  
+  hoveredEmployee: string | null = null;
 
-  constructor(private employeeService: EmployeeService, private leaveReporteesService: LeaveReporteesService) {}
+  constructor(private employeeService: EmployeeService, private leaveReporteesService: LeaveReporteesService, private authService: EmployeeAuthService) {}
+
+  employeeName: string= '';
 
   ngOnInit(): void {
+    const employee = this.authService.getAuthenticatedEmployee();
+    this.employeeName = employee.employeeName;
     this.loadReportees();
   }
 
@@ -26,6 +33,7 @@ export class LeaveReporteesComponent implements OnInit {
     this.leaveReporteesService.getReportees(managerId).subscribe(
       (data: Employee[]) => {
         this.employees = data;
+        console.log(this.employees);
         this.isLoading = false;
       },
       (error) => {
@@ -54,4 +62,8 @@ export class LeaveReporteesComponent implements OnInit {
   videoCall(employeeId: string): void {
     console.log('Video call with', employeeId);
   }
+
+  hoverOptions(employeeId: string | null): void {
+  this.hoveredEmployee = employeeId;
+}
 }

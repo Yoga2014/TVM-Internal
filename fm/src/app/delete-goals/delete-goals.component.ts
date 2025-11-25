@@ -5,6 +5,7 @@ import { GoalService } from '../AllServices/goal.service';
 @Component({
   selector: 'app-delete-goals',
   templateUrl: './delete-goals.component.html',
+  standalone: false,
   styleUrls: ['./delete-goals.component.scss']
 })
 export class DeleteGoalsComponent {

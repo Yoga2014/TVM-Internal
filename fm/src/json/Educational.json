@@ -1,0 +1,67 @@
+{
+  "Educational-detail": [
+    {
+      "0": {
+        "coursePursued": "SSLC",
+        "specialization": "state board ",
+        "institutionName": "Goverment Higher Secondary School - Sirugramam",
+        "durationFrom": 2018,
+        "durationTo": 2019,
+        "cgpaObtained": 76,
+        "percentage": 88
+      },
+      "1": {
+        "coursePursued": "HSC",
+        "specialization": "state board ",
+        "institutionName": "Goverment Higher Secondary School - Sirugramam",
+        "durationFrom": 2018,
+        "durationTo": 2019,
+        "cgpaObtained": 88,
+        "percentage": 88
+      },
+      "2": {
+        "coursePursued": "UG",
+        "specialization": "state board ",
+        "institutionName": "ghchchgg",
+        "durationFrom": 2019,
+        "durationTo": 2019,
+        "cgpaObtained": 65,
+        "percentage": 55
+      },
+      "id": "1378"
+    },
+    {
+      "0": {
+        "coursePursued": "SSLC",
+        "specialization": "state board ",
+        "institutionName": "Goverment Higher Secondary School - Sirugramam",
+        "durationFrom": 2018,
+        "durationTo": 2019,
+        "cgpaObtained": 76,
+        "percentage": 88,
+        "studyMode": "Regular"
+      },
+      "1": {
+        "coursePursued": "HSC",
+        "specialization": "state board ",
+        "institutionName": "Goverment Higher Secondary School - Sirugramam",
+        "durationFrom": 2019,
+        "durationTo": 2019,
+        "cgpaObtained": 76,
+        "percentage": 88,
+        "studyMode": "Regular"
+      },
+      "2": {
+        "coursePursued": "UG",
+        "specialization": "state board ",
+        "institutionName": "Goverment Higher Secondary School - Sirugramam",
+        "durationFrom": 2018,
+        "durationTo": 224,
+        "cgpaObtained": 88,
+        "percentage": 88,
+        "studyMode": "Correspondence"
+      },
+      "id": "5cf0"
+    }
+  ]
+}

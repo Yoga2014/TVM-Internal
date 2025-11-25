@@ -1,128 +1,97 @@
-.body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow-y: scroll;
-}
+.container-fluid {
+  display: flex;
+  flex-direction: column; /* Display cards in a list format */
+  gap: 1.5rem;
+  height: 75vh;
+  overflow-y: auto;
+  background-color: #f4f6f9;
+  padding: 1rem;
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    overflow: hidden;
-}
-
-.container {
-    width: 80%;
-    margin: 20px auto;
-}
-
-.leave-card {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-}
-
-.leave-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-}
-
-.leave-icon i {
-    font-size: 24px;
-    color: #fff;
-}
-
-.leave-details {
-    flex-grow: 1;
-}
-
-.leave-details h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.leave-status {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    /* adjust the height to your needs */
-}
-
-.leave-status p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.available {
-    color: green;
-}
-
-.booked {
-    color: #333;
-}
-
-.negative {
-    color: red;
-}
-
-.casual {
-    background-color: #a3c9ff;
-}
-
-.earned {
-    background-color: #d4e157;
-}
-
-.leave-without-pay {
-    background-color: #ff8a80;
-}
-
-.paternity {
-    background-color: #ffcc80;
-}
-
-.sabbatical {
-    background-color: #fff176;
-}
-
-.sick {
-    background-color: #ce93d8;
-}
-
-.apply-leave-btn {
-    display: none;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.leave-card:hover .apply-leave-btn {
-    display: block;
-}
-
-.leave-card {
+  .leave-summary-card {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+
+      .apply-btn {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .leave-icon {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #ffffff;
+      background-color: #6c757d; /* Neutral color for icons */
+      border-radius: 50%;
+      margin-right: 1.5rem;
+    }
+
+    .leave-details {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      align-items: center;
+      flex-grow: 1;
+      gap: 2rem;
+
+      h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555555;
+        display: flex;
+        gap: 1rem;
+
+        .available {
+          font-weight: 600;
+          color: #28a745;
+        }
+
+        .booked {
+          font-weight: 600;
+          color: #dc3545;
+        }
+      }
+    }
+
+    .apply-btn {
+      flex: 0 0 auto;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
 }

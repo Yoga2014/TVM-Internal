@@ -6,11 +6,12 @@ import { Employee } from 'src/app/Interface/employee.model';
 @Component({
   selector: 'app-employee-details',
   templateUrl:'./employee-details.component.html',
-  styleUrls: ['./employee-details.component.scss'] // Updated 'styleUrl' to 'styleUrls'
+  standalone: false,
+  styleUrls: ['./employee-details.component.scss']
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  employee: Employee | any = null;
+  employee: Employee | null = null;
   isEditing: boolean = false;
 
   constructor(private route: ActivatedRoute, private newHiresService: NewHiresService, private router: Router) { }

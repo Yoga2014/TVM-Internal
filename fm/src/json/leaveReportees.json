@@ -1,0 +1,53 @@
+{
+    "leaveReportees":[
+        {
+          "employeeId": "emp001",
+          "employeeName": "John Doe",
+          "profilePicture": "assets/images/john_doe.jpg",
+          "leaveBooked": 5,
+          "generalTiming": "9:00 AM - 6:00 PM",
+          "status": "active"
+        },
+        {
+          "employeeId": "emp002",
+          "employeeName": "Jane Smith",
+          "profilePicture": "assets/images/jane_smith.jpg",
+          "leaveBooked": 3,
+          "generalTiming": "8:00 AM - 5:00 PM",
+          "status": "on-leave"
+        },
+        {
+          "employeeId": "emp003",
+          "employeeName": "Alice Johnson",
+          "profilePicture": "assets/images/alice_johnson.jpg",
+          "leaveBooked": 7,
+          "generalTiming": "10:00 AM - 7:00 PM",
+          "status": "active"
+        },
+        {
+          "employeeId": "emp004",
+          "employeeName": "Bob Brown",
+          "profilePicture": "assets/images/bob_brown.jpg",
+          "leaveBooked": 2,
+          "generalTiming": "9:00 AM - 6:00 PM",
+          "status": "inactive"
+        },
+        {
+          "employeeId": "emp005",
+          "employeeName": "Charlie Davis",
+          "profilePicture": "assets/images/charlie_davis.jpg",
+          "leaveBooked": 4,
+          "generalTiming": "9:30 AM - 6:30 PM",
+          "status": "active"
+        },
+        {
+          "employeeId": "emp006",
+          "employeeName": "Emily White",
+          "profilePicture": "assets/images/emily_white.jpg",
+          "leaveBooked": 6,
+          "generalTiming": "8:30 AM - 5:30 PM",
+          "status": "on-leave"
+        }
+      ]
+      
+}

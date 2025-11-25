@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Employee } from '../Interface/employee.model';
 import { EmployeeService } from '../AllServices/employee.service';
 import { LeaveReporteesService } from '../AllServices/leaveReportees.service';
+import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 
 @Component({
   selector: 'app-team-reportees',
   templateUrl: './team-reportees.component.html',
+  standalone: false,
   styleUrl: './team-reportees.component.scss'
 })
 export class TeamReporteesComponent {
@@ -14,11 +16,16 @@ export class TeamReporteesComponent {
   employees: Employee[] = [];
   isGridView: boolean = true;
   selectedEmployee: string | null = null;
-  isLoading: boolean = true;                                 // Optional, to show a loading indicator
+  isLoading: boolean = true;  
+  hoveredEmployee: string | null = null;
 
-  constructor(private employeeService: EmployeeService, private leaveReporteesService: LeaveReporteesService) {}
+  constructor(private employeeService: EmployeeService, private leaveReporteesService: LeaveReporteesService, private authService: EmployeeAuthService) {}
+
+  employeeName: string= '';
 
   ngOnInit(): void {
+    const employee = this.authService.getAuthenticatedEmployee();
+    this.employeeName = employee.employeeName;
     this.loadReportees();
   }
 
@@ -27,6 +34,7 @@ export class TeamReporteesComponent {
     this.leaveReporteesService.getReportees(managerId).subscribe(
       (data: Employee[]) => {
         this.employees = data;
+        console.log(this.employees);
         this.isLoading = false;
       },
       (error) => {
@@ -56,5 +64,8 @@ export class TeamReporteesComponent {
     console.log('Video call with', employeeId);
   }
 
+  hoverOptions(employeeId: string | null): void {
+  this.hoveredEmployee = employeeId;
+}
 
 }

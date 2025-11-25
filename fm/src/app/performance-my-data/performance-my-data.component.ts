@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-performance-my-data',
   templateUrl: './performance-my-data.component.html',
+  standalone: false,
   styleUrl: './performance-my-data.component.scss'
 })
 export class PerformanceMyDataComponent {

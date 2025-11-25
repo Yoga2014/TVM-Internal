@@ -1,0 +1,155 @@
+<div class="timesheet-classic-container">
+  <!-- Header Section -->
+  <!-- <header class="classic-header">
+      <h1>GLOBAL Timesheet System</h1>
+  </header> -->
+
+  <!-- Dropdown Section -->
+  <div class="classic-dropdown-section">
+    <div class="classic-form-group">
+      <label for="year">Year:</label>
+      <select id="year" [(ngModel)]="timesheet.year" name="year">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+    <div class="classic-form-group">
+      <label for="month">Month:</label>
+      <select id="month" [(ngModel)]="timesheet.month" name="month" (change)="onMonthChange()">
+        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+      </select>
+    </div>
+    <div class="classic-form-group">
+      <label for="weekendDate">Weekend Date:</label>
+      <select id="weekendDate" [(ngModel)]="timesheet.weekendDate" name="weekendDate" (change)="onWeekendDateSelect()">
+        <option *ngFor="let date of weekendDates" [value]="date">{{ date }}</option>
+      </select>Enter hours for Monday
+    </div>
+    <div class="classic-form-group">
+      <label for="employeeName">Employee Name:</label>
+      <input type="text" id="employeeName" [(ngModel)]="timesheet.employeeName" name="employeeName"
+        placeholder="Enter Employee Name" />
+    </div>
+  </div>
+
+  <!-- Accordion Section -->
+  <div class="classic-accordion">
+    <!-- <div class="accordion-item">
+      <h2 class="accordion-header" (click)="toggleAccordion(0)">Timesheet Entry</h2>
+      <div class="accordion-content" *ngIf="accordionState[0]">
+        <p>You can now directly select fields from outside the accordion.</p>
+      </div>
+    </div> -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" (click)="toggleAccordion(1)">Timesheet Summary</h2>
+      <div class="accordion-content" *ngIf="accordionState[1]">
+        <table class="classic-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Project</th>
+              <th>Location</th>
+              <th>Hrs. Type</th>
+              <th>Total Hrs.</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of timesheetSummary">
+              <td>{{timesheet?.employeeName}}</td>
+              <td>{{ entry.project }}</td>
+              <td>{{ entry.location }}</td>
+              <td>{{ entry.hrsType }}</td>
+              <td>{{ entry.totalHours }}</td>
+              <td>{{ entry.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" (click)="toggleAccordion(2)">Fill Your Timesheet</h2>
+      <div class="accordion-content" *ngIf="accordionState[2]">
+        <form #timesheetForm="ngForm" (ngSubmit)="onSubmit(timesheetForm)">
+          <table class="classic-table">
+            <thead>
+              <tr>
+                <th>WFOL</th>
+                <th>Project</th>
+                <th>Location</th>
+                <th>Hrs. Type</th>
+                <th *ngFor="let day of weekDays">{{ day }}</th>
+                <th>Total Hrs.</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" [(ngModel)]="timesheetEntry.wfol" name="wfol" /></td>
+                <td>
+                  <select [(ngModel)]="timesheetEntry.project" name="project" required>
+                    <option value="">Select Project</option>
+                    <option>Project 1</option>
+                    <option>Project 2</option>
+                  </select>
+                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.project" class="error">Project is required.
+                  </div>
+                </td>
+                <td>
+                  <select [(ngModel)]="timesheetEntry.location" name="location" required>
+                    <option value="">Select Location</option>
+                    <option>Bangalore</option>
+                    <option>Other Location</option>
+                  </select>
+                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.location" class="error">Location is required.
+                  </div>
+                </td>
+                <td>
+                  <select [(ngModel)]="timesheetEntry.hrsType" name="hrsType" required>
+                    <option value="">Select Hrs Type</option>
+                    <option>Offshore</option>
+                    <option>Onshore</option>
+                  </select>
+                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.hrsType" class="error">Hrs Type is required.
+                  </div>
+                </td>
+                
+                <td *ngFor="let day of weekDays" class="day-cell">
+                  <div class="input-container" [class.popup-visible]="popupVisible[day]">
+                    <input type="number" [(ngModel)]="timesheetEntry.hours[day]" name="hours-{{ day }}"
+                      (input)="calculateTotalHours()" placeholder="Enter hours for {{ day }}" min="0" required />
+                    <div *ngIf="timesheetForm.submitted && !timesheetEntry.hours[day]" class="error">
+                      Hours are required for {{ day }}.
+                    </div>
+
+                    <button type="button" class="plus-icon" (click)="togglePopup(day)">+</button>
+                    <div *ngIf="popupVisible[day]" class="popup-box">
+                      <input type="text" [(ngModel)]="dayNotes[day]" placeholder="Add a note for {{ day }}"
+                        (blur)="saveNoteForDay(day)" />
+                        <button (click)="saveNoteForDay(day)">Save</button>
+                    </div>
+
+                    <div class="note-display" *ngIf="dayNotes[day]">
+                      {{ dayNotes[day] }}
+                    </div>
+                  </div>
+                </td>
+
+
+
+                <td><input type="number" [(ngModel)]="timesheetEntry.totalHours" name="totalHours"
+                    placeholder="Total Hrs" disabled /></td>
+                <td>
+                  <textarea [(ngModel)]="timesheetEntry.description" name="description" placeholder="Description"
+                    required></textarea>
+                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.description" class="error">Description is
+                    required.</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="classic-submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

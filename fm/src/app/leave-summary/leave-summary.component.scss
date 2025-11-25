@@ -1,15 +1,18 @@
 .body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif; /* Sleek and modern font */
   margin: 20px;
+  background-color: #f4f6f8; /* Light background for a professional look */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px; /* Smooth rounded edges */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Header styles */
@@ -18,173 +21,195 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  padding: 15px;
+  background-color: #cedfe0; /* Updated header color */
+  color: white;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0px 2px 6px rgb(238, 233, 233);
+
+  h1 {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 0;
+  }
 }
 
 .actions {
   display: flex;
   align-items: center;
+
+  button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px; /* Larger border-radius for modern look */
+    background-color: #ff0707;
+    color: #fdfafa; /* Contrasting text color */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #ff3907;
+    }
+  }
 }
 
-.actions button {
-  margin-right: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: #fff;
-  cursor: pointer;
-}
-
-.actions button:hover {
-  background-color: #3e8e41;
-}
-
-
+/* Leave Summary Header */
 
 .leave-summary-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
+
+  .year-display {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #333; /* Modern dark gray */
+  }
+
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    font-weight: bold;
+
+    i {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
 }
 
-.leave-summary-header .year-display {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-}
-
-.leave-summary-header button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.leave-summary-header button i {
-  margin-right: 5px;
-}
-
-/* Leave summary styles */
+/* Leave Summary Grid */
 
 .leave-summary {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-}
-
-.leave-summary .card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 15%;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.leave-summary .card i {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.leave-summary .card h3 {
-  font-size: 1.2em;
-  margin: 10px 0;
-  color: #333;
-}
-
-.leave-summary .card p {
-  margin: 5px 0;
-}
-
-.leave-summary .card .available {
-  color: green;
-  font-weight: bold;
-}
-
-.leave-summary .card .booked {
-  color: red;
-  font-weight: bold;
-}
-
-.leave-summary .card .fa-info-circle {
-  margin-left: 5px;
-  color: #ddd;
-  cursor: pointer;
-}
-
-/* Apply leave button styles */
-
-.apply-leave-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.apply-leave-btn:hover {
-  background-color: #218838;
-}
-
-/* Upcoming leave styles */
-
-.upcoming-leave {
-  padding: 20px;
-}
-
-.dropdown {
-  width: 200px;
-  margin-bottom: 20px;
-}
-
-.dropdown select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.leave-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.leave-item .date {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-.leave-item .type {
-  font-size: 16px;
-  color: #666;
-}
-
-.leave-item .type span {
-  font-size: 18px;
-  margin-right: 5px;
-}
-
-/* leave-summary.component.scss */
-.leave-summary-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
 
-.card-grid {
-  background-color: #f9f9f9;
+.leave-summary .card {
+  background-color: #ffffff;
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid #ddd;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  i {
+    font-size: 35px;
+    color: #007bff; /* Vibrant icon color */
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    font-size: 1.3em;
+    margin: 10px 0;
+    color: #333; /* Updated text color */
+    font-weight: 600;
+  }
+
+  p {
+    margin: 5px 0;
+
+    .available {
+      color: #28a745; /* Green for available leaves */
+      font-weight: bold;
+    }
+
+    .booked {
+      color: #dc3545; /* Red for booked leaves */
+      font-weight: bold;
+    }
+
+    .fa-info-circle {
+      margin-left: 5px;
+      color: #bbb; /* Subtle color for information icon */
+      cursor: pointer;
+
+      &:hover {
+        color: #007bff; /* Highlighted on hover */
+      }
+    }
+  }
+}
+
+/* Apply Leave Button */
+
+.apply-leave-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+/* Upcoming Leave Section */
+
+.upcoming-leave {
+  padding: 20px;
+  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  .dropdown {
+    width: 200px;
+    margin-bottom: 20px;
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+  }
+
+  .leave-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+
+    .date {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: 15px;
+      color: #333;
+    }
+
+    .type {
+      font-size: 1em;
+      color: #666;
+
+      span {
+        font-size: 1.2em;
+        margin-right: 5px;
+        color: #007bff; /* Highlight leave type */
+      }
+    }
+  }
 }

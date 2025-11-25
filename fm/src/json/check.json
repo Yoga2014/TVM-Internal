@@ -1,0 +1,34 @@
+{
+  "shifts": [
+    {
+      "id": "51c9",
+      "checkInTime": "18/9/2024, 3:53:42 pm",
+      "checkOutTime": "18/9/2024, 4:09:14 pm"
+    },
+    {
+      "id": "d480",
+      "checkInTime": "18/9/2024, 4:09:35 pm",
+      "checkOutTime": null
+    },
+    {
+      "id": "3e89",
+      "checkInTime": "18/9/2024, 4:34:37 pm",
+      "checkOutTime": "18/9/2024, 4:34:39 pm"
+    },
+    {
+      "id": "8314",
+      "checkInTime": "18/9/2024, 4:34:55 pm",
+      "checkOutTime": "18/9/2024, 4:35:04 pm"
+    },
+    {
+      "id": "9f54",
+      "checkInTime": "18/9/2024, 4:47:45 pm",
+      "checkOutTime": null
+    },
+    {
+      "id": "51a7",
+      "checkInTime": "18/9/2024, 6:31:56 pm",
+      "checkOutTime": null
+    }
+  ]
+}

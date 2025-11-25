@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-leave-report-dashboard',
   templateUrl: './leave-report-dashboard.component.html',
+  standalone: false,
   styleUrls: ['./leave-report-dashboard.component.scss']
 })
 export class LeaveReportDashboardComponent implements OnInit {
@@ -17,7 +18,7 @@ export class LeaveReportDashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private leaveService: LeaveService,
-    private dialog: MatDialog
+    private dialog : MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -37,22 +38,19 @@ export class LeaveReportDashboardComponent implements OnInit {
     );
   }
 
-  applyLeave() {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent, {
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.leaveService.bookLeave(result.leaveType, result.days).subscribe({
-          next: (response) => {
-            this.leaveService.setLeaveApplied(result);
-          },
-          error: (error) => {
-            console.error('Error applying leave', error);
-          }
-        });
-      }
-    });
+  applyLeave(): void {
+    {
+      const dialogRef = this.dialog.open(ApplyLeaveComponent, {
+        width: '600px',
+        data: { goalId: null }
+      });
+  
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result) {
+          this.loadLeaveReports();
+        }
+      });
+    // this.router.navigate(['apply-leave']);
   }
+}
 }

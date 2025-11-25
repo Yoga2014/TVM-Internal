@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // Correct 
   selector: 'app-professional',
 
   templateUrl: './professional.component.html',
+  standalone: false,
   styleUrl: './professional.component.scss'
 })
 export class ProfessionalComponent implements OnInit {
@@ -17,13 +18,13 @@ export class ProfessionalComponent implements OnInit {
 
   ngOnInit(): void {
     this.professionalFrom=this.pfbuilder.group({
-      companyname:['',Validators.required],
-      durationfrom:['',Validators.required],
-      durationto:['',Validators.required],
-      empreference:['',Validators.required],
+      companyName:['',Validators.required],
+      durationFrom:['',Validators.required],
+      durationTo:['',Validators.required],
+      empPreference:['',Validators.required],
       role:['',Validators.required],
-      tyoe:['',Validators.required],
-      achivements:['',Validators.required],
+      wExperience:['',Validators.required],
+      achievements:['',Validators.required],
       physical:['',Validators.required],
       arrest:['',Validators.required],
       employment:['',Validators.required],
@@ -32,10 +33,6 @@ export class ProfessionalComponent implements OnInit {
     })
   }
 
-  people = [
-    { fullName: 'Remesh', professionalRelationship: 'Project Manager', contactNo: '7985486439', business: 'Software', isEdit: false },
-    { fullName: 'Akila', professionalRelationship: 'Team Member', contactNo: '8985486439', business: 'Software', isEdit: false }
-  ];
 
   professionalPostClick(){
     const val= this.service.professionPosttMethod(this.professionalFrom.value).subscribe((res:any)=>{
@@ -45,46 +42,26 @@ export class ProfessionalComponent implements OnInit {
     console.log(this.professionalFrom.value,'total value')
       this.professionalFrom.reset()
   }
-
-  addClick(){
-    alert('Extra row Added')
-    this.people.push({fullName:'Pravin',professionalRelationship:'Team leader',contactNo:'9876543210',business:'Software',isEdit:false})
+  get companyName() {
+    return this.professionalFrom.get('companyName');
   }
-
-
-  toggleEditMode(index: number) {
-    this.people[index].isEdit = !this.people[index].isEdit;
+  get durationFrom() {
+    return this.professionalFrom.get('durationFrom');
   }
-
-  saveChanges(index: number) {
-    this.people[index].isEdit = false;
+  get durationTo() {
+    return this.professionalFrom.get('durationTo');
   }
-
-
-  deleteRow(index: number): void {
-    this.people.splice(index, 1);
-  }
-
-  get companyname() {
-    return this.professionalFrom.get('companyname');
-  }
-  get durationfrom() {
-    return this.professionalFrom.get('durationfrom');
-  }
-  get durationto() {
-    return this.professionalFrom.get('durationto');
-  }
-  get empreference() {
-    return this.professionalFrom.get('empreference');
+  get empPreference() {
+    return this.professionalFrom.get('empPreference');
   }
   get role() {
     return this.professionalFrom.get('role');
   }
-  get tyoe() {
-    return this.professionalFrom.get('tyoe');
+  get wExperience() {
+    return this.professionalFrom.get('wExperience');
   }
-  get achivements() {
-    return this.professionalFrom.get('achivements');
+  get achievements() {
+    return this.professionalFrom.get('achievements');
   }
   get physical() {
     return this.professionalFrom.get('physical');

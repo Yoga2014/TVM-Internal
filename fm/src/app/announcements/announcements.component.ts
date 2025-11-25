@@ -7,6 +7,7 @@ import { Announcement } from '../announcement.model';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
+  standalone: false,
   styleUrls: ['./announcements.component.scss']
 })
 export class AnnouncementsComponent implements OnInit {
@@ -34,9 +35,6 @@ announcement: any;
       category: ['', Validators.required],
       expiry: ['', Validators.required],
       location: ['', Validators.required],
-      disableComments: [false],
-      pinAnnouncement: [false],
-      notifyAll: [false]
     });
 
     this.loadAnnouncements();

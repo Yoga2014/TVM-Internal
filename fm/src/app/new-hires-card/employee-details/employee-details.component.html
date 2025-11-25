@@ -1,6 +1,6 @@
 <div *ngIf="employee; else noEmployee">
-  <h3>{{ employee?.employeeName }}</h3>
-  <p>Joined on: {{ employee?.joinDate | date:'longDate' }}</p>
+  <h3>{{ employee.employeeName }}</h3>
+  <p>Joined on: {{ employee.joinDate | date:'longDate' }}</p>
   <button class="edit" (click)="startEdit()">Edit</button>
   <button class="delete" (click)="deleteEmployee()">Delete</button>
 </div>

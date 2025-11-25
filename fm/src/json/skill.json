@@ -1,0 +1,28 @@
+{
+  "skills": [
+    {
+      "id": "c436",
+      "name": "Angular",
+      "description": "start to learn.",
+      "status": "active",
+      "targetCompletionDate": "2024-10-06",
+      "startDate": "2024-09-28",
+      "category": "development",
+      "weight": 15,
+      "lastUpdate": "2024-09-27",
+      "successCriteria": "Easy to complete."
+    },
+    {
+      "id": "995f",
+      "name": "React",
+      "description": "fghjk",
+      "status": "not-started",
+      "targetCompletionDate": "2024-09-28",
+      "startDate": "2024-10-03",
+      "category": "development",
+      "weight": 25,
+      "lastUpdate": "2024-10-01",
+      "successCriteria": "sdfghjkltfghjkwprefgofiergehbethber"
+    }
+  ]
+}

@@ -4,10 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { LeaveRequest } from '../Interface/leave-request.model';
 import { LeaveService } from '../AllServices/leave.service';
+import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 
 @Component({
   selector: 'app-approval-leave-request',
   templateUrl: './approval-leave-request.component.html',
+  standalone: false,
   styleUrls: ['./approval-leave-request.component.scss']
 })
 export class ApprovalLeaveRequestComponent implements OnInit {
@@ -18,15 +20,16 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     'employeeId', 'employeeName', 'email', 'designation', 'leaveType', 'teamId',
     'startDate', 'endDate', 'totalLeaveDays', 'reason', 'status', 'actions'
   ];
-  status!: 'pending' | 'approved' | 'rejected';
+  
 
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(private leaveService: LeaveService, private authService: EmployeeAuthService) {}
 
   ngOnInit() {
     this.loadLeaveRequests();
+    //this.loadAuthenticatedEmployee();
   }
 
   ngAfterViewInit() {
@@ -34,37 +37,37 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-
+  // loadAuthenticatedEmployee(): void {
+  //   const authenticatedEmployee = this.authService.getAuthenticatedEmployee();
+  //   this.dataSource.data = [
+  //     {
+  //       employeeId: authenticatedEmployee.employeeId,
+  //       employeeName: authenticatedEmployee.employeeName,
+  //       email: authenticatedEmployee.email,
+  //        designation: authenticatedEmployee.designation
+  //     }
+  //   ];
+  //   console.log('DataSource after loadAuthenticatedEmployee:', this.dataSource.data);
+  // }
 
   loadLeaveRequests(): void {
-    debugger;
-
-   
-    this.leaveRequests = [];
-    this.dataSource.data = [];
-
-    this.leaveService.getLeaves().subscribe({
-      next: (data: LeaveRequest[]) => {
-   
-        console.log('Fetched leave requests:', data);
-
-        const filteredLeaveRequests = data.filter(leaveRequest => leaveRequest.employeeName);
-
-  
-        const uniqueLeaveRequests = filteredLeaveRequests.filter((leaveRequest, index, self) =>
-          index === self.findIndex((lr) => lr.id === leaveRequest.id)
-        );
-
-   
-        this.leaveRequests = uniqueLeaveRequests;
+    this.leaveService.getLeaves().subscribe(
+      (data: LeaveRequest[]) => {
+        this.leaveRequests = data.map((request) => ({
+          ...request,
+          designation: request.designation || 'N/A',
+          email: request.email || 'N/A',
+          teamId: request.teamId || 'N/A',
+        }));
         this.dataSource.data = this.leaveRequests;
-
+        console.log('API Response data:', data);
       },
-      error: (error) => {
+      (error) => {
         console.error('Error fetching leave requests', error);
       }
-    });
+    );
   }
+  
 
   applyFilter(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -72,25 +75,42 @@ export class ApprovalLeaveRequestComponent implements OnInit {
   }
 
   approveRequest(request: LeaveRequest): void {
-    request.status='approved';
-    debugger
-    if (confirm('Are you sure you want to approve this leave request?')) {
-      this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe(() => {
-        this.refreshData();
-      });
-      console.log(request.employeeId)
+    // Check if employeeId is not undefined
+    if (request.employeeId) {
+      if (confirm('Are you sure you want to approve this leave request?')) {
+        this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe({
+          next: () => {
+            this.refreshData();
+          },
+          error: (error) => {
+            console.error('Error updating leave request:', error);
+          }
+        });
+      }
+    } else {
+      console.error('Cannot approve leave request: Employee ID is undefined.');
     }
   }
+  
 
   rejectRequest(request: LeaveRequest): void {
-    request.status='rejected';
-    const comment = prompt('Please enter the reason for rejection:');
-    if (comment) {
-      this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Rejected', comment }).subscribe(() => {
-        this.refreshData();
-      });
+    if (request.employeeId) {
+      const comment = prompt('Please enter the reason for rejection:');
+      if (comment) {
+        this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Rejected', comment }).subscribe({
+          next: () => {
+            this.refreshData();
+          },
+          error: (error) => {
+            console.error('Error updating leave request:', error);
+          }
+        });
+      }
+    } else {
+      console.error('Cannot reject leave request: Employee ID is undefined.');
     }
   }
+  
 
   refreshData(): void {
     this.leaveService.getLeaves().subscribe(

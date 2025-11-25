@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-employee-tree',
   templateUrl: './employee-tree.component.html',
+  standalone: false,
   styleUrls: ['./employee-tree.component.scss']
 })
 export class EmployeeTreeComponent {
