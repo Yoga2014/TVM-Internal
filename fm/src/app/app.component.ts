@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './AllServices/AuthService.service';
@@ -9,6 +9,7 @@ import { AuthService } from './AllServices/AuthService.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+
   title = 'fleet-management';
   activeLink: string = 'home';
   isExpanded = true;
@@ -58,9 +59,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateActiveLink() {
+  // Determine current active link
+  updateActiveLink(): void {
     const currentPath = this.router.url;
-    const activeItem = this.menuItems.find((item) => currentPath.includes(item.path));
+    const activeItem = this.menuItems.find(item => currentPath.includes(item.path));
     this.activeLink = activeItem ? activeItem.link : 'home';
   }
 
@@ -75,15 +77,37 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     this.activeLink = link;
-    this.router.navigate([path]).catch((err) => console.error('Navigation error:', err));
+    this.router.navigate([path]).catch(err => console.error('Navigation error:', err));
   }
 
-  handleSidebarToggle() {
-    this.isExpanded = !this.isExpanded;
+  // Toggle dropdown only when clicking inside avatar section
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
-  togglePopup() {
-    this.showPopup = false;
+  // Close dropdown when clicking anywhere outside
+  @HostListener('document:click')
+  closeDropdown(): void {
+    this.dropdownOpen = false;
+  }
+
+  // Logout function
+  logout(): void {
+    localStorage.clear();
+    this.dropdownOpen = false;
+    this.router.navigate(['/login']);
+  }
+
+  // After login from <app-login>
+  handleLoginSuccess(): void {
+    this.isLoggedIn = true;
+    this.showLayout = true;
+    localStorage.setItem('token', 'logged-in');
+    this.router.navigate(['/home']);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
   }
 
   handleLoginSuccess(): void {

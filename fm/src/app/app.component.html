@@ -1,4 +1,10 @@
-<app-login *ngIf="!isLoggedIn" (loginSuccess)="handleLoginSuccess()"></app-login>
+<!-- LOGIN PAGE -->
+<div *ngIf="!showLayout">
+  <app-login (loginSuccess)="handleLoginSuccess()"></app-login>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div *ngIf="showLayout" class="app-container">
 
 
 
@@ -12,7 +18,7 @@
       <div class="content" *ngFor="let item of menuItems">
         <div class="link" (click)="navigateTo(item.link, item.path)" [ngClass]="{ active: activeLink === item.link }">
           <i [class]="item.icon"></i>
-          <div class="title-home">{{ item.title }}</div>
+          <span class="title">{{ item.title }}</span>
         </div>
       </div>
     </div>
