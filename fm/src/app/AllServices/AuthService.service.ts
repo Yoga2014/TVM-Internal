@@ -12,19 +12,18 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  /** 🔹 LOGIN */
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.loginUrl, { username, password });
-  }
-
-  /** 🔹 REGISTER */
-  register(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.registerUrl, { username, password });
   }
 
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  /** 🔹 REGISTER */
+  register(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.registerUrl, { username, password });
   }
 
   setToken(token: string) {
@@ -46,12 +45,9 @@ export class AuthService {
   isTokenExpired(): boolean {
     const token = this.getToken();
     if (!token) return true;
-
     const decoded = this.decodeToken(token);
     if (!decoded || !decoded.exp) return true;
-
-    const expiryTime = decoded.exp * 1000; 
-    return Date.now() > expiryTime;
+    return Date.now() > decoded.exp * 1000;
   }
 
   isLoggedIn(): boolean {
@@ -60,27 +56,27 @@ export class AuthService {
 
   generateStaticToken() {
     const header = { alg: 'HS256', typ: 'JWT' };
-    const now = Math.floor(Date.now() / 1000); 
+    const now = Math.floor(Date.now() / 1000);
     const payload = {
-      sub: 'oohn',
+      sub: 'user',
       iat: now,
-      exp: now + 30, 
+      exp: now + 3600, // 1 hour token
+      role: 'user',
     };
 
     const base64url = (obj: any) =>
-      btoa(JSON.stringify(obj))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
+      btoa(JSON.stringify(obj)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
     const token = `${base64url(header)}.${base64url(payload)}.STATIC_SIGNATURE`;
     this.setToken(token);
   }
-
-  isAdmin(): boolean {
-    const token = this.getToken();
-    if (!token) return false;
-    const decoded = this.decodeToken(token);
-    return decoded?.role === 'admin';
+  getUserRole(): string | null {
+    // Get role from localStorage (or implement your logic)
+    return localStorage.getItem('userRole');
+  }
+    isAdmin(): boolean {
+    return this.getUserRole() === 'admin';
   }
 }
+
+
