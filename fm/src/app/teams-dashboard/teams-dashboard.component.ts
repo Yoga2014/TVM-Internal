@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TeamsDashboardComponent {
 
-  activeNavItem: string = 'team-space';
+  activeNavItem: string = 'department';
   @Output() subNavChange = new EventEmitter<string>();  // Emit string for breadcrumb
 
   constructor(private router : Router) {}
