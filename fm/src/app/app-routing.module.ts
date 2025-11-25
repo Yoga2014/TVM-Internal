@@ -65,8 +65,8 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
 import { LogOutComponent } from './log-out/log-out.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/new-Home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'logout', component: LogOutComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },

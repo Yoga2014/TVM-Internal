@@ -7,6 +7,7 @@ import { AuthService } from './AllServices/AuthService.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -16,6 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
   showPopup = true;
   private routerSubscription: Subscription | undefined;
   isLoggedIn = false;
+  dropdownOpen = false;
+  showLayout = false;
 
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
@@ -108,9 +111,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateToProfile(): void {
     this.router.navigate(['/profile']);
-  }
-
-  handleLoginSuccess(): void {
-    this.isLoggedIn = true;
   }
 }

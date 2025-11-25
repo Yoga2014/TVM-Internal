@@ -76,4 +76,11 @@ export class AuthService {
     const token = `${base64url(header)}.${base64url(payload)}.STATIC_SIGNATURE`;
     this.setToken(token);
   }
+
+  isAdmin(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    const decoded = this.decodeToken(token);
+    return decoded?.role === 'admin';
+  }
 }

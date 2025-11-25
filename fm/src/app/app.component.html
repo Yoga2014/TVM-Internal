@@ -5,10 +5,6 @@
 
 <!-- MAIN LAYOUT -->
 <div *ngIf="showLayout" class="app-container">
-
-
-
-<div class="app-container" *ngIf="isLoggedIn">
   <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
     <div class="header" (click)="navigateTo('home', 'new-Home')">
       <img src="../assets/images/TVM Infotech Logo.jpg" alt="Logo" />
