@@ -14,33 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isExpanded = true;
   showPopup = true;
   private routerSubscription: Subscription | undefined;
-
   isLoggedIn = false;
-
-  constructor(private router: Router, private authservice: AuthService) {}
-
-  ngOnInit() {
-    // Check login status initially
-    this.isLoggedIn = this.authservice.isLoggedIn();
-
-    // Update login status on route changes
-    this.routerSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.isLoggedIn = this.authservice.isLoggedIn();
-        this.updateActiveLink();
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
-  }
-
-  handleLoginSuccess(): void {
-    this.isLoggedIn = true;
-  }
 
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
@@ -55,26 +29,54 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' },
   ];
 
+  constructor(private router: Router, private authservice: AuthService) {}
+
+  ngOnInit() {
+    this.isLoggedIn = this.authservice.isLoggedIn();
+
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn = this.authservice.isLoggedIn();
+        this.updateActiveLink();
+        this.checkTokenExpiry();
+      }
+    });
+
+    // Optional: check token expiry every 30 seconds
+    setInterval(() => this.checkTokenExpiry(), 30000);
+  }
+
+  ngOnDestroy() {
+    if (this.routerSubscription) this.routerSubscription.unsubscribe();
+  }
+
+  checkTokenExpiry() {
+    if (!this.authservice.isLoggedIn() && this.authservice.getToken()) {
+      alert('Your session has expired. Please login again.');
+      this.authservice.logout();
+      this.isLoggedIn = false;
+    }
+  }
+
   updateActiveLink() {
     const currentPath = this.router.url;
     const activeItem = this.menuItems.find((item) => currentPath.includes(item.path));
     this.activeLink = activeItem ? activeItem.link : 'home';
   }
 
-navigateTo(link: string, path: string) {
-  if (link === 'logout') {
-    const confirmed = confirm('Do you really want to logout?');
-    if (confirmed) {
-      this.authservice.logout(); 
-      this.isLoggedIn = false; 
-      this.router.navigate(['login']).catch((err) => console.error(err));
+  navigateTo(link: string, path: string) {
+    if (link === 'logout') {
+      const confirmed = confirm('Do you really want to logout?');
+      if (confirmed) {
+        this.authservice.logout();
+        this.isLoggedIn = false;
+      }
+      return;
     }
-    return; 
-  }
 
-  this.activeLink = link;
-  this.router.navigate([path]).catch((err) => console.error('Navigation error:', err));
-}
+    this.activeLink = link;
+    this.router.navigate([path]).catch((err) => console.error('Navigation error:', err));
+  }
 
   handleSidebarToggle() {
     this.isExpanded = !this.isExpanded;
@@ -82,5 +84,9 @@ navigateTo(link: string, path: string) {
 
   togglePopup() {
     this.showPopup = false;
+  }
+
+  handleLoginSuccess(): void {
+    this.isLoggedIn = true;
   }
 }

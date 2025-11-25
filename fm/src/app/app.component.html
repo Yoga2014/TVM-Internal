@@ -1,6 +1,7 @@
 <app-login *ngIf="!isLoggedIn" (loginSuccess)="handleLoginSuccess()"></app-login>
 
 
+
 <div class="app-container" *ngIf="isLoggedIn">
   <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
     <div class="header" (click)="navigateTo('home', 'new-Home')">

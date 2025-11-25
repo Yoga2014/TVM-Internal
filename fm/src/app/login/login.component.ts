@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../AllServices/AuthService.service';
 import { Router } from '@angular/router';
 
@@ -6,48 +7,60 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone:false
+  standalone: false
 })
 export class LoginComponent {
-  @Output() loginSuccess = new EventEmitter<void>(); // Emit event on successful login
 
-  emailOrPhone: string = '';
-  password: string = '';
+  @Output() loginSuccess = new EventEmitter<void>();
+
+  login!: FormGroup;
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
-  login() {
-    if (!this.emailOrPhone || !this.password) {
-      this.errorMessage = 'Email/Phone and password are required';
+  ngOnInit(): void {
+    this.login = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  /** 🔹 LOGIN */
+  enter(): void {
+    if (this.login.invalid) {
+      this.login.markAllAsTouched();
+      this.errorMessage = 'Please enter username and password.';
       return;
     }
 
-    this.authService.login(this.emailOrPhone, this.password).subscribe(
-      (user) => {
-        if (user) {
-          localStorage.setItem('userRole', user.role);
-          this.emailOrPhone = '';
-          this.password = '';
+    const { username, password } = this.login.value;
 
-          this.loginSuccess.emit(); // Emit event after successful login
+    this.auth.login(username, password).subscribe({
+      next: (res: any) => {
+        if (res?.token) {
+          // localStorage.setItem('token', res.token);
+          this.auth.generateStaticToken();
+          this.loginSuccess.emit();
           this.router.navigate(['/new-Home']);
         } else {
-          this.errorMessage = 'Invalid credentials';
+          this.errorMessage = res.message || 'Invalid username or password';
         }
       },
-      (error) => {
-        console.error('Login error:', error);
-        this.errorMessage = 'Error logging in. Please try again.';
+      error: () => {
+        this.errorMessage = 'Login failed. Try again.';
       }
-    );
+    });
   }
 
-  navigateToRegister() {
+  navigateToRegister(): void {
     this.router.navigate(['/register']);
   }
 
-  navigateToForgotPassword() {
+  navigateToForgotPassword(): void {
     this.router.navigate(['/forgot-password']);
   }
 }
