@@ -248,6 +248,9 @@ $hover-color: #d90429;
     }
   }
 
+
+}
+
   .main-content {
     flex-grow: 1;
     padding: 2rem;
@@ -256,7 +259,6 @@ $hover-color: #d90429;
     overflow-y: auto;
     animation: slide-in 0.5s ease forwards;
   }
-}
 
 // Responsive styles
 @media (max-width: 768px) {

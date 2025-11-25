@@ -62,10 +62,12 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { LogOutComponent } from './log-out/log-out.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'logout', component: LogOutComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },
   { path: 'home', component: NewHomeComponent },

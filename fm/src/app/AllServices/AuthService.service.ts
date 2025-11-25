@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3011/users';
+  private apiUrl = 'http://localhost:3000/users';
   private userRole: string | null = null;
   constructor(private http: HttpClient, private router: Router) {}
   // login(username: string, password: string): Observable<boolean> {
@@ -36,9 +36,11 @@ export class AuthService {
     return this.http.post<any>(this.apiUrl, user);
   }
   logout() {
-    this.userRole = null;
-    localStorage.removeItem('userRole');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('userRole'); // or sessionStorage
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
   getUserRole(): string | null {
     return localStorage.getItem('userRole');
