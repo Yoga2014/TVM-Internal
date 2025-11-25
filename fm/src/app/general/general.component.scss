@@ -1,3 +1,7 @@
+span {
+  color: red;
+}
+
 .d-flex-gap {
   display: flex;
   gap: 10rem;
@@ -87,4 +91,16 @@ th {
   display: flex;
   flex-direction: column;
   padding: 1rem 6rem 1rem 1rem;
+}
+
+.fa-calendar-days{
+  padding-left: 5px;
+}
+
+.btns-general{
+  background-color: #000000;
+  color: white;
+  border-radius: 5px;
+  float: right;
+  margin-right: 150px;
 }

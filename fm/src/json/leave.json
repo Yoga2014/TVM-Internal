@@ -1,262 +1,42 @@
 {
   "Leave": [
     {
-      "id": "442a",
-      "taskOwner": "Durai",
-      "taskName": "Internal Project",
-      "description": "completed.",
-      "startDate": "2024-08-21",
-      "dueDate": "2024-08-31",
-      "reminder": "2024-08-25",
-      "priority": "Medium",
-      "status": "Completed"
-    },
-    {
-      "id": "cbc2",
+      "id": "c866",
+      "employeeId": "TVM01",
+      "employeeName": "Sivaneshwaran",
+      "email": "siva.tvm@gmail.com",
+      "designation": "Full-stack Developer",
       "leaveType": "Earned Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "gtf@gmail.com",
-      "reason": "ytf"
+      "teamId": "dev001",
+      "startDate": "2024-12-14",
+      "endDate": "2024-12-15",
+      "totalDays": 2,
+      "reasonforLeave": "fever",
+      "status": "Pending",
+      "dateOfRequest": "2024-12-13",
+      "booked": 2,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
     },
     {
-      "id": "3f94",
-      "leaveType": "Earned Leave",
-      "days": 1
-    },
-    {
-      "id": "af28",
-      "leaveType": "Earned Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-17T18:30:00.000Z",
-      "teamEmail": "yfc@gmail.com",
-      "reason": "tf"
-    },
-    {
-      "id": "f660",
+      "id": "8945",
+      "employeeId": "TVM01",
       "employeeName": "Sivaneshwaran",
-      "leaveType": "Earned Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Fri Oct 18 2024",
-      "daysTaken": 2,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "ae1d",
-      "leaveType": "Paternity Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "uuuu"
-    },
-    {
-      "id": "3355",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Paternity Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Thu Oct 17 2024",
-      "daysTaken": 1,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "2f36",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "tesing"
-    },
-    {
-      "id": "247f",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Thu Oct 17 2024",
-      "daysTaken": 1,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "63e4",
-      "leaveType": "Leave Without Pay",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "Better@gmail.com",
-      "reason": "tr rdt tfh"
-    },
-    {
-      "id": "12fe",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Leave Without Pay",
-      "type": "Unpaid",
-      "leavePeriod": "Thu Oct 17 2024 - Thu Oct 17 2024",
-      "daysTaken": 1,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "7947",
-      "leaveType": "Sick Leave",
-      "startDate": "2024-10-22T18:30:00.000Z",
-      "endDate": "2024-10-17T18:30:00.000Z",
-      "teamEmail": "Rest@gnail.com",
-      "reason": "testinf"
-    },
-    {
-      "id": "27b6",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sick Leave",
-      "type": "Paid",
-      "leavePeriod": "Wed Oct 23 2024 - Fri Oct 18 2024",
-      "daysTaken": -4,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "7e18",
-      "leaveType": "Sick Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "urgent@gnail.com",
-      "reason": "yhwdb"
-    },
-    {
-      "id": "44da",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sick Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Thu Oct 17 2024",
-      "daysTaken": 1,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "0b50",
-      "leaveType": "Sick Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-16T18:30:00.000Z",
-      "teamEmail": "yyy@gmail.com",
-      "reason": "tesing"
-    },
-    {
-      "id": "00bf",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sick Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Thu Oct 17 2024",
-      "daysTaken": 1,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "3cc4",
-      "leaveType": "Leave Without Pay",
-      "startDate": "2024-10-23T18:30:00.000Z",
-      "endDate": "2024-10-24T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "edeedd"
-    },
-    {
-      "id": "d9f3",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Leave Without Pay",
-      "type": "Unpaid",
-      "leavePeriod": "Thu Oct 24 2024 - Fri Oct 25 2024",
-      "daysTaken": 2,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "608d",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-17T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "test"
-    },
-    {
-      "id": "cfc2",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Fri Oct 18 2024",
-      "daysTaken": 2,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "1385",
-      "leaveType": "Earned Leave",
-      "startDate": "2024-10-16T18:30:00.000Z",
-      "endDate": "2024-10-17T18:30:00.000Z",
-      "teamEmail": "tses@gmail.com",
-      "reason": "tettetete"
-    },
-    {
-      "id": "2e23",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Earned Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 17 2024 - Fri Oct 18 2024",
-      "daysTaken": 2,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "87e3",
-      "leaveType": "Sabbatical Leave",
-      "startDate": "2024-10-14T18:30:00.000Z",
-      "endDate": "2024-10-17T18:30:00.000Z",
-      "teamEmail": "unique@gmail.com",
-      "reason": "uuhec"
-    },
-    {
-      "id": "3649",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sabbatical Leave",
-      "type": "Paid",
-      "leavePeriod": "Tue Oct 15 2024 - Fri Oct 18 2024",
-      "daysTaken": 4,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "28f9",
-      "leaveType": "Paternity Leave",
-      "startDate": "2024-10-17T18:30:00.000Z",
-      "endDate": "2024-10-22T18:30:00.000Z",
-      "teamEmail": "jtdr@gnail.vom",
-      "reason": "jgv"
-    },
-    {
-      "id": "738d",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Paternity Leave",
-      "type": "Paid",
-      "leavePeriod": "Fri Oct 18 2024 - Wed Oct 23 2024",
-      "daysTaken": 6,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
-    },
-    {
-      "id": "8e65",
-      "leaveType": "Sick Leave",
-      "startDate": "2024-10-09T18:30:00.000Z",
-      "endDate": "2024-10-08T18:30:00.000Z",
-      "teamEmail": "test@gmail.com",
-      "reason": "vgvj"
-    },
-    {
-      "id": "2e0c",
-      "employeeName": "Sivaneshwaran",
-      "leaveType": "Sick Leave",
-      "type": "Paid",
-      "leavePeriod": "Thu Oct 10 2024 - Wed Oct 09 2024",
-      "daysTaken": 0,
-      "dateOfRequest": "Wed Oct 16 2024",
-      "selected": false
+      "email": "siva.tvm@gmail.com",
+      "designation": "Full-stack Developer",
+      "leaveType": "Casual Leave",
+      "teamId": "dev001",
+      "startDate": "2024-12-16",
+      "endDate": "2024-12-16",
+      "totalDays": 1,
+      "reasonforLeave": "fever",
+      "status": "Pending",
+      "dateOfRequest": "2024-12-13",
+      "booked": 1,
+      "comment": "",
+      "reasonforRejected": "",
+      "color": ""
     }
   ]
 }

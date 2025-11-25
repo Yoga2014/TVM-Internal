@@ -1,0 +1,91 @@
+{
+    
+"Teams": [
+    {
+      "employeeId": "E001",
+      "firstName": "John",
+      "lastName": "Doe",
+      "nickName": "Johnny",
+      "email": "john.doe@example.com",
+      "photoUrl": "https://example.com/photos/john.jpg",
+      "department": "Engineering",
+      "designation": "Software Engineer",
+      "tvmRole": "Developer",
+      "employmentType": "Full-time",
+      "presentAddress": "123 Main St, Cityville",
+      "permanentAddress": "456 Elm St, Townsville",
+      "aadhaar": "123456789012",
+      "pan": "ABCDE1234F",
+      "uan": "1234567890"
+    },
+    {
+      "employeeId": "E002",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "nickName": "Janey",
+      "email": "jane.smith@example.com",
+      "photoUrl": "https://example.com/photos/jane.jpg",
+      "department": "Marketing",
+      "designation": "Marketing Manager",
+      "tvmRole": "Manager",
+      "employmentType": "Part-time",
+      "presentAddress": "789 Oak St, Cityville",
+      "permanentAddress": "321 Pine St, Townsville",
+      "aadhaar": "234567890123",
+      "pan": "FGHIJ4567K",
+      "uan": "2345678901"
+    },
+    {
+      "employeeId": "E003",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "nickName": "Ally",
+      "email": "alice.johnson@example.com",
+      "photoUrl": "https://example.com/photos/alice.jpg",
+      "department": "HR",
+      "designation": "HR Specialist",
+      "tvmRole": "HR",
+      "employmentType": "Full-time",
+      "presentAddress": "135 Maple St, Cityville",
+      "permanentAddress": "246 Birch St, Townsville",
+      "aadhaar": "345678901234",
+      "pan": "JKLMN5678P",
+      "uan": "3456789012"
+    },
+    {
+      "employeeId": "E004",
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "nickName": "Bobby",
+      "email": "bob.brown@example.com",
+      "photoUrl": "https://example.com/photos/bob.jpg",
+      "department": "Sales",
+      "designation": "Sales Executive",
+      "tvmRole": "Sales",
+      "employmentType": "Full-time",
+      "presentAddress": "159 Cedar St, Cityville",
+      "permanentAddress": "753 Spruce St, Townsville",
+      "aadhaar": "456789012345",
+      "pan": "QRSTU6789V",
+      "uan": "4567890123"
+    },
+    {
+      "employeeId": "E005",
+      "firstName": "Charlie",
+      "lastName": "Davis",
+      "nickName": "Chuck",
+      "email": "charlie.davis@example.com",
+      "photoUrl": "https://example.com/photos/charlie.jpg",
+      "department": "Engineering",
+      "designation": "Data Scientist",
+      "tvmRole": "Data Analyst",
+      "employmentType": "Contract",
+      "presentAddress": "357 Ash St, Cityville",
+      "permanentAddress": "951 Willow St, Townsville",
+      "aadhaar": "567890123456",
+      "pan": "VWXYZ1234A",
+      "uan": "5678901234"
+    }
+  ]
+
+}

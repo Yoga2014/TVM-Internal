@@ -1,75 +1,86 @@
-import { Component, input } from '@angular/core';
-
-
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+//import { Profile } from '../interfaces/profile.interface';
+import { Profile,FamilyMember,Language } from '../Interface/workers';
 @Component({
   selector: 'app-details',
-
   templateUrl: './details.component.html',
-  styleUrl: './details.component.scss'
+  styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
+  profiles: Profile[] = []; 
+  filteredProfiles: Profile[] = []; 
+  selectedRows: Profile[] = []; 
+  apiUrl: string = 'http://localhost:8080/api/profile';
 
+  constructor(private http: HttpClient) {}
 
-
-
-  workers: any[] = [
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false,  },
-    { firstName: 'Anbu', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Inactive', department: 'Software Developer', active: 'no', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'Active', department: 'Software Developer', active: 'yes', hidden: false },
-    { firstName: 'Raji', secondName: 'Krishnan', mailId: '', officialMailId: '', mobile: '987654345', onboardingStatus: 'pending', department: 'Software Developer', active: 'null', hidden: false },
-
-  ];
-
-  selectedRows: any[] = [];
-
-  constructor() {}
-
-  deleteSelectedRows() {
-    this.selectedRows.forEach(row => {
-      const index = this.workers.indexOf(row);
-      if (index !== -1) {
-        this.workers.splice(index, 1);
-      }
-    });
-    this.selectedRows = [];
-    alert('Are you sure want delete this row')
+  ngOnInit(): void {
+    this.fetchProfiles();
   }
 
-  filterWorkers(activeStatus: string) {
+  
+  fetchProfiles(): void {
+    this.http.get<Profile[]>(this.apiUrl).subscribe(
+      (data) => {
+        this.profiles = data;
+        this.filteredProfiles = [...this.profiles]; 
+      },
+      (error) => console.error('Error fetching profiles:', error)
+    );
+  }
+
+
+  filterWorkers(activeStatus: string): void {
     if (activeStatus === 'all') {
-      // Show all workers
-      this.workers.forEach(worker => worker.hidden = false);
+      this.filteredProfiles = [...this.profiles];
     } else {
-      // Filter based on active status
-      this.workers.forEach(worker => {
-        if (worker.active === activeStatus) {
-          worker.hidden = false;
-        } else {
-          worker.hidden = true;
-        }
-      });
+      this.filteredProfiles = this.profiles.filter(profile => 
+        profile.maritalStatus === activeStatus 
+      );
     }
   }
 
-  toggleSelection(event: Event, worker: any) {
-    if ((event.target as HTMLInputElement).checked) {
-      this.selectedRows.push(worker);
-    } else {
-      const index = this.selectedRows.indexOf(worker);
-      if (index !== -1) {
-        this.selectedRows.splice(index, 1);
-      }
-    }
-  }
-
-  selectAll(event: Event) {
+  
+  toggleSelection(event: Event, profile: Profile): void {
     const isChecked = (event.target as HTMLInputElement).checked;
-    this.selectedRows = isChecked ? [...this.workers] : [];
+    if (isChecked) {
+      this.selectedRows.push(profile);
+    } else {
+      this.selectedRows = this.selectedRows.filter(row => row.id !== profile.id);
+    }
   }
 
+  
+  selectAll(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedRows = isChecked ? [...this.filteredProfiles] : [];
+  }
 
+ 
+  deleteSelectedRows(): void {
+    if (confirm('Are you sure you want to delete the selected rows?')) {
+      const deleteRequests = this.selectedRows.map(profile => 
+        this.http.delete(`${this.apiUrl}/${profile.id}`).toPromise()
+      );
+
+      Promise.all(deleteRequests).then(() => {
+        this.selectedRows.forEach(row => {
+          this.profiles = this.profiles.filter(profile => profile.id !== row.id);
+        });
+        this.filteredProfiles = [...this.profiles];
+        this.selectedRows = [];
+      }).catch(error => console.error('Error deleting profiles:', error));
+    }
+  }
+
+ 
+  get allSelected(): boolean {
+    return this.selectedRows.length === this.filteredProfiles.length && this.selectedRows.length > 0;
+  }
+
+ 
+  viewProfile(profile: Profile): void {
+    console.log('Viewing profile:', profile);
+  }
 }

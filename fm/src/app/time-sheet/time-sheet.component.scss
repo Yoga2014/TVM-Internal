@@ -1,0 +1,255 @@
+$primary-color: #2c3e50;
+$secondary-color: #34495e;
+$accent-color: #1abc9c;
+$text-color: #ecf0f1;
+$error-color: #e74c3c;
+$border-color: #bdc3c7;
+$background-color: #ecf0f1;
+
+.timesheet-classic-container {
+  font-family: 'Arial', sans-serif;
+  color: $primary-color;
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .classic-header {
+    text-align: center;
+    color: $accent-color;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .classic-dropdown-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .classic-form-group {
+      display: flex;
+      flex-direction: column;
+      label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      select,
+      input {
+        padding: 0.5rem;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: 1rem;
+        &:focus {
+          outline: none;
+          border-color: $accent-color;
+          box-shadow: 0 0 4px $accent-color;
+        }
+      }
+    }
+  }
+
+  .classic-accordion {
+    border-top: 1px solid $border-color;
+
+    .accordion-item {
+      margin: 1rem 0;
+
+      .accordion-header {
+        cursor: pointer;
+        background-color: $secondary-color;
+        color: $text-color;
+        padding: 0.8rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: lighten($secondary-color, 10%);
+        }
+      }
+
+      .accordion-content {
+        margin-top: 0.5rem;
+        padding: 1rem;
+        background-color: lighten($background-color, 5%);
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .classic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    thead {
+      background-color: $secondary-color;
+      color: $text-color;
+
+      th {
+        padding: 0.8rem;
+        text-align: left;
+        border: 1px solid $border-color;
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: lighten($background-color, 10%);
+        }
+
+        td {
+          padding: 0.8rem;
+          border: 1px solid $border-color;
+        }
+
+        input,
+        select,
+        textarea {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid $border-color;
+          border-radius: 4px;
+          font-size: 0.9rem;
+          &:focus {
+            outline: none;
+            border-color: $accent-color;
+          }
+        }
+      }
+    }
+  }
+
+  .input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      padding-right: 2rem;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: transform 0.3s ease-in-out;
+  
+      &:focus {
+        outline: none;
+        border-color: $accent-color;
+        box-shadow: 0 0 4px $accent-color;
+      }
+    }
+  
+    .plus-icon {
+      position: absolute;
+      top: -0.7rem;
+      right: -0.7rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: darken(#007bff, 10%);
+      }
+    }
+
+    /* Popup box styling */
+    .popup-box {
+      position: absolute; /* Position the popup box relative to its container */
+      top: 50%; /* Center it vertically */
+      left: 50%; /* Center it horizontally */
+      transform: translate(-50%, -50%); /* Center the popup exactly */
+      background-color: white; /* Background color */
+      padding: 20px; /* Padding for spacing inside the popup */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for a subtle 3D effect */
+      border-radius: 8px; /* Rounded corners */
+      max-width: 400px; /* Max width for the popup */
+      width: 100%; /* Ensure it doesn't exceed 100% width */
+      z-index: 1000; /* Ensure the popup is on top */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+      input {
+        width: 100%;
+        padding: 10px; /* Padding inside the input field */
+        margin-bottom: 10px; /* Space below the input */
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 4px; /* Rounded corners for the input */
+        font-size: 14px; /* Text size */
+        outline: none; /* Remove the outline on focus */
+      }
+
+      button {
+        padding: 10px 20px; /* Button padding */
+        background-color: #007bff; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* No border */
+        border-radius: 4px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
+        font-size: 14px; /* Button text size */
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
+      }
+
+      button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+      }
+
+      button:focus {
+        outline: none; /* Remove the outline on focus */
+      }
+
+      button:active {
+        transform: scale(0.98); /* Slightly shrink the button on click */
+      }
+    }
+  
+    /* Show the popup box */
+    &.popup-visible .popup-box {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .note-display {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+  
+    .error {
+      color: $error-color;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+  }
+
+  .classic-submit-btn {
+    background-color: $accent-color;
+    color: $text-color;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
+}

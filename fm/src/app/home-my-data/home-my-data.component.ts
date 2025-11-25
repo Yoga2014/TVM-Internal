@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-my-data',
   templateUrl: './home-my-data.component.html',
+  standalone: false,
   styleUrls: ['./home-my-data.component.scss']
 })
 export class HomeMyDataComponent {

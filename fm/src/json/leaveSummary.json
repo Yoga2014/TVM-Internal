@@ -1,0 +1,52 @@
+{
+  "LeaveSummary": [
+    {
+      "typeLeave": "Casual Leave",
+      "iconClass": "fas fa-sun",
+      "color": "#a3c4f3",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "0848"
+    },
+    {
+      "typeLeave": "Earned Leave",
+      "iconClass": "fas fa-clock",
+      "color": "#a3d39c",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "5118"
+    },
+    {
+      "typeLeave": "Leave Without Pay",
+      "iconClass": "fas fa-sun",
+      "color": "#f3a3a3",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "aaa1"
+    },
+    {
+      "typeLeave": "Paternity Leave",
+      "iconClass": "fas fa-user",
+      "color": "#f3a3a3",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "1ac5"
+    },
+    {
+      "typeLeave": "Sabbatical Leave",
+      "iconClass": "fas fa-sync-alt",
+      "color": "#f3e3a3",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "69e4"
+    },
+    {
+      "typeLeave": "Sick Leave",
+      "iconClass": "fas fa-notes-medical",
+      "color": "#bde0fe",
+      "available": 12,
+      "booked": 0,
+      "leaveSummaryId": "6365"
+    }
+  ]
+}

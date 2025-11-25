@@ -32,32 +32,32 @@
 
   <!-- Filter Buttons -->
   <div class="filter-buttons">
-    <button mat-raised-button (click)="filterGoals('all')">
+    <button mat-raised-button (click)="filterGoals('all')" class="add-goal-button">
       All In Progress Goals ({{ allGoalsCount }})
     </button>
-    <button mat-raised-button (click)="filterGoals('thisWeek')">
+    <button mat-raised-button (click)="filterGoals('thisWeek')" class="add-goal-button">
       This Week ({{ thisWeekCount }})
     </button>
-    <button mat-raised-button (click)="filterGoals('thisMonth')">
+    <button mat-raised-button (click)="filterGoals('thisMonth')" class="add-goal-button">
       This Month ({{ thisMonthCount }})
     </button>
-    <button mat-raised-button (click)="filterGoals('thisYear')">
+    <button mat-raised-button (click)="filterGoals('thisYear')" class="add-goal-button">
       This Year ({{ thisYearCount }})
     </button>
 
     <!-- Add Goal Button -->
-  <button mat-raised-button color="primary" class="add-goal-button" (click)="addGoal()">Add Goal</button>
+  <button mat-raised-button color="primary" class="add-goal-buttons" (click)="addGoal()">Add Goal</button>
 
   </div>
 
   <!-- Goals List -->
   <mat-card *ngFor="let goal of filteredGoals" class="goal-card">
-    <div class="goal-info" (click)="navigateToGoalSpace(goal.id)">
+    <div class="goal-info" (click)="navigateToGoalSpace(goal.goalId)">
       <h1>{{ goal.name }}</h1>
       <h3>{{ goal.description }}</h3>
     </div>
     <div class="goal-actions">
-      <button mat-icon-button color="primary" (click)="openCommentsDialog(goal.id)">
+      <button mat-icon-button color="primary" (click)="openCommentsDialog(goal.goalId)">
         <mat-icon>comment</mat-icon>
       </button>
       <button mat-icon-button color="accent" (click)="editGoal(goal)">

@@ -4,7 +4,7 @@
     <div class="row mt-5">
       <div class="col-md-5">
         <div class="form-group">
-          <label for="firstName" >First name</label>
+          <label for="firstName" >First name<span>*</span></label>
           <input  class="form-control mt-3" id="firstName" placeholder="User name" formControlName="firstName"
             [ngClass]="{'invalid-input': firstName?.invalid && (firstName?.dirty || firstName?.touched)}">
           <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="text-danger">
@@ -14,10 +14,10 @@
       </div>
       <div class="col-md-5">
         <div class="form-group">
-          <label for="lastname" >Last name</label>
-          <input class="form-control mt-3" id="lastname" placeholder="User name" formControlName="lastname"
-            [ngClass]="{'invalid-input': lastname?.invalid && (lastname?.dirty || lastname?.touched)}">
-          <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="text-danger">
+          <label for="lastName" >Last name<span>*</span></label>
+          <input class="form-control mt-3" id="lastName" placeholder="User name" formControlName="lastName"
+            [ngClass]="{'invalid-input': lastName?.invalid && (lastName?.dirty || lastName?.touched)}">
+          <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class="text-danger">
             Last name is required.
           </div>
         </div>
@@ -25,8 +25,7 @@
       </div>
       <div class="col-md-5 mt-5">
             <div class="form-group">
-              <label for="dob" class="mt-3">Date of birth</label>
-              <i class="fa-solid fa-calendar-days"></i>
+              <label for="dob" class="mt-3">Date of birth</label><i class="fa-solid fa-calendar-days"></i><span>*</span>
               <input type="date" class="form-control mt-3" id="dob" placeholder="Date of birth" formControlName="dob"
                 [ngClass]="{'invalid-input': dob?.invalid && (dob?.dirty || dob?.touched)}">
               <div *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)" class="text-danger">
@@ -36,11 +35,11 @@
       </div>
       <div class="col-md-5  mt-5">
         <div class="form-group mt-3">
-          <label class="d-block">Gender</label>
+          <label class="d-block">Gender<span>*</span></label>
           <div class="mt-3">
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="genderMale" name="gender" value="male" checked>
+              <input class="form-check-input" type="radio" id="genderMale" name="gender" value="male" formControlName="gender">
               <label class="form-check-label" for="genderMale">Male</label>
             </div>
             <div class="form-check form-check-inline">
@@ -49,9 +48,9 @@
               <label class="form-check-label" for="genderFemale">Female</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="genderOther" name="gender" value="other"
+              <input class="form-check-input" type="radio" id="genderother" name="gender" value="other"
                 formControlName="gender">
-              <label class="form-check-label" for="genderOther">Other</label>
+              <label class="form-check-label" for="genderother">other</label>
             </div>
           </div>
         </div>
@@ -59,7 +58,7 @@
       </div>
       <div class="col-md-5  mt-5">
         <div class="form-group">
-          <label for="position" class="mt-3">Position applied for</label>
+          <label for="position" class="mt-3">Position applied for<span>*</span></label>
           <select class="form-select mt-3" formControlName="position"
             [ngClass]="{'invalid-input': position?.invalid && (position?.dirty || position?.touched)}">
             <option value="" disabled selected>Select a Designation</option>
@@ -72,26 +71,52 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5  mt-5">
+      <div class="col-md-5 mt-5">
         <div class="form-group">
-          <label for="employeeReference" class="mt-3">Employee Reference (if any)</label>
-          <input class="form-control mt-3" id="employeeReference" placeholder="Employee Reference" formControlName="employeeReference"
-            [ngClass]="{'invalid-input': employeeReference?.invalid && (employeeReference?.dirty || employeeReference?.touched)}">
-          <div *ngIf="employeeReference?.invalid && (employeeReference?.dirty || employeeReference?.touched)" class="text-danger">
-            <!-- CGPA Obtained Name is required. -->
-          </div>
+          <label for="employeePhoto" class="mt-3">employeePhoto</label>
+          <input 
+            type="file" 
+            class="form-control mt-3" 
+            id="employeePhoto" 
+            accept="image/*" 
+            (change)="onPhotoSelected($event)"
+          >
         </div>
 
+        <div *ngIf="photoPreview" class="mt-3">
+          <p>Photo Preview:</p>
+          <img 
+            [src]="photoPreview" 
+            alt="Employee Photo Preview" 
+            class="img-thumbnail" 
+            style="max-width: 600px; height:auto;"
+          >
+          <button class="btn btn-secondary mt-3" (click)="clearPhoto()">Clear Photo</button>
+        </div>
       </div>
 
-    </div>
-    <button class="" (click)="saveClick()">Save</button>
+      <div class="col-md-5">
+        <div class="form-group">
+          <br>  
+          <label for="bloodGroup" >Blood-Group<span>*</span></label>
+          <input  class="form-control mt-3" id="bloodGroup" placeholder="bloodGroup"formControlName="bloodGroup"
+            [ngClass]="{'invalid-input': bloodGroup?.invalid && (bloodGroup?.dirty || bloodGroup?.touched)}">
+          <div *ngIf="bloodGroup?.invalid && (bloodGroup?.dirty || bloodGroup?.touched)" class="text-danger">
+            Blood-Group is required.
+          </div>
+        </div>
+      </div>
+    </div> 
+
+
+    
+    <br>
   <div class="row  label-div mt-5">
     <hr>
-    <h2><i class="fa-sharp fa-solid fa-house"></i>Contact</h2>
+    <h2><i class="fa-sharp fa-solid fa-house"></i> Contact</h2>
     <div class="d-flex-gap mt-2 ">
       <div class="form-group me-4 col-md-2 ">
-        <label  class="label-spacing" for="mobileNumber">Mobile number</label>
+        <label  class="label-spacing" for="mobileNumber">Mobile number<span>*</span></label>
         <input class="form-control mt-2"  type="number"   id="mobileNumber" placeholder="Mobile number" formControlName="mobileNumber"
         [ngClass]="{'invalid-input': mobileNumber?.invalid && (mobileNumber?.dirty || mobileNumber?.touched)}"
 
@@ -101,7 +126,7 @@
         </div>
       </div>
       <div class="form-group me-4 col-md-2">
-        <label  class="label-spacing" for="homePhoneNumber">Home Phone number</label>
+        <label  class="label-spacing" for="homePhoneNumber">Home Phone number<span>*</span></label>
         <input class="form-control mt-2"  type="number" id="homePhoneNumber" placeholder="Home Phone number" formControlName="homeNumber"
         [ngClass]="{'invalid-input': homeNumber?.invalid && (homeNumber?.dirty || homeNumber?.touched)}">
         <div *ngIf="homeNumber?.invalid && (homeNumber?.dirty || homeNumber?.touched)" class="text-danger">
@@ -109,17 +134,17 @@
         </div>
       </div>
       <div class="form-group col-md-2">
-        <label  class="label-spacing" for="officeNumber">Office number</label>
-        <input class="form-control mt-2"  type="number" id="officeNumber" placeholder="Office number" formControlName="officeNumber"
-        [ngClass]="{'invalid-input': officeNumber?.invalid && (officeNumber?.dirty || officeNumber?.touched)}">
-        <div *ngIf="officeNumber?.invalid && (officeNumber?.dirty || officeNumber?.touched)" class="text-danger">
-          Office number is required.
+        <label  class="label-spacing" for="emergencyNumber">Emergency number<span>*</span></label>
+        <input class="form-control mt-2"  type="number" id="emergencyNumber" placeholder="emergency number" formControlName="emergencyNumber"
+        [ngClass]="{'invalid-input': emergencyNumber?.invalid && (emergencyNumber?.dirty || emergencyNumber?.touched)}">
+        <div *ngIf="emergencyNumber?.invalid && (emergencyNumber?.dirty || emergencyNumber?.touched)" class="text-danger">
+          emergency number is required.
         </div>
       </div>
     </div>
   </div>
   <div class="form-group label-div col-md-5 mt-5">
-    <label  class="label-spacing" for="email"> Personal Email ID </label>
+    <label  class="label-spacing" for="email"> Personal Email ID<span>*</span> </label>
     <input class="form-control mt-2" id="email" placeholder="Enter email " formControlName="email"
     [ngClass]="{'invalid-input': email?.invalid && (email?.dirty || email?.touched)}">
     <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
@@ -130,7 +155,7 @@
     <div class="row mt-5">
       <div class="col-md-5">
         <div class="form-group label-div">
-          <label  class="label-spacing" for="presentAddress">Permanent Address <input type="checkbox">Permanent address is same as Present</label>
+          <label  class="label-spacing" for="presentAddress">Permanent Address<span>*</span> <input type="checkbox">Permanent address is same as Present</label>
             <input class="form-control mt-2" style="height: 100px;     padding-bottom: 63px;" id="presentAddress" placeholder="Present Address" formControlName="presentAddress"
             [ngClass]="{'invalid-input': presentAddress?.invalid && (presentAddress?.dirty || presentAddress?.touched)}">
           <div *ngIf="presentAddress?.invalid && (presentAddress?.dirty || presentAddress?.touched)" class="text-danger">
@@ -140,7 +165,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div">
-          <label  class="label-spacing" for="city">City</label>
+          <label  class="label-spacing" for="city">City<span>*</span></label>
           <input class="form-control mt-2" id="city" placeholder="City" formControlName="city"
           [ngClass]="{'invalid-input': city?.invalid && (city?.dirty || city?.touched)}">
           <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="text-danger">
@@ -150,7 +175,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="district">District</label>
+          <label  class="label-spacing" for="district">District<span>*</span></label>
           <input class="form-control mt-2" id="district" placeholder="District" formControlName="district"
           [ngClass]="{'invalid-input': district?.invalid && (district?.dirty || district?.touched)}">
           <div *ngIf="district?.invalid && (district?.dirty || district?.touched)" class="text-danger">
@@ -160,7 +185,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="country">Country</label>
+          <label  class="label-spacing" for="country">Country<span>*</span></label>
           <input class="form-control mt-2" id="country" placeholder="Country" formControlName="country"
           [ngClass]="{'invalid-input': country?.invalid && (country?.dirty || country?.touched)}">
           <div *ngIf="country?.invalid && (country?.dirty || country?.touched)" class="text-danger">
@@ -170,7 +195,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="locality">Locality</label>
+          <label  class="label-spacing" for="locality">Locality<span>*</span></label>
           <input class="form-control mt-2" id="locality" placeholder="Locality" formControlName="locality"
           [ngClass]="{'invalid-input': locality?.invalid && (locality?.dirty || locality?.touched)}">
           <div *ngIf="locality?.invalid && (locality?.dirty || locality?.touched)" class="text-danger">
@@ -180,7 +205,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="pincode">Pincode</label>
+          <label  class="label-spacing" for="pincode">Pincode<span>*</span></label>
           <input class="form-control mt-2" id="pincode" placeholder="Pincode" formControlName="pincode"
           [ngClass]="{'invalid-input': pincode?.invalid && (pincode?.dirty || pincode?.touched)}">
           <div *ngIf="pincode?.invalid && (pincode?.dirty || pincode?.touched)" class="text-danger">
@@ -190,7 +215,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="state">State</label>
+          <label  class="label-spacing" for="state">State<span>*</span></label>
           <input class="form-control mt-2" id="state" placeholder="State" formControlName="state"
           [ngClass]="{'invalid-input': state?.invalid && (state?.dirty || state?.touched)}">
           <div *ngIf="state?.invalid && (state?.dirty || state?.touched)" class="text-danger">
@@ -201,7 +226,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group label-div mt-5">
-          <label  class="label-spacing" for="landmark">Landmark</label>
+          <label  class="label-spacing" for="landmark">Landmark<span>*</span></label>
           <input class="form-control mt-2" id="landmark" placeholder="Landmark" formControlName="landmark"
           [ngClass]="{'invalid-input': landmark?.invalid && (landmark?.dirty || landmark?.touched)}">
           <div *ngIf="landmark?.invalid && (landmark?.dirty || landmark?.touched)" class="text-danger">
@@ -212,25 +237,58 @@
       </div>
       <div class="col-md-5">
         <div class="form-check label-div mt-5">
-          <label class="form-check-label label-spacing" for="passportYes">Do you have a passport?</label>
+          <label class="form-check-label label-spacing" for="passportYes">Do you have a passport?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
-              <input class="form-check-input" type="radio" id="passportYes" name="passport" value="yes"  checked>
+              <input
+                class="form-check-input"
+                type="radio"
+                id="passportYes"
+                name="passport"
+                value="yes"
+                formControlName="passport"
+                (change)="onPassportChange('yes')"
+              >
               <label class="form-check-label label-spacing" for="passportYes">Yes</label>
             </div>
             <div class="form-check radio-no">
-              <input class="form-check-input" type="radio" id="passportNo" name="passport" formControlName="passport" value="no">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="passportNo"
+                name="passport"
+                value="no"
+                formControlName="passport"
+                (change)="onPassportChange('no')"
+              >
               <label class="form-check-label label-spacing" for="passportNo">No</label>
             </div>
+          </div>
+        </div>
+      
+       
+        <div *ngIf="showpassportNumberField" class="mt-3">
+          <label for="passportNumber" class="form-label">Passport Number<span>*</span></label>
+          <input
+            type="text"
+            id="passportNumber"
+            class="form-control"
+            formControlName="passportNumber"
+            placeholder="Enter Passport Number"
+          />
+       
+          <div *ngIf="passportNumber?.invalid && passportNumber?.touched" class="text-danger">
+            <small *ngIf="passportNumber?.errors?.['required']">Passport number is required.</small>
+            <small *ngIf="passportNumber?.errors?.['pattern']">Invalid format. Use only uppercase letters and numbers.</small>
           </div>
         </div>
       </div>
       <div class="col-md-5">
         <div class="form-check mt-3 label-div mt-5">
-          <label class="form-check-label label-spacing" for="visaYes">Do you have a visa ?</label>
+          <label class="form-check-label label-spacing" for="visaYes">Do you have a visa ?<span>*</span></label>
           <div class="d-flex mt-2">
             <div class="form-check me-2 radio-yes">
-              <input class="form-check-input" type="radio" id="visaYes" name="visa" value="yes"  checked>
+              <input class="form-check-input" type="radio" id="visaYes" name="visa" value="yes" formControlName="visa" checked>
               <label class="form-check-label label-spacing" for="visaYes">Yes</label>
             </div>
             <div class="form-check radio-no">
@@ -245,34 +303,34 @@
   <label class="label-spacing mt-5">Marital status</label>
   <div class="d-flex">
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusSingle" name="maritalStatus" value="single"  checked>
+      <input class="form-check-input" type="radio" id="statusSingle" name="maritalStatus" value="single"  formControlName="maritalStatus" checked>
       <label class="form-check-label label-spacing" for="statusSingle">Single</label>
     </div>
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusMarried" name="maritalStatus" value="married" formControlName="maritalstatus">
-      <label class="form-check-label label-spacing" for="statusMarried">Married</label>
+      <input class="form-check-input" type="radio" id="statusmarried" name="maritalStatus" value="married" formControlName="maritalStatus">
+      <label class="form-check-label label-spacing" for="statusmarried">married</label>
     </div>
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusDivorced" name="maritalStatus" value="divorced" formControlName="maritalstatus">
-      <label class="form-check-label label-spacing" for="statusDivorced">Divorced</label>
+      <input class="form-check-input" type="radio" id="statusdivorced" name="maritalStatus" value="divorced" formControlName="maritalStatus">
+      <label class="form-check-label label-spacing" for="statusdivorced">divorced</label>
     </div>
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusWidowed" name="maritalStatus" value="widowed" formControlName="maritalstatus">
-      <label class="form-check-label label-spacing" for="statusWidowed">Widowed</label>
+      <input class="form-check-input" type="radio" id="statuswidowed" name="maritalStatus" value="widowed" formControlName="maritalStatus">
+      <label class="form-check-label label-spacing" for="statuswidowed">widowed</label>
     </div>
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusSeparated" name="maritalStatus" value="separated" formControlName="maritalstatus">
-      <label class="form-check-label label-spacing" for="statusSeparated">Separated</label>
+      <input class="form-check-input" type="radio" id="statusseparated" name="maritalStatus" value="separated" formControlName="maritalStatus">
+      <label class="form-check-label label-spacing" for="statusseparated">separated</label>
     </div>
     <div class="form-check me-2">
-      <input class="form-check-input" type="radio" id="statusOther" name="maritalStatus" value="other" formControlName="maritalstatus">
-      <label class="form-check-label label-spacing" for="statusOther">Other</label>
+      <input class="form-check-input" type="radio" id="statusother" name="maritalStatus" value="other" formControlName="maritalStatus">
+      <label class="form-check-label label-spacing" for="statusother">other</label>
     </div>
   </div>
   <div class="mt-5">
-  <label  class="label-spacing">Family members</label>
-  <button class="btn  table-btn">Add</button>
-    <table class="table ">
+    <label class="label-spacing">Family members</label>
+    <button class="btn table-btn" type="button" (click)="addFamilyMember()">Add</button>
+    <table class="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -282,90 +340,99 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td><input class="form-control" type="text" placeholder="Name" formControlName="tname"
-            [ngClass]="{'invalid-input': tname?.invalid && (tname?.dirty || tname?.touched)}">
-            <div *ngIf="tname?.invalid && (tname?.dirty || tname?.touched)" class="text-danger">
-               Name field should not be empty
-                </div></td>
-          <td> <select class="form-select"   formControlName="trelationship"
-            [ngClass]="{'invalid-input': trelationship?.invalid && (trelationship?.dirty || trelationship?.touched)}">
-            <option value="" disabled selected>--Select--</option>
-              <option>--Select--</option>
+      <tbody formArrayName="familyMembers">
+        <tr *ngFor="let member of familyMembers.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input class="form-control" type="text" placeholder="Name" formControlName="name"
+              [ngClass]="{'invalid-input': member.get('name')?.invalid && (member.get('name')?.dirty || member.get('name')?.touched)}">
+            <div *ngIf="member.get('name')?.invalid && (member.get('name')?.dirty || member.get('name')?.touched)" class="text-danger">
+              Name field should not be empty
+            </div>
+          </td>
+          <td>
+            <select class="form-select" formControlName="relationship"
+              [ngClass]="{'invalid-input': member.get('relationship')?.invalid && (member.get('relationship')?.dirty || member.get('relationship')?.touched)}">
+              <option value="" disabled selected>--Select--</option>
               <option>Option-1</option>
               <option>Option-2</option>
               <option>Option-3</option>
             </select>
-            <div *ngIf="trelationship?.invalid && (trelationship?.dirty || trelationship?.touched)" class="text-danger">
-              Age field is required.
-               </div></td>
-          <td><input class="form-control" type="text" placeholder="Age" formControlName="tage"
-            [ngClass]="{'invalid-input': tage?.invalid && (tage?.dirty || tage?.touched)}">
-            <div *ngIf="tage?.invalid && (tage?.dirty || tage?.touched)" class="text-danger">
-               Age field is required.
-                </div></td>
-          <td><input class="form-control" type="text" placeholder="Occupation/Organization" formControlName="too"
-            [ngClass]="{'invalid-input': too?.invalid && (too?.dirty || too?.touched)}">
-            <div *ngIf="too?.invalid && (too?.dirty || too?.touched)" class="text-danger">
-              Occupation/Organization field is required.
-                </div></td>
+            <div *ngIf="member.get('relationship')?.invalid && (member.get('relationship')?.dirty || member.get('relationship')?.touched)" class="text-danger">
+              Relationship field is required.
+            </div>
+          </td>
           <td>
-            <button type="button" class="btn btn-success me-2">
-              <i class="fa-regular fa-floppy-disk"></i>
-            </button>
-            <button type="button" class="btn btn-danger">
-              <i class="fa-solid fa-ban"></i>
+            <input class="form-control" type="text" placeholder="Age" formControlName="age"
+              [ngClass]="{'invalid-input': member.get('age')?.invalid && (member.get('age')?.dirty || member.get('age')?.touched)}">
+            <div *ngIf="member.get('age')?.invalid && (member.get('age')?.dirty || member.get('age')?.touched)" class="text-danger">
+              Age field is required.
+            </div>
+          </td>
+          <td>
+            <input class="form-control" type="text" placeholder="Occupation/Organization" formControlName="occupation"
+              [ngClass]="{'invalid-input': member.get('occupation')?.invalid && (member.get('occupation')?.dirty || member.get('occupation')?.touched)}">
+            <div *ngIf="member.get('occupation')?.invalid && (member.get('occupation')?.dirty || member.get('occupation')?.touched)" class="text-danger">
+              Occupation/Organization field is required.
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="removeFamilyMember(i)">
+              Remove
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- <button class="btn btn-primary">Add Family Member</button> -->
   </div>
   <div class="mt-4">
-   <label  class="label-spacing">Language Proficiency</label>
-   <button class="btn  table-btn-1">Add</button>
-    <table class="table  ">
+    <label class="label-spacing">Language Proficiency</label>
+    <button class="btn table-btn-1" type="button" (click)="addLanguageRow()">Add</button>
+    <table class="table">
       <thead>
         <tr>
           <th>Language</th>
-          <th >Can Speak</th>
-          <th>Can Read</th>
-          <th >Can Write</th>
-          <th style="width: 130px;">Action</th>
+          <th>Can speak</th>
+          <th>Can read</th>
+          <th>Can write</th>
+          <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
+      <tbody formArrayName="languages">
+        <tr *ngFor="let language of languages.controls; let i = index" [formGroupName]="i">
           <td>
-            <select class="form-select"  formControlName="language"
-            [ngClass]="{'invalid-input': language?.invalid && (language?.dirty || language?.touched)}">
-              <option value="" disabled selected>Select a language</option>
-              <option>English</option>
-              <option>Spanish</option>
-              <option>French</option>
-            </select>
-            <div *ngIf="language?.invalid && (language?.dirty || language?.touched)" class="text-danger">
-             Select Known Languages from list<br>Language Proficiency is required
-                </div>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter Language"
+              formControlName="language"
+              [ngClass]="{'invalid-input': language.get('language')?.invalid && (language.get('language')?.dirty || language.get('language')?.touched)}"
+            />
+            <div *ngIf="language.get('language')?.invalid && (language.get('language')?.dirty || language.get('language')?.touched)" class="text-danger">
+              Language is required.
+            </div>
           </td>
-          <td><input type="checkbox" formControlName="speak"></td>
-          <td><input type="checkbox" formControlName="Read"></td>
-          <td><input type="checkbox" formControlName="Write"></td>
           <td>
-            <button type="button" class="btn btn-success me-2">
-              <i class="fa-regular fa-floppy-disk"></i>
-            </button>
-            <button type="button" class="btn btn-danger" >
-              <i class="fa-solid fa-ban"></i>
+            <input type="checkbox" formControlName="speak">
+          </td>
+          <td>
+            <input type="checkbox" formControlName="read">
+          </td>
+          <td>
+            <input type="checkbox" formControlName="write">
+          </td>
+          <td *ngIf="language.errors?.['atLeastOne']" class="text-danger">
+            At least one checkbox must be selected.
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="removeLanguageRow(i)">
+              Remove
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- <button class="btn btn-primary">Add Language</button> -->
-    <button class="btn next" (click)="nextClick()" [disabled]="">Next<i class="fa-solid fa-chevron-right"></i></button>
   </div>
 </form>
+<div>
+  <button class="btns-general" (click)="saveClick()">Save</button>
 </div>

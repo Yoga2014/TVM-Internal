@@ -6,6 +6,7 @@ import { Employee } from '../Interface/employee.model';
 @Component({
   selector: 'app-new-hires-card',
   templateUrl: './new-hires-card.component.html',
+  standalone: false,
   styleUrls: ['./new-hires-card.component.scss']
 })
 export class NewHiresComponent implements OnInit {
@@ -19,6 +20,7 @@ export class NewHiresComponent implements OnInit {
     this.newHiresService.getRecentHires().subscribe(
       (employees: Employee[]) => {
         this.employees = employees;
+        console.log(employees, "new hires");
       },
       (error) => {
         console.error('Failed to fetch new hires', error);

@@ -3,69 +3,82 @@ import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
+import { LeaveRequest } from '../Interface/leave-request.model';
 
 @Component({
   selector: 'app-leave-summary',
   templateUrl: './leave-summary.component.html',
+  standalone: false,
   styleUrls: ['./leave-summary.component.scss']
 })
 export class LeaveSummaryComponent implements OnInit {
-  
-  leaves: any[] = [];
-  upcomingLeaves: any[] = [];
-  viewMode = 'list';
-  
+  leaves: LeaveRequest[] = [];
+  upcomingLeaves: LeaveRequest[] = [];
+  viewMode: 'list' | 'grid' = 'list';
 
   constructor(
-    private leaveService: LeaveService, 
-    private router: Router,
+    private leaveService: LeaveService,
+    // private router: Router,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    debugger
-    this.leaveService.getLeaveSummary().subscribe((leaves) => {
-      this.leaves = leaves.filter((leave) => leave && leave.typeLeave && leave.available !== undefined);
-    });
+    this.loadLeaveSummary();
+    this.loadUpcomingLeaves();
+    this.listenForAppliedLeave();
+  }
 
-    this.leaveService.getUpcomingLeaves().subscribe((upcomingLeaves) => {
-      this.upcomingLeaves = upcomingLeaves;
-    });
-
-    this.leaveService.getLeaveApplied().subscribe((appliedLeave: any) => {
-      if (appliedLeave) {
-        this.updateLeaveCounts(appliedLeave);
-      }
+  loadLeaveSummary(): void {
+    this.leaveService.getLeaveSummary().subscribe({
+      next: (leavesSummary) => {
+        this.leaves = leavesSummary;
+      },
+      error: (err) => console.error('Error fetching leave summary', err),
     });
   }
 
-  updateLeaveCounts(leaveData: any): void {
-    const leave = this.leaves.find((leave) => leave.typeLeave === leaveData.leaveType);
+  loadUpcomingLeaves(): void {
+    this.leaveService.getLeaves().subscribe({
+      next: (upcomingLeaves) => {
+        this.upcomingLeaves = upcomingLeaves.filter(
+          (leave) => leave.status === 'Upcoming'
+        );
+      },
+      error: (err) => console.error('Error fetching upcoming leaves', err),
+    });
+  }
+
+  listenForAppliedLeave(): void {
+    this.leaveService.getLeaveApplied().subscribe({
+      next: (appliedLeave) => {
+        if (appliedLeave) {
+          this.updateLeaveCounts(appliedLeave);
+        }
+      },
+      error: (err) => console.error('Error receiving applied leave updates', err),
+    });
+  }
+
+  updateLeaveCounts(leaveData: LeaveRequest): void {
+    const leave = this.leaves.find((l) => l.typeLeave === leaveData.typeLeave);
     if (leave) {
-    leave.available -= leaveData.days;  
-    leave.booked += leaveData.days;     
-  }
+      const remainingLeaves = (leave.available || 0) - (leaveData.totalDays || 0);
+      if (remainingLeaves < 0) {
+        alert('Not enough available leaves. Please choose another leave type or apply Leave Without Pay.');
+      } else {
+        leave.available = remainingLeaves;
+        leave.booked = (leave.booked || 0) + (leaveData.totalDays || 0);
+      }
+    }
   }
 
-  validLeave(leave: any): boolean {
-   
-    return leave && leave.typeLeave && leave.available != null;
-  }
-
-  applyLeave() {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent, {
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+  applyLeave(): void {
+    const dialogRef = this.dialog.open(ApplyLeaveComponent);
+    dialogRef.afterClosed().subscribe((result: LeaveRequest | undefined) => {
       if (result) {
-        this.leaveService.bookLeave(result.leaveType, result.days).subscribe({
-          next: (response) => {
-            this.leaveService.setLeaveApplied(result);
-          },
-          error: (error) => {
-            console.error('Error applying leave', error);
-          }
+        this.leaveService.addLeaveRequest(result).subscribe({
+          next: () => this.leaveService.setLeaveApplied(result),
+          error: (err) => console.error('Error applying leave', err),
         });
       }
     });
@@ -75,11 +88,3 @@ export class LeaveSummaryComponent implements OnInit {
     this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
   }
 }
-
-
-
-
-// applyLeave() {
-//   debugger
-//   this.router.navigate(['apply-leave'], { queryParams: { returnUrl: this.router.url } });
-// }

@@ -6,10 +6,12 @@ import { Goal } from '../Interface/Goals.model';
 import { Subscription } from 'rxjs';
 import { DeleteGoalsComponent } from '../delete-goals/delete-goals.component';
 import { CommentsComponent } from '../comments/comments.component';
+import { AddGoalsComponent } from '../add-goals/add-goals.component';
 
 @Component({
   selector: 'app-goals',
   templateUrl: './goals.component.html',
+  standalone: false,
   styleUrls: ['./goals.component.scss']
 })
 export class GoalsComponent implements OnInit, OnDestroy {
@@ -21,8 +23,6 @@ export class GoalsComponent implements OnInit, OnDestroy {
   thisWeekCount: number = 0;
   thisMonthCount: number = 0;
   thisYearCount: number = 0;
-
-  // Stepper State
   step1Completed: boolean = false;
   step2Completed: boolean = false;
   step3Completed: boolean = false;
@@ -48,13 +48,68 @@ export class GoalsComponent implements OnInit, OnDestroy {
     this.goalsSub.unsubscribe();
   }
 
+  private isValidDate(date: any): boolean {
+    return date instanceof Date && !isNaN(date.valueOf());
+  }
+
+  private normalizeDate(date: Date): Date {
+    const normalized = new Date(date);
+    normalized.setUTCHours(0, 0, 0, 0);
+    return normalized;
+  }
+
   private loadGoals(): void {
     this.goalService.getGoals().subscribe(data => {
       this.goals = data;
       this.updateCounts();
-      this.filterGoals('all'); // Default filter on load
+      this.filterGoals('all');
       this.updateStepperState();
     });
+  }
+
+  private updateCounts(): void {
+    const now = new Date();
+    const startOfWeek = this.normalizeDate(new Date(now));
+    startOfWeek.setUTCDate(now.getUTCDate() - now.getUTCDay());
+
+    const startOfMonth = this.normalizeDate(new Date(now.getUTCFullYear(), now.getUTCMonth(), 1));
+    const startOfYear = this.normalizeDate(new Date(now.getUTCFullYear(), 0, 1));
+
+    console.log('Current Date:', now);
+    console.log('Start of Week (UTC):', startOfWeek);
+    console.log('Start of Month (UTC):', startOfMonth);
+    console.log('Start of Year (UTC):', startOfYear);
+
+    this.allGoalsCount = this.goals.length;
+
+    this.thisWeekCount = this.goals.filter(goal => {
+      const goalDate = new Date(goal.startDate);
+      if (!this.isValidDate(goalDate)) {
+        console.warn('Invalid startDate for goal:', goal);
+        return false;
+      }
+      return goalDate >= startOfWeek && goalDate <= now;
+    }).length;
+
+    this.thisMonthCount = this.goals.filter(goal => {
+      const goalDate = new Date(goal.startDate);
+      if (!this.isValidDate(goalDate)) {
+        console.warn('Invalid startDate for goal:', goal);
+        return false;
+      }
+      return goalDate >= startOfMonth && goalDate <= now;
+    }).length;
+
+    this.thisYearCount = this.goals.filter(goal => {
+      const goalDate = new Date(goal.startDate);
+      if (!this.isValidDate(goalDate)) {
+        console.warn('Invalid startDate for goal:', goal);
+        return false;
+      }
+      return goalDate >= startOfYear && goalDate <= now;
+    }).length;
+
+    console.log('Counts - All:', this.allGoalsCount, 'This Week:', this.thisWeekCount, 'This Month:', this.thisMonthCount, 'This Year:', this.thisYearCount);
   }
 
   private updateStepperState(): void {
@@ -63,6 +118,48 @@ export class GoalsComponent implements OnInit, OnDestroy {
     this.step3Completed = this.goals.some(goal => goal.status === 'PendingUserApproval');
     this.step4Completed = this.goals.every(goal => goal.status === 'GoalFinished');
   }
+
+  filterGoals(period: string): void {
+    console.log('Filtering goals for period:', period);
+    console.log('All goals before filtering:', this.goals);
+  
+    const now = new Date();
+    const startOfWeek = this.normalizeDate(new Date(now));
+    startOfWeek.setUTCDate(now.getUTCDate() - now.getUTCDay());
+  
+    const startOfMonth = this.normalizeDate(new Date(now.getUTCFullYear(), now.getUTCMonth(), 1));
+    const startOfYear = this.normalizeDate(new Date(now.getUTCFullYear(), 0, 1));
+  
+    switch (period) {
+      case 'all':
+        this.filteredGoals = this.goals;
+        break;
+      case 'thisWeek':
+        this.filteredGoals = this.goals.filter(goal => {
+          const goalDate = new Date(goal.startDate);
+          const goalDay = this.normalizeDate(goalDate).getTime();
+          return goalDay >= startOfWeek.getTime() && goalDay <= now.getTime();
+        });
+        break;
+      case 'thisMonth':
+        this.filteredGoals = this.goals.filter(goal => {
+          const goalDate = new Date(goal.startDate);
+          const goalDay = this.normalizeDate(goalDate).getTime();
+          return goalDay >= startOfMonth.getTime() && goalDay <= now.getTime();
+        });
+        break;
+      case 'thisYear':
+        this.filteredGoals = this.goals.filter(goal => {
+          const goalDate = new Date(goal.startDate);
+          const goalDay = this.normalizeDate(goalDate).getTime();
+          return goalDay >= startOfYear.getTime() && goalDay <= now.getTime();
+        });
+        break;
+    }
+  
+    console.log('Filtered Goals:', this.filteredGoals);
+  }
+  
 
   navigateToGoalSpace(goalId: string): void {
     this.router.navigate(['/goal-space', goalId]);
@@ -81,69 +178,30 @@ export class GoalsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateCounts(): void {
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    startOfWeek.setDate(now.getDate() - now.getDay());
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-
-    this.allGoalsCount = this.goals.length;
-
-    this.thisWeekCount = this.goals.filter(goal => {
-      const startDate = new Date(goal.startDate);
-      return startDate >= startOfWeek && startDate <= now;
-    }).length;
-
-    this.thisMonthCount = this.goals.filter(goal => {
-      const startDate = new Date(goal.startDate);
-      return startDate >= startOfMonth && startDate <= now;
-    }).length;
-
-    this.thisYearCount = this.goals.filter(goal => {
-      const startDate = new Date(goal.startDate);
-      return startDate >= startOfYear && startDate <= now;
-    }).length;
-  }
-
-  filterGoals(period: string): void {
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    startOfWeek.setDate(now.getDate() - now.getDay());
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-
-    switch (period) {
-      case 'all':
-        this.filteredGoals = this.goals;
-        break;
-      case 'thisWeek':
-        this.filteredGoals = this.goals.filter(goal => {
-          const startDate = new Date(goal.startDate);
-          return startDate >= startOfWeek && startDate <= now;
-        });
-        break;
-      case 'thisMonth':
-        this.filteredGoals = this.goals.filter(goal => {
-          const startDate = new Date(goal.startDate);
-          return startDate >= startOfMonth && startDate <= now;
-        });
-        break;
-      case 'thisYear':
-        this.filteredGoals = this.goals.filter(goal => {
-          const startDate = new Date(goal.startDate);
-          return startDate >= startOfYear && startDate <= now;
-        });
-        break;
-    }
-  }
-
   addGoal(): void {
-    this.router.navigate(['/add-goal']);
+    const dialogRef = this.dialog.open(AddGoalsComponent, {
+      width: '600px',
+      data: { goalId: null }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadGoals();
+      }
+    });
   }
 
   editGoal(goal: Goal): void {
-    this.router.navigate(['/add-goal', goal.id]);
+    const dialogRef = this.dialog.open(AddGoalsComponent, {
+      width: '600px',
+      data: { goalId: goal.goalId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadGoals();
+      }
+    });
   }
 
   deleteGoal(goal: Goal): void {
@@ -153,12 +211,12 @@ export class GoalsComponent implements OnInit, OnDestroy {
   openDeleteDialog(goal: Goal): void {
     const dialogRef = this.dialog.open(DeleteGoalsComponent, {
       width: '400px',
-      data: { id: goal.id, name: goal.name }
+      data: { id: goal.goalId, name: goal.name }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.goalService.deleteGoal(goal.id).subscribe({
+        this.goalService.deleteGoal(goal.goalId).subscribe({
           next: () => {
             console.log('Goal deleted successfully');
             this.loadGoals();
@@ -170,5 +228,4 @@ export class GoalsComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
 }

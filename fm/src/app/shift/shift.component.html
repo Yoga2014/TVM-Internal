@@ -1,0 +1,11 @@
+<div class="shift-container">
+    <h2>Shift Status</h2>
+    <p>Status: {{ isCheckedIn ? 'Checked In' : isCheckedOut ? 'Checked Out' : 'Not Checked In' }}</p>
+    <p>Check-In Time: {{ checkInTime || 'N/A' }}</p>
+    <p>Check-Out Time: {{ checkOutTime || 'N/A' }}</p>
+    <p>Elapsed Time: {{ elapsedTime }}</p>
+  
+    <button (click)="checkIn()" >Check In</button>
+    <button (click)="checkOut()" >Check Out</button>
+  </div>
+  

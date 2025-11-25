@@ -4,6 +4,7 @@ import { TeamService } from '../AllServices/team.service';
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
+  standalone: false,
   styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
@@ -13,7 +14,7 @@ export class TeamListComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortColumn: string = '';
 
-  currentPage: number = 1;
+  currentPage: number = 1; // Initialize to the first page
 itemsPerPage: number = 5;
 
   constructor(private teamService: TeamService) {}
@@ -26,9 +27,9 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-        this.filteredEmployees = this.employees;
+        this.filteredEmployees = this.employees; // Initialize filtered employees
       },
-      error: err => console.error('Error fetching employees:', err)
+      error: err => console.error('Error fetching employees:', err) // Handle error
     });
   }
 
@@ -38,13 +39,14 @@ itemsPerPage: number = 5;
         employee.role.toLowerCase() === this.reporteeFilter.toLowerCase()
       );
     } else {
-      this.filteredEmployees = [...this.employees];
+      this.filteredEmployees = [...this.employees]; // Reset filter
     }
   }
 
   sortBy(column: string): void {
     const direction = this.sortDirection === 'asc' ? 1 : -1;
 
+    // Ensure valid column exists
     if (this.employees.length && this.employees[0][column] !== undefined) {
       this.filteredEmployees.sort((a, b) => {
         const valA = a[column].toString().toLowerCase();

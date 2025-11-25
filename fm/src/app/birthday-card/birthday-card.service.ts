@@ -9,7 +9,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class BirthdayService {
 
-  private apiUrl = 'http://localhost:3001/employees';
+  private apiUrl = 'http://localhost:3000/Employee';
 
   constructor(private http: HttpClient) { }
 

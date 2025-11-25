@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-teams-dashboard',
   templateUrl: './teams-dashboard.component.html',
+  standalone: false,
   styleUrl: './teams-dashboard.component.scss'
 })
 export class TeamsDashboardComponent {
@@ -18,7 +19,7 @@ export class TeamsDashboardComponent {
     this.activeNavItem = 'team-space';
     this.subNavChange.emit('Team Space');
 
-    this.router.navigate(['new-Home/teams-dashboard', 'team-space']);
+    this.router?.navigate(['new-Home/teams-dashboard', 'team-space']);
   }
 
   navigateToReportees()

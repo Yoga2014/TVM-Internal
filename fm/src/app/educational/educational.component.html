@@ -1,77 +1,173 @@
-
 <div class="education-page">
-<h2 class="header" ><i class="fa-solid fa-graduation-cap "></i>Educational Details</h2>
-<div class="add">
-<h5><i class="fa-solid fa-plus btn"  (click)="addedClick()"></i>Add</h5>
-</div>
-  <form [formGroup]="educationGroup">
-    <div class="row mt-5">
-      <div class="col-md-5">
-        <div class="form-group div-spacing">
-          <label class="label-spacing" for="coursePursued">Course Pursued</label>
-          <select class="form-select"   formControlName="coursePursued"
-          [ngClass]="{'invalid-input': coursePursued?.invalid && (coursePursued?.dirty || coursePursued?.touched)}">
-          <option value="" disabled selected>Select a Designation</option>
-            <option>Option-1</option>
-            <option>Option-2</option>
-            <option>Option-3</option>
-          </select>
-          <div *ngIf="coursePursued?.invalid && (coursePursued?.dirty || coursePursued?.touched)" class="text-danger">
-            Course Pursued is required.
-          </div>
-        </div>
-
-      </div>
-      <div class="col-md-5">
-        <div class="form-group div-spacing">
-          <label class="label-spacing" for="institutionName">Name of the College/Institution</label>
-          <input   type="text" class="form-control" id="institutionName" placeholder="Name of the College/Institution" formControlName="institutionName"
-          [ngClass]="{'invalid-input': institutionName?.invalid && (institutionName?.dirty || institutionName?.touched)}">
-          <div *ngIf="institutionName?.invalid && (institutionName?.dirty || institutionName?.touched)" class="text-danger">
-            Institution Name is required.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="d-flex div-spacing">
-          <div class="me-3 flex-grow-1">
-            <div class="form-group ">
-              <label class="label-spacing" for="durationFrom">Duration</label>
-              <input type="text" class="form-control" id="durationFrom" placeholder="From" formControlName="durationFrom"
-              [ngClass]="{'invalid-input': durationFrom?.invalid && (durationFrom?.dirty || durationFrom?.touched)}">
-
-              <div *ngIf="durationFrom?.invalid && (durationFrom?.dirty || durationFrom?.touched)" class="text-danger">
-                Duration From is required.
-              </div>
-            </div>
-          </div>
-          <div class="flex-grow-1 ">
-            <div class="form-group  ">
-              <label for="durationTo" class="invisible label-spacing">To</label>
-              <input  type="text" class="form-control" id="durationTo" placeholder="To" formControlName="durationTo"
-              [ngClass]="{'invalid-input': durationTo?.invalid && (durationTo?.dirty || durationTo?.touched)}">
-              <div *ngIf="durationTo?.invalid && (durationTo?.dirty || durationTo?.touched)" class="text-danger">
-                Duration To is required.
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-      <div class="col-md-5">
-
-<div class="form-group div-spacing">
-  <label class="label-spacing" for="cgpaObtained">CGPA Obtained</label>
-  <input type="text" class="form-control" id="cgpaObtained" placeholder="CGPA obtained" formControlName="cgpaObtained"
-  [ngClass]="{'invalid-input': cgpaObtained?.invalid && (cgpaObtained?.dirty || cgpaObtained?.touched)}">
-  <div *ngIf="cgpaObtained?.invalid && (cgpaObtained?.dirty || cgpaObtained?.touched)" class="text-danger">
-    CGPA Obtained Name is required.
+  <h2 class="header">
+    <i class="fa-solid fa-graduation-cap"></i>Educational Details
+  </h2>
+  <div class="add">
+    <h5>
+      <i class="fa-solid fa-plus btn" (click)="addRow()"></i>Add
+    </h5>
   </div>
-</div>
-      </div>
+  <form [formGroup]="educationGroup">
+    <div formArrayName="educationArray">
+      <div 
+        class="row mt-3 align-items-center" 
+        *ngFor="let eduGroup of educationArray.controls; let i = index" 
+        [formGroupName]="i"
+      >
+        <!-- Course Pursued -->
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="coursePursued">Course Pursued<span>*</span></label>
+            <select 
+              class="form-select" 
+              formControlName="coursePursued" 
+              [ngClass]="{'invalid-input': eduGroup.get('coursePursued')?.invalid && (eduGroup.get('coursePursued')?.dirty || eduGroup.get('coursePursued')?.touched)}"
+            >
+              <option value="" disabled selected>Select a Course</option>
+              <option>SSLC</option>
+              <option>HSC</option>
+              <option>UG</option>
+              <option>PG</option>
+            </select>
+            <div 
+              *ngIf="eduGroup.get('coursePursued')?.invalid && (eduGroup.get('coursePursued')?.dirty || eduGroup.get('coursePursued')?.touched)" 
+              class="text-danger"
+            >
+              Course Pursued is required.
+            </div>
+          </div>
+        </div>
 
+        <!-- Specialization -->
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="specialization">Specialization<span>*</span></label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="specialization" 
+              placeholder="Specialization" 
+              formControlName="specialization" 
+              [ngClass]="{'invalid-input': eduGroup.get('specialization')?.invalid && (eduGroup.get('specialization')?.dirty || eduGroup.get('specialization')?.touched)}"
+            >
+            <div 
+              *ngIf="eduGroup.get('specialization')?.invalid && (eduGroup.get('specialization')?.dirty || eduGroup.get('specialization')?.touched)" 
+              class="text-danger"
+            >
+              Specialization is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Study Mode -->
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="studyMode">Study Mode<span>*</span></label>
+            <select 
+              class="form-select" 
+              formControlName="studyMode" 
+              [ngClass]="{'invalid-input': eduGroup.get('studyMode')?.invalid && (eduGroup.get('studyMode')?.dirty || eduGroup.get('studyMode')?.touched)}"
+            >
+              <option value="" disabled selected>Select Mode</option>
+              <option>Regular</option>
+              <option>Correspondence</option>
+            </select>
+            <div 
+              *ngIf="eduGroup.get('studyMode')?.invalid && (eduGroup.get('studyMode')?.dirty || eduGroup.get('studyMode')?.touched)" 
+              class="text-danger"
+            >
+              Study Mode is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Institution Name -->
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="institutionName">Institution Name<span>*</span></label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="institutionName" 
+              placeholder="Institution Name" 
+              formControlName="institutionName" 
+              [ngClass]="{'invalid-input': eduGroup.get('institutionName')?.invalid && (eduGroup.get('institutionName')?.dirty || eduGroup.get('institutionName')?.touched)}"
+            >
+            <div 
+              *ngIf="eduGroup.get('institutionName')?.invalid && (eduGroup.get('institutionName')?.dirty || eduGroup.get('institutionName')?.touched)" 
+              class="text-danger"
+            >
+              Institution Name is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="col-md-3">
+          <div class="d-flex div-spacing">
+            <div class="me-2 flex-grow-1">
+              <label class="label-spacing" for="durationFrom">From<span>*</span></label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="durationFrom" 
+                placeholder="From" 
+                formControlName="durationFrom" 
+                [ngClass]="{'invalid-input': eduGroup.get('durationFrom')?.invalid && (eduGroup.get('durationFrom')?.dirty || eduGroup.get('durationFrom')?.touched)}"
+              >
+            </div>
+            <div class="flex-grow-1">
+              <label class="label-spacing" for="durationTo">To<span>*</span></label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="durationTo" 
+                placeholder="To" 
+                formControlName="durationTo" 
+                [ngClass]="{'invalid-input': eduGroup.get('durationTo')?.invalid && (eduGroup.get('durationTo')?.dirty || eduGroup.get('durationTo')?.touched)}"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- CGPA & Percentage -->
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="cgpaObtained">CGPA<span>*</span></label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="cgpaObtained" 
+              placeholder="CGPA" 
+              formControlName="cgpaObtained" 
+            >
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group div-spacing">
+            <label class="label-spacing" for="percentage">Percentage<span>*</span></label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="percentage" 
+              placeholder="%" 
+              formControlName="percentage"
+            >
+          </div>
+        </div>
+
+        <!-- Remove Button -->
+        <div class="col-md-3">
+          <button type="button" class="btn btn-danger" (click)="removeRow(i)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
     </div>
-    <button class="btn next"  (click)="nextClick()" [disabled]="educationGroup.invalid">Next<i class="fa-solid fa-chevron-right"></i></button>
   </form>
+
+  <!-- Save Button -->
+  <div>
+    <button class="btns-general" [disabled]="!isSaveEnabled()" (click)="saveClick()">Save</button>
+  </div>
 </div>

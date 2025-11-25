@@ -1,0 +1,38 @@
+{
+  "account-details": [
+    {
+      "0": {
+        "aadharNumber": "800580058005",
+        "panNumber": "FMSPR8013K",
+        "name": "Muralidaran R",
+        "bankAccountNumber": "17600100014896",
+        "bankIFSCCode": "ANATHU0001",
+        "bankName": "Bank of Baroda ",
+        "branchName": "ANATHUR "
+      },
+      "id": "4235"
+    },
+    {
+      "0": {
+        "aadharNumber": "800580058005",
+        "panNumber": "FMSPR8013K",
+        "name": "Muralidaran R",
+        "bankAccountNumber": "17600100014896",
+        "bankIFSCCode": "ANATHU0001",
+        "bankName": "Bank of Baroda ",
+        "branchName": "ANATHUR "
+      },
+      "id": "542b"
+    },
+    {
+      "id": "c5ca",
+      "aadharNumber": "800180018001",
+      "panNumber": "FMSPR8013K",
+      "name": "  MuraliDran ",
+      "bankAccountNumber": "17600100014896",
+      "bankIFSCCode": "ANATHU0001",
+      "bankName": "Bank of Baroda ",
+      "branchName": "ANATHUR "
+    }
+  ]
+}

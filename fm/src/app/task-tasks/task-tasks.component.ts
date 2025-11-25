@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-task-tasks',
   templateUrl: './task-tasks.component.html',
+  standalone: false,
   styleUrl: './task-tasks.component.scss'
 })
 export class TaskTasksComponent {

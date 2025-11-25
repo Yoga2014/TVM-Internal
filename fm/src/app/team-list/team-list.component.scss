@@ -5,14 +5,15 @@
     padding: 0;
 }
 
-.container {
-    padding: 20px;
+.container-fluid {
+    //padding: 20px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     max-width: 80%; 
     margin: 20px auto;
     width: 100%;
+   
 }
 
 .header {
@@ -69,12 +70,15 @@
     overflow-x: auto;
     margin-top: 10px;
     border: 1px solid #ddd;
+    max-width: 100%;
+    
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
+    max-width: fit-content;
 }
 
 th, 

@@ -1,0 +1,24 @@
+{
+  "year": 2024,
+  "month": "December",
+  "weekendDate": "2024-12-01",
+  "employeeName": "John Doe",
+  "timesheetEntries": [
+    {
+      "id": "ce8b",
+      "wfol": true,
+      "project": "Project 2",
+      "location": "Bangalore",
+      "hrsType": "Onshore",
+      "hours": {
+        "Monday": 8,
+        "Tuesday": 8,
+        "Wednesday": 8,
+        "Thursday": 8,
+        "Friday": 8
+      },
+      "totalHours": "40",
+      "description": "test4"
+    }
+  ]
+}

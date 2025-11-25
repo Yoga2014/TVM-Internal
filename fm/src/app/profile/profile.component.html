@@ -1,0 +1,362 @@
+<div class="card-container">
+<div class="card">
+    <div class="card-header">
+      <span>About</span>
+    </div>
+    <div class="card-body">
+      <div class="icon-container">
+        <i class="pulse-icon">+</i> 
+      </div>
+      <div class="text-container">
+        <span>Add About</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      <span>Tags</span>
+    </div>
+    <div class="card-body">
+      <div class="icon-container">
+        <i class="pulse-icon">+</i> 
+      </div>
+      <div class="text-container">
+        <span>Add Tags</span>
+      </div>
+    </div>
+</div>
+</div>
+ <div *ngIf="profileData">
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Basic Information</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="employee-id">Employee ID</label>
+            <input type="text" id="employee-id" name="employee-id" 
+                   [(ngModel)]="editedData.basicInformation.employeeId">
+    
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name"
+                   [(ngModel)]="editedData.basicInformation.firstName">
+  
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name"
+                   [(ngModel)]="editedData.basicInformation.lastName">
+          </div>
+          <div class="form-group right-side">
+            <label for="nickname">Nickname</label>
+            <input type="text" id="nickname" name="nickname"
+                   [(ngModel)]="editedData.basicInformation.nickname">
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"
+                   [(ngModel)]="editedData.basicInformation.email">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Work Information</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="department">Department</label>
+            <input type="text" id="department" name="department"
+                  [(ngModel)]="editedData.workInformation.department">
+    
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location"
+            [(ngModel)]="editedData.workInformation.location">
+    
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" name="designation"
+            [(ngModel)]="editedData.workInformation.designation">
+          </div>
+          <div class="form-group right-side">
+            <label for="role">Role</label>
+            <input type="text" id="role" name="role"
+            [(ngModel)]="editedData.workInformation.role">
+    
+            <label for="employment-type">Employment Type</label>
+            <input type="text" id="employment-type" name="employment-type"
+             [(ngModel)]="editedData.workInformation.employmentType"/>
+  
+            <label for="employeeStatus">Employee Status</label>
+            <input type="text" id="employeeStatus" name="employeeStatus"
+            [(ngModel)]="editedData.workInformation.employeeStatus"/>
+  
+            <label for="sourceOfHire">Source of Hire</label>
+            <input type="text" id="sourceOfHire" name="sourceOfHire"
+            [(ngModel)]="editedData.workInformation.sourceOfHire"/>
+  
+            <label for="dateOfJoining">Date of Joining</label>
+            <input type="text" id="dateOfJoining" name="dateOfJoining"
+            [(ngModel)]="editedData.workInformation.dateOfJoining"/>
+            
+            <label for="currentExperience">Current Experience</label>
+            <input type="text" id="currentExperience" name="currentExperience"
+            [(ngModel)]="editedData.workInformation.currentExperience"/>
+  
+            <label for="totalExperience">Total Experience</label>
+            <input type="text" id="totalExperience" name="totalExperience"
+            [(ngModel)]="editedData.workInformation.totalExperience"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Hierarchy Information</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="reportingManager">Reporting Manager</label>
+            <input type="text" id="reportingManager" name="reportingManager"
+            [(ngModel)]="editedData.hierarchyInformation.reportingManager"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Personal Details</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="text" id="dateOfBirth" name="dateOfBirth"
+            [(ngModel)]="editedData.personalDetails.dateOfBirth"/>
+    
+            <label for="first-namage">Age</label>
+            <input type="text" id="age" name="age"
+            [(ngModel)]="editedData.personalDetails.age"/>
+    
+            <label for="gender">Gender</label>
+            <input type="text" id="gender" name="gender"
+            [(ngModel)]="editedData.personalDetails.gender"/>
+  
+            <label for="maritalStatus">Marital Status</label>
+            <input type="text" id="maritalStatus" name="maritalStatus"
+            [(ngModel)]="editedData.personalDetails.maritalStatus"/>
+  
+            <label for="aboutMe">About Me</label>
+            <input type="text" id="aboutMe" name="aboutMe"
+            [(ngModel)]="editedData.personalDetails.aboutMe"/>
+          </div>
+          <div class="form-group right-side">
+            <label for="askMeAbout">Ask me about/Expertise</label>
+            <input type="text" id="askMeAbout" name="askMeAbout"
+            [(ngModel)]="editedData.personalDetails.askMeAbout"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Identity Information</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="uan">UAN</label>
+            <input type="text" id="uan" name="uan"
+            [(ngModel)]="editedData.identityInformation.uan"/>
+  
+            <label for="pan">PAN</label>
+            <input type="text" id="pan" name="pan"
+            [(ngModel)]="editedData.identityInformation.pan"/>
+            
+            <label for="aadhaar">Aadhaar</label>
+            <input type="text" id="aadhaar" name="aadhaar"
+            [(ngModel)]="editedData.identityInformation.aadhaar"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Contact Details</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="workPhoneNum">Work Phone Number</label>
+            <input type="text" id="workPhoneNum" name="workPhoneNum"
+            [(ngModel)]="editedData.contactDetails.workPhoneNum"/>
+    
+            <label for="extension">Extension</label>
+            <input type="text" id="extension" name="extension"
+            [(ngModel)]="editedData.contactDetails.extension"/>
+    
+            <label for="seatingLocation">Seating Location</label>
+            <input type="text" id="seatingLocation" name="seatingLocation"
+            [(ngModel)]="editedData.contactDetails.seatingLocation"/>
+  
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" name="tags"
+            [(ngModel)]="editedData.contactDetails.tags"/>
+  
+            <label for="presentAddress">Present Address</label>
+            <input type="text-area" id="presentAddress" name="presentAddress"
+            [(ngModel)]="editedData.contactDetails.presentAddress"/>
+  
+            <label for="permanentAddress">Permanent Address</label>
+            <input type="text-area" id="permanentAddress" name="permanentAddress"
+            [(ngModel)]="editedData.contactDetails.permanentAddress"/>
+          </div>
+          <div class="form-group right-side">
+            <label for="personalMobileNum">Personal Mobile Number</label>
+            <input type="number" id="personalMobileNum" name="personalMobileNum"
+            [(ngModel)]="editedData.contactDetails.personalMobileNum"/>
+  
+            <label for="personalEmail">Personal Email Address</label>
+            <input type="email" id="personalEmail" name="personalEmail"
+            [(ngModel)]="editedData.contactDetails.personalEmail"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>Separation Information</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="dateOfExit">Date of Exit</label>
+            <input type="text" id="dateOfExit" name="dateOfExit"
+            [(ngModel)]="editedData.separationInformation.dateOfExit"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span>System Fields</span>
+      </div>
+      <div class="info-card-body">
+        <div class="form-container">
+          <div class="form-group left-side">
+            <label for="addedBy">Added By</label>
+            <input type="text" id="addedBy" name="addedBy"
+            [(ngModel)]="editedData.systemFields.addedBy"/>
+    
+            <label for="addedTime">Added Time</label>
+            <input type="text" id="addedTime" name="addedTime"
+            [(ngModel)]="editedData.systemFields.addedTime"/>
+          </div>
+          <div class="form-group right-side">
+            <label for="modifiedBy">Modified By</label>
+            <input type="text" id="modifiedBy" name="modifiedBy"
+            [(ngModel)]="editedData.systemFields.modifiedBy"/>
+  
+            <label for="modifiedTime">Modified Time</label>
+            <input type="text" id="modifiedTime" name="modifiedTime"
+            [(ngModel)]="editedData.systemFields.modifiedTime"/>
+  
+            <label for="onboardingStatus">Onboarding Status</label>
+            <input type="text" id="onboardingStatus" name="onboardingStatus"
+            [(ngModel)]="editedData.systemFields.onboardingStatus"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+  <div class="experience-card">
+    <div class="experience-card-header">
+      <span>Work Experience</span>
+    </div>
+    <div class="experience-card-body">
+      <table class="experience-table">
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Job Description</th>
+            <th>Relevant</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr class="no-rows">
+                <td colspan="6">No rows found</td>
+              </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+  <div class="experience-card">
+    <div class="experience-card-header">
+      <span>Education Details</span>
+    </div>
+    <div class="experience-card-body">
+      <table class="experience-table">
+        <thead>
+          <tr>
+            <th>Institute Name</th>
+            <th>Degree/Diploma</th>
+            <th>Specialization</th>
+            <th>Date of Completion</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr class="no-rows">
+                <td colspan="4">No rows found</td>
+              </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="experience-card">
+    <div class="experience-card-header">
+      <span>Dependent Details</span>
+    </div>
+    <div class="experience-card-body">
+      <table class="experience-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Relationship</th>
+            <th>Date of Birth</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr class="no-rows">
+                <td colspan="3">No rows found</td>
+              </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button class="save-btn" (click)="submitForm()">Save</button>
+  
+
+
+  

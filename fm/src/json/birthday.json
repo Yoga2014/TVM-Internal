@@ -1,0 +1,72 @@
+{
+    "Employee": [
+        {
+          "employeeId": "EMP001",
+          "employeeName": "John Doe",
+          "dob": "1990-12-12",
+          "profilePicture": "https://example.com/profiles/johndoe.jpg",
+          "status": "Active",
+          "generalTiming": "9:00 AM - 6:00 PM",
+          "leaveBooked": 2,
+          "image": "https://example.com/profiles/johndoe.jpg",
+          "joinDate": "2024-12-05",
+          "onLeave": false,
+          "date": "2024-12-12"
+        },
+        {
+          "employeeId": "EMP002",
+          "employeeName": "Jane Smith",
+          "dob": "1988-07-22",
+          "profilePicture": "https://example.com/profiles/janesmith.jpg",
+          "status": "On Leave",
+          "generalTiming": "10:00 AM - 7:00 PM",
+          "leaveBooked": 5,
+          "image": "https://example.com/profiles/janesmith.jpg",
+          "joinDate": "2024-12-06",
+          "onLeave": true,
+          "date": "2024-12-12"
+        },
+        {
+          "employeeId": "EMP003",
+          "employeeName": "Robert Brown",
+          "dob": "1992-09-10",
+          "profilePicture": "https://example.com/profiles/robertbrown.jpg",
+          "status": "Active",
+          "generalTiming": "8:00 AM - 5:00 PM",
+          "leaveBooked": 0,
+          "image": "https://example.com/profiles/robertbrown.jpg",
+          "joinDate": "2024-12-01",
+          "onLeave": false,
+          "date": "2024-12-12"
+        },
+        {
+          "employeeId": "EMP004",
+          "employeeName": "Emily Davis",
+          "dob": "1995-02-28",
+          "profilePicture": "https://example.com/profiles/emilydavis.jpg",
+          "status": "Active",
+          "generalTiming": "9:30 AM - 6:30 PM",
+          "leaveBooked": 1,
+          "image": "https://example.com/profiles/emilydavis.jpg",
+          "joinDate": "2019-05-20",
+          "onLeave": false,
+          "date": "2024-12-12"
+        },
+        {
+          "employeeId": "EMP005",
+          "employeeName": "Michael Johnson",
+          "dob": "1985-12-03",
+          "profilePicture": "https://example.com/profiles/michaeljohnson.jpg",
+          "status": "On Leave",
+          "generalTiming": "9:00 AM - 6:00 PM",
+          "leaveBooked": 3,
+          "image": "https://example.com/profiles/michaeljohnson.jpg",
+          "joinDate": "2017-01-10",
+          "onLeave": true,
+          "date": "2024-12-12"
+        }
+      ]
+      
+        
+    
+}

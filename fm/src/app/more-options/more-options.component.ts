@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-more-options',
   templateUrl: './more-options.component.html',
+  standalone: false,
   styleUrl: './more-options.component.scss',
 })
 export class MoreOptionsComponent {
