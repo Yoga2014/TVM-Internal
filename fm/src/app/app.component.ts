@@ -12,13 +12,11 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
   activeLink: string = 'home';
   isExpanded = true;
-  showPopup = true;
-  private routerSubscription: Subscription | undefined;
   isLoggedIn = false;
+  showLayout = false;
 
-  // NEW: define missing properties
-  showLayout: boolean = false; 
-  dropdownOpen: boolean = false;
+  dropdownOpen = false;
+  private routerSubscription: Subscription | undefined;
 
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
@@ -48,20 +46,17 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Check token expiry periodically
     setInterval(() => this.checkTokenExpiry(), 1000);
   }
 
   ngOnDestroy() {
-    if (this.routerSubscription) this.routerSubscription.unsubscribe();
+    this.routerSubscription?.unsubscribe();
   }
 
   checkTokenExpiry() {
     if (!this.authservice.isLoggedIn() && this.authservice.getToken()) {
       alert('Your session has expired. Please login again.');
-      this.authservice.logout();
-      this.isLoggedIn = false;
-      this.showLayout = false;
+      this.logout();
     }
   }
 
@@ -73,34 +68,37 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateTo(link: string, path: string) {
     if (link === 'logout') {
-      const confirmed = confirm('Do you really want to logout?');
-      if (confirmed) {
-        this.authservice.logout();
-        this.isLoggedIn = false;
-        this.showLayout = false;
-      }
+      this.logout();
       return;
     }
 
     this.activeLink = link;
-    this.router.navigate([path]).catch(err => console.error('Navigation error:', err));
+    this.router.navigate([path]).catch(err => console.error(err));
   }
 
+  // ✅ FIXED: no event parameter needed
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  @HostListener('document:click')
-  closeDropdown(): void {
-    this.dropdownOpen = false;
+  // Prevent closing when clicking inside header-area
+  @HostListener('document:click', ['$event'])
+  closeDropdown(event: any): void {
+    if (!event.target.closest('.user-info')) {
+      this.dropdownOpen = false;
+    }
+  }
+
+  // ✅ ADDED missing method
+  logout(): void {
+    this.authservice.logout();
+    this.isLoggedIn = false;
+    this.showLayout = false;
+    this.router.navigate(['/']);
   }
 
   handleLoginSuccess(): void {
     this.isLoggedIn = true;
     this.showLayout = true;
-  }
-
-  navigateToProfile(): void {
-    this.router.navigate(['/profile']);
   }
 }
