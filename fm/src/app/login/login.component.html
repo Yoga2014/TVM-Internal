@@ -2,29 +2,33 @@
   <div class="login-card">
 
     <div class="avatar">
-      <img src="assets/images/TVM_logo.jpg" class="avatar-img" />
+      <img src="assets/images/TVM Infotech Logo.jpg" class="avatar-img" />
     </div>
 
-    <h2>Login</h2>
+    <h2>Sign in to your account</h2>
 
     <form [formGroup]="login">
       
       <div class="input-group">
+        <label>User Name</label>
         <i class="bi bi-person-fill"></i>
-        <input type="text" formControlName="username" placeholder="Username" />
+        <input type="text" formControlName="username"  />
       </div>
 
       <div class="input-group">
+        <div class="position">
+        <label>Password</label>
+        <a (click)="navigateToForgotPassword()" class="forgot">Forgot Password?</a>
+        </div>
         <i class="bi bi-lock-fill"></i>
-        <input type="password" formControlName="password" placeholder="Password" />
+        <input type="password" formControlName="password"  />
       </div>
 
-      <button type="button" (click)="enter()">Login</button>
+      <button type="button" (click)="enter()">Sign in</button>
 
-      <div class="toggle-text links">
+      <!-- <div class="toggle-text links">
         <a (click)="navigateToRegister()">New User? Register Here</a><br />
-        <a (click)="navigateToForgotPassword()">Forgot Password?</a>
-      </div>
+      </div> -->
 
     </form>
 
