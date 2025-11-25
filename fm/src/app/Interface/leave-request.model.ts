@@ -23,4 +23,7 @@ export interface LeaveRequest {
   rejectionComment?: string;
   typeLeave?: string;
   email?: string;
+  total?: number; // Add the 'total' property to the LeaveRequest interface
+  reason?: string; // Add the 'reason' property to the LeaveRequest interface
+  approvedBy?: string; // Add the 'approvedBy' property to the LeaveRequest interface
 }

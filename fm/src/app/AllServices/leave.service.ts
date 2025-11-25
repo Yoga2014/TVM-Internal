@@ -76,5 +76,10 @@ export class LeaveService {
     return this.http.post<void>(`${this.leaveApprovalURL}/reject/${leaveId}`, { comment });
   }
 
-  
+  // Add a method to calculate total available leaves
+  getTotalAvailableLeaves(): Observable<number> {
+    return this.getLeaveSummary().pipe(
+      map((leaves) => leaves.reduce((sum, leave) => sum + (leave.available || 0), 0))
+    );
+  }
 }
