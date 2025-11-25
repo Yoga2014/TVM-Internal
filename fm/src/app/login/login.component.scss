@@ -1,92 +1,209 @@
-.login-page {
-  position: relative;
+.log-container {
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../assets/images/login_page.png.webp') no-repeat center center;
-  background-size: cover;
-  
-  .background-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-  
-  .login-container {
-    width: 350px;
-    padding: 25px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-      font-family: 'Roboto', sans-serif;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
 
-      label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #555;
-      }
+  .login-card {
+    background: #1e293b;
+    padding: 60px 40px 40px;
+    border-radius: 20px;
+    width: 360px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
 
-      input {
+    /* Logo */
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+      img {
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
+        height: 100%;
+        object-fit: contain;
       }
     }
-    
-    .btn {
-      width: 100%;
-      padding: 12px;
-      background-color: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
 
-      &:hover {
-        background-color: #004d99;
-      }
+    /* Title */
+    h2 {
+      margin: 60px 0 25px;
+      font-weight: 600;
+      color: #f1f5f9;
+      letter-spacing: 1.2px;
+      font-size: 1.6rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-    
-    .links {
-      text-align: center;
-      margin-top: 15px;
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+
+      .input-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+
+        i {
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          transform: translateY(-50%);
+          color: #94a3b8;
+          font-size: 1.2rem;
+        }
+
+        input {
+          width: 100%;
+          padding: 12px 12px 12px 40px;
+          border-radius: 12px;
+          border: none;
+          outline: none;
+          font-size: 1rem;
+          background: #2e3a59;
+          color: #f1f5f9;
+          box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.4),
+            inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+          transition: all 0.3s ease;
+
+          &::placeholder {
+            color: #94a3b8;
+          }
+
+          &:focus {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.4),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.1),
+              0 0 6px #3b82f6;
+          }
+        }
+
+        /* Error Text */
+        .error-text {
+          color: #f87171;
+          font-size: 0.85rem;
+          margin-top: 5px;
+          padding-left: 4px;
+          animation: fadeIn 0.3s ease-in-out;
+        }
+      }
 
       button {
-        background: none;
+        background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        color: #fff;
+        padding: 12px;
+        border-radius: 12px;
         border: none;
-        color: #0066cc;
         cursor: pointer;
-        text-decoration: underline;
-        font-size: 14px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 
         &:hover {
-          color: #004d99;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      .toggle-text {
+        margin-top: 8px;
+        a {
+          color: #3b82f6;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            text-decoration: underline;
+            color: #06b6d4;
+          }
         }
       }
     }
-    
-    .error-message {
-      margin-top: 15px;
-      color: red;
-      text-align: center;
-      font-weight: bold;
+  }
+
+  /* Toast notifications */
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .toast {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      color: #fff;
+      min-width: 220px;
+      font-weight: 500;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      opacity: 0.95;
+      animation: slideIn 0.3s ease;
+
+      &.success {
+        background: #2ea043;
+      }
+
+      &.error {
+        background: #f85149;
+      }
     }
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .login-card {
+    width: 90%;
+    padding: 50px 20px 30px;
   }
 }

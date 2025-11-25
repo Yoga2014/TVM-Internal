@@ -1,0 +1,137 @@
+
+// Variables for colors
+$primary-color: #2b2d42;
+$secondary-color: #8d99ae;
+$accent-color: #ef233c;
+$background-color: #edf2f4;
+$text-color: #ffffff;
+$hover-color: #d90429;
+
+// Base styles for the container
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: $background-color;
+
+  .sidebar {
+    background-color: $primary-color;
+    color: $text-color;
+    transition: width 0.3s ease;
+    width: 250px;
+
+    &.expanded {
+      width: 300px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 1rem;
+
+      img {
+        max-width: 80%;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .content {
+      margin-top: 1rem;
+      .link {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.2s;
+
+        &:hover {
+          background-color: $hover-color;
+          transform: translateX(5px);
+        }
+
+        &.active {
+          background-color: $accent-color;
+          color: $text-color;
+        }
+
+        i {
+          margin-right: 1rem;
+          font-size: 1.2rem;
+          animation: fade-in 0.5s ease;
+        }
+
+        .title-home,
+        .title-profile,
+        .title-leave {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+      }
+
+      .with-children {
+        margin-top: 1rem;
+        .link {
+          &:not(:last-child) {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: $background-color;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    animation: slide-in 0.5s ease forwards;
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+
+    .sidebar {
+      width: 100%;
+      height: auto;
+
+      &.expanded {
+        height: 250px;
+      }
+    }
+
+    .main-content {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
+
+// Animations
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

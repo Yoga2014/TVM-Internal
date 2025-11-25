@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from './AllServices/AuthService.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,12 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   title = 'fleet-management';
-
   activeLink: string = 'home';
-  dropdownOpen = false;
+  isExpanded = true;
+  showPopup = true;
+  private routerSubscription: Subscription | undefined;
   isLoggedIn = false;
-  showLayout: boolean = true;
 
-  userName: string = 'User';         // Displayed in header
-  userInitial: string = '';          // First letter for avatar
-
-  private routerSubscription!: Subscription;
-
-  // Sidebar Menu Items
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
     { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
@@ -31,29 +26,36 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
     { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
     { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
-    { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' }
+    { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
+    { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authservice: AuthService) {}
 
-  ngOnInit(): void {
-    // Set user initial
-    this.userInitial = this.userName.charAt(0).toUpperCase();
+  ngOnInit() {
+    this.isLoggedIn = this.authservice.isLoggedIn();
 
-    // Detect active menu item based on URL
-    this.updateActiveLink();
-
-    // Listen to router changes
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.isLoggedIn = this.authservice.isLoggedIn();
         this.updateActiveLink();
+        this.checkTokenExpiry();
       }
     });
+
+    // Optional: check token expiry every 30 seconds
+    setInterval(() => this.checkTokenExpiry(), 30000);
   }
 
-  ngOnDestroy(): void {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.routerSubscription) this.routerSubscription.unsubscribe();
+  }
+
+  checkTokenExpiry() {
+    if (!this.authservice.isLoggedIn() && this.authservice.getToken()) {
+      alert('Your session has expired. Please login again.');
+      this.authservice.logout();
+      this.isLoggedIn = false;
     }
   }
 
@@ -64,8 +66,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this.activeLink = activeItem ? activeItem.link : 'home';
   }
 
-  // Navigate to selected menu item
-  navigateTo(link: string, path: string): void {
+  navigateTo(link: string, path: string) {
+    if (link === 'logout') {
+      const confirmed = confirm('Do you really want to logout?');
+      if (confirmed) {
+        this.authservice.logout();
+        this.isLoggedIn = false;
+      }
+      return;
+    }
+
     this.activeLink = link;
     this.router.navigate([path]).catch(err => console.error('Navigation error:', err));
   }
@@ -98,5 +108,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateToProfile(): void {
     this.router.navigate(['/profile']);
+  }
+
+  handleLoginSuccess(): void {
+    this.isLoggedIn = true;
   }
 }
