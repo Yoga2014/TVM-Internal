@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { slideInAnimation } from './animation';
 import { RouterOutlet } from '@angular/router';
-import { PlatformLocation } from '@angular/common';
-import { SkillsetComponent } from "../skillset/skillset.component";
+import { CommonModule, PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: false,
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss'],
   animations: [slideInAnimation],
 })
 export class HeaderComponent {

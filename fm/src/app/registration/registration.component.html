@@ -1,24 +1,45 @@
 <div class="register-container">
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="user.email" name="email" placeholder="Enter email" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" [(ngModel)]="user.phone" name="phone" placeholder="Enter phone number" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="user.password" name="password" placeholder="Enter password" required>
-      </div>
-  
-      <button type="submit" class="btn">Register</button>
-  
-      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-      <button type="button" class="back-btn" (click)="tologin()">Back to login</button>
-    </form>
-  </div>
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        placeholder="Enter username"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Enter password"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        placeholder="Confirm password"
+      />
+    </div>
+
+    <button type="submit" class="btn">Register</button>
+
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+
+    <button type="button" class="back-btn" (click)="goToLogin()">
+      Back to login
+    </button>
+
+  </form>
+</div>

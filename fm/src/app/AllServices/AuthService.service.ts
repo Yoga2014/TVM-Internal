@@ -2,52 +2,78 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users';
-  private userRole: string | null = null;
+  private loginUrl = 'http://localhost:8080/login';
+  private registerUrl = 'http://localhost:8080/register';
+
   constructor(private http: HttpClient, private router: Router) {}
-  login(emailOrPhone: string, password: string): Observable<any> {
-  return this.http.get<any[]>(this.apiUrl).pipe(
-    map(users => {
-    console.log("AuthService login called with:", emailOrPhone, password)
-      const user = users.find(u =>
-        (u.useremail === emailOrPhone || u.phone === emailOrPhone) &&
-        u.password === password
-      );
 
-      if (!user) return null;
-
-      // Return only required fields
-      return {
-        id: user.id,
-        username: user.username || "",
-        useremail: user.email || "",
-        role: user.role || "user",
-        token: "mock-jwt-token-" + user.id
-      };
-    })
-  );
-}
-
-  register(user: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, user);
+  /** 🔹 LOGIN */
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.loginUrl, { username, password });
   }
+
+  /** 🔹 REGISTER */
+  register(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.registerUrl, { username, password });
+  }
+
   logout() {
-    this.userRole = null;
-    localStorage.removeItem('userRole');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
-  getUserRole(): string | null {
-    return localStorage.getItem('userRole');
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
   }
-  isAdmin(): boolean {
-    return this.getUserRole() === 'admin';
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
-  isUser(): boolean {
-    return this.getUserRole() === 'user';
+
+  decodeToken(token: string): any {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    const decoded = this.decodeToken(token);
+    if (!decoded || !decoded.exp) return true;
+
+    const expiryTime = decoded.exp * 1000; 
+    return Date.now() > expiryTime;
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken() && !this.isTokenExpired();
+  }
+
+  generateStaticToken() {
+    const header = { alg: 'HS256', typ: 'JWT' };
+    const now = Math.floor(Date.now() / 1000); 
+    const payload = {
+      sub: 'oohn',
+      iat: now,
+      exp: now + 30, 
+    };
+
+    const base64url = (obj: any) =>
+      btoa(JSON.stringify(obj))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+
+    const token = `${base64url(header)}.${base64url(payload)}.STATIC_SIGNATURE`;
+    this.setToken(token);
   }
 }

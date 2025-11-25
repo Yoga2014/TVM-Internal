@@ -6,18 +6,17 @@
 <!-- MAIN LAYOUT -->
 <div *ngIf="showLayout" class="app-container">
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="header-logo" (click)="navigateTo('home', 'new-Home')">
+
+
+<div class="app-container" *ngIf="isLoggedIn">
+  <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+    <div class="header" (click)="navigateTo('home', 'new-Home')">
       <img src="../assets/images/TVM Infotech Logo.jpg" alt="Logo" />
     </div>
 
     <div class="menu">
-      <div class="item" *ngFor="let item of menuItems">
-        <div class="link"
-             (click)="navigateTo(item.link, item.path)"
-             [ngClass]="{ 'active': activeLink === item.link }">
-
+      <div class="content" *ngFor="let item of menuItems">
+        <div class="link" (click)="navigateTo(item.link, item.path)" [ngClass]="{ active: activeLink === item.link }">
           <i [class]="item.icon"></i>
           <span class="title">{{ item.title }}</span>
         </div>
@@ -25,31 +24,7 @@
     </div>
   </div>
 
-  <!-- RIGHT SECTION -->
-  <div class="right-section">
-
-    <!-- Top Header -->
-    <div class="top-header">
-      <div class="company-title">TVM Infotech Private Limited</div>
-
-      <div class="avatar-section" (click)="toggleDropdown()">
-        <div class="avatar-circle">
-          <span class="initials">{{ userInitial }}</span>
-        </div>
-        <span class="user-name">{{ userName }}</span>
-
-        <!-- Dropdown -->
-        <div class="dropdown-menu" *ngIf="dropdownOpen">
-          <p (click)="navigateToProfile()">My Profile</p>
-          <p (click)="logout()">Logout</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main content -->
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
-
+  <div class="main-content">
+    <router-outlet></router-outlet>
   </div>
 </div>

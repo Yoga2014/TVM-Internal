@@ -107,13 +107,14 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    DetailsComponent,
+    PersonalDataFormComponent,
     GeneralComponent,
     EducationalComponent,
     SkillsetComponent,
     SkillSetMatrixComponent,
     ProfessionalComponent,
-    HeaderComponent,
-    DetailsComponent,
     PersonalDataFormComponent,
     DashboardComponent,
     BirthdayCardComponent,
@@ -204,10 +205,10 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     MatDialogModule,
     CalendarModule,
     FullCalendarModule,
-    TreeModule,
+    TreeModule
+
     
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
