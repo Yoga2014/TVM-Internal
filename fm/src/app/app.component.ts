@@ -16,8 +16,10 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   showLayout = false;
 
+  username: string = '';       // Stores logged-in username
+  avatarInitials: string = ''; // Stores initials for avatar
   dropdownOpen = false;
-  confirmation = false; // show logout modal
+  confirmation = false; 
   private routerSubscription: Subscription | undefined;
 
   menuItems = [
@@ -43,22 +45,35 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.authservice.isLoggedIn();
     this.showLayout = this.isLoggedIn;
 
-    // Prevent browser back navigation
+    // Load username from localStorage if logged in
+    if (this.isLoggedIn) {
+      this.setUsernameFromStorage();
+    }
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
+    // Prevent browser back navigation for logged-in users
     history.pushState(null, '', location.href);
-    window.addEventListener('popstate', () => {
+    this.location.subscribe(() => {
       if (this.authservice.isLoggedIn()) {
+        this.logout();
         history.pushState(null, '', location.href);
-        this.confirmation = true;
       }
     });
 
-    // Router subscription
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoggedIn = this.authservice.isLoggedIn();
         this.showLayout = this.isLoggedIn;
         this.updateActiveLink();
         this.checkTokenExpiry();
+
+        if (this.isLoggedIn) {
+          this.setUsernameFromStorage();
+        } else {
+          this.username = '';
+          this.avatarInitials = '';
+        }
       }
     });
 
@@ -69,12 +84,29 @@ export class AppComponent implements OnInit, OnDestroy {
     this.routerSubscription?.unsubscribe();
   }
 
-  checkTokenExpiry() {
-    if (!this.authservice.isLoggedIn() && this.authservice.getToken()) {
-      alert('Your session has expired. Please login again.');
-      this.logout();
+  // Load username and initials
+  private setUsernameFromStorage(): void {
+    this.username = localStorage.getItem('username') || '';
+    this.avatarInitials = this.username
+      .split(' ')
+      .map(n => n[0].toUpperCase())
+      .join('')
+      .slice(0, 2); // First two initials
+  }
+
+checkTokenExpiry() {
+  const tokenExpired = this.authservice.isTokenExpired() && this.authservice.getToken();
+
+  if (tokenExpired) {
+    // Show alert modal for expired session
+    if (!this.confirmation) { // show only once
+      alert('Your session has expired. Please log out.');
+      this.confirmation = true; // show logout confirmation modal
     }
   }
+}
+
+
 
   updateActiveLink(): void {
     const currentPath = this.router.url;
@@ -97,28 +129,27 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   closeDropdown(event: any): void {
-    if (!event.target.closest('.user-info')) {
+    if (!event.target.closest('.avatar-section')) {
       this.dropdownOpen = false;
     }
   }
 
-  // Show confirmation modal
   logout(): void {
     this.confirmation = true;
   }
 
-  // Confirm logout
   ok(): void {
     this.authservice.logout();
     localStorage.clear();
     sessionStorage.clear();
     this.isLoggedIn = false;
     this.showLayout = false;
+    this.username = '';
+    this.avatarInitials = '';
     this.confirmation = false;
     this.router.navigate(['/login']);
   }
 
-  // Cancel logout
   Cancel(): void {
     this.confirmation = false;
   }
@@ -126,5 +157,6 @@ export class AppComponent implements OnInit, OnDestroy {
   handleLoginSuccess(): void {
     this.isLoggedIn = true;
     this.showLayout = true;
+    this.setUsernameFromStorage();
   }
 }

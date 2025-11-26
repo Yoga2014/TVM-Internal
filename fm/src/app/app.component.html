@@ -34,9 +34,9 @@
 
       <div class="avatar-section" (click)="toggleDropdown()">
         <div class="avatar-circle">
-          <span class="initials">{{ "u" }}</span>
+          <span class="initials">{{avatarInitials}}</span>
         </div>
-        <span class="user-name">user</span>
+        <span class="user-name">{{username}}</span>
 
         <!-- Dropdown -->
         <div class="dropdown-menu" *ngIf="dropdownOpen">

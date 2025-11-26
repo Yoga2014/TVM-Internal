@@ -50,9 +50,12 @@ export class AuthService {
     return Date.now() > decoded.exp * 1000;
   }
 
-  isLoggedIn(): boolean {
-    return !!this.getToken() && !this.isTokenExpired();
-  }
+isLoggedIn(): boolean {
+  const token = this.getToken();
+  if (!token) return false;
+  return !this.isTokenExpired();
+}
+
 
  generateStaticToken() {
   const header = { alg: 'HS256', typ: 'JWT' };
@@ -60,7 +63,7 @@ export class AuthService {
   const payload = {
     sub: 'user',
     iat: now,
-    exp: now + 60, // 1 minute token
+    exp: now + 6, // 1 minute token
     role: 'user',
   };
 

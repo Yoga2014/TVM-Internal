@@ -66,7 +66,7 @@ import { LogOutComponent } from './log-out/log-out.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogOutComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },
