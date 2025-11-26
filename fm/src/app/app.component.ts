@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
     { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
     { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
-    { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' },
+    { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
   ];
 
   constructor(private router: Router, private authService: AuthService) {}

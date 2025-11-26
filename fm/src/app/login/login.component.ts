@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Pre-fill username from localStorage if available
@@ -31,33 +31,37 @@ export class LoginComponent implements OnInit {
       password: ['2234', Validators.required], // don't prefill password
     });
   }
-enter(): void {
-  if (this.login.invalid) {
-    this.login.markAllAsTouched();
-    this.errorMessage = 'Please enter username and password.';
-    return;
-  }
+  enter(): void {
+    if (this.login.invalid) {
+      this.login.markAllAsTouched();
+      this.errorMessage = 'Please enter username and password.';
+      return;
+    }
 
-  this.loading = true;
-  const { username, password } = this.login.value;
+    this.loading = true;
+    const { username, password } = this.login.value;
 
-  this.auth.login(username, password).subscribe({
-    next: (res: any) => {
-      this.loading = false;
+    this.auth.login(username, password).subscribe({
+      next: (res: any) => {
+        this.loading = false;
 
-      if (res?.token) {
-        this.auth.setToken(res.token);
-        this.loginSuccess.emit();
+        if (res?.token) {
+          // Store entered username for header display
+          localStorage.setItem('username', this.login.value.username);
 
-        this.router.navigate(['/new-Home/my-space/overview']);
-      } else {
-        this.errorMessage = res.error || 'Invalid username or password';
+          this.auth.setToken(res.token);
+          this.loginSuccess.emit();
+
+          this.router.navigate(['/new-Home/my-space/overview']);
+        } else {
+          this.errorMessage = res.error || 'Invalid username or password';
+        }
       }
-    },
-    error: () => {
-      this.loading = false;
-      this.errorMessage = 'Login failed. Try again.';
-    },
-  });
-}
+      ,
+      error: () => {
+        this.loading = false;
+        this.errorMessage = 'Login failed. Try again.';
+      },
+    });
+  }
 }

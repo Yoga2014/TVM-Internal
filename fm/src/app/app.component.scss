@@ -12,10 +12,6 @@ $white: #ffffff;
   background: $light-bg;
 }
 
-// *{
-//    font-family: 'EB Garamond', serif;
-// }
-
 /* SIDEBAR */
 .sidebar {
   width: 260px;
@@ -25,6 +21,10 @@ $white: #ffffff;
   display: flex;
   flex-direction: column;
   padding-top: 10px;
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
 
   .header-logo {
     text-align: center;
@@ -43,22 +43,42 @@ $white: #ffffff;
 
   .menu {
     margin-top: 20px;
+    overflow-y: auto; // <--- scroll only menu items
+    flex: 1;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
 
     .item {
-      margin-bottom: 7px;
+      margin-bottom: 5px; // reduce space if needed
 
       .link {
         display: flex;
         align-items: center;
-        padding: 12px 20px;
+        padding: 12px 20px; 
+        width: 98%; // expand to full width
         cursor: pointer;
         border-radius: 8px;
         transition: 0.3s;
         font-size: 20px;
 
+        i {
+          margin-right: 12px;
+          font-size: 1.2rem;
+        }
+
         .title {
           margin-left: 7px;
-          
         }
 
         &:hover {
@@ -66,7 +86,6 @@ $white: #ffffff;
           background: $light-bg;
           transform: translateX(2px);
           color: black;
-          
         }
 
         &.active {
@@ -74,17 +93,12 @@ $white: #ffffff;
           color: black;
           font-weight: 600;
         }
-
-        i {
-          margin-right: 12px;
-          font-size: 1.2rem;
-        }
       }
     }
   }
 }
 
-/* RIGHT CONTENT AREA */
+/* RIGHT SECTION */
 .right-section {
   flex: 1;
   display: flex;
@@ -146,7 +160,7 @@ $white: #ffffff;
       background: #fff;
       width: 150px;
       border-radius: 8px;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       padding: 10px 0;
       z-index: 200;
 
@@ -158,7 +172,6 @@ $white: #ffffff;
 
         &:hover {
           background: #eeeeee;
-          
         }
       }
     }
@@ -184,7 +197,7 @@ $white: #ffffff;
   }
 }
 
-/* Backdrop */
+/* BACKDROP */
 .backdrop {
   position: fixed;
   top: 0;
@@ -195,7 +208,7 @@ $white: #ffffff;
   z-index: 999;
 }
 
-/* Popup Box */
+/* LOGOUT MODAL */
 .logout-response {
   position: fixed;
   top: 50%;
@@ -208,44 +221,43 @@ $white: #ffffff;
   text-align: center;
   z-index: 1000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
 
-.logout-response h4 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 
-/* Buttons */
-.btn-container {
-  display: flex;
-  justify-content: space-between;
-}
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
 
-.ok-btn,
-.cancel-btn {
-  width: 45%;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-}
+    .ok-btn,
+    .cancel-btn {
+      width: 45%;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+    }
 
-.ok-btn {
-  background-color: #00268f;
-  color: white;
-}
+    .ok-btn {
+      background-color: #00268f;
+      color: white;
 
-.cancel-btn {
-  background-color: #f0f0f0;
-  color: #333;
-}
+      &:hover {
+        background-color: #0a1f5d;
+      }
+    }
 
-.ok-btn:hover {
-  background-color: #0a1f5d;
-}
+    .cancel-btn {
+      background-color: #f0f0f0;
+      color: #333;
 
-.cancel-btn:hover {
-  background-color: #d9d9d9;
+      &:hover {
+        background-color: #d9d9d9;
+      }
+    }
+  }
 }
