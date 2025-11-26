@@ -7,7 +7,7 @@ import { AuthService } from './AllServices/AuthService.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-})
+}) 
 export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
   activeLink: string = 'home';
@@ -33,21 +33,38 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private authservice: AuthService) {}
 
-  ngOnInit() {
-    this.isLoggedIn = this.authservice.isLoggedIn();
-    this.showLayout = this.isLoggedIn;
+ngOnInit() {
+  this.isLoggedIn = this.authservice.isLoggedIn();
+  this.showLayout = this.isLoggedIn;
 
-    this.routerSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.isLoggedIn = this.authservice.isLoggedIn();
-        this.showLayout = this.isLoggedIn;
-        this.updateActiveLink();
-        this.checkTokenExpiry();
+  this.routerSubscription = this.router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd) {
+
+      // ✅ AUTO LOGOUT IF NAVIGATING TO LOGIN WHILE LOGGED IN
+      if (event.url === '/' || event.url === '/login') {
+        if (this.isLoggedIn) {
+          this.showLayout = false;     // hide login view immediately
+          setTimeout(() => {
+            this.logout();
+          }, 1);
+        }
       }
-    });
 
-    setInterval(() => this.checkTokenExpiry(), 1000);
-  }
+      this.isLoggedIn = this.authservice.isLoggedIn();
+      this.showLayout = this.isLoggedIn;
+      this.updateActiveLink();
+      this.checkTokenExpiry();
+    }
+    else{
+      console.error('error');
+      
+    }
+  });
+
+  setInterval(() => this.checkTokenExpiry(), 1000);
+}
+
+
 
   ngOnDestroy() {
     this.routerSubscription?.unsubscribe();
@@ -89,13 +106,24 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ✅ ADDED missing method
-  logout(): void {
-    this.authservice.logout();
-    this.isLoggedIn = false;
-    this.showLayout = false;
-    this.router.navigate(['/']);
-  }
+confirmation = false;  // Show popup state
+
+logout(): void {
+  this.confirmation = true; // open popup
+}
+
+ok(): void {
+  this.authservice.logout();
+  this.isLoggedIn = false;
+  this.showLayout = false;
+  this.confirmation = false;
+  this.router.navigate(['/']);
+}
+
+Cancel(): void {
+  this.confirmation = false; 
+}
+
 
   handleLoginSuccess(): void {
     this.isLoggedIn = true;

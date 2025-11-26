@@ -1,3 +1,4 @@
+
 <!-- LOGIN PAGE -->
 <div *ngIf="!showLayout">
   <app-login (loginSuccess)="handleLoginSuccess()"></app-login>
@@ -45,6 +46,16 @@
         </div>
       </div>
     </div>
+
+<div class="backdrop" *ngIf="confirmation"></div>
+<div class="logout-response" *ngIf="confirmation">
+  <h4>Are you sure you want to log out?</h4>
+  <div class="btn-container">
+    <button class="ok-btn" (click)="ok()">Ok</button>
+    <button class="cancel-btn" (click)="Cancel()">Cancel</button>
+  </div>
+</div>
+
 
     <!-- Main content -->
     <div class="main-content">

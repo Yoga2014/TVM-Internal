@@ -24,7 +24,17 @@
         <input type="password" formControlName="password"  />
       </div>
 
-      <button type="button" (click)="enter()">Sign in</button>
+      <div class="error">{{errorMessage}}</div>
+
+      <button type="button" (click)="enter()" [disabled]="loading" class="login-btn">
+  <span *ngIf="!loading">Login</span>
+  <mat-progress-spinner
+    *ngIf="loading"
+    diameter="24"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</button>
+
 
       <!-- <div class="toggle-text links">
         <a (click)="navigateToRegister()">New User? Register Here</a><br />

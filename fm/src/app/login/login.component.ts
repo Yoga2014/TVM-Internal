@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   login!: FormGroup;
   errorMessage: string = '';
+  loading: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -23,35 +25,39 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.login = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['oohn', Validators.required],
+      password: ['2234', Validators.required],
     });
   }
 
-  enter(): void {
-    if (this.login.invalid) {
-      this.login.markAllAsTouched();
-      this.errorMessage = 'Please enter username and password.';
-      return;
-    }
-
-    const { username, password } = this.login.value;
-
-    this.auth.login(username, password).subscribe({
-      next: (res: any) => {
-        if (res?.token) {
-          this.auth.setToken(res.token); // store real token
-          this.loginSuccess.emit();
-          this.router.navigate(['/new-Home']);
-        } else {
-          this.errorMessage = res.message || 'Invalid username or password';
-        }
-      },
-      error: () => {
-        this.errorMessage = 'Login failed. Try again.';
-      },
-    });
+enter(): void {
+  if (this.login.invalid) {
+    this.login.markAllAsTouched();
+    this.errorMessage = 'Please enter username and password.';
+    return;
   }
+
+  this.loading = true; 
+  const { username, password } = this.login.value;
+  this.auth.login(username, password).subscribe({
+    next: (res: any) => {
+      this.loading = false; 
+
+      if (res?.token) {
+        this.auth.setToken(res.token);
+        this.loginSuccess.emit();
+        this.router.navigate(['/new-Home']);
+      } else {
+        this.errorMessage = res.error || 'Invalid username or password';
+      }
+    },
+    error: () => {
+      this.loading = false;
+      this.errorMessage = 'Login failed. Try again.';
+    },
+  });
+}
+
     navigateToRegister(): void {
     this.router.navigate(['/register']);
   }
