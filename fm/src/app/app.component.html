@@ -1,9 +1,9 @@
-<!-- LOGIN PAGE -->
+<!-- Login page -->
 <div *ngIf="!showLayout">
   <app-login (loginSuccess)="handleLoginSuccess()"></app-login>
 </div>
 
-<!-- MAIN LAYOUT -->
+<!-- Main layout -->
 <div *ngIf="showLayout" class="app-container">
 
   <!-- Sidebar -->
@@ -17,7 +17,6 @@
         <div class="link"
              (click)="navigateTo(item.link, item.path)"
              [ngClass]="{ 'active': activeLink === item.link }">
-
           <i [class]="item.icon"></i>
           <span class="title">{{ item.title }}</span>
         </div>
@@ -25,7 +24,7 @@
     </div>
   </div>
 
-  <!-- RIGHT SECTION -->
+  <!-- Right section -->
   <div class="right-section">
 
     <!-- Top Header -->
@@ -34,9 +33,9 @@
 
       <div class="avatar-section" (click)="toggleDropdown()">
         <div class="avatar-circle">
-          <span class="initials">{{avatarInitials}}</span>
+          <span class="initials">A</span>
         </div>
-        <span class="user-name">{{username}}</span>
+        <span class="user-name">Arul</span>
 
         <!-- Dropdown -->
         <div class="dropdown-menu" *ngIf="dropdownOpen">
@@ -45,10 +44,9 @@
       </div>
     </div>
 
-    <!-- BACKDROP -->
+    <!-- Backdrop & Logout Modal -->
     <div class="backdrop" *ngIf="confirmation"></div>
 
-    <!-- LOGOUT CONFIRMATION MODAL -->
     <div class="logout-response" *ngIf="confirmation">
       <h4>Are you sure you want to log out?</h4>
       <div class="btn-container">

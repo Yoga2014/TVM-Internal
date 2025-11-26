@@ -1,17 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OverviewService, OverviewData } from '../AllServices/overviewservice';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  standalone: false,
-  styleUrl: './overview.component.scss',
+  styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
   selectedTab: any = '';
-  bootstrap: any;
   isPopupVisible = false;
 
-  // Add missing properties with default values
   totalEmployees: number = 0;
   presentToday: number = 0;
   absentToday: number = 0;
@@ -19,6 +17,29 @@ export class OverviewComponent {
   newJoinees: number = 0;
   resignations: number = 0;
   departmentCount: number = 0;
+
+  constructor(private overviewService: OverviewService) {}
+
+  ngOnInit() {
+    this.fetchOverviewData();
+  }
+
+  fetchOverviewData() {
+    this.overviewService.getOverviewData().subscribe({
+      next: (data: OverviewData) => {
+        this.totalEmployees = data.totalEmployees;
+        this.presentToday = data.presentToday;
+        this.absentToday = data.absentToday;
+        this.leaveToday = data.leaveToday;
+        this.newJoinees = data.newJoinees;
+        this.resignations = data.resignations;
+        this.departmentCount = data.departmentCount;
+      },
+      error: (err) => {
+        console.error('Error fetching overview data:', err);
+      }
+    });
+  }
 
   aditionalClick(getValues: any) {
     this.selectedTab = getValues;

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './AllServices/AuthService.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +11,13 @@ import { Location } from '@angular/common';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
   activeLink: string = 'home';
-  isExpanded = true;
   isLoggedIn = false;
   showLayout = false;
-
-  username: string = '';       // Stores logged-in username
-  avatarInitials: string = ''; // Stores initials for avatar
+  username: string = '';
+  avatarInitials: string = '';
+  confirmation = false;
   dropdownOpen = false;
-  confirmation = false; 
+
   private routerSubscription: Subscription | undefined;
 
   menuItems = [
@@ -35,83 +33,46 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' },
   ];
 
-  constructor(
-    private router: Router,
-    private authservice: AuthService,
-    private location: Location
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
-    this.isLoggedIn = this.authservice.isLoggedIn();
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.showLayout = this.isLoggedIn;
+    this.setUsernameFromStorage();
 
-    // Load username from localStorage if logged in
-    if (this.isLoggedIn) {
-      this.setUsernameFromStorage();
-    }
-    if (!this.isLoggedIn) {
-      this.router.navigate(['/login']);
-    }
-    // Prevent browser back navigation for logged-in users
-    history.pushState(null, '', location.href);
-    this.location.subscribe(() => {
-      if (this.authservice.isLoggedIn()) {
-        this.logout();
-        history.pushState(null, '', location.href);
-      }
-    });
-
-    this.routerSubscription = this.router.events.subscribe((event) => {
+    // Listen to router changes
+    this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isLoggedIn = this.authservice.isLoggedIn();
-        this.showLayout = this.isLoggedIn;
-        this.updateActiveLink();
-        this.checkTokenExpiry();
-
-        if (this.isLoggedIn) {
-          this.setUsernameFromStorage();
-        } else {
-          this.username = '';
-          this.avatarInitials = '';
-        }
+        this.activeLink = this.getActiveLink(event.urlAfterRedirects);
       }
     });
 
-    setInterval(() => this.checkTokenExpiry(), 1000);
+    // Listen to browser back button
+    window.addEventListener('popstate', this.handleBackButton.bind(this));
+
+    // Prevent leaving app on first load
+    history.pushState(null, '', location.href);
   }
 
   ngOnDestroy() {
     this.routerSubscription?.unsubscribe();
+    window.removeEventListener('popstate', this.handleBackButton.bind(this));
   }
 
-  // Load username and initials
-  private setUsernameFromStorage(): void {
-    this.username = localStorage.getItem('username') || '';
-    this.avatarInitials = this.username
-      .split(' ')
-      .map(n => n[0].toUpperCase())
-      .join('')
-      .slice(0, 2); // First two initials
-  }
+  private handleBackButton() {
+    if (!this.authService.isLoggedIn()) return;
 
-checkTokenExpiry() {
-  const tokenExpired = this.authservice.isTokenExpired() && this.authservice.getToken();
-
-  if (tokenExpired) {
-    // Show alert modal for expired session
-    if (!this.confirmation) { // show only once
-      alert('Your session has expired. Please log out.');
-      this.confirmation = true; // show logout confirmation modal
+    // Only show confirmation if the current URL is login or root
+    const path = location.pathname;
+    if (path === '/login' || path === '/') {
+      this.confirmation = true;
+      history.pushState(null, '', location.href); // stay on the app
     }
   }
-}
 
-
-
-  updateActiveLink(): void {
-    const currentPath = this.router.url;
-    const activeItem = this.menuItems.find(item => currentPath.includes(item.path));
-    this.activeLink = activeItem ? activeItem.link : 'home';
+  getActiveLink(url: string): string {
+    const item = this.menuItems.find(m => url.includes(m.path));
+    return item ? item.link : 'home';
   }
 
   navigateTo(link: string, path: string) {
@@ -139,7 +100,7 @@ checkTokenExpiry() {
   }
 
   ok(): void {
-    this.authservice.logout();
+    this.authService.logout();
     localStorage.clear();
     sessionStorage.clear();
     this.isLoggedIn = false;
@@ -152,11 +113,21 @@ checkTokenExpiry() {
 
   Cancel(): void {
     this.confirmation = false;
+    history.pushState(null, '', location.href);
   }
 
   handleLoginSuccess(): void {
     this.isLoggedIn = true;
     this.showLayout = true;
     this.setUsernameFromStorage();
+  }
+
+  private setUsernameFromStorage(): void {
+    this.username = localStorage.getItem('username') || '';
+    this.avatarInitials = this.username
+      .split(' ')
+      .map(n => n[0].toUpperCase())
+      .join('')
+      .slice(0, 2);
   }
 }

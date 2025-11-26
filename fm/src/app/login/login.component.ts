@@ -31,49 +31,33 @@ export class LoginComponent implements OnInit {
       password: ['2234', Validators.required], // don't prefill password
     });
   }
-
-  enter(): void {
-    if (this.login.invalid) {
-      this.login.markAllAsTouched();
-      this.errorMessage = 'Please enter username and password.';
-      return;
-    }
-
-    this.loading = true; 
-    const { username, password } = this.login.value;
-
-    this.auth.login(username, password).subscribe({
-      next: (res: any) => {
-        this.loading = false; 
-
-        if (res?.token) {
-          // Store token
-          this.auth.setToken(res.token);
-
-          // Store username in localStorage
-          localStorage.setItem('username', username);
-
-          // Emit login success event
-          this.loginSuccess.emit();
-
-          // Navigate to home
-          this.router.navigate(['/new-Home']);
-        } else {
-          this.errorMessage = res.error || 'Invalid username or password';
-        }
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'Login failed. Try again.';
-      },
-    });
+enter(): void {
+  if (this.login.invalid) {
+    this.login.markAllAsTouched();
+    this.errorMessage = 'Please enter username and password.';
+    return;
   }
 
-  navigateToRegister(): void {
-    this.router.navigate(['/register']);
-  }
+  this.loading = true;
+  const { username, password } = this.login.value;
 
-  navigateToForgotPassword(): void {
-    this.router.navigate(['/forgot-password']);
-  }
+  this.auth.login(username, password).subscribe({
+    next: (res: any) => {
+      this.loading = false;
+
+      if (res?.token) {
+        this.auth.setToken(res.token);
+        this.loginSuccess.emit();
+
+        this.router.navigate(['/new-Home/my-space/overview']);
+      } else {
+        this.errorMessage = res.error || 'Invalid username or password';
+      }
+    },
+    error: () => {
+      this.loading = false;
+      this.errorMessage = 'Login failed. Try again.';
+    },
+  });
+}
 }
