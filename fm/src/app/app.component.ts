@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './AllServices/AuthService.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-}) 
+})
 export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
   activeLink: string = 'home';
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showLayout = false;
 
   dropdownOpen = false;
+  confirmation = false; // show logout modal
   private routerSubscription: Subscription | undefined;
 
   menuItems = [
@@ -31,40 +33,37 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' },
   ];
 
-  constructor(private router: Router, private authservice: AuthService) {}
+  constructor(
+    private router: Router,
+    private authservice: AuthService,
+    private location: Location
+  ) {}
 
-ngOnInit() {
-  this.isLoggedIn = this.authservice.isLoggedIn();
-  this.showLayout = this.isLoggedIn;
+  ngOnInit() {
+    this.isLoggedIn = this.authservice.isLoggedIn();
+    this.showLayout = this.isLoggedIn;
 
-  this.routerSubscription = this.router.events.subscribe((event) => {
-    if (event instanceof NavigationEnd) {
-
-      // ✅ AUTO LOGOUT IF NAVIGATING TO LOGIN WHILE LOGGED IN
-      if (event.url === '/' || event.url === '/login') {
-        if (this.isLoggedIn) {
-          this.showLayout = false;     // hide login view immediately
-          setTimeout(() => {
-            this.logout();
-          }, 1);
-        }
+    // Prevent browser back navigation
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', () => {
+      if (this.authservice.isLoggedIn()) {
+        history.pushState(null, '', location.href);
+        this.confirmation = true;
       }
+    });
 
-      this.isLoggedIn = this.authservice.isLoggedIn();
-      this.showLayout = this.isLoggedIn;
-      this.updateActiveLink();
-      this.checkTokenExpiry();
-    }
-    else{
-      console.error('error');
-      
-    }
-  });
+    // Router subscription
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn = this.authservice.isLoggedIn();
+        this.showLayout = this.isLoggedIn;
+        this.updateActiveLink();
+        this.checkTokenExpiry();
+      }
+    });
 
-  setInterval(() => this.checkTokenExpiry(), 1000);
-}
-
-
+    setInterval(() => this.checkTokenExpiry(), 1000);
+  }
 
   ngOnDestroy() {
     this.routerSubscription?.unsubscribe();
@@ -88,17 +87,14 @@ ngOnInit() {
       this.logout();
       return;
     }
-
     this.activeLink = link;
     this.router.navigate([path]).catch(err => console.error(err));
   }
 
-  // ✅ FIXED: no event parameter needed
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  // Prevent closing when clicking inside header-area
   @HostListener('document:click', ['$event'])
   closeDropdown(event: any): void {
     if (!event.target.closest('.user-info')) {
@@ -106,24 +102,26 @@ ngOnInit() {
     }
   }
 
-confirmation = false;  // Show popup state
+  // Show confirmation modal
+  logout(): void {
+    this.confirmation = true;
+  }
 
-logout(): void {
-  this.confirmation = true; // open popup
-}
+  // Confirm logout
+  ok(): void {
+    this.authservice.logout();
+    localStorage.clear();
+    sessionStorage.clear();
+    this.isLoggedIn = false;
+    this.showLayout = false;
+    this.confirmation = false;
+    this.router.navigate(['/login']);
+  }
 
-ok(): void {
-  this.authservice.logout();
-  this.isLoggedIn = false;
-  this.showLayout = false;
-  this.confirmation = false;
-  this.router.navigate(['/']);
-}
-
-Cancel(): void {
-  this.confirmation = false; 
-}
-
+  // Cancel logout
+  Cancel(): void {
+    this.confirmation = false;
+  }
 
   handleLoginSuccess(): void {
     this.isLoggedIn = true;

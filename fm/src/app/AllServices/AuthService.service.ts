@@ -21,7 +21,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  /** 🔹 REGISTER */
+
   register(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.registerUrl, { username, password });
   }
@@ -54,22 +54,26 @@ export class AuthService {
     return !!this.getToken() && !this.isTokenExpired();
   }
 
-  generateStaticToken() {
-    const header = { alg: 'HS256', typ: 'JWT' };
-    const now = Math.floor(Date.now() / 1000);
-    const payload = {
-      sub: 'user',
-      iat: now,
-      exp: now + 3600, // 1 hour token
-      role: 'user',
-    };
+ generateStaticToken() {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    sub: 'user',
+    iat: now,
+    exp: now + 60, // 1 minute token
+    role: 'user',
+  };
 
-    const base64url = (obj: any) =>
-      btoa(JSON.stringify(obj)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const base64url = (obj: any) =>
+    btoa(JSON.stringify(obj))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
 
-    const token = `${base64url(header)}.${base64url(payload)}.STATIC_SIGNATURE`;
-    this.setToken(token);
-  }
+  const token = `${base64url(header)}.${base64url(payload)}.STATIC_SIGNATURE`;
+  this.setToken(token);
+}
+
   getUserRole(): string | null {
     // Get role from localStorage (or implement your logic)
     return localStorage.getItem('userRole');
