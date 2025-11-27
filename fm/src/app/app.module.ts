@@ -102,6 +102,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { AdminrequestComponent } from './adminrequest/adminrequest.component';
+import { AdminsummaryComponent } from './adminsummary/adminsummary.component';
+import { LeaveapproveComponent } from './leaveapprove/leaveapprove.component';
 
 
 @NgModule({
@@ -177,6 +180,9 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     RegistrationComponent,
     ForgetPasswordComponent,
     AppraisalFormComponent,
+    AdminrequestComponent,
+    AdminsummaryComponent,
+    LeaveapproveComponent
   ],
   imports: [
     BrowserModule,
@@ -205,7 +211,8 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     MatDialogModule,
     CalendarModule,
     FullCalendarModule,
-    TreeModule
+    TreeModule,
+    
 
     
   ],

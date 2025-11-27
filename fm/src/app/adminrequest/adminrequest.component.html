@@ -1,0 +1,68 @@
+<div class="leave-req-wrapper">
+
+  <div class="header">
+    <h2> Employee Leave Request</h2>
+    <button class="delete-btn" (click)="deleteSelectedRequests()">Delete Selected</button>
+  </div>
+
+  <div class="table-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" (change)="selectAll($event)"></th>
+          <th>Leave Type</th>
+          <th>Period</th>
+          <th>Days</th>
+          <th>Reason</th>
+          <th>Approved By</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="filteredRequests.length === 0">
+          <td colspan="8" class="no-data">No Data Found</td>
+        </tr>
+
+        <tr *ngFor="let req of filteredRequests">
+          <td>
+            <input type="checkbox" [(ngModel)]="req.selected" (change)="onRowSelect($event, req)">
+          </td>
+          <td>{{ req.leaveType }}</td>
+          <td>{{ req.leavePeriod }}</td>
+          <td>{{ req.totalDays }}</td>
+          <td>{{ req.reasonforLeave }}</td>
+          <td>{{ req.approvedBy }}</td>
+
+          <td>
+            <span class="status-badge"
+              [ngClass]="{
+                'pending': req.status === 'Pending',
+                'approved': req.status === 'Approved',
+                'rejected': req.status === 'Rejected'
+              }">
+              {{ req.status }}
+            </span>
+          </td>
+
+          <td>
+            <button class="action-btn approve"
+                    (click)="updateStatus(req, 'Approved')"
+                    [disabled]="req.status !== 'Pending'">
+              Approve
+            </button>
+
+            <button class="action-btn reject"
+                    (click)="updateStatus(req, 'Rejected')"
+                    [disabled]="req.status !== 'Pending'">
+              Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

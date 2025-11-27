@@ -23,7 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
   menuItems = [
     { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
     { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
-    { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
+    { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Request', path: 'leave-request' },
+    { link: 'leave-tracking', icon: 'fa-solid fa-calendar-check', title: 'Leave Tracking', path: 'leave-tracking' },
     { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
     { link: 'onboarding', icon: 'fa-regular fa-handshake', title: 'Onboarding', path: 'onboarding' },
     { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
@@ -71,7 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   checkTokenExpiry() {
     if (!this.authservice.isLoggedIn() && this.authservice.getToken()) {
-      alert('Your session has expired. Please login again.');
+
       this.logout();
     }
   }

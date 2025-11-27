@@ -60,7 +60,7 @@ export class AuthService {
   const payload = {
     sub: 'user',
     iat: now,
-    exp: now + 60, // 1 minute token
+    exp: now + 36000, // 1 minute token
     role: 'user',
   };
 

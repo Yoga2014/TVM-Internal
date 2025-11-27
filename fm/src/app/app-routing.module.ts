@@ -63,6 +63,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
 import { LogOutComponent } from './log-out/log-out.component';
+import { LeaveapproveComponent } from './leaveapprove/leaveapprove.component';
+import { AdminrequestComponent } from './adminrequest/adminrequest.component';
+import { AdminsummaryComponent } from './adminsummary/adminsummary.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -88,36 +91,42 @@ const routes: Routes = [
   { path: 'onboarding', component: OnboardingComponent },
   {path:'operation', component:OperationComponent},
   {path:'reports',component:ReportsComponent},
+  {path:'leave-tracking', component: LeaveapproveComponent,
 
-  {
-    path: 'leave-tracking',
-    component: LeaveTrackingComponent,
-    children: [
-      {
-        path: 'mydata',
-        component: MyDataComponent,
-        children: [
-          { path: 'leave-summary', component: LeaveSummaryComponent },
-          { path: 'leave-balance', component: LeaveBalanceComponent },
-          { path: 'leave-requests', component: LeaveRequestsComponent },
-          { path: 'apply-leave', component: ApplyLeaveComponent },
-        ],
-      },
-      {
-        path: 'teams',
-        component: TeamsComponent,
-        children: [
-          { path: 'leave-reportees', component: LeaveReporteesComponent },
-          { path: 'on-leave', component: OnLeaveComponent },
-          {
-            path: 'approval-leave-request',
-            component: ApprovalLeaveRequestComponent,
-          },
-          { path: 'apply-leave', component: ApplyLeaveComponent },
-        ],
-      },
-    ],
-  },
+         children:[
+          {path:'admin-request',component:AdminrequestComponent},
+          {path:'admin-summary',component:AdminsummaryComponent}
+         ]
+    },
+  
+{
+  path: 'leave-request',
+  component: LeaveTrackingComponent,
+  children: [
+    {
+      path: 'mydata',
+      component: MyDataComponent,
+      children: [
+        { path: 'leave-summary', component: LeaveSummaryComponent },
+        { path: 'leave-balance', component: LeaveBalanceComponent },
+        { path: 'leave-requests', component: LeaveRequestsComponent },
+        { path: 'apply-leave', component: ApplyLeaveComponent },
+      ],
+    },
+    {
+      path: 'teams',
+      component: TeamsComponent,
+      children: [
+        { path: 'leave-reportees', component: LeaveReporteesComponent },
+        { path: 'on-leave', component: OnLeaveComponent },
+        { path: 'approval-leave-request', component: ApprovalLeaveRequestComponent },
+        { path: 'apply-leave', component: ApplyLeaveComponent },
+      ],
+    },
+  ],
+},
+
+  
   {
     path: 'new-Home',
     component: NewHomeComponent,
