@@ -1,0 +1,131 @@
+.leave-req-wrapper {
+  padding: 20px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .delete-btn {
+      background: #ff5e5e;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #e64545;
+      }
+    }
+  }
+
+  .table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    table.styled-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th {
+        background: #f7f7f7;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+      }
+
+      td {
+        padding: 12px;
+        font-size: 14px;
+        color: #444;
+        border-bottom: 1px solid #f2f2f2;
+      }
+
+      tr:hover {
+        background: #fafafa;
+      }
+
+      .no-data {
+        text-align: center;
+        padding: 15px;
+        font-size: 15px;
+        color: #999;
+      }
+
+      /* STATUS BADGES */
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 13px;
+        display: inline-block;
+      }
+
+      .pending {
+        background: #ffeeba;
+        color: #9a7400;
+      }
+
+      .approved {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .rejected {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      /* ACTION BUTTONS */
+      .action-btn {
+        padding: 6px 14px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+        color: white;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+
+      .approve {
+        background: #28a745;
+
+        &:hover {
+          background: #218838;
+        }
+
+        &:disabled {
+          background: #a6d7b5;
+          cursor: not-allowed;
+        }
+      }
+
+      .reject {
+        background: #dc3545;
+
+        &:hover {
+          background: #c82333;
+        }
+
+        &:disabled {
+          background: #e6a2a8;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OverviewService } from '../AllServices/overviewservice';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -28,7 +29,9 @@ birthdayCount = 0;
   anniversariesToday: any[] = [];
   birthdaysToday: any[] = [];
 
-  constructor(private overviewService: OverviewService) {}
+  constructor(private overviewService: OverviewService, private router: Router,  private route: ActivatedRoute) {}
+@Output() navigateToProject = new EventEmitter<void>();
+  
 
   ngOnInit() {
     this.overviewService.getOverviewData().subscribe(data => {
@@ -60,6 +63,13 @@ this.birthdayCount = data.birthdaysToday.length;
   }
   openTotalEmployee() {
   window.dispatchEvent(new Event("showTotalEmployeeTab"));
+}
+openTotalProject() {
+  this.router.navigate(['/new-Home/teams-dashboard/projects']);
+}
+
+openLeaveRequest(){
+    this.router.navigate(['/leave-tracking']);
 }
 
 }

@@ -14,12 +14,5 @@
     <div class="nav-item" [class.active]="activeNavItem === 'projects'" (click)="navigateToProjects()">Projects</div>
     <div class="nav-item" [class.active]="activeNavItem === 'team-list'" (click)="navigateToTeamList()">Team List</div>
   </nav>
-  
 
-  <div class="main-content">
-    <!-- <app-teams-space *ngIf="activeNavItem === 'team-space'"></app-teams-space> -->
-    <!-- <app-team-reportees *ngIf="activeNavItem === 'team-reportees'"></app-team-reportees> -->
-    <app-team-department *ngIf="activeNavItem === 'department'"></app-team-department>
-    <app-team-project *ngIf="activeNavItem === 'projects'"></app-team-project>
-    <app-team-list *ngIf="activeNavItem === 'team-list'"></app-team-list>
-  </div>
+  <router-outlet></router-outlet>

@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomeMyDataComponent implements OnInit {
 
+  
+
   activeNavItem: string = 'overview';
 
   showTotalEmployee: boolean = false;

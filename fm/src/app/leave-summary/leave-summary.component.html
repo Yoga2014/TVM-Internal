@@ -22,6 +22,7 @@
   <table>
     <thead>
       <tr>
+        <th>Employee Name</th>
         <th>Leave Type</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -35,11 +36,12 @@
 
     <tbody>
       <tr *ngFor="let leave of paginatedLeaves">
-        <td>{{ leave.typeLeave }}</td>
+        <td>{{ leave.employeeName }}</td>
+        <td>{{ leave.leaveType }}</td>
         <td>{{ leave.startDate | date }}</td>
         <td>{{ leave.endDate | date }}</td>
         <td>{{ leave.totalDays }}</td>
-        <td>{{ leave.reason }}</td>
+        <td>{{ leave.reasonforLeave }}</td>
         <td>{{ leave.status }}</td>
         <td>{{ leave.approvedBy || '—' }}</td>
         <td><button class="view-btn">View</button></td>

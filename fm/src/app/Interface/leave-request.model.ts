@@ -1,4 +1,5 @@
 export interface LeaveRequest {
+  id?: string; // <-- Add this
   employeeId?: string;
   employeeName?: string;
   leaveType?: any;

@@ -23,6 +23,7 @@
   <div class="col-md-8 col-sm-12">
 
     <div class="row ceo-dashboard">
+      
 
       <!-- Total Employees -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
@@ -57,7 +58,7 @@
 
       <!-- Leave Requests -->
       <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
-        <div class="card stat-card h-100">
+        <div class="card stat-card h-100" (click)="openLeaveRequest()">
           <div class="card-body">
             <h6>Leave Requests</h6>
             <h2>{{ leaveCount }}</h2>
@@ -87,7 +88,7 @@
 
       <!-- Project Count -->
       <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
-        <div class="card stat-card h-100">
+        <div class="card stat-card h-100" (click)="openTotalProject()">
           <div class="card-body">
             <h6>Total Projects</h6>
             <h2>{{ totalProjects }}</h2>

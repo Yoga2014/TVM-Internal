@@ -15,7 +15,7 @@
   <div class="nav-item"
        [class.active]="activeNavItem === 'overview'"
        (click)="navigateToOverview()">
-    Department
+      Over view
   </div>
 
   <!-- Total Employee tab (visible only after card click) -->
@@ -37,5 +37,5 @@
 </nav>
 
 <app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
-<app-total-employee *ngIf="activeNavItem === 'total-employee'"></app-total-employee>
-<app-particular-emp *ngIf="activeNavItem === 'particular-emp'"></app-particular-emp>
+<app-total-employee *ngIf="activeNavItem === 'total-employee'" class="total-employee"></app-total-employee>
+<app-particular-emp *ngIf="activeNavItem === 'particular-emp'" class="particular-emp"></app-particular-emp>

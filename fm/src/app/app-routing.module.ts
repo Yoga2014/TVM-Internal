@@ -65,6 +65,9 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
 import { TotalEmployeeComponent } from './home-my-data/total-employee/total-employee.component';
 import { ParticularEmpComponent } from './home-my-data/particular-emp/particular-emp.component';
+import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
+import { AdminrequestComponent } from './leave-approve/admin-request/admin-request.component';
+import { AdminsummaryComponent } from './leave-approve/admin-summary/admin-summary.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -92,6 +95,13 @@ const routes: Routes = [
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
   { path:'operation', component:OperationComponent, canActivate: [AuthGuard] },
   { path:'reports',component:ReportsComponent, canActivate: [AuthGuard] },
+  {path:'leave-approve', component: LeaveapproveComponent,
+
+         children:[
+          {path:'admin-request',component:AdminrequestComponent},
+          {path:'admin-summary',component:AdminsummaryComponent}
+         ]
+    },
 
   {
     path: 'leave-tracking',
@@ -129,6 +139,7 @@ const routes: Routes = [
     component: NewHomeComponent,
     canActivate: [AuthGuard],
     children: [
+       { path: '', redirectTo: 'my-space', pathMatch: 'full' },
       {
         path: 'my-space',
         component: HomeMyDataComponent,
@@ -145,6 +156,7 @@ const routes: Routes = [
         path: 'teams-dashboard',
         component: TeamsDashboardComponent,
         children: [
+          { path: '', redirectTo: 'team-space', pathMatch: 'full' },
           { path: 'team-space', component: TeamsSpaceComponent },
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },

@@ -10,16 +10,41 @@
     width: 100%;
     border-collapse: collapse;
 
+    thead{
+        background-color: #f7f7f7;
+        font-weight: bold;
+    }
+
     th, td {
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #eee;
     }
+}
 
-    th {
-      background: #f7f7f7;
-      font-weight: bold;
+    .table-body{
+        max-height: 450px;
+        overflow-y: auto;
+        display: block;
+
+        td,th{
+            min-width: 120px;
+        }
+
+    &::-webkit-scrollbar {
+      width: 6px;
     }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
 
     .view-btn {
       background: #007bff;
@@ -29,7 +54,7 @@
       border: none;
       cursor: pointer;
     }
-  }
+  
 
   .pagination {
     display: flex;
