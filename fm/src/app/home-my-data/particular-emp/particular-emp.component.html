@@ -1,22 +1,17 @@
 <div *ngIf="selectedEmployee; else noData" class="profile-page">
 
-  <!-- Avatar + Basic Info -->
-  <div class="profile-header d-flex align-items-center mb-4">
-
-    <!-- Avatar circle -->
-    <div class="profile-avatar">
-      {{ selectedEmployee.employeeName.charAt(0) | uppercase }}
-    </div>
-
-    <div class="profile-basic ms-3">
-      <h2>{{ selectedEmployee.employeeName }}</h2>
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" />
+    <div class="profile-basic">
+      <h2>{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
       <p class="text-muted">{{ selectedEmployee.designation }}</p>
       <p class="text-muted">Employee Code: {{ selectedEmployee.employeeCode }}</p>
     </div>
   </div>
 
   <!-- Personal Details -->
-  <div class="profile-section mb-4">
+  <div class="profile-section">
     <h4>Personal Details</h4>
     <div class="profile-info">
       <p><strong>Date of Birth:</strong> {{ selectedEmployee.dob }}</p>
@@ -25,9 +20,9 @@
     </div>
   </div>
 
-  <!-- Job Details -->
-  <div class="profile-section mb-4">
-    <h4>Job Details</h4>
+  <!-- Contact Details -->
+  <div class="profile-section">
+    <h4>Contact Details</h4>
     <div class="profile-info">
       <p><strong>Department:</strong> {{ selectedEmployee.department }}</p>
       <p><strong>Team:</strong> {{ selectedEmployee.team }}</p>
