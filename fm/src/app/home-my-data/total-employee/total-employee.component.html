@@ -1,0 +1,32 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Employee Name</th>
+        <th>Employee ID</th>
+        <th>Designation</th>
+        <th>Phone No</th>
+        <th>Email ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let data of datas">
+        <td>{{ data.firstName }} {{ data.lastName }}</td>
+        <td>{{ data.employeeId }}</td>
+        <td>{{ data.designation }}</td>
+        <td>{{ data.contactDetails.mobileNumber }}</td>
+        <td>{{ data.contactDetails.personalEmailId }}</td>
+        <td>
+          <button class="view-btn" (click)="viewEmployee(data)">View</button>
+        </td>
+      </tr>
+
+      <!-- Show NO DATA message when list is empty -->
+      <tr *ngIf="datas.length === 0">
+        <td colspan="6" class="no-data">No data found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

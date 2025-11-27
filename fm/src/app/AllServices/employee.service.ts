@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Employee } from '../Interface/employee.model';
 
 @Injectable({
@@ -39,5 +39,12 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<void> 
   {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+      private selectedEmployeeSource = new BehaviorSubject<any>(null);
+  selectedEmployee$ = this.selectedEmployeeSource.asObservable();
+
+  setSelectedEmployee(employee: any) {
+    this.selectedEmployeeSource.next(employee);
   }
 }

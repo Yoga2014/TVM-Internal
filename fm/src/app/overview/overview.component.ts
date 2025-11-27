@@ -58,4 +58,8 @@ this.birthdayCount = data.birthdaysToday.length;
   togglePopup() {
     this.isPopupVisible = !this.isPopupVisible;
   }
+  openTotalEmployee() {
+  window.dispatchEvent(new Event("showTotalEmployeeTab"));
+}
+
 }

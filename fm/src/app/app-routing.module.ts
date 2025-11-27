@@ -63,6 +63,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { TotalEmployeeComponent } from './home-my-data/total-employee/total-employee.component';
+import { ParticularEmpComponent } from './home-my-data/particular-emp/particular-emp.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -132,6 +134,8 @@ const routes: Routes = [
         component: HomeMyDataComponent,
         children: [
           { path: 'overview', component: OverviewComponent },
+          { path: 'total-employee', component:TotalEmployeeComponent },
+          { path: 'particular-emp', component: ParticularEmpComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'calendar', component: CalendarComponent },
         ],
