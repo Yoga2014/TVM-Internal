@@ -12,66 +12,60 @@ import { LeaveRequest } from '../Interface/leave-request.model';
   styleUrls: ['./leave-summary.component.scss']
 })
 export class LeaveSummaryComponent implements OnInit {
-  leaves: LeaveRequest[] = [];
-  upcomingLeaves: LeaveRequest[] = [];
-  viewMode: 'list' | 'grid' = 'list';
 
-  constructor(
-    private leaveService: LeaveService,
-    // private router: Router,
-    private dialog: MatDialog
-  ) {}
+  page = 1;
+pageSize = 5;
+paginatedLeaves: LeaveRequest[] = [];
+totalPages = 1;
 
-  ngOnInit(): void {
-    this.loadLeaveSummary();
-    this.loadUpcomingLeaves();
-    this.listenForAppliedLeave();
-  }
+totalUsedLeaves = 0;
+totalRemainingLeaves = 0;
 
-  loadLeaveSummary(): void {
-    this.leaveService.getLeaveSummary().subscribe({
-      next: (leavesSummary) => {
-        this.leaves = leavesSummary;
-      },
-      error: (err) => console.error('Error fetching leave summary', err),
-    });
-  }
+// Add the missing property declaration for 'leaves'
+leaves: LeaveRequest[] = [];
 
-  loadUpcomingLeaves(): void {
-    this.leaveService.getLeaves().subscribe({
-      next: (upcomingLeaves) => {
-        this.upcomingLeaves = upcomingLeaves.filter(
-          (leave) => leave.status === 'Upcoming'
-        );
-      },
-      error: (err) => console.error('Error fetching upcoming leaves', err),
-    });
-  }
+constructor(private leaveService: LeaveService,
+     private dialog: MatDialog
+) {}
 
-  listenForAppliedLeave(): void {
-    this.leaveService.getLeaveApplied().subscribe({
-      next: (appliedLeave) => {
-        if (appliedLeave) {
-          this.updateLeaveCounts(appliedLeave);
-        }
-      },
-      error: (err) => console.error('Error receiving applied leave updates', err),
-    });
-  }
+ngOnInit(): void {
+  this.loadLeaveSummary();
+}
 
-  updateLeaveCounts(leaveData: LeaveRequest): void {
-    const leave = this.leaves.find((l) => l.typeLeave === leaveData.typeLeave);
-    if (leave) {
-      const remainingLeaves = (leave.available || 0) - (leaveData.totalDays || 0);
-      if (remainingLeaves < 0) {
-        alert('Not enough available leaves. Please choose another leave type or apply Leave Without Pay.');
-      } else {
-        leave.available = remainingLeaves;
-        leave.booked = (leave.booked || 0) + (leaveData.totalDays || 0);
-      }
+loadLeaveSummary(): void {
+  this.leaveService.getLeaveSummary().subscribe({
+    next: (leavesSummary: LeaveRequest[]) => {
+      this.leaves = leavesSummary;
+
+      // Calculate cards
+      this.totalUsedLeaves = this.leaves.reduce((sum, l) => sum + (l.booked || 0), 0);
+      this.totalRemainingLeaves = this.leaves.reduce((sum, l: LeaveRequest) => sum + (l.available || 0), 0);
+
+      this.totalPages = Math.ceil(this.leaves.length / this.pageSize);
+      this.updatePagination();
     }
-  }
+  });
+}
 
+updatePagination() {
+  const start = (this.page - 1) * this.pageSize;
+  const end = start + this.pageSize;
+  this.paginatedLeaves = this.leaves.slice(start, end);
+}
+
+nextPage() {
+  if (this.page < this.totalPages) {
+    this.page++;
+    this.updatePagination();
+  }
+}
+
+prevPage() {
+  if (this.page > 1) {
+    this.page--;
+    this.updatePagination();
+  }
+}
   applyLeave(): void {
     const dialogRef = this.dialog.open(ApplyLeaveComponent);
     dialogRef.afterClosed().subscribe((result: LeaveRequest | undefined) => {
@@ -82,9 +76,5 @@ export class LeaveSummaryComponent implements OnInit {
         });
       }
     });
-  }
-
-  toggleViewMode(): void {
-    this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
   }
 }

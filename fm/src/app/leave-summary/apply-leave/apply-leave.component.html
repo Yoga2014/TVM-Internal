@@ -1,5 +1,6 @@
 <div class="apply-leave">
   <mat-card class="form-card">
+
     <mat-card-header>
       <mat-card-title>Apply Leave</mat-card-title>
       <button mat-icon-button class="close-icon" (click)="cancel()">
@@ -8,21 +9,28 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form (ngSubmit)="onSubmit()" class="form-group">
+      <form  #leaveForm="ngForm" (ngSubmit)="onSubmit(leaveForm)" class="form-group">
+
         <!-- Leave Type -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Leave Type</mat-label>
           <mat-select [(ngModel)]="leaveType" name="leaveType" required>
-            <mat-option *ngFor="let leave of leaveTypes" [value]="leave">{{ leave }}</mat-option>
+            <mat-option *ngFor="let leave of leaveTypes" [value]="leave">
+              {{ leave }}
+            </mat-option>
           </mat-select>
-          <mat-error *ngIf="!leaveType">Leave Type is required</mat-error>
         </mat-form-field>
 
         <!-- Start Date -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Start Date</mat-label>
-          <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" name="startDate"
-                 (dateChange)="validateDates()" required>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            [(ngModel)]="startDate"
+            name="startDate"
+            (dateChange)="onStartDateChange($event)"
+            required>
           <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatePicker></mat-datepicker>
           <mat-error *ngIf="startDateError">{{ startDateError }}</mat-error>
@@ -31,33 +39,37 @@
         <!-- End Date -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>End Date</mat-label>
-          <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" name="endDate"
-                 (dateChange)="validateDates()" required>
+          <input
+            matInput
+            [matDatepicker]="endDatePicker"
+            [(ngModel)]="endDate"
+            name="endDate"
+            (dateChange)="onEndDateChange($event)"
+            required>
           <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatePicker></mat-datepicker>
           <mat-error *ngIf="endDateError">{{ endDateError }}</mat-error>
         </mat-form-field>
 
-        <!-- Team Email ID -->
+        <!-- Team Email -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Team Email ID</mat-label>
           <input matInput type="email" [(ngModel)]="teamEmail" name="teamEmail" required>
-          <mat-error *ngIf="!teamEmail">Team Email ID is required</mat-error>
         </mat-form-field>
 
-        <!-- Reason for Leave -->
+        <!-- Reason -->
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Reason for Leave</mat-label>
-          <textarea matInput [(ngModel)]="reason" name="reason" placeholder="Reason for leave" required></textarea>
-          <mat-error *ngIf="!reason">Reason for Leave is required</mat-error>
+          <textarea matInput [(ngModel)]="reason" name="reason" required></textarea>
         </mat-form-field>
 
-        <!-- Buttons -->
         <div class="button-group">
           <button mat-raised-button color="primary" type="submit">Submit</button>
           <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
         </div>
+
       </form>
     </mat-card-content>
+
   </mat-card>
 </div>

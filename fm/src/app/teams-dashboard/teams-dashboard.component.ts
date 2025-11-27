@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-teams-dashboard',
@@ -9,10 +9,26 @@ import { Router } from '@angular/router';
 })
 export class TeamsDashboardComponent {
 
-  activeNavItem: string = 'team-space';
+  activeNavItem: string = '';
   @Output() subNavChange = new EventEmitter<string>();  // Emit string for breadcrumb
 
-  constructor(private router : Router) {}
+  constructor(private router : Router) {
+      router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      const url = event.urlAfterRedirects;
+
+      if (url.includes('department')) {
+        this.activeNavItem = 'department';
+      }
+      else if (url.includes('projects')) {
+        this.activeNavItem = 'projects';
+      }
+      else if (url.includes('team-list')) {
+        this.activeNavItem = 'team-list';
+      }
+    }
+  });
+  }
 
   navigateToMySpace()
   {

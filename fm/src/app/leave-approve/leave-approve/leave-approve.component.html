@@ -1,0 +1,24 @@
+<nav class="navbar">
+   <div class="nav-item"
+       [class.active]="activeNavItem === 'leave-requests'"
+       (click)="navigateAdminRequest()">
+    Leave Requesters-list
+  </div>
+  <div class="nav-item"
+       [class.active]="activeNavItem === 'leave-summary'"
+       (click)="navigateAdminSummary()">
+    Leave Summary
+  </div>
+
+ 
+</nav>
+
+<div class="main-content">
+
+  <!-- Show Admin Summary -->
+  <app-adminsummary *ngIf="activeNavItem === 'leave-summary'"></app-adminsummary>
+
+  <!-- Show Admin Request -->
+  <app-adminrequest *ngIf="activeNavItem === 'leave-requests'"></app-adminrequest>
+
+</div>

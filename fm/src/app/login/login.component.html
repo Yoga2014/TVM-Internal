@@ -1,28 +1,46 @@
-<div class="login-page">
-  <img src="../../assets/images/login_page.png.webp" alt="Background Image" class="background-image">
-  <div class="login-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
-      <div class="form-group">
-        <label for="emailOrPhone">Email or Phone Number</label>
-        <input type="text" id="emailOrPhone" [(ngModel)]="emailOrPhone" name="emailOrPhone"
-          placeholder="Enter email or phone number" required>
+<div class="log-container">
+  <div class="login-card">
+
+    <div class="avatar">
+      <img src="assets/images/TVM Infotech Logo.jpg" class="avatar-img" />
+    </div>
+
+    <h2>Sign in to your account</h2>
+
+    <form [formGroup]="login">
+      
+      <div class="input-group">
+        <label>User Name</label>
+        <i class="bi bi-person-fill"></i>
+        <input type="text" formControlName="username"  />
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter password"
-          required>
+      <div class="input-group">
+        <div class="position">
+        <label>Password</label>
+        <!-- <a (click)="navigateToForgotPassword()" class="forgot">Forgot Password?</a> -->
+        </div>
+        <i class="bi bi-lock-fill"></i>
+        <input type="password" formControlName="password"  />
       </div>
 
-      <button type="submit" class="btn">Login</button>
+      <div class="error">{{errorMessage}}</div>
 
-      <div class="links">
-        <button type="button" (click)="navigateToRegister()">New User? Register Here</button><br>
-        <button type="button" (click)="navigateToForgotPassword()">Forgot Password?</button>
-      </div>
+      <button type="button" (click)="enter()" [disabled]="loading" class="login-btn">
+  <span *ngIf="!loading">Login</span>
+  <mat-progress-spinner
+    *ngIf="loading"
+    diameter="24"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</button>
 
-      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+      <!-- <div class="toggle-text links">
+        <a (click)="navigateToRegister()">New User? Register Here</a><br />
+      </div> -->
+
     </form>
+
   </div>
 </div>

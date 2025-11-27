@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../AllServices/AuthService.service';
 import { Router } from '@angular/router';
 
@@ -6,48 +7,58 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone:false
 })
-export class LoginComponent {
-  @Output() loginSuccess = new EventEmitter<void>(); // Emit event on successful login
+export class LoginComponent implements OnInit {
+  @Output() loginSuccess = new EventEmitter<void>();
 
-  emailOrPhone: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  login!: FormGroup;
+  errorMessage = '';
+  loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
-  login() {
-    if (!this.emailOrPhone || !this.password) {
-      this.errorMessage = 'Email/Phone and password are required';
+  ngOnInit(): void {
+    const savedUsername = localStorage.getItem('username') || '';
+
+    this.login = this.fb.group({
+      username: [savedUsername, Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  enter(): void {
+    if (this.login.invalid) {
+      this.login.markAllAsTouched();
+      this.errorMessage = 'Please enter username and password.';
       return;
     }
 
-    this.authService.login(this.emailOrPhone, this.password).subscribe(
-      (user) => {
-        if (user) {
-          localStorage.setItem('userRole', user.role);
-          this.emailOrPhone = '';
-          this.password = '';
+    this.loading = true;
+    const { username, password } = this.login.value;
 
-          this.loginSuccess.emit(); // Emit event after successful login
-          this.router.navigate(['/new-Home']);
+    this.auth.login(username, password).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+
+        if (res?.token) {
+          localStorage.setItem('username', username);
+          localStorage.setItem('role', res.role);
+          this.auth.setToken(res.token);
+
+          this.loginSuccess.emit();
+          this.router.navigate(['/new-Home/my-space/overview']);
         } else {
-          this.errorMessage = 'Invalid credentials';
+          this.errorMessage = res.error || 'Invalid username or password';
         }
       },
-      (error) => {
-        console.error('Login error:', error);
-        this.errorMessage = 'Error logging in. Please try again.';
-      }
-    );
-  }
-
-  navigateToRegister() {
-    this.router.navigate(['/register']);
-  }
-
-  navigateToForgotPassword() {
-    this.router.navigate(['/forgot-password']);
+      error: () => {
+        this.loading = false;
+        this.errorMessage = 'Login failed. Try again.';
+      },
+    });
   }
 }

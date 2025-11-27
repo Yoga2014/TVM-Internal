@@ -1,11 +1,41 @@
+<!-- <nav class="navbar"> -->
+  <!-- <div class="nav-item" [class.active]="activeNavItem === 'overview'" (click)="navigateToOverview()">Overview</div> -->
+  <!-- <div class="nav-item" [class.active]="activeNavItem === 'dashboard'" (click)="navigateToDashboard()">Dashboard</div> -->
+  <!-- <div class="nav-item" [class.active]="activeNavItem === 'calendar'" (click)="navigateToCalendar()">Calendar</div> -->
+<!-- </nav> -->
+
+<!-- <div class="main-content"> -->
+  <!-- <app-overview *ngIf="activeNavItem === 'overview'"></app-overview> -->
+  <!-- <app-dashboard *ngIf="activeNavItem === 'dashboard'"></app-dashboard> -->
+  <!-- <app-calendar *ngIf="activeNavItem === 'calendar'"></app-calendar> -->
+<!-- </div> -->
+
 <nav class="navbar">
-  <div class="nav-item" [class.active]="activeNavItem === 'overview'" (click)="navigateToOverview()">Overview</div>
-  <div class="nav-item" [class.active]="activeNavItem === 'dashboard'" (click)="navigateToDashboard()">Dashboard</div>
-  <div class="nav-item" [class.active]="activeNavItem === 'calendar'" (click)="navigateToCalendar()">Calendar</div>
+
+  <div class="nav-item"
+       [class.active]="activeNavItem === 'overview'"
+       (click)="navigateToOverview()">
+      Over view
+  </div>
+
+  <!-- Total Employee tab (visible only after card click) -->
+  <div class="nav-item"
+       *ngIf="showTotalEmployee"
+       [class.active]="activeNavItem === 'total-employee'"
+       (click)="navigateToEmpDetails()">
+    Total Employee
+  </div>
+
+  <!-- Particular Emp tab -->
+  <div class="nav-item"
+       *ngIf="showParticular"
+       [class.active]="activeNavItem === 'particular-emp'"
+       (click)="navigateToParticularDetails()">
+    Particular Emp
+  </div>
+
 </nav>
 
-<div class="main-content">
-  <app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
-  <app-dashboard *ngIf="activeNavItem === 'dashboard'"></app-dashboard>
-  <app-calendar *ngIf="activeNavItem === 'calendar'"></app-calendar>
-</div>
+<app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
+<app-total-employee *ngIf="activeNavItem === 'total-employee'" class="total-employee"></app-total-employee>
+<app-particular-emp *ngIf="activeNavItem === 'particular-emp'" class="particular-emp"></app-particular-emp>

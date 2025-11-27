@@ -1,215 +1,113 @@
-.body {
-  font-family: 'Poppins', sans-serif; /* Sleek and modern font */
-  margin: 20px;
-  background-color: #f4f6f8; /* Light background for a professional look */
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px; /* Smooth rounded edges */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Header styles */
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: #cedfe0; /* Updated header color */
-  color: white;
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0px 2px 6px rgb(238, 233, 233);
+  margin-bottom: 20px;
 
-  h1 {
-    font-size: 1.6em;
+  h2 {
+    font-size: 22px;
     font-weight: bold;
-    margin: 0;
-  }
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-
-  button {
-    margin-right: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px; /* Larger border-radius for modern look */
-    background-color: #ff0707;
-    color: #fdfafa; /* Contrasting text color */
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: #ff3907;
-    }
-  }
-}
-
-/* Leave Summary Header */
-
-.leave-summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px 0;
-
-  .year-display {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: #333; /* Modern dark gray */
+    color: #333;
   }
 
-  button {
-    background-color: #28a745;
+  .apply-btn {
+    background: #ff5e5e;
     color: white;
-    border: none;
     padding: 10px 20px;
     border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: 1em;
     font-weight: bold;
-
-    i {
-      margin-right: 8px;
-    }
-
-    &:hover {
-      background-color: #218838;
-    }
+    cursor: pointer;
+    border: none;
   }
 }
 
-/* Leave Summary Grid */
+/* Top Cards */
+.top-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
 
-.leave-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
+  .card {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 
-.leave-summary .card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    h3 {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 5px;
+    }
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  i {
-    font-size: 35px;
-    color: #007bff; /* Vibrant icon color */
-    margin-bottom: 15px;
-  }
-
-  h3 {
-    font-size: 1.3em;
-    margin: 10px 0;
-    color: #333; /* Updated text color */
-    font-weight: 600;
-  }
-
-  p {
-    margin: 5px 0;
-
-    .available {
-      color: #28a745; /* Green for available leaves */
+    p {
+      font-size: 26px;
       font-weight: bold;
+      color: #222;
     }
+  }
 
-    .booked {
-      color: #dc3545; /* Red for booked leaves */
-      font-weight: bold;
-    }
+  .total-used {
+    border-left: 6px solid #ff5e5e;
+  }
 
-    .fa-info-circle {
-      margin-left: 5px;
-      color: #bbb; /* Subtle color for information icon */
-      cursor: pointer;
-
-      &:hover {
-        color: #007bff; /* Highlighted on hover */
-      }
-    }
+  .remaining {
+    border-left: 6px solid #28a745;
   }
 }
 
-/* Apply Leave Button */
-
-.apply-leave-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-}
-
-/* Upcoming Leave Section */
-
-.upcoming-leave {
+/* Leave Summary Table */
+.table-container {
+  background: white;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 
-  .dropdown {
-    width: 200px;
-    margin-bottom: 20px;
+  table {
+    width: 100%;
+    border-collapse: collapse;
 
-    select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f7f7f7;
+      font-weight: bold;
+    }
+
+    .view-btn {
+      background: #007bff;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
     }
   }
 
-  .leave-item {
+  .pagination {
     display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 10px;
 
-    .date {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-right: 15px;
-      color: #333;
-    }
-
-    .type {
-      font-size: 1em;
-      color: #666;
-
-      span {
-        font-size: 1.2em;
-        margin-right: 5px;
-        color: #007bff; /* Highlight leave type */
-      }
+    button {
+      padding: 6px 14px;
+      background: #666;
+      color: white;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
     }
   }
 }
+.no-data {
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  color: #777;
+}
+

@@ -1,33 +1,55 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-my-data',
   templateUrl: './home-my-data.component.html',
-  standalone: false,
   styleUrls: ['./home-my-data.component.scss']
 })
-export class HomeMyDataComponent {
-  @Output() subNavChange = new EventEmitter<string>();  // Specify string type
+export class HomeMyDataComponent implements OnInit {
+
+  
+
   activeNavItem: string = 'overview';
+
+  showTotalEmployee: boolean = false;
+  showParticular: boolean = false;
 
   constructor(private router: Router) {}
 
-  navigateToDashboard() {
-    this.activeNavItem = 'dashboard';
-    this.subNavChange.emit('Dashboard');  // Emit string
-    this.router.navigate(['new-home/my-space', 'dashboard']);
+  ngOnInit() {
+    // Listen when user clicks view button (from TotalEmployeeComponent)
+    window.addEventListener("showParticularTab", () => {
+      this.showParticular = true;
+      this.activeNavItem = 'particular-emp';
+      this.router.navigate(['new-home/my-space/particular-emp']);
+    });
+
+    // Listen when clicking Total Employee card from Overview
+    window.addEventListener("showTotalEmployeeTab", () => {
+      this.showTotalEmployee = true;
+      this.showParticular = false;
+      this.navigateToEmpDetails();
+    });
   }
 
   navigateToOverview() {
     this.activeNavItem = 'overview';
-    this.subNavChange.emit('Overview');  // Emit string
-    this.router.navigate(['new-home/my-space', 'overview']);
+    this.showTotalEmployee = false;
+    this.showParticular = false;
   }
 
-  navigateToCalendar() {
-    this.activeNavItem = 'calendar';
-    this.subNavChange.emit('Calendar');  // Emit string
-    this.router.navigate(['new-home/my-space', 'calendar']);
+  navigateToEmpDetails() {
+    this.activeNavItem = 'total-employee';
+    this.showTotalEmployee = true;
+    this.showParticular = false;
+    this.router.navigate(['new-home/my-space/total-employee']);
   }
+
+  navigateToParticularDetails() {
+    this.activeNavItem = 'particular-emp';
+    this.showParticular = true;
+    this.router.navigate(['new-home/my-space/particular-emp']);
+  }
+
 }

@@ -102,6 +102,11 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { TotalEmployeeComponent } from './home-my-data/total-employee/total-employee.component';
+import { ParticularEmpComponent } from './home-my-data/particular-emp/particular-emp.component';
+import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
+import { AdminrequestComponent} from './leave-approve/admin-request/admin-request.component';
+import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summary.component';
 
 
 @NgModule({
@@ -115,7 +120,6 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     SkillsetComponent,
     SkillSetMatrixComponent,
     ProfessionalComponent,
-    PersonalDataFormComponent,
     DashboardComponent,
     BirthdayCardComponent,
     NewHiresComponent,
@@ -141,6 +145,8 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     CommentsComponent,
     NewHomeComponent,
     HomeMyDataComponent,
+    TotalEmployeeComponent,
+    ParticularEmpComponent,
     OverviewComponent,
     TeamReporteesComponent,
     TeamDepartmentComponent,
@@ -177,6 +183,9 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     RegistrationComponent,
     ForgetPasswordComponent,
     AppraisalFormComponent,
+    LeaveapproveComponent,
+    AdminrequestComponent,
+    AdminsummaryComponent
   ],
   imports: [
     BrowserModule,

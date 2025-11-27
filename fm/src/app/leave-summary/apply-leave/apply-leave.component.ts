@@ -2,31 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LeaveService } from 'src/app/AllServices/leave.service';
-import { EmployeeAuthService } from 'src/app/AllServices/EmployeeAuthService'; // Import the service for employee authentication
+import { EmployeeAuthService } from 'src/app/AllServices/EmployeeAuthService';
 import { LeaveRequest } from 'src/app/Interface/leave-request.model';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-apply-leave',
   templateUrl: './apply-leave.component.html',
-  standalone: false,
   styleUrls: ['./apply-leave.component.scss']
 })
 export class ApplyLeaveComponent implements OnInit {
-  leaveTypes: string[] = [];
+
+  leaveTypes: string[] = [
+    'fever', 'sick leave', 'casual leave',
+    'maternity leave', 'paternity leave',
+    'bereavement leave', 'unpaid leave'
+  ];
+
   leaveType: string = '';
   startDate: Date | null = null;
   endDate: Date | null = null;
   reason: string = '';
-  startDateError: string = '';
-  endDateError: string = '';
   teamEmail: string = '';
 
+  startDateError: string = '';
+  endDateError: string = '';
+
   employee: any = {};
-  leaveForm!: FormGroup;
-  dateForm: FormGroup | null = null;
-  today = new Date();
-  minEndDate: Date | null = null;
 
   constructor(
     private router: Router,
@@ -40,14 +41,23 @@ export class ApplyLeaveComponent implements OnInit {
   }
 
   loadEmployeeDetails() {
-    const employeeDetails = this.employeeAuthService.getAuthenticatedEmployee();
-    if (employeeDetails) {
-      this.employee = employeeDetails; // Set the authenticated employee details
+    const emp = this.employeeAuthService.getAuthenticatedEmployee();
+    if (emp) {
+      this.employee = emp;
     } else {
       alert('Failed to fetch employee details');
     }
   }
 
+  onStartDateChange(event: any) {
+    this.startDate = new Date(event.value || event.target?.value);
+    this.validateDates();
+  }
+
+  onEndDateChange(event: any) {
+    this.endDate = new Date(event.value || event.target?.value);
+    this.validateDates();
+  }
 
   validateDates() {
     const today = new Date();
@@ -60,61 +70,29 @@ export class ApplyLeaveComponent implements OnInit {
 
     if (this.endDate) {
       const end = new Date(this.endDate);
+
       if (end < today) {
         this.endDateError = 'End date cannot be in the past.';
-      } else {
-        this.endDateError = this.startDate && end < new Date(this.startDate) ? 'End date cannot be before start date.' : '';
-      }
-    }
-  }
-
-  onSubmit() {
-    debugger
-    if (this.isValidLeaveRequest()) {
-      const leaveDays = this.calculateLeaveDays();
-      if (leaveDays < 0) {
+      } else if (this.startDate && end < new Date(this.startDate)) {
         this.endDateError = 'End date cannot be before start date.';
-        return;
+      } else {
+        this.endDateError = '';
       }
-
-      if (!this.employee?.employeeId || !this.employee?.employeeName) {
-        alert('Employee details are missing. Cannot submit leave request.');
-        return;
-      }
-
-      const leaveRequest: LeaveRequest = {
-        employeeId: this.employee.employeeId,
-        employeeName: this.employee.employeeName,
-        email: this.employee.email,
-        designation: this.employee.designation,
-        leaveType: this.leaveType,
-        startDate: this.startDate ? this.formatDate(this.startDate) : '',
-        endDate: this.endDate ? this.formatDate(this.endDate) : '',
-        totalDays: leaveDays + 1,
-        reasonforLeave: this.reason,
-        status: 'Pending',
-        dateOfRequest: this.formatDate(new Date()),
-        booked: leaveDays + 1,
-      };
-
-      this.leaveService.addLeaveRequest(leaveRequest).subscribe({
-        next: () => {
-          alert(`Leave applied successfully! ${leaveDays + 1} days of ${this.leaveType}`);
-          this.location.back();
-        },
-        error: (err) => {
-          alert('Failed to apply leave');
-          console.error('Error applying leave', err);
-        }
-      });
-    } else {
-      alert('Please fill all required fields and ensure dates are valid');
     }
   }
 
   isValidLeaveRequest(): boolean {
     this.validateDates();
-    return Boolean(this.leaveType && this.startDate && this.endDate && !this.startDateError && !this.endDateError);
+
+    return !!(
+      this.leaveType &&
+      this.reason &&
+      this.teamEmail &&
+      this.startDate &&
+      this.endDate &&
+      !this.startDateError &&
+      !this.endDateError
+    );
   }
 
   calculateLeaveDays(): number {
@@ -127,13 +105,45 @@ export class ApplyLeaveComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-    return `${year}-${month}-${day}`;
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    const y = date.getFullYear().toString();
+    return `${y}-${m}-${d}`;
   }
+onSubmit(form: any) {
 
-  cancel(): void {
+  const leaveRequest: LeaveRequest = {
+    employeeId: this.employee.employeeId,
+    employeeName: this.employee.employeeName,
+    email: this.teamEmail,
+    designation: this.employee.designation,
+    leaveType: this.leaveType,
+    startDate: this.formatDate(this.startDate!),
+    endDate: this.formatDate(this.endDate!),
+    totalDays: this.calculateLeaveDays() + 1,
+    reasonforLeave: this.reason,
+    status: 'Pending',
+    dateOfRequest: this.formatDate(new Date()),
+    booked: this.calculateLeaveDays() + 1
+  };
+
+  this.leaveService.addLeaveRequest(leaveRequest).subscribe({
+    next: () => {
+      alert('Leave applied successfully!');
+
+      form.resetForm();
+      this.startDateError = '';
+      this.endDateError = '';
+      this.router.navigate(['/leave-summary']);
+    },
+    error: () => {
+      alert("Failed to apply leave");
+    }
+  });
+}
+
+
+  cancel() {
     this.location.back();
   }
 }

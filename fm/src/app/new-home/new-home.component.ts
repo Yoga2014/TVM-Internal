@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-home',
@@ -11,7 +11,25 @@ export class NewHomeComponent {
   activeNavItem: string = 'my-space';
   activeSubNavItem: string= 'Overview' ;
 
-  constructor(private router: Router) {}
+ constructor(private router: Router, private route: ActivatedRoute) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
+
+        if (url.includes('/new-Home/my-space')) {
+          this.activeNavItem = 'my-space';
+
+        } else if (url.includes('/new-Home/teams-dashboard')) {
+          this.activeNavItem = 'teams-dashboard';
+
+        } else if (url.includes('/new-Home/organization')) {
+          this.activeNavItem = 'organization';
+
+        }
+      }
+    });
+  }
+  
 
   navigateToMySpace() {
     this.activeNavItem = 'my-space';
@@ -34,4 +52,15 @@ export class NewHomeComponent {
   updateBreadcrumb(subNav: any) {
     this.activeSubNavItem = subNav;
   }
+  goToProjects() {
+  // switch tab to teams-dashboard
+  this.activeNavItem = 'teams-dashboard';
+  this.activeSubNavItem = 'projects';
+  this.router.navigate(['new-Home', 'teams-dashboard', 'projects']);
+}
+navigateTo(tab: string) {
+  this.activeNavItem = tab;
+  this.router.navigate([tab], { relativeTo: this.route });
+}
+  
 }
