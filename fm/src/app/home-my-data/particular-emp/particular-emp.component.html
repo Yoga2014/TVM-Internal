@@ -1,0 +1,41 @@
+<div *ngIf="selectedEmployee; else noData" class="profile-page">
+
+  <!-- Profile Header -->
+  <div class="profile-header d-flex align-items-center mb-4">
+    <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" />
+    <div class="profile-basic ms-3">
+      <h2>{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
+      <p class="text-muted">{{ selectedEmployee.designation }}</p>
+      <p class="text-muted">Employee ID: {{ selectedEmployee.employeeId }}</p>
+    </div>
+  </div>
+
+  <!-- Personal Details -->
+  <div class="profile-section mb-4">
+    <h4>Personal Details</h4>
+    <div class="profile-info">
+      <p><strong>Date of Birth:</strong> {{ selectedEmployee.dateOfBirth }}</p>
+      <p><strong>Gender:</strong> {{ selectedEmployee.gender }}</p>
+      <p><strong>Blood Group:</strong> {{ selectedEmployee.bloodGroup }}</p>
+      <p><strong>Marital Status:</strong> {{ selectedEmployee.maritalStatus }}</p>
+    </div>
+  </div>
+
+  <!-- Contact Details -->
+  <div class="profile-section mb-4">
+    <h4>Contact Details</h4>
+    <div class="profile-info">
+      <p><strong>Mobile Number:</strong> {{ selectedEmployee.contactDetails.mobileNumber }}</p>
+      <p><strong>Email:</strong> {{ selectedEmployee.contactDetails.personalEmailId }}</p>
+      <p><strong>Permanent Address:</strong> {{ selectedEmployee.contactDetails.permanentAddress }}, {{ selectedEmployee.contactDetails.locality }}, {{ selectedEmployee.contactDetails.city }}, {{ selectedEmployee.contactDetails.district }}, {{ selectedEmployee.contactDetails.state }} - {{ selectedEmployee.contactDetails.pincode }}, {{ selectedEmployee.contactDetails.country }}</p>
+      <p><strong>Landmark:</strong> {{ selectedEmployee.contactDetails.landmark }}</p>
+      <p><strong>Passport:</strong> {{ selectedEmployee.contactDetails.havePassport }}</p>
+      <p><strong>Visa:</strong> {{ selectedEmployee.contactDetails.haveVisa }}</p>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #noData>
+  <p>No Employee Selected</p>
+</ng-template>

@@ -9,4 +9,33 @@
   <!-- <app-dashboard *ngIf="activeNavItem === 'dashboard'"></app-dashboard> -->
   <!-- <app-calendar *ngIf="activeNavItem === 'calendar'"></app-calendar> -->
 <!-- </div> -->
- <app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
+
+<nav class="navbar">
+
+  <div class="nav-item"
+       [class.active]="activeNavItem === 'overview'"
+       (click)="navigateToOverview()">
+    Department
+  </div>
+
+  <!-- Total Employee tab (visible only after card click) -->
+  <div class="nav-item"
+       *ngIf="showTotalEmployee"
+       [class.active]="activeNavItem === 'total-employee'"
+       (click)="navigateToEmpDetails()">
+    Total Employee
+  </div>
+
+  <!-- Particular Emp tab -->
+  <div class="nav-item"
+       *ngIf="showParticular"
+       [class.active]="activeNavItem === 'particular-emp'"
+       (click)="navigateToParticularDetails()">
+    Particular Emp
+  </div>
+
+</nav>
+
+<app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
+<app-total-employee *ngIf="activeNavItem === 'total-employee'"></app-total-employee>
+<app-particular-emp *ngIf="activeNavItem === 'particular-emp'"></app-particular-emp>

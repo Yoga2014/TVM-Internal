@@ -102,6 +102,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { TotalEmployeeComponent } from './home-my-data/total-employee/total-employee.component';
+import { ParticularEmpComponent } from './home-my-data/particular-emp/particular-emp.component';
 
 
 @NgModule({
@@ -141,6 +143,8 @@ import { AppraisalFormComponent } from './appraisal-form/appraisal-form.componen
     CommentsComponent,
     NewHomeComponent,
     HomeMyDataComponent,
+    TotalEmployeeComponent,
+    ParticularEmpComponent,
     OverviewComponent,
     TeamReporteesComponent,
     TeamDepartmentComponent,

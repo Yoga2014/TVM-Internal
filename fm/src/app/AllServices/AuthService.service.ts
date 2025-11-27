@@ -22,7 +22,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-
   register(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.registerUrl, { username, password });
   }
