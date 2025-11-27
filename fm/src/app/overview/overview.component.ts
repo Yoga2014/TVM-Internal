@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OverviewService, OverviewData } from '../AllServices/overviewservice';
+import { OverviewService } from '../AllServices/overviewservice';
 
 @Component({
   selector: 'app-overview',
@@ -10,34 +10,44 @@ export class OverviewComponent implements OnInit {
   selectedTab: any = '';
   isPopupVisible = false;
 
-  totalEmployees: number = 0;
-  presentToday: number = 0;
-  absentToday: number = 0;
-  leaveToday: number = 0;
-  newJoinees: number = 0;
-  resignations: number = 0;
-  departmentCount: number = 0;
+  // Dashboard values
+  totalEmployees = 0;
+  presentToday = 0;
+  absentToday = 0;
+  newJoinees = 0;
+  totalProjects = 0;
+  leaveCount = 0;
+departmentCount = 0;
+anniversaryCount = 0;
+birthdayCount = 0;
+
+
+  // Nested + list data
+  departmentCounts: any = {};
+  leaveRequests: any[] = [];
+  anniversariesToday: any[] = [];
+  birthdaysToday: any[] = [];
 
   constructor(private overviewService: OverviewService) {}
 
   ngOnInit() {
-    this.fetchOverviewData();
-  }
+    this.overviewService.getOverviewData().subscribe(data => {
+this.totalEmployees = data.totalEmployees;
+this.presentToday = data.presentToday;
+this.absentToday = data.absentToday;
 
-  fetchOverviewData() {
-    this.overviewService.getOverviewData().subscribe({
-      next: (data: OverviewData) => {
-        this.totalEmployees = data.totalEmployees;
-        this.presentToday = data.presentToday;
-        this.absentToday = data.absentToday;
-        this.leaveToday = data.leaveToday;
-        this.newJoinees = data.newJoinees;
-        this.resignations = data.resignations;
-        this.departmentCount = data.departmentCount;
-      },
-      error: (err) => {
-        console.error('Error fetching overview data:', err);
-      }
+this.leaveCount = data.leaveRequests.length;
+this.newJoinees = data.newJoineesThisMonth;
+
+this.departmentCount = Object.keys(data.departmentCounts).length;
+
+this.totalProjects = data.totalProjects;
+
+this.anniversaryCount = data.anniversariesToday.length;
+this.birthdayCount = data.birthdaysToday.length;
+
+
+      console.log("Dashboard →", data);
     });
   }
 

@@ -10,69 +10,82 @@ import { AuthService } from './AllServices/AuthService.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'fleet-management';
-  activeLink: string = 'home';
+  activeLink = 'home';
   isLoggedIn = false;
   showLayout = false;
-  username: string = '';
-  avatarInitials: string = '';
+  username = '';
+  avatarInitials = '';
   confirmation = false;
   dropdownOpen = false;
 
-  private routerSubscription: Subscription | undefined;
+  private routerSubscription!: Subscription;
+  private backButtonPressed = false; // flag to prevent modal on page load
 
-  menuItems = [
-    { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
-    { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
-    { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
-    { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
-    { link: 'onboarding', icon: 'fa-regular fa-handshake', title: 'Onboarding', path: 'onboarding' },
-    { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
-    { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
-    { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
-    { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
-    { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
-  ];
+  menuItems: any[] = [];
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.showLayout = this.isLoggedIn;
-    this.setUsernameFromStorage();
 
-    // Listen to router changes
+    this.setUsernameFromStorage();
+    this.setupMenuByRole();
+
+    // Track active link for sidebar highlight
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activeLink = this.getActiveLink(event.urlAfterRedirects);
       }
     });
 
-    // Listen to browser back button
-    window.addEventListener('popstate', this.handleBackButton.bind(this));
-
-    // Prevent leaving app on first load
+    // Initialize history to intercept back button
     history.pushState(null, '', location.href);
   }
 
   ngOnDestroy() {
-    this.routerSubscription?.unsubscribe();
-    window.removeEventListener('popstate', this.handleBackButton.bind(this));
+    this.routerSubscription.unsubscribe();
   }
 
-  private handleBackButton() {
-    if (!this.authService.isLoggedIn()) return;
+  setupMenuByRole() {
+    const role = localStorage.getItem('role');
 
-    // Only show confirmation if the current URL is login or root
-    const path = location.pathname;
-    if (path === '/login' || path === '/') {
-      this.confirmation = true;
-      history.pushState(null, '', location.href); // stay on the app
+    if (role === 'admin') {
+      this.menuItems = [
+        { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
+        { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
+        { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
+        { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
+        { link: 'onboarding', icon: 'fa-regular fa-handshake', title: 'Onboarding', path: 'onboarding' },
+        { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
+        { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
+        { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
+        { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
+        { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
+      ];
+    } else if (role === 'user') {
+      this.menuItems = [
+        { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
+        { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
+        { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
+        { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
+        { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
+        { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
+      ];
+    } else {
+      this.menuItems = [
+        { link: 'reports', title: 'Reports', path: 'reports' },
+        { link: 'logout', title: 'Logout', path: 'logout' }
+      ];
     }
   }
 
   getActiveLink(url: string): string {
-    const item = this.menuItems.find(m => url.includes(m.path));
-    return item ? item.link : 'home';
+    const item = this.menuItems.find(m => url.startsWith('/' + m.path));
+    return item ? item.link : '';
   }
 
   navigateTo(link: string, path: string) {
@@ -81,53 +94,69 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
     this.activeLink = link;
-    this.router.navigate([path]).catch(err => console.error(err));
+    this.router.navigate(['/' + path]);
   }
 
-  toggleDropdown(): void {
+  logout() {
+    this.confirmation = true;
+  }
+
+  ok() {
+    this.authService.logout();
+    localStorage.clear();
+    sessionStorage.clear();
+
+    this.isLoggedIn = false;
+    this.showLayout = false;
+
+    this.router.navigate(['/login']);
+  }
+
+  Cancel() {
+    this.confirmation = false;
+  }
+
+  toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
   @HostListener('document:click', ['$event'])
-  closeDropdown(event: any): void {
+  closeDropdown(event: any) {
     if (!event.target.closest('.avatar-section')) {
       this.dropdownOpen = false;
     }
   }
 
-  logout(): void {
-    this.confirmation = true;
-  }
-
-  ok(): void {
-    this.authService.logout();
-    localStorage.clear();
-    sessionStorage.clear();
-    this.isLoggedIn = false;
-    this.showLayout = false;
-    this.username = '';
-    this.avatarInitials = '';
-    this.confirmation = false;
-    this.router.navigate(['/login']);
-  }
-
-  Cancel(): void {
-    this.confirmation = false;
-    history.pushState(null, '', location.href);
-  }
-
-  handleLoginSuccess(): void {
+  handleLoginSuccess() {
     this.isLoggedIn = true;
     this.showLayout = true;
     this.setUsernameFromStorage();
+    this.setupMenuByRole();
   }
 
-  private setUsernameFromStorage(): void {
+  private setUsernameFromStorage() {
     this.username = localStorage.getItem('username') || '';
     this.avatarInitials = this.username
       .split(' ')
-      .map(n => n[0].toUpperCase())
+      .map(x => x[0])
       .join('')
-      .slice(0, 2);
+      .toUpperCase();
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    if (!this.authService.isLoggedIn()) return;
+
+    // Ignore first popstate on page load
+    if (!this.backButtonPressed) {
+      this.backButtonPressed = true;
+      return;
+    }
+
+    const path = location.pathname;
+    if (path === '/login' || path === '/') {
+      this.confirmation = true;
+      history.pushState(null, '', location.href);
+    }
   }
 }

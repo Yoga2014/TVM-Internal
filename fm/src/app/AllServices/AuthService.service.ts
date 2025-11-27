@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import{ API_CONFIG } from '../api-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:8080/login';
+  private loginUrl = `${API_CONFIG.BASE_URL}/login`;
   private registerUrl = 'http://localhost:8080/register';
 
   constructor(private http: HttpClient, private router: Router) {}

@@ -7,30 +7,29 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone: false
 })
 export class LoginComponent implements OnInit {
   @Output() loginSuccess = new EventEmitter<void>();
 
   login!: FormGroup;
-  errorMessage: string = '';
-  loading: boolean = false;
+  errorMessage = '';
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    // Pre-fill username from localStorage if available
     const savedUsername = localStorage.getItem('username') || '';
 
     this.login = this.fb.group({
       username: [savedUsername, Validators.required],
-      password: ['2234', Validators.required], // don't prefill password
+      password: ['', Validators.required],
     });
   }
+
   enter(): void {
     if (this.login.invalid) {
       this.login.markAllAsTouched();
@@ -46,18 +45,16 @@ export class LoginComponent implements OnInit {
         this.loading = false;
 
         if (res?.token) {
-          // Store entered username for header display
-          localStorage.setItem('username', this.login.value.username);
-
+          localStorage.setItem('username', username);
+          localStorage.setItem('role', res.role);
           this.auth.setToken(res.token);
-          this.loginSuccess.emit();
 
+          this.loginSuccess.emit();
           this.router.navigate(['/new-Home/my-space/overview']);
         } else {
           this.errorMessage = res.error || 'Invalid username or password';
         }
-      }
-      ,
+      },
       error: () => {
         this.loading = false;
         this.errorMessage = 'Login failed. Try again.';
