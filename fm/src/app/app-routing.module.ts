@@ -156,7 +156,7 @@ const routes: Routes = [
         path: 'teams-dashboard',
         component: TeamsDashboardComponent,
         children: [
-          { path: '', redirectTo: 'team-space', pathMatch: 'full' },
+          { path: '', redirectTo: 'department', pathMatch: 'full' },
           { path: 'team-space', component: TeamsSpaceComponent },
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },
