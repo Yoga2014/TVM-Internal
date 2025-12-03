@@ -112,24 +112,21 @@
                   <div *ngIf="timesheetForm.submitted && !timesheetEntry.hrsType" class="error">Hrs Type is required.
                   </div>
                 </td>
-                
+
                 <td *ngFor="let day of weekDays" class="day-cell">
                   <div class="input-container" [class.popup-visible]="popupVisible[day]">
                     <input type="number" [(ngModel)]="timesheetEntry.hours[day]" name="hours-{{ day }}"
-                      (input)="calculateTotalHours()" placeholder="Enter hours for {{ day }}" min="0" required />
+                      (input)="calculateTotalHours()" (blur)="calculateTotalHours()"
+                      placeholder="Enter hours for {{ day }}" min="0" required />
                     <div *ngIf="timesheetForm.submitted && !timesheetEntry.hours[day]" class="error">
                       Hours are required for {{ day }}.
                     </div>
 
                     <button type="button" class="plus-icon" (click)="togglePopup(day)">+</button>
                     <div *ngIf="popupVisible[day]" class="popup-box">
-                      <input type="text" [(ngModel)]="dayNotes[day]" placeholder="Add a note for {{ day }}"
+                      <input type="text" [(ngModel)]="dayNotes[day]"  name="note-{{ day }}" placeholder="Add a note for {{ day }}"
                         (blur)="saveNoteForDay(day)" />
-                        <button (click)="saveNoteForDay(day)">Save</button>
-                    </div>
-
-                    <div class="note-display" *ngIf="dayNotes[day]">
-                      {{ dayNotes[day] }}
+                      <button (click)="saveNoteForDay(day)">Save</button>
                     </div>
                   </div>
                 </td>

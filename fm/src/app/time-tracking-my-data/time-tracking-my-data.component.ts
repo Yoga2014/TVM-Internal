@@ -14,20 +14,21 @@ export class TimeTrackingMyDataComponent {
   activeNavItem: string = 'time-sheet';
   @Output() subNavChange = new EventEmitter<string>();
 
-  constructor(private router: Router, private myService: EmployeeService) {
-    this.activeNavItem = this.myService.activeTab ? this.myService.activeTab : this.activeNavItem;
-    this.router.navigate(['time-sheet', this.activeNavItem]);
-  }
+constructor(private router: Router, private myService: EmployeeService) {
+  this.activeNavItem = this.myService.activeTab ? this.myService.activeTab : this.activeNavItem;
+  this.router.navigate(['/time-tracking/my-data/time-sheet']);
+}
+
 
   navigateToTimeSheet() {
     this.activeNavItem = 'time-sheet';
-    this.router.navigate(['time-tracking/my-data', 'time-sheet']);
+this.router.navigate(['/time-tracking/my-data/time-sheet']);
     this.subNavChange.emit('time-sheet');
   }
 
   navigateToAppraisal() {
     this.activeNavItem = 'appraisal';
-    this.router.navigate(['time-tracking/my-data', 'appraisal']);
+this.router.navigate(['/time-tracking/my-data/appraisal']);
     this.subNavChange.emit('appraisal');
   }
 

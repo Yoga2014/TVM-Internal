@@ -67,31 +67,39 @@ export class TimeSheetComponent {
   constructor(
     private timesheetService: TimeSheetService,
     private employeeAuthService: EmployeeAuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const employee = this.employeeAuthService.getAuthenticatedEmployee();
     this.timesheet.employeeName = employee.employeeName;
     this.initializeYears();
     this.initializeMonths();
+
+    this.loadDropdowndata();
     this.loadTimesheets();
   }
 
   togglePopup(day: WeekDay): void {
-    this.openNotePopup(day);
+    console.log('Toggle popup for', day);
+    this.popupVisible[day] = !this.popupVisible[day];
+    if (this.popupVisible[day]) {
+      this.openNotePopup(day);
+    }
   }
 
   saveNoteForDay(day: WeekDay): void {
     const selectedDate = this.getSelectedDateForDay(day);
 
     if (this.dayNotes[day]?.trim()) {
+       this.timesheetEntry.hours[day] = this.dayNotes[day];
       const noteKey = `note_${selectedDate}`;
       localStorage.setItem(noteKey, this.dayNotes[day]);
       console.log(`Note for ${day} (${selectedDate}) saved:`, this.dayNotes[day]);
+        this.calculateTotalHours();
     } else {
       console.warn(`No note provided for ${day}`);
     }
-
+      this.dayNotes[day] = '';
     this.popupVisible[day] = false;
   }
 
@@ -112,6 +120,7 @@ export class TimeSheetComponent {
     const selectedDate = this.getSelectedDateForDay(day);
     const noteKey = `note_${selectedDate}`;
     this.dayNotes[day] = localStorage.getItem(noteKey) || '';
+    this.dayNotes[day] = '';
     this.popupVisible[day] = true;
   }
 
@@ -128,7 +137,7 @@ export class TimeSheetComponent {
   }
 
   loadTimesheets(): void {
-    this.timesheetService.getTimesheets().subscribe(data => {
+    this.timesheetService.getTimesheets('timesheetEntries').subscribe(data => {
       this.timesheetSummary = data;
     });
   }
@@ -160,7 +169,6 @@ export class TimeSheetComponent {
   onWeekendDateSelect(): void {
     if (this.timesheet.weekendDate) {
       this.populateWeekDays(this.timesheet.weekendDate);
-      this.openFillYourTimesheetAccordion();
     }
   }
 
@@ -187,20 +195,59 @@ export class TimeSheetComponent {
     this.timesheetEntry.totalHours = total.toString();
   }
 
+
+
   openFillYourTimesheetAccordion(): void {
     this.accordionState = [false, false, true];
   }
 
   onSubmit(form: any): void {
     if (form.valid) {
-      this.timesheetService.addTimesheet(this.timesheetEntry).subscribe(() => {
+      const payload = {
+        ...this.timesheetEntry,
+        ...this.timesheet
+      };
+      this.timesheetService.addTimesheet('timesheetEntries', payload).subscribe(() => {
         this.loadTimesheets();
         form.resetForm();
+        // Reset timesheetEntry hours & description
+        this.timesheetEntry.hours = { Monday: '', Tuesday: '', Wednesday: '', Thursday: '', Friday: '' };
+        this.timesheetEntry.totalHours = '';
+        this.timesheetEntry.description = '';
       });
     }
   }
 
+
   validateWeekDay(day: string): boolean {
     return this.weekDays.includes(day as WeekDay);
   }
+
+  loadDropdowndata(): void {
+    this.timesheetService.getTimesheets('year').subscribe((res) => {
+      this.years = [Number(res)]
+    });
+
+    this.timesheetService.getTimesheets('month').subscribe((res) => {
+      // res could be 'March' for example
+      if (this.months.includes(res)) {
+        this.timesheet.month = res;
+      }
+    });
+
+    this.timesheetService.getTimesheets('weekendDate').subscribe((res) => {
+      // If backend returns a single date
+      this.weekendDates = [res];
+      // Preselect the first weekend date
+      if (this.weekendDates.length > 0) {
+        this.timesheet.weekendDate = this.weekendDates[0];
+        this.onWeekendDateSelect();
+      }
+    });
+
+    this.timesheetService.getTimesheets('employeeName').subscribe((res) => {
+      this.timesheet.employeeName = res;
+    });
+  }
+
 }
