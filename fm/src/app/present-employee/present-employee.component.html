@@ -1,0 +1,38 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Employee Name</th>
+        <th>Employee Code</th>
+        <th>Designation</th>
+        <th>Location</th>
+        <th>Department</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  </table>
+
+  <div class="table-body">
+    <table>
+      <tbody>
+        <tr *ngFor="let data of presentEmployees">
+          <td>{{ data.employeeName }}</td>
+          <td>{{ data.employeeId }}</td>
+          <td>{{ data.designation }}</td>
+          <td>{{ data.location }}</td>
+          <td>{{ data.designation }}</td>
+          <td>
+            <button class="view-btn">
+              View
+            </button>
+          </td>
+        </tr>
+
+        <!-- No Data -->
+        <tr *ngIf="presentEmployees.length === 0">
+          <td colspan="6" class="no-data">No present employees today</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
