@@ -90,7 +90,7 @@ export class MyTaskComponent {
     if (this.taskForm.valid) {
       const taskData = this.taskForm.value;
       if (this.editingTask) {
-        taskData.taskId = this.editingTask.taskId;
+        taskData.id = this.editingTask.id;
         this.taskService.updateTask(taskData).subscribe(() => {
           this.loadTasks();
           this.closeModal();
