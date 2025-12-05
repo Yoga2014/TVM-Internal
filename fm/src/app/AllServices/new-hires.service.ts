@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class NewHiresService {
 
-  private apiUrl = 'http://localhost:3000/Employee';
+  private apiUrl = 'http://localhost:3020/hires';
 
   constructor(private http: HttpClient) {}
 
@@ -35,11 +35,17 @@ export class NewHiresService {
     return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
 
-  updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${employee.employeeId}`, employee);
+ updateEmployee(employee: Employee): Observable<Employee> {
+    if (employee.id == null) {
+      throw new Error('Employee must have an id to update');
+    }
+    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
 
-  deleteEmployee(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+deleteEmployee(id: any): Observable<void> {
+  const empId = Number(id); 
+  return this.http.delete<void>(`${this.apiUrl}/${empId}`);
 }
+
+}
+

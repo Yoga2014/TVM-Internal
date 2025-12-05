@@ -2,7 +2,7 @@
   <nav class="top-nav">
     <!-- Full Width Search Bar -->
     <div class="search-bar-container" *ngIf="isSearchActive">
-      <input type="search" class="search-input" placeholder="Search announcements" [(ngModel)]="searchTerm">
+    <input type="search" class="search-input" placeholder="Search announcements" [(ngModel)]="searchTerm" (input)="searchAnnouncements()">
       <button class="search-close-icon" (click)="toggleSearch()">
         <i class="fa fa-times"></i>
       </button>
@@ -142,7 +142,12 @@
   </div>
 </div>
 <!-- announcement-card -->
-<div class="announcement-card" *ngFor="let announcement of announcements">
+<div class="announcement-card" *ngFor="let announcement of displayAnnouncements">
+
+
+
+
+
   <div class="card-left">
     <h2>{{ announcement.title }}</h2>
     <p>Posted By - {{ announcement.name }}</p>

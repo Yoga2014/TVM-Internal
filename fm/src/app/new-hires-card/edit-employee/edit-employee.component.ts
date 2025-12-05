@@ -25,13 +25,23 @@ export class EditEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.employee) {
-      this.employeeForm.patchValue(this.employee);
+          const joinDateValue = this.employee.joinDate
+        ? new Date(this.employee.joinDate).toISOString().slice(0, 10)
+        : '';
+
+      this.employeeForm.patchValue({
+        employeeName: this.employee.employeeName,
+        joinDate: joinDateValue
+      });
     }
-  }
+
+    }
+  
 
   onSubmit(): void {
     if (this.employeeForm.valid) {
-      this.save.emit(this.employeeForm.value);
+     const formValue = this.employeeForm.value;
+      this.save.emit(formValue);
     }
   }
 
