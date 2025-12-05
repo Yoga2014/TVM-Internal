@@ -35,11 +35,15 @@ export class TeamDepartmentComponent implements OnInit {
     this.loadSections();
   }
 
-  loadSections() {
-    this.teamService.getSections().subscribe((sections:any) => {
-      this.sections = sections;
+  loadSections(): void {
+    this.teamService.getSections().subscribe((sections: Section[]) => {
+      this.sections = sections.map(section => ({
+        ...section,
+        id: Number(section.id) // convert id to number just in case
+      }));
     });
   }
+
 
   // loadSections(){
   //   this.teamService.getSections().subscribe((res:any)=>{
@@ -47,15 +51,10 @@ export class TeamDepartmentComponent implements OnInit {
   //   })
   // }
 
-
-  getFilteredSections() {
-
-    if (this.selectedOptionId === 0) {
-      return this.sections; // Return all sections if "All" is selected
-    } else {
-      return this.sections.filter(section => section.id === this.selectedOptionId);
-
-    }
+  getFilteredSections(): Section[] {
+    return this.selectedOptionId === 0
+      ? this.sections
+      : this.sections.filter(section => section.id === this.selectedOptionId);
   }
 
   // isSectionVisible(sectionId: number): boolean { debugger
