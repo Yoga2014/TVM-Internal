@@ -10,8 +10,8 @@ import { details } from '../AllServices/details.service';
 })
 export class DepartmentDirectoryComponent {
   departments :any;
-
-  selectedDepartment: any;
+ selectedDepartment: any;
+   searchTerm: string = '';
 
   constructor(private userRoleService:details ) {
     this.userRole()
@@ -24,11 +24,18 @@ export class DepartmentDirectoryComponent {
   userRole(){
     this.userRoleService.getUserRoleDetails().subscribe({
       next: (data) => {
-        this.departments =  [...new Set(data.map((item:any) => item.roles))].map(role => ({ label: role }));
+        console.log(data);
+        this.departments =  [...new Set(data.map((item:any) => item.role))].map(role => ({ label: role }));
       },
       error: (err) => {
         console.error('Error fetching employee details', err);
       }
     });
+  }
+    get filteredDepartments() {
+    if (!this.searchTerm) return this.departments;
+    return this.departments.filter((d: any) =>
+      d.label.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

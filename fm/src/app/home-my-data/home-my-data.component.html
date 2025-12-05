@@ -33,9 +33,16 @@
        (click)="navigateToParticularDetails()">
     Particular Emp
   </div>
-
+  <!-- Present Employee tab -->
+   <div class="nav-item"
+       *ngIf="showPresentEmployee"
+       [class.active]="activeNavItem === 'present-employee'"
+       (click)="navigateToPresentEmployee()">
+    Present Employee
+</div>
 </nav>
 
 <app-overview *ngIf="activeNavItem === 'overview'"></app-overview>
 <app-total-employee *ngIf="activeNavItem === 'total-employee'" class="total-employee"></app-total-employee>
 <app-particular-emp *ngIf="activeNavItem === 'particular-emp'" class="particular-emp"></app-particular-emp>
+<app-present-employee *ngIf="activeNavItem === 'present-employee'" class="present-employee"></app-present-employee>

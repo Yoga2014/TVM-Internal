@@ -1,21 +1,19 @@
 <div class="team-dept-container">
   <!-- Dropdown for selecting sections -->
-  <div class="card">
+   <div class="card filter-card">
     <select [(ngModel)]="selectedOptionId">
-      <option [value]="0">All</option>
-
-      <div class="member-count">{{ options.length }}</div>
-      <option *ngFor="let option of options" [value]="option.id">{{ option.option }}</option>
+      <option [ngValue]="0">All</option>
+      <option *ngFor="let option of options" [ngValue]="option.id">{{ option.option }}</option>
     </select>
+    <span class="member-count">Total Number Of Departments:  <b>{{ options.length }}</b></span>
   </div>
 
   <!-- Display sections based on selection -->
-   <div>
     <ng-container *ngFor="let section of getFilteredSections()">
       <div class="team-overview" >
-        <div class="card">
+        <div class="card team-card">
           <h3>{{ section.name }}</h3>
-          <div class="card">
+         <div class="members-container">
 
             <img src="path/to/default-avatar.png" alt="Avatar" class="avatar">
             <span>{{ section.id }} - {{ section.details }}</span>
@@ -23,8 +21,6 @@
             <!-- <p>{{ section.details }}</p> -->
           </div>
         </div>
-      </div>
+        </div>
     </ng-container>
    </div>
-
-</div>
