@@ -25,9 +25,12 @@ export class TeamService {
   //   );
   // }
 
-  getSections(){
-    return this.http.get(this.apiUrl)
-  }
+getSections(): Observable<Section[]> {
+  return this.http.get<Section[]>(this.apiUrl)
+    .pipe(
+      catchError(this.handleError<Section[]>('getSections', []))
+    );
+}
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -4,12 +4,15 @@
     
     <img [src]="employee.image" alt="{{employee.employeeName}}" class="employee-image">
     <div class="employee-info">
-     
-      <p>{{employee.employeeName}}</p>
-      <p>{{employee.dob | date:'longDate'}}</p>
+      <p><strong>Employee ID:</strong> {{employee.employeeId}}</p>
+      <p><strong>Name:</strong> {{employee.employeeName}}</p>
+      <p><strong>Date of Birth:</strong> {{employee.dob | date:'longDate'}}</p>
+      <p><strong>General Timing:</strong> {{employee.generalTiming}}</p>
+      <p><strong>Join Date:</strong> {{employee.joinDate | date:'longDate'}}</p>
+      <p><strong>Record Date:</strong> {{employee.date}}</p>
     </div>
   </div>
-</div>
+</div> 
 
 
 <ng-template #noBirthdays>

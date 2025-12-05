@@ -33,6 +33,7 @@ export class FormViewComponent {
 
     // Initialize the Reactive Form
     this.taskForm = this.fb.group({
+      id: [null],  // hidden, used for updates
       taskOwner: ['', Validators.required],
       taskName: ['', Validators.required],
       description: ['', Validators.required],
@@ -86,28 +87,48 @@ export class FormViewComponent {
     this.isModalOpen = false;
     this.editingTask = null;
   }
-  submitForm(): void {
-    if (this.taskForm.valid) {
-      const taskData = this.taskForm.value;
-      if (this.editingTask) {
-        taskData.id = this.editingTask.id;
-        this.taskService.updateTask(taskData).subscribe(() => {
-          this.loadTasks();
-          this.closeModal();
-        });
-      } else {
-        this.taskService.addTask(taskData).subscribe(() => {
-          this.loadTasks();
-          this.closeModal();
-        });
-      }
-    } else {
-      // Mark all fields as touched to show validation messages
-      this.taskForm.markAllAsTouched();
-      // You can also log errors or handle them as needed
-      console.log('Form is invalid');
-    }
+
+submitForm(): void {
+  if (!this.taskForm.valid) {
+    this.taskForm.markAllAsTouched();
+    console.log('Form is invalid');
+    return;
   }
+
+  // Take form values
+  const taskData = this.taskForm.value;
+
+  if (this.editingTask) {
+    // Ensure editingTask has a valid id
+    if (this.editingTask.id === undefined) {
+      console.error('Editing task has no id, cannot update');
+      return;
+    }
+
+    // Assign id for backend
+    taskData.id = this.editingTask.id;
+
+    this.taskService.updateTask(taskData).subscribe({
+      next: () => {
+        this.loadTasks();
+        this.closeModal();
+      },
+      error: (err) => console.error('Error updating task:', err)
+    });
+  } else {
+    this.taskService.addTask(taskData).subscribe({
+      next: () => {
+        this.loadTasks();
+        this.closeModal();
+      },
+      error: (err) => console.error('Error adding task:', err)
+    });
+  }
+}
+
+
+
+
   
 
   editTask(task: Task): void {

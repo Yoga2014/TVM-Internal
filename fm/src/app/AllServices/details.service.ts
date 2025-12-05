@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class details {
   private apiUrl = 'http://localhost:8080/api/profile';
 
-  private userRole =  'http://localhost:8080/api';
+  private userRole =  'http://localhost:3000/users';
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,6 @@ export class details {
 
 
   getUserRoleDetails(): Observable<any> {
-    return this.http.get(`${this.userRole}/users/allDetails`);
+    return this.http.get(`${this.userRole}`);
   }
 }

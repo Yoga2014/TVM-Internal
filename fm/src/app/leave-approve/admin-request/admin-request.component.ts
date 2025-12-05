@@ -20,13 +20,14 @@ export class AdminrequestComponent implements OnInit {
   }
 
   loadLeaveRequests(): void {
+      
     this.leaveService.getLeaves().subscribe({
       next: (data) => {
         this.leaveRequests = data.map(req => ({
           ...req,
           leavePeriod: `${req.startDate} → ${req.endDate}`,
           approvedBy: req.approvedBy ?? "—",
-          selected: false // initialize selection
+          selected: false 
         }));
         this.filteredRequests = [...this.leaveRequests];
       },

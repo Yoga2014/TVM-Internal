@@ -14,6 +14,7 @@ export class HomeMyDataComponent implements OnInit {
 
   showTotalEmployee: boolean = false;
   showParticular: boolean = false;
+  showPresentEmployee: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -31,12 +32,19 @@ export class HomeMyDataComponent implements OnInit {
       this.showParticular = false;
       this.navigateToEmpDetails();
     });
+  window.addEventListener("showPresentEmployeeTab", () => {
+  this.showPresentEmployee = true;
+  this.activeNavItem = 'present-employee';
+  this.router.navigate(['new-home/my-space/present-employee']);
+});
   }
+
 
   navigateToOverview() {
     this.activeNavItem = 'overview';
     this.showTotalEmployee = false;
     this.showParticular = false;
+    this.showPresentEmployee = false;
   }
 
   navigateToEmpDetails() {
@@ -51,5 +59,10 @@ export class HomeMyDataComponent implements OnInit {
     this.showParticular = true;
     this.router.navigate(['new-home/my-space/particular-emp']);
   }
-
+ navigateToPresentEmployee() {
+    this.activeNavItem = 'present-employee';
+    this.showPresentEmployee = true;
+    this.showPresentEmployee = false;
+    this.router.navigate(['new-home/my-space/present-employee']);
+  }
 }

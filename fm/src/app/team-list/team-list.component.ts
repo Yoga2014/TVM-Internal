@@ -13,8 +13,10 @@ export class TeamListComponent implements OnInit {
   reporteeFilter: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortColumn: string = '';
+  teams: any[] = [];
+  selectedTeam:string='';
 
-  currentPage: number = 1; // Initialize to the first page
+  currentPage: number = 1; 
 itemsPerPage: number = 5;
 
   constructor(private teamService: TeamService) {}
@@ -27,45 +29,18 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-        this.filteredEmployees = this.employees; // Initialize filtered employees
+         this.teams = [...new Set(data.map(emp => emp.department))];
+        this.filteredEmployees = this.employees; 
       },
-      error: err => console.error('Error fetching employees:', err) // Handle error
+      error: err => console.error('Error fetching employees:', err) 
     });
   }
 
-  filterReportees(): void {
-    if (this.reporteeFilter) {
-      this.filteredEmployees = this.employees.filter(employee =>
-        employee.role.toLowerCase() === this.reporteeFilter.toLowerCase()
-      );
-    } else {
-      this.filteredEmployees = [...this.employees]; // Reset filter
-    }
-  }
-
-  sortBy(column: string): void {
-    const direction = this.sortDirection === 'asc' ? 1 : -1;
-
-    // Ensure valid column exists
-    if (this.employees.length && this.employees[0][column] !== undefined) {
-      this.filteredEmployees.sort((a, b) => {
-        const valA = a[column].toString().toLowerCase();
-        const valB = b[column].toString().toLowerCase();
-
-        if (valA < valB) {
-          return -1 * direction;
-        } else if (valA > valB) {
-          return 1 * direction;
-        }
-        return 0;
-      });
-    }
-
-    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    this.currentSortColumn = column;
-  }
-
-  maskData(data: string): string {
+selectTeam(team: string) {
+  this.selectedTeam = team;
+  this.filteredEmployees = this.employees.filter(e => e.department === team);
+}
+maskData(data: string): string {
     return data.replace(/./g, '*');
   }
 
@@ -73,4 +48,5 @@ itemsPerPage: number = 5;
     this.itemsPerPage = +event.target.value; 
     this.currentPage = 1;
   }
+ 
 }

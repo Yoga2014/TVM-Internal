@@ -31,6 +31,7 @@ birthdayCount = 0;
 
   constructor(private overviewService: OverviewService, private router: Router,  private route: ActivatedRoute) {}
 @Output() navigateToProject = new EventEmitter<void>();
+@Output() navigateToPresentEmployee = new EventEmitter<void>();
   
 
   ngOnInit() {
@@ -71,5 +72,9 @@ openTotalProject() {
 openLeaveRequest(){
     this.router.navigate(['/leave-tracking']);
 }
+openPresentEmployee() {
+ window.dispatchEvent(new Event("showPresentEmployeeTab"));
+}
+
 
 }

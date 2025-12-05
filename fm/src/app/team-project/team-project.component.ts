@@ -56,20 +56,35 @@ import { TeamProject } from '../Interface/team-project';
 
   populateForm(data: any) {
     this.projectForm.patchValue({
-      projectName: data.projectName,
-      clientName: data.clientName,
+      projectname: data.projectname,
+      clientname: data.clientname,
       domain: data.domain,
       startDate: data.startDate,
       voice: data.voice,
-      voiceStartDate: data.voiceStartDate,
+      voicestartDate: data.voicestartDate,
       voiceEndDate: data.voiceEndDate,
       coding: data.coding,
-      codingStartDate: data.codingStartDate,
-      codingEndDate: data.codingEndDate,
-      asset: data.asset,
+      codingstartDate: data.codingstartDate,
+      codingendDate: data.codingendDate,
       projectStatus: data.projectStatus
     });
+
+const assetsArray = this.projectForm.get('asset') as FormArray;
+assetsArray.clear();
+if (data.asset) {
+  data.asset
+    .filter((a: string | null) => a != null) // specify type
+    .forEach((asset: string) => assetsArray.push(new FormControl(asset)));
+}
+
   }
+
+  allAssets: string[] = ['laptop', 'charger', 'headset', 'mouse'];
+
+// Getter for asset FormArray
+get assetArray(): FormArray {
+  return this.projectForm.get('asset') as FormArray;
+}
 
   getdata() {
     this.teams.getMethod().subscribe((response: any) => {
@@ -102,39 +117,28 @@ import { TeamProject } from '../Interface/team-project';
     }
   }
 
-  onCheckboxChange(event: any) {
-    const assets: FormArray = this.projectForm.get('asset') as FormArray;
-    if (event.target.checked) {
-      assets.push(new FormControl(event.target.value));
-    } else {
-      const index = assets.controls.findIndex((control) => control.value === event.target.value);
-      if (index >= 0) {
-        assets.removeAt(index);
-      }
+onCheckboxChange(event: any) {
+  const assets: FormArray = this.assetArray;
+  if (event.target.checked) {
+    assets.push(new FormControl(event.target.value));
+  } else {
+    const index = assets.controls.findIndex(control => control.value === event.target.value);
+    if (index >= 0) {
+      assets.removeAt(index);
     }
   }
+}
 
-  edit(id: any) {
-    // this.editID = id;
-    // this.isEditMode = true;
-    // this.updatebtn = false;
-    // this.submit = true;
-    this.teams.editMethod(id).subscribe((res: any) => {
-      if (this.submittedData && this.submittedData.length > 0) {
-        this.populateForm(this.submittedData[0]);
-        this.isEditMode = true;
-        this.editID = this.submittedData[0].id;
-      }
-      const assetsArray = this.projectForm.get('asset') as FormArray;
-      assetsArray.clear();
-      if (res.asset) {
-        res.asset.forEach((asset: string) => {
-          assetsArray.push(new FormControl(asset));
-        });
-      }
-      // this.showToast = true;
-    });
+
+edit(id: any) {
+  const project = this.submittedData.find(p => p.id === id);
+  if (project) {
+    this.populateForm(project);
+    this.isEditMode = true;
+    this.editID = project.id;
+    this.showToast = true; // open offcanvas
   }
+}
   
   openToast() {
     this.showToast = true;
@@ -163,9 +167,9 @@ import { TeamProject } from '../Interface/team-project';
 
   resetForm() {
     this.projectForm.reset();
-    const assetsArray = this.projectForm.get('ass') as FormArray;
-    this.showToast = false;
+    const assetsArray = this.projectForm.get('asset') as FormArray;
     assetsArray.clear();
+    this.showToast = false;
     this.isEditMode = false;
   }
 

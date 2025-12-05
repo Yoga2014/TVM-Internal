@@ -108,6 +108,7 @@ import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-appro
 import { AdminrequestComponent} from './leave-approve/admin-request/admin-request.component';
 import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summary.component';
 import { EmpProfileComponent } from './emp-profile/emp-profile.component';
+import { PresentEmployeeComponent } from './present-employee/present-employee.component';
 
 
 @NgModule({
@@ -187,7 +188,8 @@ import { EmpProfileComponent } from './emp-profile/emp-profile.component';
     AppraisalFormComponent,
     LeaveapproveComponent,
     AdminrequestComponent,
-    AdminsummaryComponent
+    AdminsummaryComponent,
+    PresentEmployeeComponent
   ],
   imports: [
     BrowserModule,

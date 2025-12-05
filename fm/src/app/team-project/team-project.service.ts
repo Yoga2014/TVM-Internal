@@ -12,7 +12,7 @@ export class TeamProjectService {
   constructor(private apihttp: HttpClient) { }
   
   getMethod(): Observable<TeamProject[]> {
-    return this.apihttp.get<TeamProject[]>(this.api + '/get')
+    return this.apihttp.get<TeamProject[]>(this.api)
   }
 
   postMethod(item: TeamProject): Observable<TeamProject> {
