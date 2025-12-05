@@ -16,7 +16,7 @@ export class TeamListComponent implements OnInit {
   teams: any[] = [];
   selectedTeam:string='';
 
-  currentPage: number = 1; // Initialize to the first page
+  currentPage: number = 1; 
 itemsPerPage: number = 5;
 
   constructor(private teamService: TeamService) {}
@@ -29,8 +29,8 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-       this.teams = [...new Set(data.map(emp => emp.department))];
-        this.filteredEmployees = this.employees; // Initialize filtered employees
+         this.teams = [...new Set(data.map(emp => emp.department))];
+        this.filteredEmployees = this.employees; 
       },
       error: err => console.error('Error fetching employees:', err) 
     });
