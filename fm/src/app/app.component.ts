@@ -69,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
       ];
     } else if (role === 'user') {
       this.menuItems = [
-        { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
+        { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Request', path: 'leave-tracking' },
         { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
         { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
         { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
