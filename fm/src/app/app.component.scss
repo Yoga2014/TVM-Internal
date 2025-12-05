@@ -1,301 +1,263 @@
-// $primary-color: #004085;
-// $secondary-color: #f8f9fa;
-// $hover-color: #0056b3;
-// $background-color: #e9ecef;
-// $text-color: #343a40;
-// $border-color: #ced4da;
-// $focus-color: #ffc107;
-// $transition-speed: 0.3s;
+/* COLORS */
+$primary: #112868;
+$accent: #007bff;
+$hover: #007bff;
+$light-bg: #f7f7f7;
+$white: #ffffff;
 
-
-// .app-container {
-//   display: flex;
-//   height: 100vh;
-//   font-family: "Arial", sans-serif;
-//   background-color: $background-color;
-
-//   .sidebar {
-//     background: $primary-color;
-//     color: $secondary-color;
-//     width: 250px;
-//     transition: width $transition-speed ease, height $transition-speed ease;
-//     overflow: hidden;
-
-//     &.expanded {
-//       width: 300px;
-//     }
-
-//     .header {
-//       padding: 1rem;
-//       text-align: center;
-//       img {
-//         width: 80%;
-//         border-radius: 5px;
-//         transition: transform $transition-speed ease;
-
-//         &:hover {
-//           transform: scale(1.05);
-//         }
-//       }
-//     }
-
-//     .content {
-//       .link {
-//         display: flex;
-//         align-items: center;
-//         gap: 1rem;
-//         padding: 1rem 1.5rem;
-//         color: $secondary-color;
-//         text-decoration: none;
-//         cursor: pointer;
-//         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-//         transition: background $transition-speed ease, transform $transition-speed ease;
-//         will-change: transform;
-
-//         i {
-//           font-size: 1.5rem;
-//         }
-
-//         .title-home {
-//           font-size: 1rem;
-//           font-weight: bold;
-//           white-space: nowrap;
-//         }
-
-//         &:hover {
-//           background: $hover-color;
-//           transform: translateX(5px);
-//         }
-
-//         &.active {
-//           background: lighten($hover-color, 10%);
-//           border-left: 4px solid $secondary-color;
-//         }
-
-//         &:focus {
-//           outline: none;
-//           box-shadow: 0 0 0 2px $focus-color;
-//         }
-//       }
-//     }
-//   }
-
-//   .main-content {
-//     flex: 1;
-//     background: $secondary-color;
-//     padding: 2rem;
-//     overflow-y: auto;
-//     transition: padding $transition-speed ease;
-
-//     h1 {
-//       font-size: 2rem;
-//       color: $text-color;
-//     }
-
-//     p {
-//       font-size: 1rem;
-//       line-height: 1.6;
-//       color: darken($text-color, 10%);
-//     }
-//   }
-// }
-
-
-// @media (max-width: 768px) {
-//   .app-container {
-//     flex-direction: column;
-
-//     .sidebar {
-//       width: 100%;
-//       position: fixed;
-//       z-index: 10;
-//       bottom: 0;
-//       left: 0;
-//       height: auto;
-
-//       &.expanded {
-//         height: 60vh;
-//       }
-
-//       .content .link {
-//         justify-content: center;
-
-//         .title-home {
-//           display: none;
-//         }
-//       }
-//     }
-
-//     .main-content {
-//       padding: 1rem;
-//       margin-top: 50px;
-//     }
-//   }
-// }
-
-// @keyframes slideIn {
-//   0% {
-//     transform: translateX(-100%);
-//     opacity: 0;
-//   }
-//   100% {
-//     transform: translateX(0);
-//     opacity: 1;
-//   }
-// }
-
-// @keyframes fadeIn {
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }
-
-// .sidebar {
-//   animation: slideIn $transition-speed ease;
-// }
-
-// .main-content {
-//   animation: fadeIn $transition-speed ease;
-// }
-
-
-
-// Variables for colors
-$primary-color: #2b2d42;
-$secondary-color: #8d99ae;
-$accent-color: #ef233c;
-$background-color: #edf2f4;
-$text-color: #ffffff;
-$hover-color: #d90429;
-
-// Base styles for the container
+/* MAIN LAYOUT */
 .app-container {
   display: flex;
-  flex-direction: row;
   height: 100vh;
-  background-color: $background-color;
+  background: $light-bg;
+}
 
-  .sidebar {
-    background-color: $primary-color;
-    color: $text-color;
-    transition: width 0.3s ease;
-    width: 250px;
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  min-width: 250px;
+  background: $primary;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
 
-    &.expanded {
-      width: 300px;
-    }
+  .header-logo {
+    text-align: center;
+    padding: 1rem;
 
-    .header {
-      text-align: center;
-      padding: 1rem;
+    img {
+      width: 80%;
+      border-radius: 8px;
+      transition: 0.3s;
 
-      img {
-        max-width: 80%;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.1);
-        }
+      &:hover {
+        transform: scale(1.05);
       }
     }
+  }
 
-    .content {
-      margin-top: 1rem;
+  .menu {
+    margin-top: 20px;
+    overflow-y: auto; // <--- scroll only menu items
+    flex: 1;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .item {
+      margin-bottom: 5px; // reduce space if needed
+
       .link {
         display: flex;
         align-items: center;
-        padding: 0.8rem 1rem;
+        padding: 12px 20px; 
+        width: 98%; // expand to full width
         cursor: pointer;
         border-radius: 8px;
-        transition: background-color 0.3s, transform 0.2s;
+        transition: 0.3s;
+        font-size: 20px;
+
+        i {
+          margin-right: 12px;
+          font-size: 1.2rem;
+        }
+
+        .title {
+          margin-left: 7px;
+        }
 
         &:hover {
-          background-color: $hover-color;
-          transform: translateX(5px);
+          font-weight: 600;
+          background: $light-bg;
+          transform: translateX(2px);
+          color: black;
         }
 
         &.active {
-          background-color: $accent-color;
-          color: $text-color;
-        }
-
-        i {
-          margin-right: 1rem;
-          font-size: 1.2rem;
-          animation: fade-in 0.5s ease;
-        }
-
-        .title-home,
-        .title-profile,
-        .title-leave {
-          font-weight: bold;
-          font-size: 1rem;
-        }
-      }
-
-      .with-children {
-        margin-top: 1rem;
-        .link {
-          &:not(:last-child) {
-            margin-bottom: 0.5rem;
-          }
+          background: $light-bg;
+          color: black;
+          font-weight: 600;
         }
       }
     }
   }
+}
 
-  .main-content {
-    flex-grow: 1;
-    padding: 2rem;
-    background-color: $background-color;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    animation: slide-in 0.5s ease forwards;
+/* RIGHT SECTION */
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP HEADER */
+.top-header {
+  height: 60px;
+  background: $white;
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .company-title {
+    font-size: 24px;
+    font-weight: bolder;
+    color: $primary;
+  }
+
+  .avatar-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+
+    .avatar-circle {
+      width: 40px;
+      height: 40px;
+      background: #4A90E2;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .initials {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+
+    .user-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-right: 15px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: #fff;
+      width: 150px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      padding: 10px 0;
+      z-index: 200;
+
+      p {
+        padding: 10px 15px;
+        margin: 0;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          background: #eeeeee;
+        }
+      }
+    }
   }
 }
 
-// Responsive styles
+/* MAIN CONTENT */
+.main-content {
+  padding: 20px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+  }
 
-    .sidebar {
-      width: 100%;
-      height: auto;
+  .company-title {
+    font-size: 16px !important;
+  }
+}
 
-      &.expanded {
-        height: 250px;
+/* BACKDROP */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+/* LOGOUT MODAL */
+.logout-response {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  width: 360px;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+
+    .ok-btn,
+    .cancel-btn {
+      width: 45%;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .ok-btn {
+      background-color: #00268f;
+      color: white;
+
+      &:hover {
+        background-color: #0a1f5d;
       }
     }
 
-    .main-content {
-      width: 100%;
-      padding: 1rem;
+    .cancel-btn {
+      background-color: #f0f0f0;
+      color: #333;
+
+      &:hover {
+        background-color: #d9d9d9;
+      }
     }
-  }
-}
-
-// Animations
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
   }
 }

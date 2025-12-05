@@ -7,10 +7,10 @@ import { AuthService } from './AuthService.service';
 export class AdminGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(): boolean {
-    if (this.authService.isAdmin()) {
-      return true;
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return false;
     }
-    this.router.navigate(['/new-Home']);
-    return false;
+    return true;
   }
 }

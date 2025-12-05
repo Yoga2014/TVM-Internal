@@ -5,16 +5,16 @@
 @import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  line-height:25px;
+/* styles.scss */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: 'EB Garamond', serif !important;
+  line-height: 1.6;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body.mat-typography {
+  font-family: 'EB Garamond', serif !important;
+}

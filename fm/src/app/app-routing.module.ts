@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 import { GeneralComponent } from './general/general.component';
 import { EducationalComponent } from './educational/educational.component';
@@ -62,34 +63,50 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AppraisalFormComponent } from './appraisal-form/appraisal-form.component';
+import { TotalEmployeeComponent } from './home-my-data/total-employee/total-employee.component';
+import { ParticularEmpComponent } from './home-my-data/particular-emp/particular-emp.component';
+import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
+import { AdminrequestComponent } from './leave-approve/admin-request/admin-request.component';
+import { AdminsummaryComponent } from './leave-approve/admin-summary/admin-summary.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },
-  { path: 'home', component: NewHomeComponent },
-  { path: 'general', component: GeneralComponent },
-  { path: 'educational', component: EducationalComponent },
-  { path: 'skillset', component: SkillsetComponent },
-  { path: 'professional', component: ProfessionalComponent },
-  { path: 'details', component: DetailsComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'newhires', component: NewHiresComponent },
-  { path: 'employee-details/:id', component: EmployeeDetailsComponent },
-  { path: 'edit-employee/:id', component: EditEmployeeComponent },
-  { path: 'apply-leave', component: ApplyLeaveComponent },
-  { path: 'leave-balance', component: LeaveBalanceComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'personalDataForm', component: PersonalDataFormComponent },
-  { path: 'onboarding', component: OnboardingComponent },
-  {path:'operation', component:OperationComponent},
-  {path:'reports',component:ReportsComponent},
+
+  // PROTECTED ROUTES
+  { path: 'home', component: NewHomeComponent, canActivate: [AuthGuard] },
+  { path: 'general', component: GeneralComponent, canActivate: [AuthGuard] },
+  { path: 'educational', component: EducationalComponent, canActivate: [AuthGuard] },
+  { path: 'skillset', component: SkillsetComponent, canActivate: [AuthGuard] },
+  { path: 'professional', component: ProfessionalComponent, canActivate: [AuthGuard] },
+  { path: 'details', component: DetailsComponent, canActivate: [AuthGuard] },
+  { path: 'header', component: HeaderComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'newhires', component: NewHiresComponent, canActivate: [AuthGuard] },
+  { path: 'employee-details/:id', component: EmployeeDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'edit-employee/:id', component: EditEmployeeComponent, canActivate: [AuthGuard] },
+  { path: 'apply-leave', component: ApplyLeaveComponent, canActivate: [AuthGuard] },
+  { path: 'leave-balance', component: LeaveBalanceComponent, canActivate: [AuthGuard] },
+  { path: 'teams', component: TeamsComponent, canActivate: [AuthGuard] },
+  { path: 'personalDataForm', component: PersonalDataFormComponent, canActivate: [AuthGuard] },
+  { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
+  { path:'operation', component:OperationComponent, canActivate: [AuthGuard] },
+  { path:'reports',component:ReportsComponent, canActivate: [AuthGuard] },
+  {path:'leave-approve', component: LeaveapproveComponent,
+
+         children:[
+          {path:'admin-request',component:AdminrequestComponent},
+          {path:'admin-summary',component:AdminsummaryComponent}
+         ]
+    },
 
   {
     path: 'leave-tracking',
     component: LeaveTrackingComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'mydata',
@@ -116,15 +133,20 @@ const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'new-Home',
     component: NewHomeComponent,
+    canActivate: [AuthGuard],
     children: [
+       { path: '', redirectTo: 'my-space', pathMatch: 'full' },
       {
         path: 'my-space',
         component: HomeMyDataComponent,
         children: [
           { path: 'overview', component: OverviewComponent },
+          { path: 'total-employee', component:TotalEmployeeComponent },
+          { path: 'particular-emp', component: ParticularEmpComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'calendar', component: CalendarComponent },
         ],
@@ -134,6 +156,7 @@ const routes: Routes = [
         path: 'teams-dashboard',
         component: TeamsDashboardComponent,
         children: [
+          { path: '', redirectTo: 'team-space', pathMatch: 'full' },
           { path: 'team-space', component: TeamsSpaceComponent },
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },
@@ -141,17 +164,18 @@ const routes: Routes = [
           { path: 'team-list', component: TeamListComponent },
         ],
       },
+
       {
         path: 'organization',
         component: OrganizationComponent,
         children:[
-          { path:'announcements', component: AnnouncementsComponent},
-          { path:'policies', component: PoliciesComponent},
-          { path:'employee-tree', component: EmployeeTreeComponent},
-          { path:'department-tree', component: DepartmentTreeComponent},
-          { path:'department-directory', component: DepartmentDirectoryComponent},
-          { path:'birthday-folks', component: BirthdayCardComponent},
-          { path:'new-hires', component: NewHiresComponent},
+          { path:'announcements', component: AnnouncementsComponent },
+          { path:'policies', component: PoliciesComponent },
+          { path:'employee-tree', component: EmployeeTreeComponent },
+          { path:'department-tree', component: DepartmentTreeComponent },
+          { path:'department-directory', component: DepartmentDirectoryComponent },
+          { path:'birthday-folks', component: BirthdayCardComponent },
+          { path:'new-hires', component: NewHiresComponent },
         ]
       },
     ],
@@ -160,55 +184,56 @@ const routes: Routes = [
   {
     path: 'task-tasks',
     component: TaskTasksComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: '',
+      { 
+        path: '',
         component: TaskNavsComponent,
         children: [
           { path: 'my-task', component: MyTaskComponent },
-          { path: 'track-task', component: TrackTaskComponent},
+          { path: 'track-task', component: TrackTaskComponent },
           { path: 'form-view', component: FormViewComponent },
         ]
       }
     ]
   },
+
   {
     path: 'time-tracking',
     component: TimeTrackingComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'my-data',
         component: TimeTrackingMyDataComponent,
         children: [
-         { path: 'time-sheet', component: TimeSheetComponent},
-         { path: 'appraisal', component: AppraisalFormComponent}
+         { path: 'time-sheet', component: TimeSheetComponent },
+         { path: 'appraisal', component: AppraisalFormComponent }
         ],
       },
     ]
   },
+
   {
     path: 'perfomance-myData',
     component: PerformanceMyDataComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: GoalsMyDataComponent,
         children: [
           { path: 'goals', component: GoalsComponent },
-          // { path: 'skillset', component: SkillsetComponent },
           { path: 'competency', component: CompetencyComponent },
           { path: 'feedback', component: PerformanceFeedbackComponent },
         ],
       },
-      {
-        path: 'Skill-Set-Matrix',
-        component: PerformanceMyDataComponent,
-        children: [
-        ],
-      },
     ],
   },
-  { path: 'goals/:goalId/comments', component: CommentsComponent },
-  { path: 'add-goal/:id', component: AddGoalsComponent },
+
+  { path: 'goals/:goalId/comments', component: CommentsComponent, canActivate: [AuthGuard] },
+  { path: 'add-goal/:id', component: AddGoalsComponent, canActivate: [AuthGuard] },
+
 ];
 
 @NgModule({

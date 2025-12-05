@@ -1,0 +1,55 @@
+<div *ngIf="selectedEmployee; else noData" class="profile-page">
+
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" />
+    <div class="profile-basic">
+      <h2>{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
+      <p class="text-muted">{{ selectedEmployee.designation }}</p>
+      <p class="text-muted">Employee Code: {{ selectedEmployee.employeeCode }}</p>
+    </div>
+  </div>
+
+  <!-- Personal Details -->
+  <div class="profile-section">
+    <h4>Personal Details</h4>
+    <div class="profile-info">
+      <p><strong>Date of Birth:</strong> {{ selectedEmployee.dob }}</p>
+      <p><strong>Joining Date:</strong> {{ selectedEmployee.joiningDate }}</p>
+      <p><strong>PAN Number:</strong> {{ selectedEmployee.panNo }}</p>
+    </div>
+  </div>
+
+  <!-- Contact Details -->
+  <div class="profile-section">
+    <h4>Contact Details</h4>
+    <div class="profile-info">
+      <p><strong>Department:</strong> {{ selectedEmployee.department }}</p>
+      <p><strong>Team:</strong> {{ selectedEmployee.team }}</p>
+      <p><strong>Location:</strong> {{ selectedEmployee.location }}</p>
+    </div>
+  </div>
+
+  <!-- Bank Details -->
+  <div class="profile-section mb-4">
+    <h4>Bank Details</h4>
+    <div class="profile-info">
+      <p><strong>Bank Account:</strong> {{ selectedEmployee.bankAccount }}</p>
+    </div>
+  </div>
+
+  <!-- Meta Details -->
+  <div class="profile-section mb-4">
+    <h4>System Info</h4>
+    <div class="profile-info">
+      <p><strong>Record Created At:</strong> {{ selectedEmployee.createdAt }}</p>
+      <p><strong>ID:</strong> {{ selectedEmployee.id }}</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- No Data -->
+<ng-template #noData>
+  <p>No Employee Selected</p>
+</ng-template>

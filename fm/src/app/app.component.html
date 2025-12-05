@@ -1,29 +1,64 @@
-<app-login *ngIf="!isLoggedIn" (loginSuccess)="handleLoginSuccess()"></app-login>
+<!-- Login page -->
+<div *ngIf="!showLayout">
+  <app-login (loginSuccess)="handleLoginSuccess()"></app-login>
+</div>
 
-<div class="app-container" *ngIf="isLoggedIn">
-  <div class="sidebar" [ngClass]="{ expanded: isExpanded }">
-    <div class="header" (click)="navigateTo('home', 'new-Home')">
+<!-- Main layout -->
+<div *ngIf="showLayout" class="app-container">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="header-logo" (click)="navigateTo('home', 'new-Home')">
       <img src="../assets/images/TVM Infotech Logo.jpg" alt="Logo" />
     </div>
 
     <div class="menu">
-      <div
-        class="content"
-        *ngFor="let item of menuItems"
-      >
-        <div
-          class="link"
-          (click)="navigateTo(item.link, item.path)"
-          [ngClass]="{ 'active': activeLink === item.link }"
-        >
+      <div class="item" *ngFor="let item of menuItems">
+        <div class="link"
+             (click)="navigateTo(item.link, item.path)"
+             [ngClass]="{ 'active': activeLink === item.link }">
           <i [class]="item.icon"></i>
-          <div class="title-home">{{ item.title }}</div>
+          <span class="title">{{ item.title }}</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="main-content" style="width: 100%">
-    <router-outlet></router-outlet>
+  <!-- Right section -->
+  <div class="right-section">
+
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="company-title">TVM Infotech Private Limited</div>
+
+      <div class="avatar-section" (click)="toggleDropdown()">
+        <div class="avatar-circle">
+          <span class="initials">{{avatarInitials}}</span>
+        </div>
+        <span class="user-name">{{username}}</span>
+
+        <!-- Dropdown -->
+        <div class="dropdown-menu" *ngIf="dropdownOpen">
+          <p (click)="logout()">Logout</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backdrop & Logout Modal -->
+    <div class="backdrop" *ngIf="confirmation"></div>
+
+    <div class="logout-response" *ngIf="confirmation">
+      <h4>Are you sure you want to log out?</h4>
+      <div class="btn-container">
+        <button class="ok-btn" (click)="ok()">Ok</button>
+        <button class="cancel-btn" (click)="Cancel()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 </div>
