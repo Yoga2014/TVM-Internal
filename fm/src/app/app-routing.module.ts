@@ -68,6 +68,7 @@ import { ParticularEmpComponent } from './home-my-data/particular-emp/particular
 import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
 import { AdminrequestComponent } from './leave-approve/admin-request/admin-request.component';
 import { AdminsummaryComponent } from './leave-approve/admin-summary/admin-summary.component';
+import { EmpProfileComponent } from './emp-profile/emp-profile.component';
 import { PresentEmployeeComponent } from './present-employee/present-employee.component';
 
 const routes: Routes = [
@@ -139,8 +140,10 @@ const routes: Routes = [
     path: 'new-Home',
     component: NewHomeComponent,
     canActivate: [AuthGuard],
+
     children: [
-       { path: '', redirectTo: 'my-space', pathMatch: 'full' },
+       { path: '', redirectTo: 'my-space', pathMatch: 'full' },        
+      { path: 'emp-profile', component: EmpProfileComponent },
       {
         path: 'my-space',
         component: HomeMyDataComponent,
@@ -150,7 +153,7 @@ const routes: Routes = [
           { path: 'total-employee', component:TotalEmployeeComponent },
           { path: 'particular-emp', component: ParticularEmpComponent },
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'calendar', component: CalendarComponent },
+          { path: 'calendar', component: CalendarComponent }
         ],
       },
 
