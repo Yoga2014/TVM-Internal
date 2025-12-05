@@ -8,13 +8,13 @@ import { AdminGuard } from './AllServices/admin.guard';
   providedIn: 'root'
 })
 export class AnnouncementService {
-  private apiUrl = 'http://localhost:8080/api/announcements'; // Adjust this URL to your setup
+  private apiUrl = 'http://localhost:3001/announcements'; // Adjust this URL to your setup
 
   constructor(private http: HttpClient) { }
 
   // Method to save a new announcement
   saveAnnouncement(announcement: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(this.apiUrl + '/add', announcement);
+    return this.http.post<Announcement>(this.apiUrl, announcement);
   }
 
   // Method to get all announcements (if needed)

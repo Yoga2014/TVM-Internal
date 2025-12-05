@@ -13,9 +13,8 @@ export class TeamListComponent implements OnInit {
   reporteeFilter: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortColumn: string = '';
-  
-  teams: any[] = [];           
-  selectedTeam: string = ''; 
+  teams: any[] = [];
+  selectedTeam:string='';
 
   currentPage: number = 1; 
 itemsPerPage: number = 5;
@@ -41,41 +40,7 @@ selectTeam(team: string) {
   this.selectedTeam = team;
   this.filteredEmployees = this.employees.filter(e => e.department === team);
 }
-
-
-  filterReportees(): void {
-    if (this.reporteeFilter) {
-      this.filteredEmployees = this.employees.filter(employee =>
-        employee.role.toLowerCase() === this.reporteeFilter.toLowerCase()
-      );
-    } else {
-      this.filteredEmployees = [...this.employees]; 
-    }
-  }
-
-  sortBy(column: string): void {
-    const direction = this.sortDirection === 'asc' ? 1 : -1;
-
-  
-    if (this.employees.length && this.employees[0][column] !== undefined) {
-      this.filteredEmployees.sort((a, b) => {
-        const valA = a[column].toString().toLowerCase();
-        const valB = b[column].toString().toLowerCase();
-
-        if (valA < valB) {
-          return -1 * direction;
-        } else if (valA > valB) {
-          return 1 * direction;
-        }
-        return 0;
-      });
-    }
-
-    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    this.currentSortColumn = column;
-  }
-
-  maskData(data: string): string {
+maskData(data: string): string {
     return data.replace(/./g, '*');
   }
 
@@ -83,8 +48,5 @@ selectTeam(team: string) {
     this.itemsPerPage = +event.target.value; 
     this.currentPage = 1;
   }
-  goBack() {
-  this.selectedTeam = '';
-  this.filteredEmployees = [];
-}
+ 
 }

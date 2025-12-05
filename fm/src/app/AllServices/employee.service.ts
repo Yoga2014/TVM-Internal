@@ -65,4 +65,8 @@ getEmployeeByCode(employeeCode: string): Observable<any> {
   setSelectedEmployee(employee: any) {
     this.selectedEmployeeSource.next(employee);
   }
+  getPresentEmployees() {
+  return this.http.get<any[]>('http://localhost:3000/Leave');
+}
+
 }

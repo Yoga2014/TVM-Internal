@@ -1,4 +1,4 @@
-<div class="team-card-container" *ngIf="!selectedTeam">
+<div class="team-card-container">
   <div 
     class="team-card"
     *ngFor="let team of teams"
@@ -10,36 +10,12 @@
 </div>
 
 <div *ngIf="selectedTeam" class="body">
-    <div class="container-fluid">
-      <div class="header">
-        <div>
-           <button class="back-btn" *ngIf="selectedTeam" (click)="goBack()">
-      ← Back
-    </button>
-          <select [(ngModel)]="reporteeFilter" (change)="filterReportees()">
-            <option value="Employee">Employee View</option>
-            <option value="Admin">Admin</option>
-            <option value="Manager">Manager</option>
-          </select>
-          <button>Edit</button>
-        </div>
-        <div class="right-buttons">
-          <button>View All Data</button>
-          <select [(ngModel)]="reporteeFilter">
-            <option value="Direct Reportees">Direct Reportees' Data</option>
-          </select>
-          <button><i class="fas fa-filter"></i></button>
-          <button><i class="fas fa-ellipsis-h"></i></button>
-        </div>
-      </div>
-  
-      <div class="table-container">
-        <table>
+     <div class="table-container">
+        <table >
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
-              <th (click)="sortBy('employeeId')">Employee ID <i class="fas fa-sort"></i></th>
-              <th (click)="sortBy('firstName')">First Name <i class="fas fa-sort"></i></th>
+              <th>Employee ID <i class="fas fa-sort"></i></th>
+              <th >First Name <i class="fas fa-sort"></i></th>
               <th>Last Name</th>
               <th>Nick name</th>
               <th>Email address</th>
@@ -57,7 +33,6 @@
           </thead>
           <tbody>
             <tr *ngFor="let employee of filteredEmployees">
-              <td><input type="checkbox" /></td>
               <td>{{employee.employeeId}}</td>
               <td>{{employee.firstName}}</td>
               <td>{{employee.lastName}}</td>
@@ -77,20 +52,6 @@
           </tbody>
         </table>
       </div>
-      <div class="footer">
-        <div>Total Record Count: <strong>{{employees.length}}</strong></div>
-        <div>
-            <select>
-                <option value="5">05</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-            </select>
-            <span>
-                {{(currentPage - 1) * itemsPerPage + 1}} - 
-                {{currentPage * itemsPerPage > employees.length ? employees.length : currentPage * itemsPerPage}}
-            </span>
-        </div>
     </div>
-    
   </div>
-  
+</div>
