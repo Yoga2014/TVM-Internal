@@ -1,5 +1,6 @@
 
 export interface Employee {
+  id:number;
   employeeId?: string | any;
   employeeName?: string;
   dob?: string | any;

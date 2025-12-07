@@ -12,6 +12,15 @@ export class OrganizationComponent {
   activeNavItem: string = 'announcements';
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+  const currentUrl = this.router.url;
+
+  if (currentUrl.includes('new-hires')) {
+    this.activeNavItem = 'newHires';
+    window.scrollTo(0,0); // optional scroll reset
+  }
+}
   
   navigatePolicies(){
     this.activeNavItem = 'policies';
