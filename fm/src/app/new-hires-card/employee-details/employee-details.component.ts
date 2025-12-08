@@ -42,34 +42,50 @@ export class EmployeeDetailsComponent implements OnInit {
     this.isEditing = false;
   }
 
-  saveEmployee(employee: Employee): void {
-    if (this.employee) {
-      this.newHiresService.updateEmployee({ ...this.employee, ...employee }).subscribe(
-        (updatedEmployee: Employee) => {
-          this.employee = updatedEmployee;
-          this.isEditing = false;
-        },
-        (error: any) => {
-          console.error('Failed to save employee details', error);
-        }
-      );
-    }
-  }
+  saveEmployee(partial: Partial<Employee>): void {
+    if (!this.employee) return;
 
-deleteEmployee(): void {
-  if (this.employee) {
-    this.newHiresService.deleteEmployee(this.employee.id).subscribe(
-      () => {
-        this.employee = null; // stop showing the old data
-        this.router
-          .navigate(['/new-Home/organization/new-hires'])
-          .then(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
+    
+    const updatedEmployee: Employee = {
+      ...this.employee,
+      ...partial
+    };
+
+    
+    if (updatedEmployee.joinDate && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(updatedEmployee.joinDate)) {
+      const dateOnly = updatedEmployee.joinDate;
+      updatedEmployee.joinDate = new Date(dateOnly + 'T00:00:00.000Z').toISOString();
+    }
+
+    this.newHiresService.updateEmployee(updatedEmployee).subscribe(
+      (res: Employee) => {
+        this.employee = res;
+        this.isEditing = false;
       },
       (error: any) => {
-        console.error('Failed to delete employee', error);
+        console.error('Failed to save employee details', error);
       }
     );
   }
+
+deleteEmployee(): void {
+  if (!this.employee || !this.employee.id) {
+    console.error('No Employee ID found!');
+    return;
+  }
+
+  this.newHiresService.deleteEmployee(this.employee.id).subscribe({
+    next: () => {
+      alert('Employee deleted successfully');
+       this.router.navigate(['/organization/new-hires']); 
+    },
+    error: (err) => {
+      console.error('Delete failed:', err);
+    }
+  });
+}
+
+
 }
 
   

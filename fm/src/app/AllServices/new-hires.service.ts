@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class NewHiresService {
 
-  private apiUrl = 'http://localhost:3000/hiring';
+  private apiUrl = 'http://localhost:3020/hires';
 
   constructor(private http: HttpClient) {}
 
@@ -42,3 +42,4 @@ deleteEmployee(id: number): Observable<void> {
 }
 
 }
+

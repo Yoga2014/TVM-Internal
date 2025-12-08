@@ -12,7 +12,8 @@ import { Announcement } from '../announcement.model';
 })
 export class AnnouncementsComponent implements OnInit {
 
-  
+  displayAnnouncements: any[] = [];
+
   announcements: any[] = [];
   selectedAnnouncement: any;
   isSearchActive = false;
@@ -58,6 +59,7 @@ announcement: any;
     this.announcementService.getAnnouncements().subscribe(
       (announcements: Announcement[]) => {
         this.announcements = announcements;
+        this.displayAnnouncements = [...this.announcements];
       },
       (error: any) => {
         console.error('Error loading announcements:', error);
@@ -124,17 +126,22 @@ announcement: any;
     this.isFilterPopupActive = !this.isFilterPopupActive;
   }
 
-  applyFilter(): void {
-    // Implement filter application logic here
-    console.log('Filter applied');
-    this.toggleFilterPopup(); // Close the popup after applying
-  }
+applyFilter(): void {
+  const category = (document.getElementById('filter-category') as HTMLSelectElement).value;
+  const location = (document.getElementById('filter-location') as HTMLSelectElement).value;
 
-  resetFilter(): void {
-    // Implement filter reset logic here
-    console.log('Filter reset');
-    this.toggleFilterPopup(); // Close the popup after resetting
-  }
+  this.displayAnnouncements = this.announcements.filter(a => {
+    return (category ? a.category === category : true) &&
+           (location ? a.location === location : true);
+  });
+
+  this.toggleFilterPopup(); // close popup
+}
+resetFilter(): void {
+  this.displayAnnouncements = [...this.announcements]; // show all
+  this.toggleFilterPopup();
+}
+
 
   likeAnnouncement(id: number): void {
  
@@ -215,4 +222,12 @@ saveLikeData(id: number, liked: boolean) {
   // });
   localStorage.setItem('announcement_' + id, JSON.stringify(likeData));
 }
+searchAnnouncements(): void {
+  const term = this.searchTerm.toLowerCase();
+  this.displayAnnouncements = this.announcements.filter(a =>
+    a.title.toLowerCase().includes(term) ||
+    a.name.toLowerCase().includes(term)
+  );
+}
+
 }
