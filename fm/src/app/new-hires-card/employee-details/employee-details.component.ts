@@ -17,11 +17,13 @@ export class EmployeeDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private newHiresService: NewHiresService, private router: Router) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+   const id = Number(this.route.snapshot.paramMap.get('id'));
+
     if (id) {
       this.newHiresService.getEmployeeById(id).subscribe(
         (employee: Employee) => {
           this.employee = employee;
+         
         },
         (error: any) => {
           console.error('Failed to fetch employee details', error);
@@ -84,4 +86,7 @@ deleteEmployee(): void {
 }
 
 
+}
+
+  
 }

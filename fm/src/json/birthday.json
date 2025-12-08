@@ -3,12 +3,12 @@
         {
           "employeeId": "EMP001",
           "employeeName": "John Doe",
-          "dob": "1990-12-12",
+          "dob": "1990-12-05",
           "profilePicture": "https://example.com/profiles/johndoe.jpg",
           "status": "Active",
           "generalTiming": "9:00 AM - 6:00 PM",
           "leaveBooked": 2,
-          "image": "https://example.com/profiles/johndoe.jpg",
+          "image": "https://i.pravatar.cc/150?img=3",
           "joinDate": "2024-12-05",
           "onLeave": false,
           "date": "2024-12-12"

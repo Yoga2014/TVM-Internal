@@ -13,7 +13,6 @@ export class NewHiresService {
   constructor(private http: HttpClient) {}
 
   getRecentHires(): Observable<Employee[]> {
-    debugger
     const today = new Date();
     const fifteenDaysAgo = new Date(today.setDate(today.getDate() - 15));
 
@@ -30,21 +29,16 @@ export class NewHiresService {
     );
   }
 
+getEmployeeById(id: number): Observable<Employee> {
+  return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+}
 
-  getEmployeeById(id: string): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
-  }
+updateEmployee(employee: Employee): Observable<Employee> {
+  return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
+}
 
- updateEmployee(employee: Employee): Observable<Employee> {
-    if (employee.id == null) {
-      throw new Error('Employee must have an id to update');
-    }
-    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
-  }
-
-deleteEmployee(id: any): Observable<void> {
-  const empId = Number(id); 
-  return this.http.delete<void>(`${this.apiUrl}/${empId}`);
+deleteEmployee(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${id}`);
 }
 
 }
