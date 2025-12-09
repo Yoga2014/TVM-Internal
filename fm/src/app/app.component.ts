@@ -133,6 +133,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showLayout = true;
     this.setUsernameFromStorage();
     this.setupMenuByRole();
+    
   }
 
   private setUsernameFromStorage() {

@@ -1,25 +1,6 @@
 {
   "Leave": [
     {
-      "id": "c866",
-      "employeeId": "TVM01",
-      "employeeName": "Sivaneshwaran",
-      "email": "siva.tvm@gmail.com",
-      "designation": "Full-stack Developer",
-      "leaveType": "Earned Leave",
-      "teamId": "dev001",
-      "startDate": "2024-12-14",
-      "endDate": "2024-12-15",
-      "totalDays": 2,
-      "reasonforLeave": "fever",
-      "status": "Pending",
-      "dateOfRequest": "2024-12-13",
-      "booked": 2,
-      "comment": "",
-      "reasonforRejected": "",
-      "color": ""
-    },
-    {
       "id": "8945",
       "employeeId": "TVM01",
       "employeeName": "Sivaneshwaran",
@@ -37,6 +18,36 @@
       "comment": "",
       "reasonforRejected": "",
       "color": ""
+    },
+    {
+      "id": "317c",
+      "employeeId": "TVM01",
+      "employeeName": "Sivaneshwaran",
+      "email": "chandrum690@gmail.com",
+      "designation": "Full-stack Developer",
+      "leaveType": "sick leave",
+      "startDate": "2025-01-09",
+      "endDate": "2025-11-28",
+      "totalDays": 324,
+      "reasonforLeave": "aisudaodaoiaoid",
+      "status": "Pending",
+      "dateOfRequest": "2025-12-08",
+      "booked": 324
+    },
+    {
+      "id": "583d",
+      "employeeId": "TVM01",
+      "employeeName": "Sivaneshwaran",
+      "email": "chandrum690@gmail.com",
+      "designation": "Full-stack Developer",
+      "leaveType": "sick leave",
+      "startDate": "2025-12-17",
+      "endDate": "2025-11-28",
+      "totalDays": -18,
+      "reasonforLeave": "ihjads",
+      "status": "Pending",
+      "dateOfRequest": "2025-12-08",
+      "booked": -18
     }
   ]
 }

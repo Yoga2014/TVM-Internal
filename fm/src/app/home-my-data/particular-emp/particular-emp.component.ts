@@ -11,31 +11,18 @@ export class ParticularEmpComponent {
   selectedEmployee: any;
 
   constructor(private employeeService: EmployeeService) {
+
     this.employeeService.selectedEmployee$.subscribe((employeeCode: string) => {
-  if (employeeCode) {
-    this.employeeService.getEmployeeByCode(employeeCode).subscribe({
-      next: (res: any) => {
-        this.selectedEmployee = res;
-      },
-      error: (err: any) => {
-        console.error("Failed to load employee details", err);
+      if (employeeCode) {
+        this.employeeService.getEmployeeByCode(employeeCode).subscribe({
+          next: (res: any) => {
+            this.selectedEmployee = res;
+          },
+          error: (err: any) => {
+            console.error("Failed to load employee details", err);
+          }
+        });
       }
     });
   }
-});
-
-  }
-
-  loadEmployeeDetails(employeeCode: string) {
-    this.employeeService.getEmployeeByCode(employeeCode).subscribe({
-      next: (res) => {
-        console.log("Full Employee Details:", res);
-        this.selectedEmployee = res;
-      },
-      error: (err) => {
-        console.error("Error fetching employee details", err);
-      }
-    });
-  }
-
 }

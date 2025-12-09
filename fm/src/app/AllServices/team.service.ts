@@ -6,7 +6,7 @@ import { catchError, Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamService {
-    private apiUrl = 'http://localhost:3000/Teams';
+    private apiUrl = 'http://localhost:3040/Teams';
 
     constructor(private http: HttpClient) { }
 
