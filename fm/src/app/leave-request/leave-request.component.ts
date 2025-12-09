@@ -74,20 +74,35 @@ export class LeaveRequestsComponent implements OnInit {
   }
 
   deleteSelectedRequests(): void {
-    if (this.selectedRequests.length === 0) {
-      alert("Select at least one request to delete.");
-      return;
-    }
-
-    if (confirm("Are you sure you want to delete selected leave requests?")) {
-      this.selectedRequests.forEach(req => {
-        if (req.employeeId) {
-          this.leaveService.deleteLeaveRequest(req.employeeId).subscribe(() => {
-            this.loadLeaveRequests();
-          });
-        }
-      });
-      this.selectedRequests = [];
-    }
+  if (this.selectedRequests.length === 0) {
+    alert("Select at least one request to delete.");
+    return;
   }
+
+  if (confirm("Are you sure you want to delete selected leave requests?")) {
+
+    this.selectedRequests.forEach(req => {
+
+      const id =
+        (req as any).id ||
+        (req as any).leaveId ||
+        (req as any)._id ||
+        (req as any).requestId;
+
+      if (!id) {
+        console.error("No valid ID found for:", req);
+        return;
+      }
+
+      this.leaveService.deleteLeaveRequest(id).subscribe({
+        next: () => this.loadLeaveRequests(),
+        error: err => console.error("Delete failed:", err)
+      });
+
+    });
+
+    this.selectedRequests = [];
+  }
+}
+
 }

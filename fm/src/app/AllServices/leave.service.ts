@@ -10,7 +10,7 @@ export class LeaveService {
   
   private leaveSummaryURL = 'http://localhost:3008/LeaveSummary';
   private applyLeaveURL = 'http://localhost:3000/Leave';
-  private leaveApprovalURL = 'http://localhost:3001/leaveRequest';
+  private leaveApprovalURL = 'http://localhost:3002/leaveRequest';
 
   private leaveAppliedSubject = new Subject<LeaveRequest>();
 

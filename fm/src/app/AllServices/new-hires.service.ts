@@ -8,7 +8,7 @@ import { Employee } from '../Interface/employee.model';
 })
 export class NewHiresService {
 
-  private apiUrl = 'http://localhost:3020/hires';
+  private apiUrl = 'http://localhost:3020/hiring';
 
   constructor(private http: HttpClient) {}
 

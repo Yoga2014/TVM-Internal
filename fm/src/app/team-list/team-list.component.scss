@@ -48,9 +48,8 @@ select {
   border: none;
 }
 
-.primary-btn {
-  background: #007bff;
-  color: #fff;
+.header button:hover {
+    background-color: #0056b3;
 }
 
 .secondary-btn {
@@ -67,81 +66,101 @@ select {
 }
 
 .table-container {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  font-size: 14px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    max-width: fit-content;
 }
 
-th,
+th, 
 td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
 }
 
 th {
-  background: #eef1f6;
-  position: sticky;
-  top: 0;
-  z-index: 2;
+    background-color: #f8f9fa;
+    cursor: pointer; 
+}
+
+th i {
+    margin-left: 5px;
+    color: #888;
 }
 
 tr:hover {
-  background: #f1f1f1;
+    background-color: #f1f1f1;
 }
 
-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+td img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 12px;
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
-  flex-shrink: 0;
+/* Footer styling */
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
 }
 
-.pagination {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Footer select box styling */
+.footer select {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
+/* Footer text styling */
+.footer span {
+    font-size: 14px;
+}
+
+/* Responsive design for smaller screens */
 @media (max-width: 768px) {
-  .card-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  table {
-    font-size: 12px;
-  }
+    .header .right-buttons {
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+    
+    table {
+        font-size: 12px;
+    }
 
-  th,
-  td {
-    padding: 6px;
-  }
+    th, td {
+        padding: 8px;
+    }
 
-  .card-footer {
-    flex-direction: column;
-    gap: 8px;
-  }
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer select {
+        margin-bottom: 10px;
+    }
 }
 .team-card-container {
  display: flex;
@@ -162,20 +181,28 @@ img {
   user-select: none;
 }
 
-.team-card:hover {
-  background: #f2f7ff;
-  border-color: #4a90e2;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-.team-card.active {
-  background: #4a90e2;
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #007bff; /* Blue background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  border-color: #4a90e2;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  transform: translateY(-3px);
+  font-weight: bold;
+  font-size: 40px;
+}
+.back-wrapper {
+  margin: 10px 0;
 }
 
-
+.back-btn {
+  padding: 10px 20px;
+  background: #444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
 

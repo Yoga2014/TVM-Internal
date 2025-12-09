@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../AllServices/team.service';
 
+
+
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
@@ -10,16 +12,18 @@ import { TeamService } from '../AllServices/team.service';
 export class TeamListComponent implements OnInit {
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  reporteeFilter: string = '';
-  sortDirection: 'asc' | 'desc' = 'asc';
-  currentSortColumn: string = '';
   teams: any[] = [];
-  selectedTeam:string='';
+  selectedTeam: string = '';
+  selectedEmployee: any = null;
+  avatarInitials: string = ''; // <-- For avatar
+  searchText: string = '';
 
   currentPage: number = 1; 
-itemsPerPage: number = 5;
+  itemsPerPage: number = 5;
 
-  constructor(private teamService: TeamService) {}
+  constructor(
+    private teamService: TeamService
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -29,24 +33,49 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-         this.teams = [...new Set(data.map(emp => emp.department))];
-        this.filteredEmployees = this.employees; 
+
+        this.teams = [...new Set(data.map(emp => emp.team))];
+
+        if (this.teams.length > 0) {
+          this.selectTeam(this.teams[0]);
+        }
       },
-      error: err => console.error('Error fetching employees:', err) 
+      error: err => console.error('Error fetching employees:', err)
     });
   }
 
-selectTeam(team: string) {
-  this.selectedTeam = team;
-  this.filteredEmployees = this.employees.filter(e => e.department === team);
-}
-maskData(data: string): string {
-    return data.replace(/./g, '*');
+ 
+  selectTeam(team: string) {
+    this.selectedTeam = team;
+    this.filteredEmployees = this.employees.filter(e => e.team === team);
+    this.applySearch();
   }
 
-  onItemsPerPageChange(event: any) {
-    this.itemsPerPage = +event.target.value; 
-    this.currentPage = 1;
+
+  applySearch() {
+    const text = this.searchText.toLowerCase();
+    this.filteredEmployees = this.employees
+      .filter(e => e.team === this.selectedTeam)
+      .filter(e =>
+        e.employeeId?.toString().toLowerCase().includes(text) ||
+        e.firstName.toLowerCase().includes(text) ||
+        e.lastName.toLowerCase().includes(text) ||
+        e.nickName?.toLowerCase().includes(text) ||
+        e.email.toLowerCase().includes(text) ||
+        e.designation.toLowerCase().includes(text)
+      );
   }
+
  
+  viewEmployee(emp: any) {
+    this.selectedEmployee = emp;
+    this.avatarInitials = this.getAvatarInitials(emp.firstName);
+  }
+
+
+  getAvatarInitials(name: string): string {
+    return name ? name.charAt(0).toUpperCase() : '?';
+  }
+
+
 }

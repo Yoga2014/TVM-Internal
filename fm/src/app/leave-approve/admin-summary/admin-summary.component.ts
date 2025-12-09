@@ -15,7 +15,9 @@ export class AdminsummaryComponent implements OnInit {
 
   leaves: LeaveRequest[] = [];
   paginatedLeaves: LeaveRequest[] = [];
+  filteredLeaves: LeaveRequest[] = [];
 
+  searchTerm: string = '';
   totalUsedLeaves = 0;
   totalRemainingLeaves = 0;
 
@@ -28,6 +30,7 @@ export class AdminsummaryComponent implements OnInit {
   loadSummary() {
     this.leaveService.getLeaveSummary().subscribe(summary => {
       this.leaves = summary;
+       this.filteredLeaves = [...this.leaves];
 
       this.totalUsedLeaves = this.leaves.reduce((a, b) => a + (b.booked || 0), 0);
       this.totalRemainingLeaves = this.leaves.reduce((a, b) => a + (b.available || 0), 0);
@@ -36,10 +39,24 @@ export class AdminsummaryComponent implements OnInit {
       this.updatePagination();
     });
   }
+  filterLeaves() {
+  const term = this.searchTerm.toLowerCase();
+  this.filteredLeaves = this.leaves.filter(leave =>
+    (leave.employeeName?.toLowerCase() || '').includes(term) ||
+    (leave.leaveType?.toLowerCase() || '').includes(term) ||
+    (leave.startDate?.toLowerCase() || '').includes(term) ||
+    (leave.endDate?.toLowerCase() || '').includes(term)
+  );
+
+  this.page = 1; // Reset to first page after search
+  this.totalPages = Math.ceil(this.filteredLeaves.length / this.pageSize);
+  this.updatePagination();
+}
+
 
   updatePagination() {
     const start = (this.page - 1) * this.pageSize;
-    this.paginatedLeaves = this.leaves.slice(start, start + this.pageSize);
+    this.paginatedLeaves = this.filteredLeaves.slice(start, start + this.pageSize); 
   }
 
   nextPage() {
@@ -55,4 +72,5 @@ export class AdminsummaryComponent implements OnInit {
       this.updatePagination();
     }
   }
+  
 }

@@ -2,7 +2,7 @@
     
 "Teams": [
     {
-      "employeeId": "E001",
+      "employeeCode": "EMP001",
       "firstName": "John",
       "lastName": "Doe",
       "nickName": "Johnny",
@@ -16,10 +16,11 @@
       "permanentAddress": "456 Elm St, Townsville",
       "aadhaar": "123456789012",
       "pan": "ABCDE1234F",
-      "uan": "1234567890"
+      "uan": "1234567890",
+      "team":"varsha"
     },
     {
-      "employeeId": "E002",
+      "employeeCode": "EMP002",
       "firstName": "Jane",
       "lastName": "Smith",
       "nickName": "Janey",
@@ -33,10 +34,11 @@
       "permanentAddress": "321 Pine St, Townsville",
       "aadhaar": "234567890123",
       "pan": "FGHIJ4567K",
-      "uan": "2345678901"
+      "uan": "2345678901",
+      "team":"varsha"
     },
     {
-      "employeeId": "E003",
+      "employeeCode": "EMP003",
       "firstName": "Alice",
       "lastName": "Johnson",
       "nickName": "Ally",
@@ -50,10 +52,11 @@
       "permanentAddress": "246 Birch St, Townsville",
       "aadhaar": "345678901234",
       "pan": "JKLMN5678P",
-      "uan": "3456789012"
+      "uan": "3456789012",
+      "team":"subash"
     },
     {
-      "employeeId": "E004",
+      "employeeCode": "EMP004",
       "firstName": "Bob",
       "lastName": "Brown",
       "nickName": "Bobby",
@@ -67,10 +70,11 @@
       "permanentAddress": "753 Spruce St, Townsville",
       "aadhaar": "456789012345",
       "pan": "QRSTU6789V",
-      "uan": "4567890123"
+      "uan": "4567890123",
+      "team":"subash"
     },
     {
-      "employeeId": "E005",
+      "employeeCode": "EMP005",
       "firstName": "Charlie",
       "lastName": "Davis",
       "nickName": "Chuck",
@@ -84,7 +88,8 @@
       "permanentAddress": "951 Willow St, Townsville",
       "aadhaar": "567890123456",
       "pan": "VWXYZ1234A",
-      "uan": "5678901234"
+      "uan": "5678901234",
+      "team":"dinesh"
     }
   ]
 
