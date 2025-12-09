@@ -193,12 +193,7 @@ export class TotalEmployeeComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private route: Router) {}
 
   ngOnInit() {
-      this.datas = this.datas.map((emp:any) => ({...emp,
-    fullName: `${emp.firstName} ${emp.lastName}`
-  }));
-
-    this.filteredData = [...this.datas];
-    // this.loadEmployees();
+    this.loadEmployees();
   }
 
   loadEmployees() {
@@ -217,21 +212,5 @@ viewEmployee(data: any) {
   this.employeeService.setSelectedEmployee(data.employeeCode);   // pass only employeeCode
   window.dispatchEvent(new Event("showParticularTab"));
 }
-onSearch(){
-  const query = this.searchText.trim().toLowerCase();
 
-  if(query.length < 3){
-    this.filteredData = [...this.datas]
-    return;
-  }
-
-  this.filteredData = this.datas.filter((emp:any)=>{
-    const fullName = `${emp.firstName} ${emp.lastName}`.toLowerCase();
-    return(
-      emp.employeeId.toLowerCase().includes(query) ||
-      fullName.includes(query) ||
-      emp.designation.toLowerCase().includes(query)
-    );
-  })
-}
 }

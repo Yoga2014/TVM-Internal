@@ -1,0 +1,98 @@
+.accordion-content {
+  padding: 1rem 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Table Style */
+.classic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  color: #333;
+  background: #fff;
+  text-align: left;
+
+  th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  thead {
+    background: #112868;        /* Dark Blue Header */
+    color: #fff;
+
+    th {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  tbody tr {
+    transition: background-color 0.25s ease;
+
+    &:hover {
+      background-color: #f6f9ff;  /* soft blue hover */
+    }
+  }
+
+  tbody td {
+    font-size: 15px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .classic-table th, .classic-table td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .accordion-content {
+    padding: 1rem;
+  }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Status Styles */
+.approved-status {
+  background: #28a745;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.rejected-status {
+  background: #dc3545;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.pending-status {
+  background: #ffc107;
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+

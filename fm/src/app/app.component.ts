@@ -29,11 +29,17 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.showLayout = this.isLoggedIn;
+  // Clear token if expired or missing role
+  if (!this.authService.isLoggedIn()) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+  }
 
-    this.setUsernameFromStorage();
-    this.setupMenuByRole();
+  this.isLoggedIn = this.authService.isLoggedIn();
+  this.showLayout = this.isLoggedIn;
+
+  this.setUsernameFromStorage();
+  this.setupMenuByRole();
 
     // Track active link for sidebar highlight
     this.routerSubscription = this.router.events.subscribe(event => {
@@ -55,11 +61,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (role === 'admin') {
       this.menuItems = [
-        { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
+        { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-home' },
         { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
-        { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Request', path: 'leave-tracking' },
         { link: 'leave-approve', icon: 'fa-solid fa-calendar-check', title: 'Leave Tracking', path: 'leave-approve' },
-        { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
+        { link: 'time-request', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'admin-time-sheet' },
         { link: 'onboarding', icon: 'fa-regular fa-handshake', title: 'Onboarding', path: 'onboarding' },
         { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
         { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
@@ -70,10 +75,8 @@ export class AppComponent implements OnInit, OnDestroy {
     } else if (role === 'user') {
       this.menuItems = [
         { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Request', path: 'leave-tracking' },
-        { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },
-        { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
+        { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Request', path: 'time-tracking' },
         { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
-        { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
         { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
       ];
     } else {
@@ -91,15 +94,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateTo(link: string, path: string) {
     if (link === 'logout') {
-      this.logout();
+      this.logoutClick();
       return;
     }
     this.activeLink = link;
     this.router.navigate(['/' + path]);
-  }
-
-  logout() {
-    this.confirmation = true;
   }
 
   ok() {
@@ -117,10 +116,24 @@ export class AppComponent implements OnInit, OnDestroy {
     this.confirmation = false;
   }
 
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-    this.router.navigate(['/new-Home/emp-profile']);
-  }
+toggleDropdown(event: Event) {
+  event.stopPropagation();  // prevent document click from closing it
+  this.dropdownOpen = !this.dropdownOpen;
+}
+
+goToProfile(event: Event) {
+  event.stopPropagation();
+  this.dropdownOpen = false;
+  this.router.navigate(['/new-home/emp-profile']);
+}
+
+logoutClick(event? : Event) {
+ if(event) event.stopPropagation();
+  this.dropdownOpen = false;
+  this.confirmation = true;
+}
+
+
 
   
 

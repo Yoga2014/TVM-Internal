@@ -1,0 +1,50 @@
+<div class="accordion-content">
+
+  <h2 class="page-title">Timesheet Requesters-List</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Project</th>
+        <th>Location</th>
+        <th>Hrs. Type</th>
+        <th>Total Hrs.</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let entry of timesheetEntries"
+        [class.disabled-row]="entry.status === 'Approved' || entry.status === 'Rejected'">
+          <td>{{ entry.employeeName || name }}</td>
+          <td>{{ entry.project }}</td>
+          <td>{{ entry.location }}</td>
+          <td>{{ entry.hrsType }}</td>
+          <td>{{ entry.totalHours }}</td>
+          <td>{{ entry.description }}</td>
+
+        <td>
+          <!-- Approve button -->
+          <button *ngIf="entry.status !== 'Rejected'" (click)="updateStatus(entry, 'Approved')" class="approve-btn"
+            [disabled]="entry.status === 'Approved'">
+            Approve
+          </button>
+
+          <!-- Reject button -->
+          <button *ngIf="entry.status !== 'Approved'" (click)="updateStatus(entry, 'Rejected')" class="reject-btn"
+            [disabled]="entry.status === 'Rejected'">
+            Reject
+          </button>
+        </td>
+
+
+        <td>
+          <button *ngIf="entry.status === 'Approved' || entry.status === 'Rejected'" (click)="revertStatus(entry)"
+            class="revert-btn">⟲</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

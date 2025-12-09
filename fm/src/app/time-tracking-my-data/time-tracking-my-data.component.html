@@ -1,8 +1,8 @@
 <nav class="navbar">
     <div class="nav-item" [class.active]="activeNavItem === 'time-sheet'" (click)="navigateToTimeSheet()">Time Sheet</div>
-    <div class="nav-item" [class.active]="activeNavItem === 'appraisal'" (click)="navigateToAppraisal()">Appraisal</div>
+    <div class="nav-item" [class.active]="activeNavItem === 'time-request'" (click)="navigateToAppraisal()">Time-sheet Summary</div>
   </nav>
   <div class="main-content">
     <app-time-sheet *ngIf="activeNavItem === 'time-sheet'"></app-time-sheet>
-    <app-appraisal-form *ngIf="activeNavItem === 'appraisal'"></app-appraisal-form>
+    <app-time-request *ngIf="activeNavItem === 'time-request'"></app-time-request>
   </div> 

@@ -3,7 +3,7 @@
         {
           "employeeId": "EMP001",
           "employeeName": "John Doe",
-          "dob": "1990-12-05",
+          "dob": "1990-12-08",
           "profilePicture": "https://example.com/profiles/johndoe.jpg",
           "status": "Active",
           "generalTiming": "9:00 AM - 6:00 PM",
@@ -16,12 +16,12 @@
         {
           "employeeId": "EMP002",
           "employeeName": "Jane Smith",
-          "dob": "1988-07-22",
+          "dob": "1988-12-08",
           "profilePicture": "https://example.com/profiles/janesmith.jpg",
           "status": "On Leave",
           "generalTiming": "10:00 AM - 7:00 PM",
           "leaveBooked": 5,
-          "image": "https://example.com/profiles/janesmith.jpg",
+          "image": "https://i.pravatar.cc/150?img=3",
           "joinDate": "2024-12-06",
           "onLeave": true,
           "date": "2024-12-12"

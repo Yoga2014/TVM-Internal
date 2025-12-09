@@ -28,7 +28,7 @@ export class NewHiresComponent implements OnInit {
     );
   }
 
-  viewEmployeeDetails(id: number): void {
+  viewEmployeeDetails(id: any): void {
     this.router.navigate(['/employee-details', id]);
   }
 }

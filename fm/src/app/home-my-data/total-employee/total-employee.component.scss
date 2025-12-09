@@ -1,93 +1,59 @@
-.search-box {
-  width: 100%;
-  margin-bottom: 20px;
-
-  input {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-    background: #fff;
-    transition: 0.3s ease;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-
-    &::placeholder {
-      color: #999;
-      font-size: 14px;
-    }
-
-    &:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 6px rgba(0,123,255,0.3);
-    }
-  }
-}
-
+/* Leave Summary Table */
 .table-container {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead{
+        background-color: #f7f7f7;
+        font-weight: bold;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
 }
 
-.fixed-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  /* Force equal column width */
+    .table-body{
+        max-height: 450px;
+        overflow-y: auto;
+        display: block;
 
-  thead {
-    background-color: #f7f7f7;
-    font-weight: bold;
-    display: table;
-    width: 100%;
+        td,th{
+            min-width: 120px;
+        }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
 
-  tbody {
-    display: block;
-    max-height: 450px;
-    overflow-y: auto;
-    width: 100%;
-  }
 
-  tr {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-  }
-
-  th,
-  td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-    min-width: 120px;
-  }
-
-  tbody::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  tbody::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
-
-  tbody::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-
-  .view-btn {
-    background: #007bff;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-
+    .view-btn {
+      background: #007bff;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+  
 
   .pagination {
     display: flex;
@@ -104,4 +70,10 @@
       cursor: pointer;
     }
   }
+}
+.no-data {
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  color: #777;
 }

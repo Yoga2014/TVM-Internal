@@ -42,7 +42,8 @@ export class TimeSheetComponent {
       [WeekDay.Friday]: ''
     } as { [key in WeekDay]: string },
     totalHours: '',
-    description: ''
+    description: '',
+     status: 'Pending' 
   };
 
   popupVisible: { [day in WeekDay]: boolean } = {
@@ -62,7 +63,6 @@ export class TimeSheetComponent {
   };
 
   timesheetSummary: any[] = [];
-  accordionState = [false, false, false];
 
   constructor(
     private timesheetService: TimeSheetService,
@@ -133,10 +133,6 @@ export class TimeSheetComponent {
     });
   }
 
-  toggleAccordion(index: number): void {
-    this.accordionState[index] = !this.accordionState[index];
-  }
-
   onMonthChange(): void {
     if (this.timesheet.month) {
       this.updateMondays(this.timesheet.year, this.timesheet.month);
@@ -160,7 +156,6 @@ export class TimeSheetComponent {
   onWeekendDateSelect(): void {
     if (this.timesheet.weekendDate) {
       this.populateWeekDays(this.timesheet.weekendDate);
-      this.openFillYourTimesheetAccordion();
     }
   }
 
@@ -188,17 +183,25 @@ export class TimeSheetComponent {
   }
 
   openFillYourTimesheetAccordion(): void {
-    this.accordionState = [false, false, true];
+    // this.accordionState = [false, false, true];
   }
 
-  onSubmit(form: any): void {
-    if (form.valid) {
-      this.timesheetService.addTimesheet(this.timesheetEntry).subscribe(() => {
-        this.loadTimesheets();
-        form.resetForm();
-      });
-    }
+onSubmit(form: any): void {
+  if (form.valid) {
+    const payload = {
+      ...this.timesheetEntry,
+      status: 'Pending',  // Always store as Pending when submitting
+      employeeName: this.timesheet.employeeName
+    };
+
+    this.timesheetService.addTimesheet(payload).subscribe(() => {
+      this.loadTimesheets();
+      form.resetForm();
+      this.timesheetEntry.status = 'Pending';
+    });
   }
+}
+
 
   validateWeekDay(day: string): boolean {
     return this.weekDays.includes(day as WeekDay);

@@ -66,7 +66,7 @@ this.birthdayCount = data.birthdaysToday.length;
   window.dispatchEvent(new Event("showTotalEmployeeTab"));
 }
 openTotalProject() {
-  this.router.navigate(['/new-Home/teams-dashboard/projects']);
+  this.router.navigate(['/new-home/teams-dashboard/projects']);
 }
 
 openLeaveRequest(){

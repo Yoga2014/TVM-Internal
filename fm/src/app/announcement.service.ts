@@ -8,7 +8,7 @@ import { AdminGuard } from './AllServices/admin.guard';
   providedIn: 'root'
 })
 export class AnnouncementService {
-  private apiUrl = 'http://localhost:3001/announcements'; // Adjust this URL to your setup
+  private apiUrl = 'http://localhost:3002/announcements'; // Adjust this URL to your setup
 
   constructor(private http: HttpClient) { }
 

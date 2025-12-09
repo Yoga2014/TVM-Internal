@@ -17,13 +17,11 @@ export class EmployeeDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private newHiresService: NewHiresService, private router: Router) { }
 
   ngOnInit(): void {
-   const id = Number(this.route.snapshot.paramMap.get('id'));
-
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.newHiresService.getEmployeeById(id).subscribe(
         (employee: Employee) => {
           this.employee = employee;
-         
         },
         (error: any) => {
           console.error('Failed to fetch employee details', error);
@@ -69,20 +67,19 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
 deleteEmployee(): void {
-  if (!this.employee || !this.employee.id) {
-    console.error('No Employee ID found!');
-    return;
+  if (this.employee) {
+    this.newHiresService.deleteEmployee(this.employee.id).subscribe(
+      () => {
+        this.employee = null; // stop showing the old data
+        this.router
+          .navigate(['/new-Home/organization/new-hires'])
+          .then(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
+      },
+      (error: any) => {
+        console.error('Failed to delete employee', error);
+      }
+    );
   }
-
-  this.newHiresService.deleteEmployee(this.employee.id).subscribe({
-    next: () => {
-      alert('Employee deleted successfully');
-       this.router.navigate(['/organization/new-hires']); 
-    },
-    error: (err) => {
-      console.error('Delete failed:', err);
-    }
-  });
 }
 
 

@@ -1,0 +1,8 @@
+<nav class="navbar">
+    <div class="nav-item" [class.active]="activeNavItem === 'admin-time-summary'" (click)="navigateToTimeSheet()">Time Requesters-List</div>
+    <div class="nav-item" [class.active]="activeNavItem === 'admin-time-tracking'" (click)="navigateToTimeTracking()">Time-sheet Summary</div>
+  </nav>
+<div class="main-content">
+  <app-admin-time-summary *ngIf="activeNavItem === 'admin-time-summary'"></app-admin-time-summary>
+  <app-admin-time-tracking *ngIf="activeNavItem === 'admin-time-tracking'"></app-admin-time-tracking>
+</div>

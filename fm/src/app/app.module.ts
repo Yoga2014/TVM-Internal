@@ -109,6 +109,10 @@ import { AdminrequestComponent} from './leave-approve/admin-request/admin-reques
 import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summary.component';
 import { EmpProfileComponent } from './emp-profile/emp-profile.component';
 import { PresentEmployeeComponent } from './present-employee/present-employee.component';
+import { TimeRequestComponent } from './time-request/time-request.component';
+import { AdminTimeSummaryComponent } from './Admin-Timesheet/admin-time-summary/admin-time-summary.component';
+import { AdminTimeTrackingComponent } from './Admin-Timesheet/admin-time-tracking/admin-time-tracking.component';
+import { AdminTimeSheetComponent } from './Admin-Timesheet/admin-time-sheet/admin-time-sheet.component';
 
 
 @NgModule({
@@ -121,6 +125,9 @@ import { PresentEmployeeComponent } from './present-employee/present-employee.co
     EmpProfileComponent,
     EducationalComponent,
     SkillsetComponent,
+    AdminTimeSheetComponent,
+    AdminTimeSummaryComponent,
+    AdminTimeTrackingComponent,
     SkillSetMatrixComponent,
     ProfessionalComponent,
     DashboardComponent,
@@ -134,7 +141,6 @@ import { PresentEmployeeComponent } from './present-employee/present-employee.co
     LeaveReporteesComponent,
     OnLeaveComponent,
     LeaveTrackingComponent,
-    
     LeaveBalanceComponent,
     LeaveRequestsComponent,
     LeaveReportDashboardComponent,
@@ -182,6 +188,7 @@ import { PresentEmployeeComponent } from './present-employee/present-employee.co
     TimeSheetComponent,
     TimeTrackingComponent,
     TimeTrackingMyDataComponent,
+    TimeRequestComponent,
     LoginComponent,
     RegistrationComponent,
     ForgetPasswordComponent,

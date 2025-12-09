@@ -5,42 +5,55 @@
     <div class="pro">Project List</div>
   </div>
   <!-- Add Project Button  -->
- <div class="card-body">
+  <div class="card-body">
     <button type="button" (click)="openToast()" class="btn btn-primary" data-bs-toggle="offcanvas"
       data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
   </div>
 </div>
 
 <!-- Table to Display Project Data -->
- <div class="table-wrapper">
-<table class="project-table">
+<div class="table-wrapper">
+  <table class="project-table">
     <tr>
       <th>Project Name</th>
       <th>Client Name</th>
       <th>Domain</th>
       <th>Status</th>
-      <th>Actions</th>
     </tr>
     <tr *ngFor="let item of submittedData">
       <td>{{ item.projectname }}</td>
       <td>{{ item.clientname }}</td>
       <td>{{ item.domain }}</td>
       <td>{{item.projectStatus}}</td>
-      <td>
-        <button class="edit-btn" (click)="edit(item.id)" class="alert alert-primary" role="alert"
-         >Edit</button>
-        <button class="delete-btn" (click)="delete(item.id,'Success', 'Project deleted successfully!')"
-          class="alert alert-danger" role="alert">Delete</button>
-      </td>
-    </tr>
-</table>
+<td class="position-relative">
+  <button class="btn btn-link p-0" (click)="toggleDropdown(item)">
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+
+  <div *ngIf="selectedItem === item" class="dropdown-card">
+      <button (click)="edit(item.id)">Edit</button>
+      <button (click)="delete(item.id)">Delete</button>
+  </div>
+</td>
+
+
+<div 
+  class="global-dropdown" 
+  *ngIf="dropdownVisible" 
+  [ngStyle]="{ top: dropdownPosition.top, left: dropdownPosition.left }"
+>
+  <div class="dropdown-item" (click)="edit(selectedItem.id)">Edit</div>
+  <div class="dropdown-item" (click)="delete(selectedItem.id)">Delete</div>
 </div>
 
 
-
+    </tr>
+  </table>
+</div>
 
 <!-- Add Project Form -->
-<div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}" aria-labelledby="offcanvasFormLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}"
+  aria-labelledby="offcanvasFormLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
     <button type="button" class="btn-close" data-bs-target="#offcanvasForm" data-bs-dismiss="offcanvas"
@@ -48,8 +61,7 @@
 
   </div>
   <div class="offcanvas-body">
-    <form [formGroup]="projectForm"
-      (ngSubmit)="isEditMode ? update() : onSubmit()">
+    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update() : onSubmit()">
       <!-- Project Name -->
       <div class="mb-3">
         <label for="projectName" class="form-label">Project Name</label>
@@ -59,7 +71,8 @@
           *ngIf="projectForm.get('projectname')?.invalid && (projectForm.get('projectname')?.dirty || projectForm.get('projectname')?.touched)"
           class="invalid-feedback">
           <div *ngIf="projectForm.get('projectname')?.errors?.['required']">Project name is required.</div>
-          <div *ngIf="projectForm.get('projectname')?.errors?.['minlength']">Project name must be at least 3 characters long.</div>
+          <div *ngIf="projectForm.get('projectname')?.errors?.['minlength']">Project name must be at least 3 characters
+            long.</div>
         </div>
       </div>
 
@@ -78,7 +91,9 @@
         <label for="domain" class="form-label">Domain</label>
         <input type="text" class="form-control" id="domain" formControlName="domain"
           [class.is-invalid]="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.touched || projectForm.get('domain')?.dirty)">
-        <div *ngIf="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.touched || projectForm.get('domain')?.dirty)" class="invalid-feedback">
+        <div
+          *ngIf="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.touched || projectForm.get('domain')?.dirty)"
+          class="invalid-feedback">
           Domain is required.
         </div>
       </div>
@@ -100,7 +115,9 @@
         <label for="voice" class="form-label">Voice</label>
         <input type="text" class="form-control" id="voice" formControlName="voice"
           [class.is-invalid]="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.touched || projectForm.get('voice')?.dirty)">
-        <div *ngIf="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.touched || projectForm.get('voice')?.dirty)" class="invalid-feedback">
+        <div
+          *ngIf="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.touched || projectForm.get('voice')?.dirty)"
+          class="invalid-feedback">
           <div *ngIf="projectForm.get('voice')?.errors?.['maxlength']">Voice must be less than 100 characters.</div>
         </div>
       </div>
@@ -188,7 +205,8 @@
       <!-- Submit and Cancel Buttons -->
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary me-2" [disabled]="!projectForm.valid || isEditMode">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="update()" [disabled]="!projectForm.valid || !isEditMode">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="update()"
+          [disabled]="!projectForm.valid || !isEditMode">Update</button>
       </div>
     </form>
   </div>

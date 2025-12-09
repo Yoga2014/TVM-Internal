@@ -73,6 +73,7 @@ export class LeaveRequestsComponent implements OnInit {
     }
   }
 
+
   deleteSelectedRequests(): void {
   if (this.selectedRequests.length === 0) {
     alert("Select at least one request to delete.");
@@ -104,5 +105,4 @@ export class LeaveRequestsComponent implements OnInit {
     this.selectedRequests = [];
   }
 }
-
 }

@@ -36,7 +36,6 @@
               "node_modules/bootstrap/scss/bootstrap-utilities.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
@@ -108,7 +107,6 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-
             ]
           }
         }

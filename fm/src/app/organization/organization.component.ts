@@ -25,43 +25,43 @@ export class OrganizationComponent {
   navigatePolicies(){
     this.activeNavItem = 'policies';
     this.subNavChange.emit('Policies'); 
-    this.router.navigate(['/policies']);
+    this.router.navigate(['/new-home/organization/policies']);
   }
   
   navigateAnnouncements(){
     this.activeNavItem = 'announcements';
     this.subNavChange.emit('Announcements'); 
-    this.router.navigate(['/announcements']);
+    this.router.navigate(['/new-home/organization/announcements']);
   }
   
   navigateEmployeeTree(){
     this.activeNavItem = 'employeeTree';
     this.subNavChange.emit('Employee Tree'); 
-    this.router.navigate(['/employeeTree']);
+    this.router.navigate(['/new-home/organization/employee-tree']);
   }
   
   navigateDepartmentTree(){
     this.activeNavItem = 'departmentTree';
     this.subNavChange.emit('Department Tree'); 
-    this.router.navigate(['/departmentTree']);
+    this.router.navigate(['/new-home/organization/department-tree']);
   }
   
   navigateDepartmentDirectory(){
     this.activeNavItem = 'departmentDirectory';
     this.subNavChange.emit('Department Directory'); 
-    this.router.navigate(['/departmentDirectory']);
+    this.router.navigate(['/new-home/organization/department-directory']);
   }
   
   navigateBirthdayFolks(){
     this.activeNavItem = 'birthdayFolks';
     this.subNavChange.emit('Birthday Folks'); 
-    this.router.navigate(['/birthdayFolks']);
+    this.router.navigate(['/new-home/organization/birthday-folks']);
   }
   
   navigateNewHires(){
     this.activeNavItem = 'newHires';
     this.subNavChange.emit('New Hires'); 
-    this.router.navigate(['/newHires']);
+    this.router.navigate(['/new-home/organization/new-hires']);
   }
 
 }

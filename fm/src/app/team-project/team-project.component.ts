@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamProjectService } from './team-project.service';
@@ -6,49 +6,51 @@ import { TeamProject } from '../Interface/team-project';
 
 
 
-  @Component({
-    selector: 'app-team-project',
-    templateUrl: './team-project.component.html',
-    standalone: false,
-    styleUrls: ['./team-project.component.scss']
-  })
-  export class TeamProjectComponent{
-    projectForm: FormGroup = this.fb.group({
-      projectname: ['', [Validators.required, Validators.minLength(3)]],
-      clientname: ['', Validators.required],
-      domain: ['', Validators.required],
-      startDate: ['', Validators.required],
-      voice: ['', [Validators.required, Validators.maxLength(100)]],
-      voicestartDate: ['', Validators.required],
-      voiceendDate: [''],
-      coding: ['', [Validators.required, Validators.maxLength(100)]],
-      codingstartDate: ['', Validators.required],
-      codingendDate: [''],
-      asset: this.fb.array([]),
-      projectStatus: ['', Validators.required] 
-    });
-    @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
-    @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
-    toastTitle = '';
-    toastMessage = '';
-    projects: any[] = [];
-    projectId: string | null = null;
-    isEditMode = false;
-    submittedData: any[] = [];
-    editID: any;
-    showToast: boolean = false; // This should be a boolean
-    updatebtn:boolean=false;
-    submit:boolean=false
-    toastTime: string = 'Just now';
-    isOffcanvasOpen = false;
-  
-    constructor(
-      public fb: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private renderer: Renderer2,
-      private teams: TeamProjectService
-    ) {}
+@Component({
+  selector: 'app-team-project',
+  templateUrl: './team-project.component.html',
+  standalone: false,
+  styleUrls: ['./team-project.component.scss']
+})
+export class TeamProjectComponent {
+  projectForm: FormGroup = this.fb.group({
+    projectname: ['', [Validators.required, Validators.minLength(3)]],
+    clientname: ['', Validators.required],
+    domain: ['', Validators.required],
+    startDate: ['', Validators.required],
+    voice: ['', [Validators.required, Validators.maxLength(100)]],
+    voicestartDate: ['', Validators.required],
+    voiceendDate: [''],
+    coding: ['', [Validators.required, Validators.maxLength(100)]],
+    codingstartDate: ['', Validators.required],
+    codingendDate: [''],
+    asset: this.fb.array([]),
+    projectStatus: ['', Validators.required]
+  });
+  @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
+  @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
+  toastTitle = '';
+  toastMessage = '';
+  projects: any[] = [];
+  projectId: string | null = null;
+  isEditMode = false;
+  submittedData: any[] = [];
+  editID: any;
+  showToast: boolean = false; // This should be a boolean
+  updatebtn: boolean = false;
+  submit: boolean = false
+  toastTime: string = 'Just now';
+  isOffcanvasOpen = false;
+
+  constructor(
+    public fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private renderer: Renderer2,
+    private teams: TeamProjectService
+  ) { }
+
+  dropdownItem: any = null;
 
   ngOnInit() {
     this.getdata();
@@ -69,22 +71,22 @@ import { TeamProject } from '../Interface/team-project';
       projectStatus: data.projectStatus
     });
 
-const assetsArray = this.projectForm.get('asset') as FormArray;
-assetsArray.clear();
-if (data.asset) {
-  data.asset
-    .filter((a: string | null) => a != null) // specify type
-    .forEach((asset: string) => assetsArray.push(new FormControl(asset)));
-}
+    const assetsArray = this.projectForm.get('asset') as FormArray;
+    assetsArray.clear();
+    if (data.asset) {
+      data.asset
+        .filter((a: string | null) => a != null) // specify type
+        .forEach((asset: string) => assetsArray.push(new FormControl(asset)));
+    }
 
   }
 
   allAssets: string[] = ['laptop', 'charger', 'headset', 'mouse'];
 
-// Getter for asset FormArray
-get assetArray(): FormArray {
-  return this.projectForm.get('asset') as FormArray;
-}
+  // Getter for asset FormArray
+  get assetArray(): FormArray {
+    return this.projectForm.get('asset') as FormArray;
+  }
 
   getdata() {
     this.teams.getMethod().subscribe((response: any) => {
@@ -117,29 +119,30 @@ get assetArray(): FormArray {
     }
   }
 
-onCheckboxChange(event: any) {
-  const assets: FormArray = this.assetArray;
-  if (event.target.checked) {
-    assets.push(new FormControl(event.target.value));
-  } else {
-    const index = assets.controls.findIndex(control => control.value === event.target.value);
-    if (index >= 0) {
-      assets.removeAt(index);
+  onCheckboxChange(event: any) {
+    const assets: FormArray = this.assetArray;
+    if (event.target.checked) {
+      assets.push(new FormControl(event.target.value));
+    } else {
+      const index = assets.controls.findIndex(control => control.value === event.target.value);
+      if (index >= 0) {
+        assets.removeAt(index);
+      }
     }
   }
-}
 
 
-edit(id: any) {
-  const project = this.submittedData.find(p => p.id === id);
-  if (project) {
-    this.populateForm(project);
-    this.isEditMode = true;
-    this.editID = project.id;
-    this.showToast = true; // open offcanvas
+  edit(id: any) {
+    const project = this.submittedData.find(p => p.id === id);
+    if (project) {
+      this.populateForm(project);
+      this.isEditMode = true;
+      this.editID = project.id;
+      this.showToast = true; // open offcanvas
+    }
+    this.closeDropdown();
   }
-}
-  
+
   openToast() {
     this.showToast = true;
     this.isEditMode = false;
@@ -155,11 +158,10 @@ edit(id: any) {
         this.isEditMode = false;
         this.showToast = false;
       });
-
     }
   }
 
-  delete(id: any, title: string, message: string) {
+  delete(id: any) {
     this.teams.deleteMethod(id).subscribe(() => {
       this.getdata();
     });
@@ -173,7 +175,20 @@ edit(id: any) {
     this.isEditMode = false;
   }
 
-  closeToast(){
-    this.showToast = false; 
+  closeToast() {
+    this.showToast = false;
   }
+  dropdownVisible = false;
+  dropdownPosition = { top: '0px', left: '0px' };
+  selectedItem: any = null;
+
+toggleDropdown(item: any) {
+  this.selectedItem = this.selectedItem === item ? null : item;
+}
+
+
+closeDropdown() {
+  this.selectedItem = null;
+}
+
 }

@@ -35,21 +35,21 @@ export class TeamsDashboardComponent {
     this.activeNavItem = 'team-space';
     this.subNavChange.emit('Team Space');
 
-    this.router?.navigate(['new-Home/teams-dashboard', 'team-space']);
+    this.router?.navigate(['new-home/teams-dashboard', 'team-space']);
   }
 
   navigateToReportees()
   {
     this.activeNavItem = 'team-reportees';
     this.subNavChange.emit('Reportees');
-    this.router.navigate(['new-Home/teams-dashboard', 'team-reportees']);
+    this.router.navigate(['new-home/teams-dashboard', 'team-reportees']);
   }
 
   navigateToDepartment()
   {
     this.activeNavItem = 'department';
     this.subNavChange.emit('Department');
-    this.router.navigate(['new-Home/teams-dashboard', 'department']);
+    this.router.navigate(['new-home/teams-dashboard', 'department']);
   }
 
   navigateToProjects()
@@ -57,14 +57,14 @@ export class TeamsDashboardComponent {
     this.activeNavItem = 'projects';
     this.subNavChange.emit('Projects');
 
-    this.router.navigate(['new-Home/teams-dashboard', 'projects'])
+    this.router.navigate(['new-home/teams-dashboard', 'projects'])
   }
 
   navigateToTeamList()
   {
     this.activeNavItem = 'team-list';
     this.subNavChange.emit('Team List');
-    this.router.navigate(['new-Home/teams-dashboard', 'team-list']);
+    this.router.navigate(['new-home/teams-dashboard', 'team-list']);
   }
 
 }

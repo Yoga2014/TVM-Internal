@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class details {
   private apiUrl = 'http://localhost:8080/api/profile';
 
-  private userRole =  'http://localhost:3000/users';
+  private userRole =  'http://localhost:3003/users';
 
   constructor(private http: HttpClient) {}
 
