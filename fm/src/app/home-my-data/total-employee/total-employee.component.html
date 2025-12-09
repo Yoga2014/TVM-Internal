@@ -1,5 +1,5 @@
 <div class="table-container">
-  <table>
+  <table class="main-table">
     <thead>
       <tr>
         <th>Employee Name</th>
@@ -10,27 +10,27 @@
         <th>Action</th>
       </tr>
     </thead>
-    </table>
-
-    <div class="table-body">
-        <table>
-    <tbody>
-      <tr *ngFor="let data of datas">
-        <td>{{ data.employeeName }}</td>
-        <td>{{ data.employeeCode }}</td>
-        <td>{{ data.designation }}</td>
-        <td>{{ data.location }}</td>
-        <td>{{ data.department }}</td>
-        <td>
-          <button class="view-btn" (click)="viewEmployee(data)">View</button>
-        </td>
-      </tr>
-
-      <!-- No Data Message -->
-      <tr *ngIf="datas.length === 0">
-        <td colspan="6" class="no-data">No data found</td>
-      </tr>
-    </tbody>
   </table>
+
+  <!-- Scrollable Body -->
+  <div class="table-body">
+    <table class="main-table">
+      <tbody>
+        <tr *ngFor="let data of datas">
+          <td>{{ data.employeeName }}</td>
+          <td>{{ data.employeeCode }}</td>
+          <td>{{ data.designation }}</td>
+          <td>{{ data.location }}</td>
+          <td>{{ data.department }}</td>
+          <td>
+            <button class="view-btn" (click)="viewEmployee(data)">View</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="datas.length === 0">
+          <td colspan="6" class="no-data">No data found</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

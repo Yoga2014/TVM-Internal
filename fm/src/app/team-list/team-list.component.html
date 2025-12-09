@@ -23,9 +23,8 @@
         <tr>
           <th>Employee ID</th>
           <th>First Name</th>
-          <th>Last Name</th>
           <th>Email</th>
-          <th>Team</th>
+           <th>Project</th>
           <th>Designation</th>
           <th>Action</th>
         </tr>
@@ -35,9 +34,8 @@
         <tr *ngFor="let emp of filteredEmployees">
           <td>{{ emp.employeeCode }}</td>
           <td>{{ emp.firstName }}</td>
-          <td>{{ emp.lastName }}</td>
           <td>{{ emp.email }}</td>
-          <td>{{ emp.team }}</td>
+          <td>{{ emp.project }}</td>
           <td>{{ emp.designation }}</td>
           <td>
             <button class="view-btn" (click)="viewEmployee(emp)">View</button>
@@ -71,7 +69,7 @@
     <h4>Personal Details</h4>
     <div class="profile-info">
       <p><strong>Date of Birth:</strong> {{ selectedEmployee.dob }}</p>
-      <p><strong>Joining Date:</strong> {{ selectedEmployee.joiningDate }}</p>
+      <p><strong>Joining Date:</strong> {{ selectedEmployee.joinDate }}</p>
       <p><strong>PAN Number:</strong> {{ selectedEmployee.pan }}</p>
     </div>
   </div>
@@ -95,7 +93,7 @@
   <div class="profile-section mb-4">
     <h4>System Info</h4>
     <div class="profile-info">
-      <p><strong>Record Created At:</strong> {{ selectedEmployee.createdAt }}</p>
+      <p><strong>Record Created At:</strong> {{ selectedEmployee.record }}</p>
       <p><strong>ID:</strong> {{ selectedEmployee.id }}</p>
     </div>
   </div>

@@ -1,12 +1,6 @@
 {
   "hiring": [
     {
-      "id": "2",
-      "employeeId": 2,
-      "employeeName": "Priya Sharma",
-      "joinDate": "2025-11-28T00:00:00"
-    },
-    {
       "id": "3",
       "employeeId": 3,
       "employeeName": "Michael Smith",

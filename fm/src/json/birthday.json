@@ -9,14 +9,14 @@
           "generalTiming": "9:00 AM - 6:00 PM",
           "leaveBooked": 2,
           "image": "https://i.pravatar.cc/150?img=3",
-          "joinDate": "2024-12-05",
+          "joinDate": "2024-12-09",
           "onLeave": false,
           "date": "2024-12-12"
         },
         {
           "employeeId": "EMP002",
           "employeeName": "Jane Smith",
-          "dob": "1988-12-08",
+          "dob": "1988-12-09",
           "profilePicture": "https://example.com/profiles/janesmith.jpg",
           "status": "On Leave",
           "generalTiming": "10:00 AM - 7:00 PM",
@@ -35,7 +35,7 @@
           "generalTiming": "8:00 AM - 5:00 PM",
           "leaveBooked": 0,
           "image": "https://example.com/profiles/robertbrown.jpg",
-          "joinDate": "2024-12-01",
+          "joinDate": "2024-12-09",
           "onLeave": false,
           "date": "2024-12-12"
         },
@@ -66,7 +66,4 @@
           "date": "2024-12-12"
         }
       ]
-      
-        
-    
-}
+    }
