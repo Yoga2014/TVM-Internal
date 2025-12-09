@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../AllServices/team.service';
-import { EmployeeService } from '../AllServices/employee.service';
-import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-team-list',

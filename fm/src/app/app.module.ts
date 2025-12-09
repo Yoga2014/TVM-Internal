@@ -107,6 +107,8 @@ import { ParticularEmpComponent } from './home-my-data/particular-emp/particular
 import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
 import { AdminrequestComponent} from './leave-approve/admin-request/admin-request.component';
 import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summary.component';
+import { EmpProfileComponent } from './emp-profile/emp-profile.component';
+import { PresentEmployeeComponent } from './present-employee/present-employee.component';
 
 
 @NgModule({
@@ -116,6 +118,7 @@ import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summar
     DetailsComponent,
     PersonalDataFormComponent,
     GeneralComponent,
+    EmpProfileComponent,
     EducationalComponent,
     SkillsetComponent,
     SkillSetMatrixComponent,
@@ -185,7 +188,8 @@ import { AdminsummaryComponent} from './leave-approve/admin-summary/admin-summar
     AppraisalFormComponent,
     LeaveapproveComponent,
     AdminrequestComponent,
-    AdminsummaryComponent
+    AdminsummaryComponent,
+    PresentEmployeeComponent
   ],
   imports: [
     BrowserModule,

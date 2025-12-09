@@ -119,7 +119,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+    this.router.navigate(['/new-Home/emp-profile']);
   }
+
+  
 
   @HostListener('document:click', ['$event'])
   closeDropdown(event: any) {

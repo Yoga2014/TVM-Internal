@@ -68,6 +68,8 @@ import { ParticularEmpComponent } from './home-my-data/particular-emp/particular
 import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
 import { AdminrequestComponent } from './leave-approve/admin-request/admin-request.component';
 import { AdminsummaryComponent } from './leave-approve/admin-summary/admin-summary.component';
+import { EmpProfileComponent } from './emp-profile/emp-profile.component';
+import { PresentEmployeeComponent } from './present-employee/present-employee.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -138,17 +140,20 @@ const routes: Routes = [
     path: 'new-Home',
     component: NewHomeComponent,
     canActivate: [AuthGuard],
+
     children: [
-       { path: '', redirectTo: 'my-space', pathMatch: 'full' },
+       { path: '', redirectTo: 'my-space', pathMatch: 'full' },        
+      { path: 'emp-profile', component: EmpProfileComponent },
       {
         path: 'my-space',
         component: HomeMyDataComponent,
         children: [
           { path: 'overview', component: OverviewComponent },
+          { path: 'present-employee', component: PresentEmployeeComponent },
           { path: 'total-employee', component:TotalEmployeeComponent },
           { path: 'particular-emp', component: ParticularEmpComponent },
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'calendar', component: CalendarComponent },
+          { path: 'calendar', component: CalendarComponent }
         ],
       },
 
@@ -156,8 +161,9 @@ const routes: Routes = [
         path: 'teams-dashboard',
         component: TeamsDashboardComponent,
         children: [
-          { path: '', redirectTo: 'team-space', pathMatch: 'full' },
+          { path: '', redirectTo: 'department', pathMatch: 'full' },
           { path: 'team-space', component: TeamsSpaceComponent },
+      
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },
           { path: 'projects', component: TeamProjectComponent },

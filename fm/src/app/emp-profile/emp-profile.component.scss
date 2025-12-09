@@ -1,0 +1,143 @@
+.profile-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #333;
+  font-family: Arial, sans-serif;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  /* Profile Header */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #007bff;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      background: #3f51b5;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .profile-basic {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #007bff;
+      }
+
+      p {
+        margin: 0.2rem 0;
+        font-size: 0.95rem;
+        color: #555;
+      }
+    }
+  }
+
+  /* Profile Sections */
+  .profile-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+
+    h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #007bff;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    .profile-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+
+      p {
+        margin: 0.2rem 0;
+        font-size: 0.95rem;
+
+        strong {
+          color: #333;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  /* Optional back button */
+  .back-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+
+    .profile-photo,
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    .profile-basic h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  .profile-section .profile-info {
+    grid-template-columns: 1fr;
+  }
+}

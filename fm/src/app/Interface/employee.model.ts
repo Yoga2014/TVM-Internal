@@ -1,7 +1,7 @@
 
 export interface Employee {
   id:number;
-  employeeId?: string | any;
+  employeeId?: number | any;
   employeeName?: string;
   dob?: string | any;
   profilePicture?: string;

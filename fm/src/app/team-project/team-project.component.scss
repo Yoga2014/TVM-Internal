@@ -1,296 +1,348 @@
-/* Offcanvas Styles */
-.offcanvas {
-    width: 100%;
-    max-width: 500px; /* Adjust as needed */
-  }
-  
-  /* Offcanvas header and footer */
-  .offcanvas-header {
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .offcanvas-footer {
-    border-top: 1px solid #dee2e6;
-  }
-  
-  .card-body {
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 1000px;
-    margin-top: -38px;
-    position: static;
-    
-  }
-  .card-body .btn{
-    background-color: white;
-    color: rgb(33, 9, 121);
-   
-  }
+$primary-color: #1e3c72;
+$secondary-color: #259862;
+$accent-color: #007bff;
+$danger-color: #f44336;
+$light-bg: #f8f9fa;
+$white: #fff;
+$text-color: #333;
+$table-header-bg: rgba(57, 113, 255, 0.878);
 
- .card-header {
-background-color: #259862;
-  }
-  .form-check{
-    display: inline-flex;
-    margin-left: 20px;
-    padding-top: 5px;
-  }
-
-  .container {
-    margin-top: 4rem;
-  }
-  
-  .submitted-data {
-    margin-top: 1rem;
-  }
-  
-  .submitted-data .d-flex.flex-wrap p {
-    margin-right: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .submitted-data p {
-    margin-bottom: 0.5rem;
-  }
-  .projectlist{
-    color:white;
-    background-color: #1e3c72;
-    height: 40px;
-    padding: 20px;
-  }
- .pro{
- margin-top: -304px;
- }
- .container {
-  margin-top: 20px;
+.container {
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: $light-bg;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(151, 18, 18, 0.1);
-  height: 80px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .projectlist {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background-color: #1e3c72;
+  padding: 15px 20px;
+  background-color: $primary-color;
   border-radius: 5px;
-  color: #fff;
+  color: $white;
   font-weight: bold;
   font-size: 1.2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  .pro {
+    margin: 0;
+    font-size: 1.2rem;
+  }
 }
 
-.projectlist .pro {
-  margin: 0; /* Ensure no extra margin */
-  font-size: 1.2rem; /* Adjust font size if needed */
+.card-body {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -38px;
+  
+  .btn {
+    background-color: $white;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
 }
 
-/* CSS */
 .project-table {
-  width: 90%;
-  border-collapse: collapse;
-  margin: 20px 70px;
-  font-family: Arial, sans-serif;
-  
-  
-}
-
-.project-table thead {
-  background-color: #f4f4f4;
-}
-
-.project-table th, .project-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.project-table tr:hover {
-  background-color: #ede5e5;
-}
-
-.project-table th {
-  background-color: rgba(57, 113, 255, 0.878);
-  color: #fff;
-  font-weight: bold;
-  margin: 10px;
-
-  
-  
-}
-
-.project-table td select {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  max-width: 1200px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
 
+  thead {
+    background-color: $table-header-bg;
+    color: $white;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  tr:hover {
+    background-color: #ede5e5;
+  }
+
+  select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+/* ACTION BUTTONS (Table) */
+.action-buttons {
+  display: flex;
+  gap: 8px;
 }
 
 .edit-btn, .delete-btn {
-  padding: 8px 12px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
+  border-radius: 8px;
   font-size: 14px;
-  margin-right: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 80px;
+  transition: all 0.3s ease;
 }
 
+/* Edit Button */
 .edit-btn {
-  background-color: #4CAF50; /* Green */
+  background: #0d6efd; // bootstrap primary blue
+  color: #fff;
+
+  &:hover {
+    background: #fff;
+    color: #0d6efd;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, .45);
+    transform: translateY(-2px);
+  }
 }
 
+/* Delete Button */
 .delete-btn {
-  background-color: #f44336; /* Red */
-}
+  background: #dc3545; // bootstrap danger red
+  color: #fff;
 
-.edit-btn:hover, .delete-btn:hover {
-  opacity: 0.8;
-}
-
-
-/* Dropdown Styling */
-select {
-  padding: 5px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* Action Buttons Layout */
-.action-buttons {
-  display: flex;
-  justify-content: space-around;
-  gap: 10px;
-}
-
-/* Button Styles */
-button {
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-
-  border-radius: 20px;
-  background-color: #007bff;
-  color: white;
-  transition: background-color 0.3s ease;
-}
-
-button:last-child {
-  background-color: #dc3545;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Responsive Grid for Smaller Screens */
-/* Tablet view (768px to 1024px) */
-@media (max-width: 1024px) and (min-width: 768px) {
-  .projectlist .pro {
-    font-size: 20px;
-  }
-
-  .project-table th,
-  .project-table td {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .offcanvas-body form .form-control {
-    font-size: 14px;
-  }
-
-  .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-  .card-body{
-    padding: 10px;
-    margin-left: 400px;
+  &:hover {
+    background: #fff;
+    color: #dc3545;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, .45);
+    transform: translateY(-2px);
   }
 }
-
-/* Mobile view (max-width: 767px) */
-@media (max-width: 767px) {
-  .container {
-    padding: 10px;
-  }
-
-  .projectlist .pro {
-    font-size: 18px;
-  }
-
-  .project-table {
-    font-size: 12px;
-  }
-
-  .project-table th,
-  .project-table td {
-    padding: 8px;
-    font-size: 12px;
-  }
-
-  /* Stack form fields vertically */
-  .offcanvas-body form .row {
-    flex-direction: column;
-  }
-
-  .offcanvas-body form .col-md-6 {
-    width: 100%;
-    padding: 0;
-  }
-
-  .btn {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-
-  /* Ensure the offcanvas form adapts for small screens */
-  .offcanvas {
-    width: 100%;
-  }
-
 }
+
+.offcanvas {
+  width: 100%;
+  max-width: 500px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  &-header {
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn-close {
+      cursor: pointer;
+    }
+  }
+
+  &-body {
+    padding: 20px;
+
+    form {
+      .mb-3 {
+        margin-bottom: 15px;
+
+        label {
+          font-weight: 500;
+        }
+
+        input.form-control, select.form-select {
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 8px 10px;
+
+          &.is-invalid {
+            border-color: $danger-color;
+          }
+        }
+
+        .invalid-feedback {
+          font-size: 12px;
+          color: $danger-color;
+        }
+      }
+
+      .row {
+        display: flex;
+        gap: 10px;
+
+        .col-md-6 {
+          flex: 1;
+        }
+      }
+
+      .d-flex.justify-content-end {
+        gap: 10px;
+        margin-top: 10px;
+
+        button {
+          padding: 8px 16px;
+          border-radius: 5px;
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 15px;
+
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+}
+
 .toast {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
-}
 
-.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-.toast show{
- 
-  position: relative;
-  bottom: 231px;
-  right: -234px;
-  margin-left: 17px;
-  min-width: 250px;
-  
-}
-  
-
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  h2 {
-    font-weight: 600;
-    color: #333;
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
-nz-table {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
+button {
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:last-child {
+    background-color: $danger-color;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card-body { margin-left: auto; padding: 10px; }
+
+  .project-table th, .project-table td { padding: 10px; font-size: 13px; }
+}
+
+@media (max-width: 767px) {
+  .offcanvas-body form .row { flex-direction: column; }
+  .offcanvas-body form .col-md-6 { width: 100%; padding: 0; }
+  .project-table th, .project-table td { font-size: 12px; padding: 8px; }
+  .projectlist .pro { font-size: 18px; }
+  .card-body { margin-left: auto; }
+}
+
+
+.card-body {
+  
+  .btn {
+    background-color: #007bff; 
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+
+    &:hover {
+      background-color: #ffffff; 
+      color: black;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+    }
+  }
+}
+
+
+@media (max-width: 767px) {
+  .card-body {
+    justify-content: center; 
+    padding: 10px;
+
+    .btn {
+      width: 100%;
+      font-size: 16px;
+    }
+  }
+}
+
+
+/* FORM FOOTER BUTTONS */
+.d-flex.justify-content-end button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 6px 12px;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  }
+}
+
+/* Submit */
+.btn-primary {
+  background: #0d6efd;
+
+  &:hover {
+    background: #0b5ed7;
+  }
+}
+
+/* Update */
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+
+  &:hover {
+    background: #565e64;
+  }
+}
+
+
+.table-wrapper {
+  max-height: 400px;      // Set scrollable height
+  overflow-y: auto;       // Enable vertical scroll
+  overflow-x: hidden;     // Avoid horizontal scroll
+  margin-top: 15px;
+
+  border-radius: 6px;
+}
+
+/* Make header sticky */
+.project-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: $table-header-bg;
+  color: $white;
+  z-index: 10;
 }

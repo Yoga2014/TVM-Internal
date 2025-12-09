@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-track-task',
   templateUrl: './track-task.component.html',
-   standalone: false,
+  standalone: false,
   styleUrls: ['./track-task.component.scss']
 })
 export class TrackTaskComponent implements OnInit {
@@ -34,6 +34,7 @@ export class TrackTaskComponent implements OnInit {
 
     // Initialize the Reactive Form
     this.taskForm = this.fb.group({
+      id: [null],  // hidden, used for updates
       taskOwner: ['', Validators.required],
       taskName: ['', Validators.required],
       description: ['', Validators.required],
@@ -89,25 +90,40 @@ export class TrackTaskComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.taskForm.valid) {
-      const taskData = this.taskForm.value;
-      if (this.editingTask) {
-        taskData.id = this.editingTask.id;
-        this.taskService.updateTask(taskData).subscribe(() => {
-          this.loadTasks();
-          this.closeModal();
-        });
-      } else {
-        this.taskService.addTask(taskData).subscribe(() => {
-          this.loadTasks();
-          this.closeModal();
-        });
-      }
-    } else {
-      // Mark all fields as touched to show validation messages
+    if (!this.taskForm.valid) {
       this.taskForm.markAllAsTouched();
-      // You can also log errors or handle them as needed
       console.log('Form is invalid');
+      return;
+    }
+
+    // Take form values
+    const taskData = this.taskForm.value;
+
+    if (this.editingTask) {
+      // Ensure editingTask has a valid id
+      if (this.editingTask.id === undefined) {
+        console.error('Editing task has no id, cannot update');
+        return;
+      }
+
+      // Assign id for backend
+      taskData.id = this.editingTask.id;
+
+      this.taskService.updateTask(taskData).subscribe({
+        next: () => {
+          this.loadTasks();
+          this.closeModal();
+        },
+        error: (err) => console.error('Error updating task:', err)
+      });
+    } else {
+      this.taskService.addTask(taskData).subscribe({
+        next: () => {
+          this.loadTasks();
+          this.closeModal();
+        },
+        error: (err) => console.error('Error adding task:', err)
+      });
     }
   }
 
@@ -143,7 +159,6 @@ export class TrackTaskComponent implements OnInit {
 
       return matchesName && matchesPriority && matchesStatus;
     });
-
     console.log('Filters applied', this.filterCriteria);
     this.toggleFilterPopup();
   }
@@ -161,34 +176,34 @@ export class TrackTaskComponent implements OnInit {
 
 
 
- // In your component
-getCardClass(status: string): string {
-  switch (status) {
-    case 'Not Started':
-      return 'card-status-not-started';
-    case 'In Progress':
-      return 'card-status-in-progress';
-    case 'Completed':
-      return 'card-status-completed';
-    default:
-      return '';
+  // In your component
+  getCardClass(status: string): string {
+    switch (status) {
+      case 'Not Started':
+        return 'card-status-not-started';
+      case 'In Progress':
+        return 'card-status-in-progress';
+      case 'Completed':
+        return 'card-status-completed';
+      default:
+        return '';
+    }
   }
-}
 
-getPriorityClass(priority: string): string {
-  switch (priority) {
-    case 'High':
-      return 'priority-high';
-    case 'Medium':
-      return 'priority-medium';
-    case 'Low':
-      return 'priority-low';
-    default:
-      return '';
+  getPriorityClass(priority: string): string {
+    switch (priority) {
+      case 'High':
+        return 'priority-high';
+      case 'Medium':
+        return 'priority-medium';
+      case 'Low':
+        return 'priority-low';
+      default:
+        return '';
+    }
   }
-}
 
-getStatusClass(status: string): string {
-  return status.toLowerCase().replace(/ /g, '-');
-}
+  getStatusClass(status: string): string {
+    return status.toLowerCase().replace(/ /g, '-');
+  }
 }
