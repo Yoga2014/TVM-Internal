@@ -1,28 +1,6 @@
 {
   "tasks": [
     {
-      "taskOwner": "Durai",
-      "taskName": "Internal Project",
-      "description": "ongoing",
-      "startDate": "2024-08-21",
-      "dueDate": "2024-08-31",
-      "reminder": "2024-08-25",
-      "priority": "Medium",
-      "status": "In Progress",
-      "id": "b807"
-    },
-    {
-      "id": "3871",
-      "taskOwner": "Durai",
-      "taskName": "Internal Project",
-      "description": "ongoing",
-      "startDate": "2024-08-21",
-      "dueDate": "2024-08-31",
-      "reminder": "2024-08-25",
-      "priority": "Medium",
-      "status": "Not Started"
-    },
-    {
       "id": "c7e4",
       "taskOwner": "Durai",
       "taskName": "Internal Project",
