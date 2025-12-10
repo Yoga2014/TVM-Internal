@@ -2,9 +2,12 @@
 
   <!-- Profile Header -->
   <div class="profile-header">
-    <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" />
+    <!-- <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" /> -->
+      <div class="avatar-circle">
+      {{ selectedEmployee.employeeName?.charAt(0)?.toUpperCase() }}
+    </div>
     <div class="profile-basic">
-      <h2>{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</h2>
+      <h2>{{ selectedEmployee.employeeName}}</h2>
       <p class="text-muted">{{ selectedEmployee.designation }}</p>
       <p class="text-muted">Employee Code: {{ selectedEmployee.employeeCode }}</p>
     </div>
