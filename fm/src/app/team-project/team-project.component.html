@@ -1,5 +1,5 @@
 <!-- Toast Notification -->
-<div class="container mt-4">
+<div class="container ">
   <!-- Project List Tab -->
   <div class="projectlist">
     <div class="pro">Project List</div>
@@ -14,58 +14,46 @@
 <!-- Table to Display Project Data -->
 <div class="table-wrapper">
   <table class="project-table">
-    <tr>
-      <th>Project Name</th>
-      <th>Client Name</th>
-      <th>Domain</th>
-      <th>startDate</th>
-      <th>voice</th>
-      <th>voicestartDate</th>
-      <th>voiceendDate</th>
-      <th>coding</th>
-      <th>codingstartDate</th>
-      <th>codingendDate</th>
-      <th>Assets</th>
-      <th>Project Status</th>
-    </tr>
-    <tr *ngFor="let item of submittedData">
-      <td>{{ item.projectname }}</td>
-      <td>{{ item.clientname }}</td>
-      <td>{{ item.domain }}</td>
-      <td>{{ item.startDate }}</td>
-      <td>{{ item.voice }}</td>
-      <td>{{ item.voicestartDate }}</td>
-      <td>{{ item.voiceendDate || '-' }}</td>
-      <td>{{ item.coding }}</td>
-      <td>{{ item.codingstartDate }}</td>
-      <td>{{ item.codingendDate || '-' }}</td>
-      <td>{{ item.assets.join(', ') || '-' }}</td>
-      <td>{{item.projectStatus}}</td>
-<td class="position-relative">
-  <button class="btn btn-link p-0" (click)="toggleDropdown(item)">
-    <i class="bi bi-three-dots-vertical"></i>
-  </button>
+    <thead>
+      <tr>
+        <th>Project Holder Name</th>
+        <th>Project Voice Name</th>
+        <th>Project Id</th>
+        <th>Vendor</th>
+        <th>Client</th>
+        <th>Parent Company</th>
+        <th>Onboarded Date</th>
+        <th>Project Domain</th>
+        <th>Project Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of submittedData">
+        <td>{{ item.projectHolder }}</td>
+        <td>{{ item.projectVoice }}</td>
+        <td>{{ item.projectId }}</td>
+        <td>{{ item.vendor }}</td>
+        <td>{{ item.client }}</td>
+        <td>{{ item.parentCompany }}</td>
+        <td>{{ item.onboardedDate || '-' }}</td>
+        <td>{{ item.projectDomain }}</td>
+        <td>{{ item.projectStatus }}</td>
+        <td class="position-relative">
+          <button class="btn btn-link p-0" (click)="toggleDropdown(item)">
+            <i class="bi bi-three-dots-vertical"></i>
+          </button>
 
-  <div *ngIf="selectedItem === item" class="dropdown-card">
-      <button (click)="edit(item.id)">Edit</button>
-      <button (click)="delete(item.id)">Delete</button>
-  </div>
-</td>
-
-
-<div 
-  class="global-dropdown" 
-  *ngIf="dropdownVisible" 
-  [ngStyle]="{ top: dropdownPosition.top, left: dropdownPosition.left }"
->
-  <div class="dropdown-item" (click)="edit(selectedItem.id)">Edit</div>
-  <div class="dropdown-item" (click)="delete(selectedItem.id)">Delete</div>
-</div>
-
-
-    </tr>
+          <div *ngIf="selectedItem === item" class="dropdown-card">
+            <button (click)="edit(item.id)">Edit</button>
+            <button (click)="delete(item.id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
+
 
 <!-- Add Project Form -->
 <div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}"

@@ -68,4 +68,9 @@ export class OverviewComponent implements OnInit {
   openPresentEmployee() {
     window.dispatchEvent(new Event("showPresentEmployeeTab"));
   }
+  openBirthdayCard() {
+  this.router.navigate(['/new-home/organization/birthday-folks']);
 }
+openNewJoineesCard() {
+  this.router.navigate(['/new-home/organization/new-hires']);
+}}

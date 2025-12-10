@@ -10,7 +10,7 @@ $table-header-bg: rgba(57, 113, 255, 0.878);
 
 /* CONTAINER */
 .container {
-  margin: 20px auto;
+  margin: 5px auto;
   padding: 20px;
   background-color: $light-bg;
   border-radius: 8px;
@@ -62,42 +62,50 @@ $table-header-bg: rgba(57, 113, 255, 0.878);
   }
 }
 
-/* TABLE WRAPPER */
-.table-wrapper {
-  max-height: 440px;
-  overflow-x: auto;
-  overflow-y: visible;
-  position: relative;
-  margin-top: 20px;
-}
+
 
 /* PROJECT TABLE */
+.table-wrapper {
+  max-height: 440px;    // height of scrollable tbody
+  overflow-y: auto;     // vertical scroll only
+  overflow-x: hidden;
+}
+
 .project-table {
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
-  min-width: 1100px;
 
   thead {
-    background-color: $table-header-bg;
-    color: $white;
     position: sticky;
-    top: 0;
-    z-index: 10;
+    top: 0; // important for sticky header
+    background-color: $primary-color; // dark blue background
+    color: $white; // white text
+    z-index: 10; // ensures header is above tbody rows
   }
 
-  th,
-  td {
+  th, td {
     padding: 16px 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    vertical-align: middle;
+
+    // Remove background from th to avoid overriding thead
+    th {
+      background-color: $primary-color;
+      color: $white;
+    }
+
+    td {
+      background-color: $white; // keep tbody white
+    }
   }
 
-  tr:hover {
+  tbody tr:hover {
     background-color: #f1f1f1;
   }
+}
+
+
 
   select {
     width: 100%;
@@ -146,7 +154,7 @@ $table-header-bg: rgba(57, 113, 255, 0.878);
       transform: translateY(-2px);
     }
   }
-}
+
 
 /* DROPDOWN BUTTON & CARD */
 td.position-relative {

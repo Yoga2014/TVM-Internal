@@ -1,111 +1,114 @@
 {
   "project": [
     {
-      "projectname": "Website Development",
-      "clientname": "Mani",
-      "domain": "Backend",
-      "startDate": "2024-08-27",
-      "voice": "Scripting",
-      "voicestartDate": "2024-08-22",
-      "voiceendDate": null,
-      "coding": "Mozhi",
-      "codingstartDate": "2024-08-15",
-      "codingendDate": null,
-      "assets": [
-        "Logo",
-        "Wireframe"
-      ],
+      "projectHolder": "Dinish",
+      "projectVoice": "Dinesh",
+      "projectId": "PRO12",
+      "vendor": "Vignesh",
+      "client": "Visa",
+      "parentCompany": "Trigent",
+      "onboardedDate": "05-01-2024",
+      "projectStatus": "Active",
+      "projectDomain": "Finance"
+    },
+    {
+      "projectHolder": "Karthik",
+      "projectVoice": "Manoj",
+      "projectId": "PRO13",
+      "vendor": "Suresh",
+      "client": "Mastercard",
+      "parentCompany": "Infosys",
+      "onboardedDate": "12-01-2024",
+      "projectStatus": "Active",
+      "projectDomain": "Banking"
+    },
+    {
+      "projectHolder": "Arun",
+      "projectVoice": "Vijay",
+      "projectId": "PRO14",
+      "vendor": "Vignesh",
+      "client": "HDFC",
+      "parentCompany": "TCS",
+      "onboardedDate": "18-01-2024",
       "projectStatus": "Inactive",
-      "id": "5cfe"
+      "projectDomain": "Insurance"
     },
     {
-      "projectname": "DB Management System",
-      "clientname": "Joshua",
-      "domain": "Backend",
-      "startDate": "2024-08-08",
-      "voice": "Ergee",
-      "voicestartDate": "2024-08-23",
-      "voiceendDate": null,
-      "coding": "DG",
-      "codingstartDate": "2024-08-28",
-      "codingendDate": null,
-      "assets": [
-        "Database Schema"
-      ],
-      "projectStatus": "Pending",
-      "id": "a178"
-    },
-    {
-      "projectname": "Mobile App Development",
-      "clientname": "Varsha",
-      "domain": "Frontend",
-      "startDate": "2024-09-01",
-      "voice": "Recording",
-      "voicestartDate": "2024-09-02",
-      "voiceendDate": "2024-09-05",
-      "coding": "React Native",
-      "codingstartDate": "2024-09-06",
-      "codingendDate": "2024-09-20",
-      "assets": [
-        "App Icons",
-        "UI Design"
-      ],
+      "projectHolder": "Praveen",
+      "projectVoice": "Ravi",
+      "projectId": "PRO15",
+      "vendor": "Saravanan",
+      "client": "Amazon",
+      "parentCompany": "Trigent",
+      "onboardedDate": "25-01-2024",
       "projectStatus": "Active",
-      "id": "b234"
+      "projectDomain": "E-Commerce"
     },
     {
-      "projectname": "E-commerce Platform",
-      "clientname": "Kumar",
-      "domain": "Fullstack",
-      "startDate": "2024-07-15",
-      "voice": "QA",
-      "voicestartDate": "2024-07-16",
-      "voiceendDate": "2024-07-25",
-      "coding": "Angular + Node.js",
-      "codingstartDate": "2024-07-16",
-      "codingendDate": "2024-08-10",
-      "assets": [
-        "Logo",
-        "Banner Images"
-      ],
+      "projectHolder": "Sanjay",
+      "projectVoice": "Lokesh",
+      "projectId": "PRO16",
+      "vendor": "Vignesh",
+      "client": "Google",
+      "parentCompany": "Cognizant",
+      "onboardedDate": "03-02-2024",
+      "projectStatus": "Inactive",
+      "projectDomain": "Cloud"
+    },
+    {
+      "projectHolder": "Naveen",
+      "projectVoice": "Dinesh",
+      "projectId": "PRO17",
+      "vendor": "Ajay",
+      "client": "Paypal",
+      "parentCompany": "Trigent",
+      "onboardedDate": "10-02-2024",
       "projectStatus": "Active",
-      "id": "c567"
+      "projectDomain": "Payments"
     },
     {
-      "projectname": "CRM System",
-      "clientname": "sivaneshwaran",
-      "domain": "Backend",
-      "startDate": "2024-06-12",
-      "voice": "Integration",
-      "voicestartDate": "2024-06-15",
-      "voiceendDate": "2024-06-25",
-      "coding": "Java Spring Boot",
-      "codingstartDate": "2024-06-12",
-      "codingendDate": "2024-07-10",
-      "assets": [
-        "Database Script",
-        "API Docs"
-      ],
-      "projectStatus": "Pending",
-      "id": "d890"
+      "projectHolder": "Vimal",
+      "projectVoice": "Kiran",
+      "projectId": "PRO18",
+      "vendor": "Vignesh",
+      "client": "Meta",
+      "parentCompany": "Accenture",
+      "onboardedDate": "16-02-2024",
+      "projectStatus": "Inactive",
+      "projectDomain": "Social Media"
     },
     {
-      "projectname": "Social Media App",
-      "clientname": "Dinesh",
-      "domain": "Fullstack",
-      "startDate": "2024-10-01",
-      "voice": "Scripting",
-      "voicestartDate": "2024-10-02",
-      "voiceendDate": null,
-      "coding": "Flutter + Firebase",
-      "codingstartDate": "2024-10-05",
-      "codingendDate": null,
-      "assets": [
-        "App Logo",
-        "UI Mockups"
-      ],
+      "projectHolder": "Hari",
+      "projectVoice": "Deepak",
+      "projectId": "PRO19",
+      "vendor": "Sathish",
+      "client": "Netflix",
+      "parentCompany": "Tech Mahindra",
+      "onboardedDate": "20-02-2024",
       "projectStatus": "Active",
-      "id": "e901"
+      "projectDomain": "Entertainment"
+    },
+    {
+      "projectHolder": "Raghav",
+      "projectVoice": "Dinesh",
+      "projectId": "PRO20",
+      "vendor": "Vignesh",
+      "client": "Uber",
+      "parentCompany": "Trigent",
+      "onboardedDate": "01-03-2024",
+      "projectStatus": "Inactive",
+      "projectDomain": "Transportation"
+    },
+    {
+      "projectHolder": "Yogesh",
+      "projectVoice": "Aravind",
+      "projectId": "PRO21",
+      "vendor": "Vignesh",
+      "client": "Zoho",
+      "parentCompany": "Wipro",
+      "onboardedDate": "07-03-2024",
+      "projectStatus": "Active",
+      "projectDomain": "CRM"
     }
   ]
 }
