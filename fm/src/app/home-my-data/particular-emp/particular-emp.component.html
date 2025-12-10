@@ -1,58 +1,87 @@
-<div *ngIf="selectedEmployee; else noData" class="profile-page">
+<div *ngIf="!loading && selectedEmployee; else templateBlock" class="profile-page">
 
-  <!-- Profile Header -->
+  <!-- HEADER WITH AVATAR -->
   <div class="profile-header">
-    <!-- <img [src]="selectedEmployee.photo" alt="Employee Photo" class="profile-photo" /> -->
-      <div class="avatar-circle">
-      {{ selectedEmployee.employeeName?.charAt(0)?.toUpperCase() }}
+    <div class="avatar-circle">
+      {{ selectedEmployee.employeeName?.charAt(0) }}
     </div>
     <div class="profile-basic">
-      <h2>{{ selectedEmployee.employeeName}}</h2>
-      <p class="text-muted">{{ selectedEmployee.designation }}</p>
-      <p class="text-muted">Employee Code: {{ selectedEmployee.employeeCode }}</p>
-    </div>
-  </div>
-
-  <!-- Personal Details -->
-  <div class="profile-section">
-    <h4>Personal Details</h4>
-    <div class="profile-info">
-      <p><strong>Date of Birth:</strong> {{ selectedEmployee.dob }}</p>
-      <p><strong>Joining Date:</strong> {{ selectedEmployee.joiningDate }}</p>
-      <p><strong>PAN Number:</strong> {{ selectedEmployee.panNo }}</p>
-    </div>
-  </div>
-
-  <!-- Contact Details -->
-  <div class="profile-section">
-    <h4>Contact Details</h4>
-    <div class="profile-info">
+      <h2>{{ selectedEmployee.employeeName }}</h2>
+      <p><strong>Employee Code:</strong> {{ selectedEmployee.employeeCode }}</p>
+      <p><strong>Designation:</strong> {{ selectedEmployee.designation }}</p>
       <p><strong>Department:</strong> {{ selectedEmployee.department }}</p>
       <p><strong>Team:</strong> {{ selectedEmployee.team }}</p>
       <p><strong>Location:</strong> {{ selectedEmployee.location }}</p>
     </div>
   </div>
 
-  <!-- Bank Details -->
-  <div class="profile-section mb-4">
-    <h4>Bank Details</h4>
+  <!-- PERSONAL DETAILS -->
+  <div class="profile-section">
+    <h4>Personal Details</h4>
     <div class="profile-info">
-      <p><strong>Bank Account:</strong> {{ selectedEmployee.bankAccount }}</p>
+      <p><strong>Date of Birth:</strong> {{ selectedEmployee.dob }}</p>
+      <p><strong>Personal Email:</strong> {{ selectedEmployee.personalEmail }}</p>
+      <p><strong>Aadhaar No:</strong> {{ selectedEmployee.aadhaarNo }}</p>
+      <p><strong>PAN No:</strong> {{ selectedEmployee.panNo }}</p>
+      <p><strong>Alternate Mobile:</strong> {{ selectedEmployee.alternateMobile }}</p>
     </div>
   </div>
 
-  <!-- Meta Details -->
-  <div class="profile-section mb-4">
+  <!-- ADDRESS DETAILS -->
+  <div class="profile-section">
+    <h4>Address Details</h4>
+    <div class="profile-info">
+      <p><strong>Current Address:</strong> {{ selectedEmployee.currentAddress }}</p>
+      <p><strong>Permanent Address:</strong> {{ selectedEmployee.permanentAddress }}</p>
+    </div>
+  </div>
+
+  <!-- BANK DETAILS -->
+  <div class="profile-section">
+    <h4>Bank Details</h4>
+    <div class="profile-info">
+      <p><strong>Bank Account No:</strong> {{ selectedEmployee.bankAccount }}</p>
+      <p><strong>Salary Account No:</strong> {{ selectedEmployee.salaryAccountNo }}</p>
+      <p><strong>IFSC Code:</strong> {{ selectedEmployee.ifscCode }}</p>
+    </div>
+  </div>
+
+  <!-- JOB DETAILS -->
+  <div class="profile-section">
+    <h4>Job Information</h4>
+    <div class="profile-info">
+      <p><strong>Joining Date:</strong> {{ selectedEmployee.joiningDate }}</p>
+      <p><strong>Employee Type:</strong> {{ selectedEmployee.employeeType }}</p>
+      <p><strong>Last Working Day:</strong> {{ selectedEmployee.lastWorkingDay || '-' }}</p>
+      <p><strong>Project ID:</strong> {{ selectedEmployee.projectId }}</p>
+      <p><strong>Status:</strong> {{ selectedEmployee.employeeStatus }}</p>
+      <p><strong>Salary:</strong> ₹ {{ selectedEmployee.salary }}</p>
+    </div>
+  </div>
+
+  <!-- SYSTEM INFO -->
+  <div class="profile-section">
     <h4>System Info</h4>
     <div class="profile-info">
-      <p><strong>Record Created At:</strong> {{ selectedEmployee.createdAt }}</p>
+      <p><strong>Created At:</strong> {{ selectedEmployee.createdAt }}</p>
       <p><strong>ID:</strong> {{ selectedEmployee.id }}</p>
     </div>
   </div>
 
 </div>
 
-<!-- No Data -->
-<ng-template #noData>
-  <p>No Employee Selected</p>
+<!-- LOADING / ERROR / NO DATA -->
+<ng-template #templateBlock>
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading employee details...</p>
+  </div>
+
+  <div *ngIf="!loading && error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && !selectedEmployee">
+    <p>No Employee Selected</p>
+  </div>
 </ng-template>
