@@ -1,17 +1,18 @@
 <div class="admin-summary-container">
 
   <h2 class="page-title">Employee Leave Summary</h2>
-  
-  <div class="leave-table-section">
-    <h3>Leave Details</h3>
+  <input type="text" placeholder="Search by Employee, Leave Type, or Date" [(ngModel)]="searchTerm"
+    (input)="filterLeaves()" class="search-box" />
 
+  <div class="leave-table-section">
     <table class="table">
       <thead>
         <tr>
           <th>Employee</th>
           <th>Leave Type</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
           <th>Booked</th>
-          <th>Available</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -20,13 +21,13 @@
         <tr *ngFor="let leave of paginatedLeaves">
           <td>{{ leave.employeeName}}</td>
           <td>{{ leave.leaveType }}</td>
+          <td>{{leave.startDate}}</td>
+          <td>{{leave.endDate}}</td>
           <td>{{ leave.booked }}</td>
-          <td>{{ leave.available }}</td>
+
           <td>
-            <span class="status"
-              [class.approved]="leave.status === 'Approved'"
-              [class.pending]="leave.status === 'Pending'"
-              [class.rejected]="leave.status === 'Rejected'">
+            <span class="status" [class.approved]="leave.status === 'Approved'"
+              [class.pending]="leave.status === 'Pending'" [class.rejected]="leave.status === 'Rejected'">
               {{ leave.status }}
             </span>
           </td>
@@ -47,5 +48,3 @@
       </button>
     </div>
   </div>
-
-</div>

@@ -1,0 +1,33 @@
+<div class="accordion-content">
+  <h2 class="page-title">Timesheet Summary</h2>
+  <table class="classic-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Project</th>
+        <th>Location</th>
+        <th>Hrs. Type</th>
+        <th>Total Hrs.</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of timesheetSummary">
+        <td>{{entry.employeeName || name }}</td>
+        <td>{{ entry.project }}</td>
+        <td>{{ entry.location }}</td>
+        <td>{{ entry.hrsType }}</td>
+        <td>{{ entry.totalHours }}</td>
+        <td>{{ entry.description }}</td>
+        <td>
+          <span [ngClass]="{
+    'approved-status': entry.status === 'Approved',
+    'rejected-status': entry.status === 'Rejected',
+    'pending-status': entry.status === 'Pending'}">
+            {{ entry.status }} </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

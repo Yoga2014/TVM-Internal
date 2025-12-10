@@ -8,7 +8,7 @@
         <li *ngFor="let employee of employees">
           <p><strong>{{ employee.employeeName }}</strong></p>
           <p>Joined on: {{ employee.joinDate | date:'longDate' }}</p>
-          <button (click)="viewEmployeeDetails(employee.employeeId)">
+          <button (click)="viewEmployeeDetails(employee.id)">
             View Details
             <span class="eye-icon">&#128065;</span>
           </button>

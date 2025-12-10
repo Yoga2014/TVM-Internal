@@ -1,241 +1,311 @@
-/* Offcanvas Styles */
-.offcanvas {
-    width: 100%;
-    max-width: 500px; /* Adjust as needed */
-  }
-  
-  /* Offcanvas header and footer */
-  .offcanvas-header {
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .offcanvas-footer {
-    border-top: 1px solid #dee2e6;
-  }
-  
-  .card-body {
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 1000px;
-    margin-top: -38px;
-    position: static;
-    
-  }
-  .card-body .btn{
-    background-color: white;
-    color: rgb(33, 9, 121);
-   
-  }
+/* COLORS */
+$primary-color: #1e3c72;
+$secondary-color: #259862;
+$accent-color: #007bff;
+$danger-color: #f44336;
+$light-bg: #f8f9fa;
+$white: #fff;
+$text-color: #333;
+$table-header-bg: rgba(57, 113, 255, 0.878);
 
- .card-header {
-background-color: #259862;
-  }
-  .form-check{
-    display: inline-flex;
-    margin-left: 20px;
-    padding-top: 5px;
-  }
-
-  .container {
-    margin-top: 4rem;
-  }
-  
-  .submitted-data {
-    margin-top: 1rem;
-  }
-  
-  .submitted-data .d-flex.flex-wrap p {
-    margin-right: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .submitted-data p {
-    margin-bottom: 0.5rem;
-  }
-  .projectlist{
-    color:white;
-    background-color: #1e3c72;
-    height: 40px;
-    padding: 20px;
-  }
- .pro{
- margin-top: -304px;
- }
- .container {
-  margin-top: 20px;
+/* CONTAINER */
+.container {
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: $light-bg;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(151, 18, 18, 0.1);
-  height: 80px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* PROJECT LIST HEADER */
 .projectlist {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background-color: #1e3c72;
+  padding: 15px 20px;
+  background-color: $primary-color;
   border-radius: 5px;
-  color: #fff;
+  color: $white;
   font-weight: bold;
   font-size: 1.2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+  .pro { margin: 0; font-size: 1.2rem; }
 }
 
-.projectlist .pro {
-  margin: 0; /* Ensure no extra margin */
-  font-size: 1.2rem; /* Adjust font size if needed */
-}
-
-/* CSS */
-.project-table {
-  width: 90%;
-  border-collapse: collapse;
-  margin: 20px 70px;
-  font-family: Arial, sans-serif;
-  
-  
-}
-
-.project-table thead {
-  background-color: #f4f4f4;
-}
-
-.project-table th, .project-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.project-table tr:hover {
-  background-color: #ede5e5;
-}
-
-.project-table th {
-  background-color: rgba(57, 113, 255, 0.878);
-  color: #fff;
-  font-weight: bold;
-  margin: 10px;
-
-  
-  
-}
-
-.project-table td select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-
-}
-
-.edit-btn, .delete-btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  margin-right: 5px;
-}
-
-.edit-btn {
-  background-color: #4CAF50; /* Green */
-}
-
-.delete-btn {
-  background-color: #f44336; /* Red */
-}
-
-.edit-btn:hover, .delete-btn:hover {
-  opacity: 0.8;
-}
-
-
-/* Dropdown Styling */
-select {
-  padding: 5px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* Action Buttons Layout */
-.action-buttons {
+/* CARD BODY BUTTONS */
+.card-body {
   display: flex;
-  justify-content: space-around;
-  gap: 10px;
-}
-
-/* Button Styles */
-button {
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-
-  border-radius: 20px;
-  background-color: #007bff;
-  color: white;
-  transition: background-color 0.3s ease;
-}
-
-button:last-child {
-  background-color: #dc3545;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Responsive Grid for Smaller Screens */
-/* Tablet view (768px to 1024px) */
-@media (max-width: 1024px) and (min-width: 768px) {
-  .projectlist .pro {
-    font-size: 20px;
-  }
-
-  .project-table th,
-  .project-table td {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .offcanvas-body form .form-control {
-    font-size: 14px;
-  }
+  justify-content: flex-end;
+  margin-top: -38px;
 
   .btn {
-    padding: 8px 12px;
+    background-color: $white;
+    color: $text-color;
+    font-weight: 600;
     font-size: 14px;
-  }
-  .card-body{
-    padding: 10px;
-    margin-left: 400px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.4);
+    }
   }
 }
 
-/* Mobile view (max-width: 767px) */
-@media (max-width: 767px) {
-  .container {
+/* TABLE WRAPPER */
+.table-wrapper {
+  max-height: 440px;
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* PROJECT TABLE */
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  min-width: 1100px;
+
+  thead {
+    background-color: $table-header-bg;
+    color: $white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  th,
+  td {
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.3s ease;
+  }
+
+  .edit-btn {
+    background: #0d6efd;
+    color: $white;
+
+    &:hover {
+      background: $white;
+      color: #0d6efd;
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.45);
+      transform: translateY(-2px);
+    }
+  }
+
+  .delete-btn {
+    background: #dc3545;
+    color: $white;
+
+    &:hover {
+      background: $white;
+      color: #dc3545;
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.45);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* DROPDOWN BUTTON & CARD */
+td.position-relative {
+  position: relative;
+
+  .dropdown-card {
+    position: absolute;
+    top: 36px;
+    right: 0;
+    min-width: 150px;
+    background: $white;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      text-align: left;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+    }
+  }
+}
+
+/* OFFCANVAS FORM */
+.offcanvas {
+  width: 100%;
+  max-width: 520px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+
+  &-header {
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn-close {
+      cursor: pointer;
+    }
+  }
+
+  &-body {
+    padding: 20px;
+
+    form {
+      .mb-3 {
+        margin-bottom: 18px;
+
+        label {
+          font-weight: 500;
+        }
+
+        input.form-control,
+        select.form-select {
+          padding: 10px 12px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+
+          &.is-invalid {
+            border-color: $danger-color;
+          }
+        }
+
+        .invalid-feedback {
+          font-size: 12px;
+          color: $danger-color;
+        }
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+      }
+
+      .col-md-6 {
+        flex: 1;
+      }
+
+      .form-check {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 15px;
+
+        input[type='checkbox'] {
+          margin-right: 5px;
+        }
+      }
+
+      .d-flex.justify-content-end {
+        gap: 12px;
+        margin-top: 12px;
+
+        button {
+          padding: 10px 18px;
+          border-radius: 8px;
+          font-weight: 600;
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+
+          &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* BUTTON VARIANTS */
+.btn-primary {
+  background: #0d6efd;
+  color: $white;
+
+  &:hover {
+    background: #0b5ed7;
+  }
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: $white;
+
+  &:hover {
+    background: #565e64;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .card-body {
+    margin-left: auto;
     padding: 10px;
-  }
-
-  .projectlist .pro {
-    font-size: 18px;
-  }
-
-  .project-table {
-    font-size: 12px;
   }
 
   .project-table th,
   .project-table td {
-    padding: 8px;
-    font-size: 12px;
+    padding: 12px;
+    font-size: 13px;
   }
+}
 
-  /* Stack form fields vertically */
+@media (max-width: 767px) {
   .offcanvas-body form .row {
     flex-direction: column;
   }
@@ -245,52 +315,23 @@ button:hover {
     padding: 0;
   }
 
-  .btn {
-    padding: 6px 10px;
+  .project-table th,
+  .project-table td {
     font-size: 12px;
+    padding: 10px;
   }
 
-  /* Ensure the offcanvas form adapts for small screens */
-  .offcanvas {
+  .projectlist .pro {
+    font-size: 16px;
+  }
+
+  .card-body {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .card-body .btn {
     width: 100%;
+    font-size: 16px;
   }
-
-}
-.toast {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-.toast show{
- 
-  position: relative;
-  bottom: 231px;
-  right: -234px;
-  margin-left: 17px;
-  min-width: 250px;
-  
-}
-  
-
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  h2 {
-    font-weight: 600;
-    color: #333;
-  }
-}
-
-nz-table {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
 }

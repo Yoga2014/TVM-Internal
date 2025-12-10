@@ -20,7 +20,7 @@ export class SideBarComponent implements OnInit{
       this.isLoggedIn = true;
     }
     menuItems = [
-      { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-Home' },
+      { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-home' },
       { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
       { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Tracking', path: 'leave-tracking' },
       { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'time-tracking' },

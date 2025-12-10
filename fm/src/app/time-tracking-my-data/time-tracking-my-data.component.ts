@@ -26,9 +26,9 @@ export class TimeTrackingMyDataComponent {
   }
 
   navigateToAppraisal() {
-    this.activeNavItem = 'appraisal';
-    this.router.navigate(['time-tracking/my-data', 'appraisal']);
-    this.subNavChange.emit('appraisal');
+    this.activeNavItem = 'time-request';
+    this.router.navigate(['time-tracking/my-data', 'time-request']);
+    this.subNavChange.emit('time-request');
   }
 
 }

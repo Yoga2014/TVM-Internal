@@ -1,0 +1,38 @@
+<div class="accordion-content">
+    <h2 class="page-title">Timesheet Summary</h2>
+  <div class="action-bar">
+    <button class="delete-btn" (click)="deleteSelectedRequests()">Delete Selected</button>
+  </div>
+  <table class="classic-table">
+    <thead>
+      <tr>
+        <th><input type="checkbox" (change)="selectAll($event)" /></th>
+        <th>Name</th>
+        <th>Project</th>
+        <th>Location</th>
+        <th>Hrs. Type</th>
+        <th>Total Hrs.</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of timesheetSummary">
+      <td><input type="checkbox" [(ngModel)]="entry.selected" (change)="onRowSelect($event, entry)" /></td>
+        <td>{{ entry.employeeName }}</td>
+        <td>{{ entry.project }}</td>
+        <td>{{ entry.location }}</td>
+        <td>{{ entry.hrsType }}</td>
+        <td>{{ entry.totalHours }}</td>
+        <td>{{ entry.description }}</td>
+        <td>
+          <span [ngClass]="{
+    'approved-status': entry.status === 'Approved',
+    'rejected-status': entry.status === 'Rejected',
+    'pending-status': entry.status === 'Pending'}">
+            {{ entry.status }} </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

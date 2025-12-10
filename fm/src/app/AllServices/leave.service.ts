@@ -8,8 +8,8 @@ import { LeaveRequest } from '../Interface/leave-request.model';
 })
 export class LeaveService {
   
-  private leaveSummaryURL = 'http://localhost:3008/LeaveSummary';
-  private applyLeaveURL = 'http://localhost:3000/Leave';
+  private leaveSummaryURL = 'http://localhost:3006/LeaveSummary';
+  private applyLeaveURL = 'http://localhost:3007/Leave';
   private leaveApprovalURL = 'http://localhost:3001/leaveRequest';
 
   private leaveAppliedSubject = new Subject<LeaveRequest>();
@@ -34,7 +34,7 @@ export class LeaveService {
    *  ADD NEW LEAVE REQUEST
    * --------------------------------------- */
   addLeaveRequest(leaveRequest:any){
-    return this.http.post<LeaveRequest>('http://localhost:3000/Leave', leaveRequest);
+    return this.http.post<LeaveRequest>(this.applyLeaveURL, leaveRequest);
   }
 
   /** ---------------------------------------

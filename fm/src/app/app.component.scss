@@ -43,30 +43,21 @@ $white: #ffffff;
 
   .menu {
     margin-top: 20px;
-    overflow-y: auto; // <--- scroll only menu items
+    overflow-y: auto; 
     flex: 1;
 
     &::-webkit-scrollbar {
       width: 0;
     }
 
-    &::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-
     .item {
-      margin-bottom: 5px; // reduce space if needed
+      margin-bottom: 5px;
 
       .link {
         display: flex;
         align-items: center;
-        padding: 12px 20px; 
-        width: 98%; // expand to full width
+        padding: 12px 20px;
+        width: 98%;
         cursor: pointer;
         border-radius: 8px;
         transition: 0.3s;
@@ -125,11 +116,12 @@ $white: #ffffff;
   }
 
   .avatar-section {
-    position: relative;
+    position: relative;  // important for dropdown positioning
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 10px;
+    z-index: 10;
 
     .avatar-circle {
       width: 40px;
@@ -155,14 +147,16 @@ $white: #ffffff;
 
     .dropdown-menu {
       position: absolute;
-      top: 50px;
+      top: 50px;  // below the avatar
       right: 0;
       background: #fff;
-      width: 150px;
+      width: 160px;
       border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       padding: 10px 0;
-      z-index: 200;
+      z-index: 9999;  // very high to stay above all
+      display: flex;
+      flex-direction: column;
 
       p {
         padding: 10px 15px;
@@ -261,3 +255,4 @@ $white: #ffffff;
     }
   }
 }
+  

@@ -16,13 +16,13 @@ export class NewHomeComponent {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects;
 
-        if (url.includes('/new-Home/my-space')) {
+        if (url.includes('/new-home/my-space')) {
           this.activeNavItem = 'my-space';
 
-        } else if (url.includes('/new-Home/teams-dashboard')) {
+        } else if (url.includes('/new-home/teams-dashboard')) {
           this.activeNavItem = 'teams-dashboard';
 
-        } else if (url.includes('/new-Home/organization')) {
+        } else if (url.includes('/new-home/organization')) {
           this.activeNavItem = 'organization';
 
         }
@@ -56,7 +56,7 @@ export class NewHomeComponent {
   // switch tab to teams-dashboard
   this.activeNavItem = 'teams-dashboard';
   this.activeSubNavItem = 'projects';
-  this.router.navigate(['new-Home', 'teams-dashboard', 'projects']);
+  this.router.navigate(['new-home', 'teams-dashboard', 'projects']);
 }
 navigateTo(tab: string) {
   this.activeNavItem = tab;

@@ -1,0 +1,174 @@
+.accordion-content {
+  padding: 1rem 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #112868;
+}
+
+/* Table Style */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  color: #333;
+  background: #fff;
+  text-align: left;
+  border-radius: 6px;
+  overflow: hidden;
+
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+
+  th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    background: #112868;
+    /* Dark Blue Header */
+    color: #fff;
+  }
+}
+
+tbody tr {
+  transition: background-color 0.25s ease;
+
+  &:hover {
+    background-color: #f6f9ff;
+    /* Soft blue hover */
+  }
+}
+
+tbody td {
+  font-size: 15px;
+  vertical-align: middle;
+
+  .status {
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+
+    &.approved {
+      background: #28a745;
+      color: #fff;
+    }
+
+    &.pending {
+      background: #ffc107;
+      color: #000;
+    }
+
+    &.rejected {
+      background: #dc3545;
+      color: #fff;
+    }
+  }
+}
+
+
+/* Buttons */
+.approve-btn,
+.reject-btn,
+.revert-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.approve-btn {
+  background: #28a745;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #218838;
+  }
+
+  &:disabled {
+    background: #b5d6b5;
+    cursor: not-allowed;
+  }
+}
+
+.reject-btn {
+  background: #dc3545;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #c82333;
+  }
+
+  &:disabled {
+    background: #e8a0a0;
+    cursor: not-allowed;
+  }
+}
+
+.revert-btn {
+  background: #ffc107;
+  color: #000;
+
+  &:hover:not(:disabled) {
+    background: #e0a800;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .table th,
+  .table td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .accordion-content {
+    padding: 1rem;
+  }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Apply fade & disable ONLY to data columns */
+.disabled-row td:not(:nth-child(7)):not(:nth-child(8)) {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Ensure Action & Revert columns remain normal */
+.disabled-row td:nth-child(7),
+.disabled-row td:nth-child(8) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

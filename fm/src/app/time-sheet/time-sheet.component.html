@@ -24,11 +24,6 @@
         <option *ngFor="let date of weekendDates" [value]="date">{{ date }}</option>
       </select>Enter hours for Monday
     </div>
-    <div class="classic-form-group">
-      <label for="employeeName">Employee Name:</label>
-      <input type="text" id="employeeName" [(ngModel)]="timesheet.employeeName" name="employeeName"
-        placeholder="Enter Employee Name" />
-    </div>
   </div>
 
   <!-- Accordion Section -->
@@ -40,35 +35,8 @@
       </div>
     </div> -->
     <div class="accordion-item">
-      <h2 class="accordion-header" (click)="toggleAccordion(1)">Timesheet Summary</h2>
-      <div class="accordion-content" *ngIf="accordionState[1]">
-        <table class="classic-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Project</th>
-              <th>Location</th>
-              <th>Hrs. Type</th>
-              <th>Total Hrs.</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let entry of timesheetSummary">
-              <td>{{timesheet.employeeName}}</td>
-              <td>{{ entry.project }}</td>
-              <td>{{ entry.location }}</td>
-              <td>{{ entry.hrsType }}</td>
-              <td>{{ entry.totalHours }}</td>
-              <td>{{ entry.description }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" (click)="toggleAccordion(2)">Fill Your Timesheet</h2>
-      <div class="accordion-content" *ngIf="accordionState[2]">
+      <h2 class="accordion-header">Fill Your Timesheet</h2>
+      <div class="accordion-content">
         <form #timesheetForm="ngForm" (ngSubmit)="onSubmit(timesheetForm)">
           <table class="classic-table">
             <thead>

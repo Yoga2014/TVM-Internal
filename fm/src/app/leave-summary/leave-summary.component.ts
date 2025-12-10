@@ -66,15 +66,4 @@ prevPage() {
     this.updatePagination();
   }
 }
-  applyLeave(): void {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent);
-    dialogRef.afterClosed().subscribe((result: LeaveRequest | undefined) => {
-      if (result) {
-        this.leaveService.addLeaveRequest(result).subscribe({
-          next: () => this.leaveService.setLeaveApplied(result),
-          error: (err) => console.error('Error applying leave', err),
-        });
-      }
-    });
-  }
 }

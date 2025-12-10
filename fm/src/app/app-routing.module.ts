@@ -68,11 +68,18 @@ import { ParticularEmpComponent } from './home-my-data/particular-emp/particular
 import { LeaveapproveComponent } from './leave-approve/leave-approve/leave-approve.component';
 import { AdminrequestComponent } from './leave-approve/admin-request/admin-request.component';
 import { AdminsummaryComponent } from './leave-approve/admin-summary/admin-summary.component';
+import { EmpProfileComponent } from './emp-profile/emp-profile.component';
+import { PresentEmployeeComponent } from './present-employee/present-employee.component';
+import { TimeRequestComponent } from './time-request/time-request.component';
+import { AdminTimeSheetComponent } from './Admin-Timesheet/admin-time-sheet/admin-time-sheet.component';
+import { AdminTimeSummaryComponent } from './Admin-Timesheet/admin-time-summary/admin-time-summary.component';
+import { AdminTimeTrackingComponent } from './Admin-Timesheet/admin-time-tracking/admin-time-tracking.component';
+import { LoginRouteGuard } from './AllServices/login-route.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoginRouteGuard] },
   { path: 'register', component: RegistrationComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },
 
@@ -93,15 +100,16 @@ const routes: Routes = [
   { path: 'teams', component: TeamsComponent, canActivate: [AuthGuard] },
   { path: 'personalDataForm', component: PersonalDataFormComponent, canActivate: [AuthGuard] },
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
-  { path:'operation', component:OperationComponent, canActivate: [AuthGuard] },
-  { path:'reports',component:ReportsComponent, canActivate: [AuthGuard] },
-  {path:'leave-approve', component: LeaveapproveComponent,
+  { path: 'operation', component: OperationComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'leave-approve', component: LeaveapproveComponent,
 
-         children:[
-          {path:'admin-request',component:AdminrequestComponent},
-          {path:'admin-summary',component:AdminsummaryComponent}
-         ]
-    },
+    children: [
+      { path: 'admin-request', component: AdminrequestComponent },
+      { path: 'admin-summary', component: AdminsummaryComponent }
+    ]
+  },
 
   {
     path: 'leave-tracking',
@@ -135,20 +143,24 @@ const routes: Routes = [
   },
 
   {
-    path: 'new-Home',
+    path: 'new-home',
     component: NewHomeComponent,
     canActivate: [AuthGuard],
+
     children: [
-       { path: '', redirectTo: 'my-space', pathMatch: 'full' },
+      { path: '', redirectTo: 'my-space', pathMatch: 'full' },
+      { path: 'emp-profile', component: EmpProfileComponent },
       {
         path: 'my-space',
         component: HomeMyDataComponent,
         children: [
           { path: 'overview', component: OverviewComponent },
-          { path: 'total-employee', component:TotalEmployeeComponent },
+          { path: 'present-employee', component: PresentEmployeeComponent },
+          { path: 'total-employee', component: TotalEmployeeComponent },
           { path: 'particular-emp', component: ParticularEmpComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'calendar', component: CalendarComponent },
+          { path: 'birthdayFolks', component: BirthdayCardComponent },
         ],
       },
 
@@ -156,8 +168,9 @@ const routes: Routes = [
         path: 'teams-dashboard',
         component: TeamsDashboardComponent,
         children: [
-          { path: '', redirectTo: 'team-space', pathMatch: 'full' },
+          { path: '', redirectTo: 'department', pathMatch: 'full' },
           { path: 'team-space', component: TeamsSpaceComponent },
+
           { path: 'team-reportees', component: TeamReporteesComponent },
           { path: 'department', component: TeamDepartmentComponent },
           { path: 'projects', component: TeamProjectComponent },
@@ -168,14 +181,14 @@ const routes: Routes = [
       {
         path: 'organization',
         component: OrganizationComponent,
-        children:[
-          { path:'announcements', component: AnnouncementsComponent },
-          { path:'policies', component: PoliciesComponent },
-          { path:'employee-tree', component: EmployeeTreeComponent },
-          { path:'department-tree', component: DepartmentTreeComponent },
-          { path:'department-directory', component: DepartmentDirectoryComponent },
-          { path:'birthday-folks', component: BirthdayCardComponent },
-          { path:'new-hires', component: NewHiresComponent },
+        children: [
+          { path: 'announcements', component: AnnouncementsComponent },
+          { path: 'policies', component: PoliciesComponent },
+          { path: 'employee-tree', component: EmployeeTreeComponent },
+          { path: 'department-tree', component: DepartmentTreeComponent },
+          { path: 'department-directory', component: DepartmentDirectoryComponent },
+          { path: 'birthday-folks', component: BirthdayCardComponent },
+          { path: 'new-hires', component: NewHiresComponent },
         ]
       },
     ],
@@ -186,7 +199,7 @@ const routes: Routes = [
     component: TaskTasksComponent,
     canActivate: [AuthGuard],
     children: [
-      { 
+      {
         path: '',
         component: TaskNavsComponent,
         children: [
@@ -207,12 +220,25 @@ const routes: Routes = [
         path: 'my-data',
         component: TimeTrackingMyDataComponent,
         children: [
-         { path: 'time-sheet', component: TimeSheetComponent },
-         { path: 'appraisal', component: AppraisalFormComponent }
+          { path: 'time-sheet', component: TimeSheetComponent },
+          { path: 'appraisal', component: AppraisalFormComponent },
+          { path: 'time-request', component: TimeRequestComponent },
         ],
-      },
+      }
     ]
   },
+
+  {
+    path: 'admin-time-sheet',
+    component: AdminTimeSheetComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'admin-time-summary', pathMatch: 'full' },
+      { path: 'admin-time-summary', component: AdminTimeSummaryComponent },
+      { path: 'admin-time-tracking', component: AdminTimeTrackingComponent },
+    ]
+  },
+
 
   {
     path: 'perfomance-myData',
@@ -240,4 +266,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

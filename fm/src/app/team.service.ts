@@ -15,7 +15,7 @@ export interface Section {
   providedIn: 'root'
 })
 export class TeamService {
-  private apiUrl = 'http://localhost:3000/sections';  // Replace with your actual API URL
+  private apiUrl = 'http://localhost:3013/sections';  // Replace with your actual API URL
 
   constructor(private http: HttpClient) {}
 
@@ -25,9 +25,12 @@ export class TeamService {
   //   );
   // }
 
-  getSections(){
-    return this.http.get(this.apiUrl)
-  }
+getSections(): Observable<Section[]> {
+  return this.http.get<Section[]>(this.apiUrl)
+    .pipe(
+      catchError(this.handleError<Section[]>('getSections', []))
+    );
+}
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

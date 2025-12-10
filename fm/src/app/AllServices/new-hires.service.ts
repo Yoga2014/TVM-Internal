@@ -8,12 +8,11 @@ import { Employee } from '../Interface/employee.model';
 })
 export class NewHiresService {
 
-  private apiUrl = 'http://localhost:3000/Employee';
+  private apiUrl = 'http://localhost:3004/hiring';
 
   constructor(private http: HttpClient) {}
 
   getRecentHires(): Observable<Employee[]> {
-    debugger
     const today = new Date();
     const fifteenDaysAgo = new Date(today.setDate(today.getDate() - 15));
 
@@ -30,16 +29,17 @@ export class NewHiresService {
     );
   }
 
-
-  getEmployeeById(id: string): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
-  }
-
-  updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${employee.employeeId}`, employee);
-  }
-
-  deleteEmployee(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+getEmployeeById(id: number): Observable<Employee> {
+  return this.http.get<Employee>(`${this.apiUrl}/${id}`);
 }
+
+updateEmployee(employee: Employee): Observable<Employee> {
+  return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
+}
+
+deleteEmployee(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${id}`);
+}
+
+}
+

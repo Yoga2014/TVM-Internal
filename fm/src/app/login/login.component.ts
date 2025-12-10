@@ -30,35 +30,42 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  enter(): void {
-    if (this.login.invalid) {
-      this.login.markAllAsTouched();
-      this.errorMessage = 'Please enter username and password.';
-      return;
-    }
-
-    this.loading = true;
-    const { username, password } = this.login.value;
-
-    this.auth.login(username, password).subscribe({
-      next: (res: any) => {
-        this.loading = false;
-
-        if (res?.token) {
-          localStorage.setItem('username', username);
-          localStorage.setItem('role', res.role);
-          this.auth.setToken(res.token);
-
-          this.loginSuccess.emit();
-          this.router.navigate(['/new-Home/my-space/overview']);
-        } else {
-          this.errorMessage = res.error || 'Invalid username or password';
-        }
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'Login failed. Try again.';
-      },
-    });
+enter(): void {
+  if (this.login.invalid) {
+    this.login.markAllAsTouched();
+    this.errorMessage = 'Please enter username and password.';
+    return;
   }
+
+  this.loading = true;
+  const { username, password } = this.login.value;
+
+  this.auth.login(username, password).subscribe({
+    next: (res: any) => {
+      this.loading = false;
+
+      if (res?.token) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('role', res.role); // store the role
+        this.auth.setToken(res.token);
+
+        this.loginSuccess.emit();
+
+        // Redirect based on role
+        if (res.role === 'admin') {
+          this.router.navigate(['/new-home/my-space/overview']);
+        } else if (res.role === 'user') {
+          this.router.navigate(['/leave-tracking/mydata/leave-summary']);
+        }
+      } else {
+        this.errorMessage = res.error || 'Invalid username or password';
+      }
+    },
+    error: () => {
+      this.loading = false;
+      this.errorMessage = 'Login failed. Try again.';
+    },
+  });
+}
+
 }

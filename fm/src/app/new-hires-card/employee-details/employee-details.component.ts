@@ -17,7 +17,7 @@ export class EmployeeDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private newHiresService: NewHiresService, private router: Router) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.newHiresService.getEmployeeById(id).subscribe(
         (employee: Employee) => {
@@ -40,30 +40,50 @@ export class EmployeeDetailsComponent implements OnInit {
     this.isEditing = false;
   }
 
-  saveEmployee(employee: Employee): void {
-    if (this.employee) {
-      this.newHiresService.updateEmployee({ ...this.employee, ...employee }).subscribe(
-        (updatedEmployee: Employee) => {
-          this.employee = updatedEmployee;
-          this.isEditing = false;
-        },
-        (error: any) => {
-          console.error('Failed to save employee details', error);
-        }
-      );
+  saveEmployee(partial: Partial<Employee>): void {
+    if (!this.employee) return;
+
+    
+    const updatedEmployee: Employee = {
+      ...this.employee,
+      ...partial
+    };
+
+    
+    if (updatedEmployee.joinDate && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(updatedEmployee.joinDate)) {
+      const dateOnly = updatedEmployee.joinDate;
+      updatedEmployee.joinDate = new Date(dateOnly + 'T00:00:00.000Z').toISOString();
     }
+
+    this.newHiresService.updateEmployee(updatedEmployee).subscribe(
+      (res: Employee) => {
+        this.employee = res;
+        this.isEditing = false;
+      },
+      (error: any) => {
+        console.error('Failed to save employee details', error);
+      }
+    );
   }
 
-  deleteEmployee(): void {
-    if (this.employee) {
-      this.newHiresService.deleteEmployee(this.employee.employeeId).subscribe(
-        () => {
-          this.router.navigate(['/new-hires']);
-        },
-        (error: any) => {
-          console.error('Failed to delete employee', error);
-        }
-      );
-    }
+deleteEmployee(): void {
+  if (this.employee) {
+    this.newHiresService.deleteEmployee(this.employee.id).subscribe(
+      () => {
+        this.employee = null; // stop showing the old data
+        this.router
+          .navigate(['/new-Home/organization/new-hires'])
+          .then(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
+      },
+      (error: any) => {
+        console.error('Failed to delete employee', error);
+      }
+    );
   }
 }
+
+
+}
+
+  
+

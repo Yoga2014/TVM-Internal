@@ -2,7 +2,6 @@
   "year": 2024,
   "month": "December",
   "weekendDate": "2024-12-01",
-  "employeeName": "John Doe",
   "timesheetEntries": [
     {
       "id": "ce8b",
@@ -18,7 +17,63 @@
         "Friday": 8
       },
       "totalHours": "40",
-      "description": "test4"
+      "description": "test4",
+      "status": "Approved",
+      "employeeName": "Dinesh"
+    },
+    {
+      "id": "5089",
+      "wfol": true,
+      "project": "Project 1",
+      "location": "Bangalore",
+      "hrsType": "Onshore",
+      "hours": {
+        "Monday": 2,
+        "Tuesday": 5,
+        "Wednesday": 2,
+        "Thursday": 2,
+        "Friday": 2
+      },
+      "totalHours": "13",
+      "description": "dfghjk",
+      "status": "Rejected",
+      "employeeName": "Kumarakrishnan"
+    },
+    {
+      "id": "048a",
+      "wfol": true,
+      "project": "Project 1",
+      "location": "Bangalore",
+      "hrsType": "Onshore",
+      "hours": {
+        "Monday": 2,
+        "Tuesday": 4,
+        "Wednesday": 6,
+        "Thursday": 2,
+        "Friday": 5
+      },
+      "totalHours": "19",
+      "description": "vrfrf",
+      "status": "Pending",
+      "employeeName": "Chandru"
+    },
+    {
+      "id": "b0f3",
+      "wfol": true,
+      "project": "Project 1",
+      "location": "Bangalore",
+      "hrsType": "Onshore",
+      "hours": {
+        "Monday": 1,
+        "Tuesday": 2,
+        "Wednesday": 3,
+        "Thursday": 4,
+        "Friday": 5
+      },
+      "totalHours": "15",
+      "description": "vfv",
+      "status": "Pending",
+      "employeeName": "Sivaneshwaran"
     }
   ]
 }

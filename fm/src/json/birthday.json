@@ -2,26 +2,26 @@
     "Employee": [
         {
           "employeeId": "EMP001",
-          "employeeName": "John Doe",
-          "dob": "1990-12-12",
-          "profilePicture": "https://example.com/profiles/johndoe.jpg",
+          "employeeName": "Karthik",
+          "dob": "1990-12-09",
+          "profilePicture": "https://example.com/profiles/karthik.jpg",
           "status": "Active",
           "generalTiming": "9:00 AM - 6:00 PM",
           "leaveBooked": 2,
-          "image": "https://example.com/profiles/johndoe.jpg",
-          "joinDate": "2024-12-05",
+          "image": "https://i.pravatar.cc/150?img=3",
+          "joinDate": "2024-12-09",
           "onLeave": false,
           "date": "2024-12-12"
         },
         {
           "employeeId": "EMP002",
-          "employeeName": "Jane Smith",
-          "dob": "1988-07-22",
-          "profilePicture": "https://example.com/profiles/janesmith.jpg",
+          "employeeName": "Chandru",
+          "dob": "1988-12-09",
+          "profilePicture": "https://example.com/profiles/chandru.jpg",
           "status": "On Leave",
           "generalTiming": "10:00 AM - 7:00 PM",
           "leaveBooked": 5,
-          "image": "https://example.com/profiles/janesmith.jpg",
+          "image": "https://i.pravatar.cc/150?img=3",
           "joinDate": "2024-12-06",
           "onLeave": true,
           "date": "2024-12-12"
@@ -35,7 +35,7 @@
           "generalTiming": "8:00 AM - 5:00 PM",
           "leaveBooked": 0,
           "image": "https://example.com/profiles/robertbrown.jpg",
-          "joinDate": "2024-12-01",
+          "joinDate": "2024-12-09",
           "onLeave": false,
           "date": "2024-12-12"
         },
@@ -66,7 +66,4 @@
           "date": "2024-12-12"
         }
       ]
-      
-        
-    
-}
+    }

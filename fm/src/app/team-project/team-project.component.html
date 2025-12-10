@@ -4,90 +4,113 @@
   <div class="projectlist">
     <div class="pro">Project List</div>
   </div>
-  <!-- Add Project Button -->
-  <!-- <div class="card-body">
+  <!-- Add Project Button  -->
+  <div class="card-body">
     <button type="button" (click)="openToast()" class="btn btn-primary" data-bs-toggle="offcanvas"
       data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
-  </div> -->
+  </div>
 </div>
 
 <!-- Table to Display Project Data -->
-<table class="project-table">
+<div class="table-wrapper">
+  <table class="project-table">
     <tr>
       <th>Project Name</th>
       <th>Client Name</th>
       <th>Domain</th>
-      <th>Status</th>
-      <th>Actions</th>
+      <th>startDate</th>
+      <th>voice</th>
+      <th>voicestartDate</th>
+      <th>voiceendDate</th>
+      <th>coding</th>
+      <th>codingstartDate</th>
+      <th>codingendDate</th>
+      <th>Assets</th>
+      <th>Project Status</th>
     </tr>
-    {{submittedData | json}}
     <tr *ngFor="let item of submittedData">
-      <td>{{ item.projectName }}</td>
-      <td>{{ item.clientName }}</td>
+      <td>{{ item.projectname }}</td>
+      <td>{{ item.clientname }}</td>
       <td>{{ item.domain }}</td>
+      <td>{{ item.startDate }}</td>
+      <td>{{ item.voice }}</td>
+      <td>{{ item.voicestartDate }}</td>
+      <td>{{ item.voiceendDate || '-' }}</td>
+      <td>{{ item.coding }}</td>
+      <td>{{ item.codingstartDate }}</td>
+      <td>{{ item.codingendDate || '-' }}</td>
+      <td>{{ item.assets.join(', ') || '-' }}</td>
       <td>{{item.projectStatus}}</td>
-      <td>
-        <button class="edit-btn" (click)="edit(item.id)" class="alert alert-primary" role="alert"
-         >Edit</button>
-        <button class="delete-btn" (click)="delete(item.id,'Success', 'Project deleted successfully!')"
-          class="alert alert-danger" role="alert">Delete</button>
-      </td>
+<td class="position-relative">
+  <button class="btn btn-link p-0" (click)="toggleDropdown(item)">
+    <i class="bi bi-three-dots-vertical"></i>
+  </button>
+
+  <div *ngIf="selectedItem === item" class="dropdown-card">
+      <button (click)="edit(item.id)">Edit</button>
+      <button (click)="delete(item.id)">Delete</button>
+  </div>
+</td>
+
+
+<div 
+  class="global-dropdown" 
+  *ngIf="dropdownVisible" 
+  [ngStyle]="{ top: dropdownPosition.top, left: dropdownPosition.left }"
+>
+  <div class="dropdown-item" (click)="edit(selectedItem.id)">Edit</div>
+  <div class="dropdown-item" (click)="delete(selectedItem.id)">Delete</div>
+</div>
+
+
     </tr>
-</table>
-
-
-
+  </table>
+</div>
 
 <!-- Add Project Form -->
-<div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}" aria-labelledby="offcanvasFormLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}"
+  aria-labelledby="offcanvasFormLabel">
   <div class="offcanvas-header">
-    {{isEditMode | json}}
     <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
     <button type="button" class="btn-close" data-bs-target="#offcanvasForm" data-bs-dismiss="offcanvas"
       aria-label="Close" (click)="closeToast()"></button>
 
   </div>
   <div class="offcanvas-body">
-    <form [formGroup]="projectForm"
-      (ngSubmit)="isEditMode ? update() : onSubmit()">
+    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update() : onSubmit()">
       <!-- Project Name -->
       <div class="mb-3">
         <label for="projectName" class="form-label">Project Name</label>
-        <input type="text" class="form-control" id="projectName" formControlName="projectName"
-          [class.is-invalid]="projectForm.get('projectName')?.invalid && (projectForm.get('projectName')?.dirty || projectForm.get('projectName')?.touched)">
+        <input type="text" class="form-control" id="projectName" formControlName="projectname"
+          [class.is-invalid]="projectForm.get('projectname')?.invalid && (projectForm.get('projectname')?.dirty || projectForm.get('projectname')?.touched)">
         <div
-          *ngIf="projectForm.get('projectName')?.invalid && (projectForm.get('projectName')?.dirty || projectForm.get('projectName')?.touched)"
+          *ngIf="projectForm.get('projectname')?.invalid && (projectForm.get('projectname')?.dirty || projectForm.get('projectname')?.touched)"
           class="invalid-feedback">
-          <div *ngIf="projectForm.get('projectName')?.errors?.['required']">
-            Project name is required.
-          </div>
-          <div *ngIf="projectForm.get('projectName')?.errors?.['minlength']">
-            Project name must be at least 3 characters long.
-          </div>
+          <div *ngIf="projectForm.get('projectname')?.errors?.['required']">Project name is required.</div>
+          <div *ngIf="projectForm.get('projectname')?.errors?.['minlength']">Project name must be at least 3 characters
+            long.</div>
         </div>
       </div>
 
       <!-- Client Name -->
       <div class="mb-3">
         <label for="clientName" class="form-label">Client Name</label>
-        <input type="text" class="form-control" id="clientName" formControlName="clientName"
-          [class.is-invalid]="projectForm.get('clientName')?.invalid && (projectForm.get('clientName')?.dirty || projectForm.get('clientName')?.touched)">
+        <input type="text" class="form-control" id="clientName" formControlName="clientname"
+          [class.is-invalid]="projectForm.get('clientname')?.invalid && (projectForm.get('clientname')?.dirty || projectForm.get('clientname')?.touched)">
         <div
-          *ngIf="projectForm.get('clientName')?.invalid && (projectForm.get('clientName')?.dirty || projectForm.get('clientName')?.touched)"
-          class="invalid-feedback">
-          Client name is required.
-        </div>
+          *ngIf="projectForm.get('clientname')?.invalid && (projectForm.get('clientname')?.dirty || projectForm.get('clientname')?.touched)"
+          class="invalid-feedback">Client name is required.</div>
       </div>
 
       <!-- Domain -->
       <div class="mb-3">
         <label for="domain" class="form-label">Domain</label>
         <input type="text" class="form-control" id="domain" formControlName="domain"
-          [class.is-invalid]="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.dirty || projectForm.get('domain')?.touched)">
+          [class.is-invalid]="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.touched || projectForm.get('domain')?.dirty)">
         <div
-          *ngIf="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.dirty || projectForm.get('domain')?.touched)"
+          *ngIf="projectForm.get('domain')?.invalid && (projectForm.get('domain')?.touched || projectForm.get('domain')?.dirty)"
           class="invalid-feedback">
-          Domain name is required.
+          Domain is required.
         </div>
       </div>
 
@@ -107,42 +130,23 @@
       <div class="mb-3">
         <label for="voice" class="form-label">Voice</label>
         <input type="text" class="form-control" id="voice" formControlName="voice"
-          [class.is-invalid]="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.dirty || projectForm.get('voice')?.touched)">
+          [class.is-invalid]="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.touched || projectForm.get('voice')?.dirty)">
         <div
-          *ngIf="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.dirty || projectForm.get('voice')?.touched)"
+          *ngIf="projectForm.get('voice')?.invalid && (projectForm.get('voice')?.touched || projectForm.get('voice')?.dirty)"
           class="invalid-feedback">
-          <div *ngIf="projectForm.get('voice')?.errors?.['maxlength']">
-            Voice must be less than 100 characters.
-          </div>
+          <div *ngIf="projectForm.get('voice')?.errors?.['maxlength']">Voice must be less than 100 characters.</div>
         </div>
       </div>
 
       <!-- Voice Start Date -->
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-6">
-          <div class="mb-3">
-            <label for="voiceStartDate" class="form-label">Voice Start Date</label>
-            <input type="date" class="form-control" id="voiceStartDate" formControlName="voiceStartDate"
-              [class.is-invalid]="projectForm.get('voiceStartDate')?.invalid && (projectForm.get('voiceStartDate')?.dirty || projectForm.get('voiceStartDate')?.touched)">
-            <div
-              *ngIf="projectForm.get('voiceStartDate')?.invalid && (projectForm.get('voiceStartDate')?.dirty || projectForm.get('voiceStartDate')?.touched)"
-              class="invalid-feedback">
-              Please provide a valid Voice Start Date.
-            </div>
-          </div>
+          <label for="voicestartDate" class="form-label">Voice Start Date</label>
+          <input type="date" class="form-control" id="voicestartDate" formControlName="voicestartDate">
         </div>
-
-        <!-- Voice End Date -->
         <div class="col-md-6">
-          <div class="mb-3">
-            <label for="voiceEndDate" class="form-label">Voice End Date</label>
-            <input type="date" class="form-control" id="voiceEndDate" formControlName="voiceEndDate">
-            <div
-              *ngIf="projectForm.get('voiceEndDate')?.invalid && (projectForm.get('voiceEndDate')?.dirty || projectForm.get('voiceEndDate')?.touched)"
-              class="invalid-feedback">
-              Please provide a valid Voice End Date.
-            </div>
-          </div>
+          <label for="voiceendDate" class="form-label">Voice End Date</label>
+          <input type="date" class="form-control" id="voiceendDate" formControlName="voiceendDate">
         </div>
       </div>
 
@@ -165,10 +169,10 @@
         <div class="col-md-6">
           <div class="mb-3">
             <label for="codingStartDate" class="form-label">Coding Start Date</label>
-            <input type="date" class="form-control" id="codingStartDate" formControlName="codingStartDate"
-              [class.is-invalid]="projectForm.get('codingStartDate')?.invalid && (projectForm.get('codingStartDate')?.dirty || projectForm.get('codingStartDate')?.touched)">
+            <input type="date" class="form-control" id="codingStartDate" formControlName="codingstartDate"
+              [class.is-invalid]="projectForm.get('codingstartDate')?.invalid && (projectForm.get('codingStartDate')?.dirty || projectForm.get('codingstartDate')?.touched)">
             <div
-              *ngIf="projectForm.get('codingStartDate')?.invalid && (projectForm.get('codingStartDate')?.dirty || projectForm.get('codingStartDate')?.touched)"
+              *ngIf="projectForm.get('codingstartDate')?.invalid && (projectForm.get('codingstartDate')?.dirty || projectForm.get('codingstartDate')?.touched)"
               class="invalid-feedback">
               Please provide a valid Coding Start Date.
             </div>
@@ -179,9 +183,9 @@
         <div class="col-md-6">
           <div class="mb-3">
             <label for="codingEndDate" class="form-label">Coding End Date</label>
-            <input type="date" class="form-control" id="codingEndDate" formControlName="codingEndDate">
+            <input type="date" class="form-control" id="codingEndDate" formControlName="codingendDate">
             <div
-              *ngIf="projectForm.get('codingEndDate')?.invalid && (projectForm.get('codingEndDate')?.dirty || projectForm.get('codingEndDate')?.touched)"
+              *ngIf="projectForm.get('codingendDate')?.invalid && (projectForm.get('codingendDate')?.dirty || projectForm.get('codingendDate')?.touched)"
               class="invalid-feedback">
               Please provide a valid Coding End Date.
             </div>
@@ -189,30 +193,17 @@
         </div>
       </div>
 
-      <!-- Asset -->
-      <div class="mb-3 ">
-        <label class="form-label">Asset</label>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="laptop" value="laptop" formControlName="asset1"
-            (change)="onCheckboxChange($event)" />
-          <label class="form-check-label" for="laptop">Laptop</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="charger" value="charger" formControlName="asset2"
-            (change)="onCheckboxChange($event)" />
-          <label class="form-check-label" for="charger">Charger</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="headset" value="headset" formControlName="asset3"
+
+      <!-- Dynamic Assets -->
+      <div class="mb-3">
+        <label class="form-label">Assets</label><br>
+        <div *ngFor="let asset of allAssets">
+          <input type="checkbox" [value]="asset" [checked]="assetArray.value.includes(asset)"
             (change)="onCheckboxChange($event)">
-          <label class="form-check-label" for="headset">Headset</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="mouse" value="mouse" formControlName="asset4"
-            (change)="onCheckboxChange($event)">
-          <label class="form-check-label" for="mouse">Mouse</label>
+          {{ asset }}
         </div>
       </div>
+
       <div class="mb-3">
         <label for="projectStatus" class="form-label">Project Status</label>
         <select class="form-select" id="projectStatus" formControlName="projectStatus">

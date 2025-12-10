@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../AllServices/team.service';
 
+
+
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
@@ -10,14 +12,18 @@ import { TeamService } from '../AllServices/team.service';
 export class TeamListComponent implements OnInit {
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  reporteeFilter: string = '';
-  sortDirection: 'asc' | 'desc' = 'asc';
-  currentSortColumn: string = '';
+  teams: any[] = [];
+  selectedTeam: string = '';
+  selectedEmployee: any = null;
+  avatarInitials: string = ''; // <-- For avatar
+  searchText: string = '';
 
-  currentPage: number = 1; // Initialize to the first page
-itemsPerPage: number = 5;
+  currentPage: number = 1; 
+  itemsPerPage: number = 5;
 
-  constructor(private teamService: TeamService) {}
+  constructor(
+    private teamService: TeamService
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -27,50 +33,49 @@ itemsPerPage: number = 5;
     this.teamService.getEmployees().subscribe({
       next: data => {
         this.employees = data;
-        this.filteredEmployees = this.employees; // Initialize filtered employees
+
+        this.teams = [...new Set(data.map(emp => emp.team))];
+
+        if (this.teams.length > 0) {
+          this.selectTeam(this.teams[0]);
+        }
       },
-      error: err => console.error('Error fetching employees:', err) // Handle error
+      error: err => console.error('Error fetching employees:', err)
     });
   }
 
-  filterReportees(): void {
-    if (this.reporteeFilter) {
-      this.filteredEmployees = this.employees.filter(employee =>
-        employee.role.toLowerCase() === this.reporteeFilter.toLowerCase()
+ 
+  selectTeam(team: string) {
+    this.selectedTeam = team;
+    this.filteredEmployees = this.employees.filter(e => e.team === team);
+    this.applySearch();
+  }
+
+
+  applySearch() {
+    const text = this.searchText.toLowerCase();
+    this.filteredEmployees = this.employees
+      .filter(e => e.team === this.selectedTeam)
+      .filter(e =>
+        e.employeeId?.toString().toLowerCase().includes(text) ||
+        e.firstName.toLowerCase().includes(text) ||
+        e.lastName.toLowerCase().includes(text) ||
+        e.nickName?.toLowerCase().includes(text) ||
+        e.email.toLowerCase().includes(text) ||
+        e.designation.toLowerCase().includes(text)
       );
-    } else {
-      this.filteredEmployees = [...this.employees]; // Reset filter
-    }
   }
 
-  sortBy(column: string): void {
-    const direction = this.sortDirection === 'asc' ? 1 : -1;
-
-    // Ensure valid column exists
-    if (this.employees.length && this.employees[0][column] !== undefined) {
-      this.filteredEmployees.sort((a, b) => {
-        const valA = a[column].toString().toLowerCase();
-        const valB = b[column].toString().toLowerCase();
-
-        if (valA < valB) {
-          return -1 * direction;
-        } else if (valA > valB) {
-          return 1 * direction;
-        }
-        return 0;
-      });
-    }
-
-    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    this.currentSortColumn = column;
+ 
+  viewEmployee(emp: any) {
+    this.selectedEmployee = emp;
+    this.avatarInitials = this.getAvatarInitials(emp.firstName);
   }
 
-  maskData(data: string): string {
-    return data.replace(/./g, '*');
+
+  getAvatarInitials(name: string): string {
+    return name ? name.charAt(0).toUpperCase() : '?';
   }
 
-  onItemsPerPageChange(event: any) {
-    this.itemsPerPage = +event.target.value; 
-    this.currentPage = 1;
-  }
+
 }

@@ -58,11 +58,15 @@ getEmployeeByCode(employeeCode: string): Observable<any> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getAuthHeaders());
   }
 
-  // 🔥 BehaviorSubject for selected employee
-  private selectedEmployeeSource = new BehaviorSubject<any>(null);
-  selectedEmployee$ = this.selectedEmployeeSource.asObservable();
+ private selectedEmployeeSubject = new BehaviorSubject<any>(null);
+  selectedEmployee$ = this.selectedEmployeeSubject.asObservable();
 
   setSelectedEmployee(employee: any) {
-    this.selectedEmployeeSource.next(employee);
+    this.selectedEmployeeSubject.next(employee);
   }
+
+  getPresentEmployees() {
+  return this.http.get<any[]>('http://localhost:3007/Leave');
+}
+
 }
