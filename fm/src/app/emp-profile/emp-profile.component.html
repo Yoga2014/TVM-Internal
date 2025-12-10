@@ -1,46 +1,70 @@
 <div class="profile-page" *ngIf="profiledata as entry">
 
-  <!-- Profile Header -->
+  <!-- HEADER WITH AVATAR -->
   <div class="profile-header">
-
-    <!-- <img *ngIf="entry.photoUrl; else avatar"
-         [src]="entry.photoUrl"
-         class="profile-photo" /> -->
-
-  
-      <div class="profile-avatar">
-        {{ entry.firstName.charAt(0).toUpperCase()}}{{ entry.lastName.charAt(0).toUpperCase()}}
-      </div>
-
-    <div class="profile-basic">
-      <h2>{{ entry.firstName }} {{ entry.lastName }}</h2>
-      <p class="text-muted">{{ entry.designation }}</p>
-      <p class="text-muted">Employee Code: {{ entry.employeeCode }}</p>
+    <div class="avatar-circle">
+      {{ entry.employeeName.charAt(0) }}
     </div>
-
+    <div class="profile-basic">
+      <h2>{{ entry.employeeName }}</h2>
+      <p><strong>Employee Code:</strong> {{ entry.employeeCode }}</p>
+      <p><strong>Designation:</strong> {{ entry.designation }}</p>
+      <p><strong>Department:</strong> {{ entry.department }}</p>
+      <p><strong>Team:</strong> {{ entry.team }}</p>
+      <p><strong>Location:</strong> {{ entry.location }}</p>
+    </div>
   </div>
 
-  <!-- Personal Details -->
+  <!-- PERSONAL DETAILS -->
   <div class="profile-section">
     <h4>Personal Details</h4>
     <div class="profile-info">
       <p><strong>Date of Birth:</strong> {{ entry.dob }}</p>
-      <p><strong>Joining Date:</strong> {{ entry.joinDate }}</p>
-      <p><strong>Marital Status:</strong> {{ entry.maritalStatus || 'N/A' }}</p>
+      <p><strong>Personal Email:</strong> {{ entry.personalEmail }}</p>
+      <p><strong>Aadhaar No:</strong> {{ entry.aadhaarNo }}</p>
+      <p><strong>PAN No:</strong> {{ entry.panNo }}</p>
+      <p><strong>Alternate Mobile:</strong> {{ entry.alternateMobile }}</p>
     </div>
   </div>
 
-  <!-- Contact Details -->
+  <!-- ADDRESS DETAILS -->
   <div class="profile-section">
-    <h4>Contact Details</h4>
+    <h4>Address Details</h4>
     <div class="profile-info">
-      <p><strong>Mobile Number:</strong> {{ entry.personalMobileNum || 'N/A' }}</p>
-      <p><strong>Email ID:</strong> {{ entry.email }}</p>
-      <p><strong>Department:</strong> {{ entry.department }}</p>
-      <p><strong>Job Level:</strong> {{ entry.tvmRole }}</p>
-      <p><strong>Present Address:</strong> {{ entry.presentAddress }}</p>
+      <p><strong>Current Address:</strong> {{ entry.currentAddress }}</p>
       <p><strong>Permanent Address:</strong> {{ entry.permanentAddress }}</p>
-      <p><strong>Employment Type:</strong> {{ entry.employmentType }}</p>
+    </div>
+  </div>
+
+  <!-- BANK DETAILS -->
+  <div class="profile-section">
+    <h4>Bank Details</h4>
+    <div class="profile-info">
+      <p><strong>Bank Account No:</strong> {{ entry.bankAccount }}</p>
+      <p><strong>Salary Account No:</strong> {{ entry.salaryAccountNo }}</p>
+      <p><strong>IFSC Code:</strong> {{ entry.ifscCode }}</p>
+    </div>
+  </div>
+
+  <!-- JOB DETAILS -->
+  <div class="profile-section">
+    <h4>Job Information</h4>
+    <div class="profile-info">
+      <p><strong>Joining Date:</strong> {{ entry.joiningDate }}</p>
+      <p><strong>Employee Type:</strong> {{ entry.employeeType }}</p>
+      <p><strong>Last Working Day:</strong> {{ entry.lastWorkingDay || '-' }}</p>
+      <p><strong>Project ID:</strong> {{ entry.projectId }}</p>
+      <p><strong>Status:</strong> {{ entry.employeeStatus }}</p>
+      <p><strong>Salary:</strong> ₹ {{ entry.salary }}</p>
+    </div>
+  </div>
+
+  <!-- SYSTEM INFO -->
+  <div class="profile-section">
+    <h4>System Info</h4>
+    <div class="profile-info">
+      <p><strong>Created At:</strong> {{ entry.createdAt }}</p>
+      <p><strong>ID:</strong> {{ entry.id }}</p>
     </div>
   </div>
 

@@ -2,26 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
 
 export interface EmployeeProfile {
-  firstName: string;
-  lastName: string;
-  photoUrl?: string;
-
-  designation: string;
+  employeeName: string;
   employeeCode: string;
-
-  dob: string;
-  joinDate: string;
-  maritalStatus?: string;
-
-  personalMobileNum?: string;
-  email: string;
+  designation: string;
   department: string;
-  tvmRole: string;
-
-  presentAddress?: string;
-  permanentAddress?: string;
-
-  employmentType?: string;
+  team: string;
+  location: string;
+  dob: string;
+  personalEmail: string;
+  aadhaarNo: string;
+  panNo: string;
+  alternateMobile: string;
+  currentAddress: string;
+  permanentAddress: string;
+  bankAccount: string;
+  salaryAccountNo: string;
+  ifscCode: string;
+  joiningDate: string;
+  employeeType: string;
+  lastWorkingDay?: string;
+  projectId: string;
+  employeeStatus: string;
+  salary: number;
+  createdAt: string;
+  id: number;
 }
 
 @Component({
