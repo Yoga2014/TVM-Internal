@@ -1,5 +1,14 @@
 <div class="table-container">
-  <table class="main-table">
+    <div class="search-box">
+    <input 
+      type="text" 
+      placeholder="Search by ID, Name, Designation..."
+      [(ngModel)]="searchText"
+      (input)="onSearch()"
+    />
+    </div>
+  <div class="fixed-table">
+  <table>
     <thead>
       <tr>
         <th>Employee Name</th>
@@ -33,4 +42,4 @@
       </tbody>
     </table>
   </div>
-</div>
+  </div>

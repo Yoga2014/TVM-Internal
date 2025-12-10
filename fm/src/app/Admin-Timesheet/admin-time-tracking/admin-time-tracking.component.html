@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let entry of timesheetSummary">
-        <td>{{name}}</td>
+        <td>{{entry.employeeName || name }}</td>
         <td>{{ entry.project }}</td>
         <td>{{ entry.location }}</td>
         <td>{{ entry.hrsType }}</td>

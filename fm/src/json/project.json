@@ -1,32 +1,111 @@
 {
   "project": [
     {
-      "projectname": "subramani  jhb",
-      "clientname": "mani",
-      "domain": "hfuh",
+      "projectname": "Website Development",
+      "clientname": "Mani",
+      "domain": "Backend",
       "startDate": "2024-08-27",
-      "voice": "s",
+      "voice": "Scripting",
       "voicestartDate": "2024-08-22",
-      "coding": "mozhi",
+      "voiceendDate": null,
+      "coding": "Mozhi",
       "codingstartDate": "2024-08-15",
       "codingendDate": null,
-      "asset": [],
-      "projectStatus": "Completed",
+      "assets": [
+        "Logo",
+        "Wireframe"
+      ],
+      "projectStatus": "Inactive",
       "id": "5cfe"
     },
     {
-      "projectname": "yhn",
-      "clientname": "ryhryh",
-      "domain": "e6y",
+      "projectname": "DB Management System",
+      "clientname": "Joshua",
+      "domain": "Backend",
       "startDate": "2024-08-08",
-      "voice": "ergee",
+      "voice": "Ergee",
       "voicestartDate": "2024-08-23",
-      "coding": "dg",
+      "voiceendDate": null,
+      "coding": "DG",
       "codingstartDate": "2024-08-28",
       "codingendDate": null,
-      "asset": [],
+      "assets": [
+        "Database Schema"
+      ],
       "projectStatus": "Pending",
       "id": "a178"
+    },
+    {
+      "projectname": "Mobile App Development",
+      "clientname": "Varsha",
+      "domain": "Frontend",
+      "startDate": "2024-09-01",
+      "voice": "Recording",
+      "voicestartDate": "2024-09-02",
+      "voiceendDate": "2024-09-05",
+      "coding": "React Native",
+      "codingstartDate": "2024-09-06",
+      "codingendDate": "2024-09-20",
+      "assets": [
+        "App Icons",
+        "UI Design"
+      ],
+      "projectStatus": "Active",
+      "id": "b234"
+    },
+    {
+      "projectname": "E-commerce Platform",
+      "clientname": "Kumar",
+      "domain": "Fullstack",
+      "startDate": "2024-07-15",
+      "voice": "QA",
+      "voicestartDate": "2024-07-16",
+      "voiceendDate": "2024-07-25",
+      "coding": "Angular + Node.js",
+      "codingstartDate": "2024-07-16",
+      "codingendDate": "2024-08-10",
+      "assets": [
+        "Logo",
+        "Banner Images"
+      ],
+      "projectStatus": "Active",
+      "id": "c567"
+    },
+    {
+      "projectname": "CRM System",
+      "clientname": "sivaneshwaran",
+      "domain": "Backend",
+      "startDate": "2024-06-12",
+      "voice": "Integration",
+      "voicestartDate": "2024-06-15",
+      "voiceendDate": "2024-06-25",
+      "coding": "Java Spring Boot",
+      "codingstartDate": "2024-06-12",
+      "codingendDate": "2024-07-10",
+      "assets": [
+        "Database Script",
+        "API Docs"
+      ],
+      "projectStatus": "Pending",
+      "id": "d890"
+    },
+    {
+      "projectname": "Social Media App",
+      "clientname": "Dinesh",
+      "domain": "Fullstack",
+      "startDate": "2024-10-01",
+      "voice": "Scripting",
+      "voicestartDate": "2024-10-02",
+      "voiceendDate": null,
+      "coding": "Flutter + Firebase",
+      "codingstartDate": "2024-10-05",
+      "codingendDate": null,
+      "assets": [
+        "App Logo",
+        "UI Mockups"
+      ],
+      "projectStatus": "Active",
+      "id": "e901"
     }
   ]
 }

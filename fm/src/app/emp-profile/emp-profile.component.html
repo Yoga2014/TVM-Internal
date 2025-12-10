@@ -1,29 +1,32 @@
-<div *ngIf="profiledata; else noData" class="profile-page">
+<div class="profile-page" *ngIf="profiledata as entry">
 
   <!-- Profile Header -->
   <div class="profile-header">
-    <img *ngIf="profiledata.photo; else avatar" [src]="profiledata.photo" alt="Employee Photo" class="profile-photo" />
 
-    <ng-template #avatar>
+    <!-- <img *ngIf="entry.photoUrl; else avatar"
+         [src]="entry.photoUrl"
+         class="profile-photo" /> -->
+
+  
       <div class="profile-avatar">
-        {{ profiledata.basicInformation.firstName[0] }}{{ profiledata.basicInformation.lastName[0] }}
+        {{ entry.firstName.charAt(0).toUpperCase()}}{{ entry.lastName.charAt(0).toUpperCase()}}
       </div>
-    </ng-template>
 
     <div class="profile-basic">
-      <h2>{{ profiledata.basicInformation.firstName}} {{ profiledata.basicInformation.lastName }}</h2>
-      <p class="text-muted">{{ profiledata.workInformation.designation }}</p>
-      <p class="text-muted">Employee Code: {{ profiledata.basicInformation.employeeId}}</p>
+      <h2>{{ entry.firstName }} {{ entry.lastName }}</h2>
+      <p class="text-muted">{{ entry.designation }}</p>
+      <p class="text-muted">Employee Code: {{ entry.employeeCode }}</p>
     </div>
+
   </div>
 
   <!-- Personal Details -->
   <div class="profile-section">
     <h4>Personal Details</h4>
     <div class="profile-info">
-      <p><strong>Date of Birth:</strong> {{  profiledata.personalDetails.dob }}</p>
-      <p><strong>Joining Date:</strong> {{ profiledata.workInformation.dateOfJoining }}</p>
-      <p><strong>Marital Status:</strong> {{ profiledata.personalDetails.maritalStatus }}</p>
+      <p><strong>Date of Birth:</strong> {{ entry.dob }}</p>
+      <p><strong>Joining Date:</strong> {{ entry.joinDate }}</p>
+      <p><strong>Marital Status:</strong> {{ entry.maritalStatus || 'N/A' }}</p>
     </div>
   </div>
 
@@ -31,17 +34,14 @@
   <div class="profile-section">
     <h4>Contact Details</h4>
     <div class="profile-info">
-      <p><strong>Mobile Number:</strong>{{ profiledata.contactDetails.personalMobileNum }}</p>
-      <p><strong>Email ID:</strong> {{  profiledata.basicInformation.email}}</p>
-      <p><strong>Department:</strong> {{ profiledata.workInformation.department }}</p>
-      <p><strong>Job Level:</strong> {{  profiledata.workInformation.role  }}</p>
-      <p><strong>Present Address:</strong> {{  profiledata.contactDetails.presentAddress }}</p>
-      <p><strong>Permanent Address:</strong>{{ profiledata.contactDetails.permanentAddress }}</p>
-      <p><strong>Employment Type:</strong>{{ profiledata.workInformation.employmentType }}</p>
+      <p><strong>Mobile Number:</strong> {{ entry.personalMobileNum || 'N/A' }}</p>
+      <p><strong>Email ID:</strong> {{ entry.email }}</p>
+      <p><strong>Department:</strong> {{ entry.department }}</p>
+      <p><strong>Job Level:</strong> {{ entry.tvmRole }}</p>
+      <p><strong>Present Address:</strong> {{ entry.presentAddress }}</p>
+      <p><strong>Permanent Address:</strong> {{ entry.permanentAddress }}</p>
+      <p><strong>Employment Type:</strong> {{ entry.employmentType }}</p>
     </div>
   </div>
-</div>
 
-<ng-template #noData>
-  <p>Server Error Employee Not found</p>
-</ng-template>
+</div>

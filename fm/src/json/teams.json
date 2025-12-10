@@ -3,10 +3,10 @@
 "Teams":[
   {
     "employeeCode": "EMP001",
-    "firstName": "Chandru",
-    "lastName": "M",
-    "nickName": "cha",
-    "email": "chandrum690@gmail.com",
+    "firstName": "Kumar",
+    "lastName": "Joshua",
+    "nickName": "KJ",
+    "email": "kumar.joshua@example.com",
     "photoUrl": "https://example.com/photos/john.jpg",
     "department": "Engineering",
     "designation": "Software Engineer",
@@ -19,7 +19,7 @@
     "uan": "1234567890",
     "team": "VARSHA",
     "dob": "01/11/2002",
-    "project":"cloud",
+    "project":"Employee Management System",
     "joinDate": "28/10/2025",
     "record": "1234567890"
   },
@@ -42,7 +42,7 @@
     "uan": "2345678901",
     "team": "DINESH",
     "dob": "15/05/2001",
-    "project":"Angular",
+    "project":"E-Commerce Product Dashboard",
     "joinDate": "12/01/2024",
     "record": "2345678901"
   },
@@ -65,7 +65,7 @@
     "uan": "3456789012",
     "team": "VARSHA",
     "dob": "23/09/1999",
-    "project":"python",
+    "project":"Student Result Management",
     "joinDate": "05/06/2023",
     "record": "3456789012"
   },
@@ -88,7 +88,7 @@
     "uan": "4567890123",
     "team": "DINESH",
     "dob": "10/02/2000",
-    "project":"cloud",
+    "project":"Personal Expense Tracker",
     "joinDate": "15/03/2024",
     "record": "4567890123"
   },
@@ -111,7 +111,7 @@
     "uan": "5678901234",
     "team": "SUBHASH",
     "dob": "19/12/1998",
-    "project":"Angular",
+    "project":"Real-Time Chat Application",
     "joinDate": "20/11/2023",
     "record": "5678901234"
   },
@@ -135,7 +135,7 @@
     "team": "SUBHASH",
     "dob": "05/08/2001",
     "joinDate": "02/12/2024",
-    "project":"Java",
+    "project":"Online Quiz Application",
     "record": "6789012345"
   }
 ]

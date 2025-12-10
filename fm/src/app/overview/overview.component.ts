@@ -18,9 +18,9 @@ export class OverviewComponent implements OnInit {
   newJoinees = 0;
   totalProjects = 0;
   leaveCount = 0;
-departmentCount = 0;
-anniversaryCount = 0;
-birthdayCount = 0;
+  departmentCount = 0;
+  anniversaryCount = 0;
+  birthdayCount = 0;
 
 
   // Nested + list data
@@ -29,28 +29,22 @@ birthdayCount = 0;
   anniversariesToday: any[] = [];
   birthdaysToday: any[] = [];
 
-  constructor(private overviewService: OverviewService, private router: Router,  private route: ActivatedRoute) {}
-@Output() navigateToProject = new EventEmitter<void>();
-@Output() navigateToPresentEmployee = new EventEmitter<void>();
-  
+  constructor(private overviewService: OverviewService, private router: Router, private route: ActivatedRoute) { }
+  @Output() navigateToProject = new EventEmitter<void>();
+  @Output() navigateToPresentEmployee = new EventEmitter<void>();
+
 
   ngOnInit() {
     this.overviewService.getOverviewData().subscribe(data => {
-this.totalEmployees = data.totalEmployees;
-this.presentToday = data.presentToday;
-this.absentToday = data.absentToday;
-
-this.leaveCount = data.leaveRequests.length;
-this.newJoinees = data.newJoineesThisMonth;
-
-this.departmentCount = Object.keys(data.departmentCounts).length;
-
-this.totalProjects = data.totalProjects;
-
-this.anniversaryCount = data.anniversariesToday.length;
-this.birthdayCount = data.birthdaysToday.length;
-
-
+      this.totalEmployees = data.totalEmployees;
+      this.presentToday = data.presentToday;
+      this.absentToday = data.absentToday;
+      this.leaveCount = data.leaveRequests.length;
+      this.newJoinees = data.newJoineesThisMonth;
+      this.departmentCount = Object.keys(data.departmentCounts).length;
+      this.totalProjects = data.totalProjects;
+      this.anniversaryCount = data.anniversariesToday.length;
+      this.birthdayCount = data.birthdaysToday.length;
       console.log("Dashboard →", data);
     });
   }
@@ -63,18 +57,15 @@ this.birthdayCount = data.birthdaysToday.length;
     this.isPopupVisible = !this.isPopupVisible;
   }
   openTotalEmployee() {
-  window.dispatchEvent(new Event("showTotalEmployeeTab"));
-}
-openTotalProject() {
-  this.router.navigate(['/new-home/teams-dashboard/projects']);
-}
-
-openLeaveRequest(){
-    this.router.navigate(['/leave-tracking']);
-}
-openPresentEmployee() {
- window.dispatchEvent(new Event("showPresentEmployeeTab"));
-}
-
-
+    window.dispatchEvent(new Event("showTotalEmployeeTab"));
+  }
+  openTotalProject() {
+    this.router.navigate(['/new-home/teams-dashboard/projects']);
+  }
+  openLeaveRequest() {
+    this.router.navigate(['/leave-approve']);
+  }
+  openPresentEmployee() {
+    window.dispatchEvent(new Event("showPresentEmployeeTab"));
+  }
 }

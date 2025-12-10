@@ -2,9 +2,9 @@
     "Employee": [
         {
           "employeeId": "EMP001",
-          "employeeName": "John Doe",
-          "dob": "1990-12-08",
-          "profilePicture": "https://example.com/profiles/johndoe.jpg",
+          "employeeName": "Karthik",
+          "dob": "1990-12-09",
+          "profilePicture": "https://example.com/profiles/karthik.jpg",
           "status": "Active",
           "generalTiming": "9:00 AM - 6:00 PM",
           "leaveBooked": 2,
@@ -15,9 +15,9 @@
         },
         {
           "employeeId": "EMP002",
-          "employeeName": "Jane Smith",
+          "employeeName": "Chandru",
           "dob": "1988-12-09",
-          "profilePicture": "https://example.com/profiles/janesmith.jpg",
+          "profilePicture": "https://example.com/profiles/chandru.jpg",
           "status": "On Leave",
           "generalTiming": "10:00 AM - 7:00 PM",
           "leaveBooked": 5,

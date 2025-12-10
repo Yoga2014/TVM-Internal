@@ -2,7 +2,6 @@
   "year": 2024,
   "month": "December",
   "weekendDate": "2024-12-01",
-  "employeeName": "John Doe",
   "timesheetEntries": [
     {
       "id": "ce8b",
@@ -19,7 +18,8 @@
       },
       "totalHours": "40",
       "description": "test4",
-      "status": "Pending"
+      "status": "Approved",
+      "employeeName": "Dinesh"
     },
     {
       "id": "5089",
@@ -36,8 +36,8 @@
       },
       "totalHours": "13",
       "description": "dfghjk",
-      "status": "Pending",
-      "employeeName": "Sivaneshwaran"
+      "status": "Rejected",
+      "employeeName": "Kumarakrishnan"
     },
     {
       "id": "048a",
@@ -55,7 +55,7 @@
       "totalHours": "19",
       "description": "vrfrf",
       "status": "Pending",
-      "employeeName": "Sivaneshwaran"
+      "employeeName": "Chandru"
     },
     {
       "id": "b0f3",

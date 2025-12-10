@@ -19,7 +19,7 @@
     <tbody>
       <tr *ngFor="let entry of timesheetSummary">
       <td><input type="checkbox" [(ngModel)]="entry.selected" (change)="onRowSelect($event, entry)" /></td>
-        <td>{{name}}</td>
+        <td>{{ entry.employeeName }}</td>
         <td>{{ entry.project }}</td>
         <td>{{ entry.location }}</td>
         <td>{{ entry.hrsType }}</td>
