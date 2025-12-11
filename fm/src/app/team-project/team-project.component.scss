@@ -81,7 +81,7 @@ $table-header-bg: rgba(57, 113, 255, 0.878);
     top: 0; // important for sticky header
     background-color: $primary-color; // dark blue background
     color: $white; // white text
-    z-index: 10; // ensures header is above tbody rows
+    z-index: 100; // ensures header is above tbody rows
   }
 
   th, td {
@@ -169,7 +169,7 @@ td.position-relative {
     padding: 10px 0;
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-    z-index: 9999;
+    z-index: 99;
     display: flex;
     flex-direction: column;
 

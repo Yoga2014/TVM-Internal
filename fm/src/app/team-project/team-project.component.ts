@@ -1,162 +1,137 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { TeamProjectService } from './team-project.service';
-import { TeamProject } from '../Interface/team-project';
-
-
 
 @Component({
   selector: 'app-team-project',
   templateUrl: './team-project.component.html',
-  standalone: false,
   styleUrls: ['./team-project.component.scss']
 })
 export class TeamProjectComponent {
+
   projectForm: FormGroup = this.fb.group({
-    projectname: ['', [Validators.required, Validators.minLength(3)]],
-    clientname: ['', Validators.required],
-    domain: ['', Validators.required],
-    startDate: ['', Validators.required],
-    voice: ['', [Validators.required, Validators.maxLength(100)]],
-    voicestartDate: ['', Validators.required],
-    voiceendDate: [''],
-    coding: ['', [Validators.required, Validators.maxLength(100)]],
-    codingstartDate: ['', Validators.required],
-    codingendDate: [''],
-    asset: this.fb.array([]),
-    projectStatus: ['', Validators.required]
+    projectHolder: ['', [Validators.required, Validators.minLength(3)]],
+    projectVoice: ['', [Validators.required, Validators.maxLength(100)]],
+    projectId: ['', Validators.required],
+    vendor: ['', Validators.required],
+    client: ['', [Validators.required, Validators.maxLength(100)]],
+    parentCompany: ['', Validators.required],
+    onboardedDate: ['', Validators.required],
+    projectDomain: ['', Validators.required],
+    projectStatus: ['', Validators.required],
+    assets: this.fb.array([]) // Initialize FormArray
   });
-  @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
+
   @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
-  toastTitle = '';
-  toastMessage = '';
-  projects: any[] = [];
-  projectId: string | null = null;
-  isEditMode = false;
+
   submittedData: any[] = [];
+  isEditMode: boolean = false;
+  showToast: boolean = false;
   editID: any;
-  showToast: boolean = false; // This should be a boolean
-  updatebtn: boolean = false;
-  submit: boolean = false
-  toastTime: string = 'Just now';
-  isOffcanvasOpen = false;
+
+  allAssets: string[] = ['laptop', 'charger', 'headset', 'mouse'];
+  selectedItem: any = null;
 
   constructor(
     public fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private renderer: Renderer2,
-    private teams: TeamProjectService
+    private teams: TeamProjectService,
+    private elRef: ElementRef
   ) { }
-
-  dropdownItem: any = null;
 
   ngOnInit() {
     this.getdata();
   }
 
-  populateForm(data: any) {
-    this.projectForm.patchValue({
-      projectname: data.projectname,
-      clientname: data.clientname,
-      domain: data.domain,
-      startDate: data.startDate,
-      voice: data.voice,
-      voicestartDate: data.voicestartDate,
-      voiceEndDate: data.voiceEndDate,
-      coding: data.coding,
-      codingstartDate: data.codingstartDate,
-      codingendDate: data.codingendDate,
-      projectStatus: data.projectStatus
-    });
-
-    const assetsArray = this.projectForm.get('asset') as FormArray;
-    assetsArray.clear();
-    if (data.asset) {
-      data.asset
-        .filter((a: string | null) => a != null) // specify type
-        .forEach((asset: string) => assetsArray.push(new FormControl(asset)));
+    @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    const clickedInside = this.elRef.nativeElement.contains(event.target);
+    if (!clickedInside) {
+      this.selectedItem = null; // close dropdown if clicked outside
     }
-
   }
 
-  allAssets: string[] = ['laptop', 'charger', 'headset', 'mouse'];
-
-  // Getter for asset FormArray
   get assetArray(): FormArray {
-    return this.projectForm.get('asset') as FormArray;
+    return this.projectForm.get('assets') as FormArray;
   }
 
   getdata() {
-    this.teams.getMethod().subscribe((response: any) => {
-      this.submittedData = response;
+    this.teams.getMethod().subscribe((res: any) => {
+      this.submittedData = res;
     });
   }
 
-  onSubmit() {
-    if (this.projectForm.valid) {
-      if (!this.isEditMode) {
-        const newId = this.submittedData.length > 0
-          ? Math.max(...this.submittedData.map((project: any) => project.id)) + 1
-          : 1;
-        const newProject = {
-          ...this.projectForm.value,
-          id: newId
-        };
-        this.teams.postMethod(newProject).subscribe(
-          (response: any) => {
-            console.log(response, 'submitform')
-            this.projects.push(response);
-            this.getdata();
-            this.resetForm();
-          },
-          (error: any) => {
-            console.error('Error submitting project:', error);
-          }
-        );
-      }
-    }
-  }
+  populateForm(data: any) {
+    this.projectForm.patchValue({
+      projectHolder: data.projectHolder,
+      projectVoice: data.projectVoice,
+      projectId: data.projectId,
+      vendor: data.vendor,
+      client: data.client,
+      parentCompany: data.parentCompany,
+      onboardedDate: data.onboardedDate,
+      projectDomain: data.projectDomain,
+      projectStatus: data.projectStatus
+    });
 
-  onCheckboxChange(event: any) {
-    const assets: FormArray = this.assetArray;
-    if (event.target.checked) {
-      assets.push(new FormControl(event.target.value));
-    } else {
-      const index = assets.controls.findIndex(control => control.value === event.target.value);
-      if (index >= 0) {
-        assets.removeAt(index);
-      }
+    this.assetArray.clear();
+    if (data.assets) {
+      data.assets.forEach((asset: string) => this.assetArray.push(new FormControl(asset)));
     }
-  }
-
-
-  edit(id: any) {
-    const project = this.submittedData.find(p => p.id === id);
-    if (project) {
-      this.populateForm(project);
-      this.isEditMode = true;
-      this.editID = project.id;
-      this.showToast = true; // open offcanvas
-    }
-    this.closeDropdown();
   }
 
   openToast() {
     this.showToast = true;
     this.isEditMode = false;
     this.projectForm.reset();
-    this.updatebtn = true;
-    this.submit = false;
+    this.assetArray.clear();
+  }
+
+  closeToast() {
+    this.showToast = false;
+    this.isEditMode = false;
+    this.projectForm.reset();
+    this.assetArray.clear();
+  }
+
+  onCheckboxChange(event: any) {
+    if (event.target.checked) {
+      this.assetArray.push(new FormControl(event.target.value));
+    } else {
+      const index = this.assetArray.controls.findIndex(c => c.value === event.target.value);
+      this.assetArray.removeAt(index);
+    }
+  }
+
+  onSubmit() {
+    if (this.projectForm.valid && !this.isEditMode) {
+      const newId = this.submittedData.length > 0
+        ? Math.max(...this.submittedData.map(p => p.id)) + 1
+        : 1;
+      const body = { ...this.projectForm.value, id: newId };
+      this.teams.postMethod(body).subscribe(() => {
+        this.getdata();
+        this.closeToast();
+      });
+    }
+  }
+
+  edit(id: any) {
+    const project = this.submittedData.find(p => p.id === id);
+    if (project) {
+      this.populateForm(project);
+      this.editID = id;
+      this.isEditMode = true;
+      this.showToast = true;
+      this.selectedItem = false;
+
+    }
   }
 
   update() {
     if (this.projectForm.valid && this.isEditMode) {
       this.teams.updateMethod(this.editID, this.projectForm.value).subscribe(() => {
         this.getdata();
-        this.isEditMode = false;
-        this.showToast = false;
+        this.closeToast();
       });
     }
   }
@@ -167,28 +142,8 @@ export class TeamProjectComponent {
     });
   }
 
-  resetForm() {
-    this.projectForm.reset();
-    const assetsArray = this.projectForm.get('asset') as FormArray;
-    assetsArray.clear();
-    this.showToast = false;
-    this.isEditMode = false;
+  toggleDropdown(item: any) {
+    this.selectedItem = this.selectedItem === item ? null : item;
   }
-
-  closeToast() {
-    this.showToast = false;
-  }
-  dropdownVisible = false;
-  dropdownPosition = { top: '0px', left: '0px' };
-  selectedItem: any = null;
-
-toggleDropdown(item: any) {
-  this.selectedItem = this.selectedItem === item ? null : item;
-}
-
-
-closeDropdown() {
-  this.selectedItem = null;
-}
-
+  
 }

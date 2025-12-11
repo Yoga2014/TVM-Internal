@@ -19,8 +19,10 @@
       "client": "Mastercard",
       "parentCompany": "Infosys",
       "onboardedDate": "12-01-2024",
-      "projectStatus": "Active",
-      "projectDomain": "Banking"
+      "projectDomain": "Banking",
+      "projectStatus": "Inactive",
+      "assets": [],
+      "id": "f75a"
     },
     {
       "projectHolder": "Arun",
@@ -31,7 +33,8 @@
       "parentCompany": "TCS",
       "onboardedDate": "18-01-2024",
       "projectStatus": "Inactive",
-      "projectDomain": "Insurance"
+      "projectDomain": "Insurance",
+      "id": "7b09"
     },
     {
       "projectHolder": "Praveen",
@@ -42,7 +45,8 @@
       "parentCompany": "Trigent",
       "onboardedDate": "25-01-2024",
       "projectStatus": "Active",
-      "projectDomain": "E-Commerce"
+      "projectDomain": "E-Commerce",
+      "id": "a3f3"
     },
     {
       "projectHolder": "Sanjay",
@@ -53,7 +57,8 @@
       "parentCompany": "Cognizant",
       "onboardedDate": "03-02-2024",
       "projectStatus": "Inactive",
-      "projectDomain": "Cloud"
+      "projectDomain": "Cloud",
+      "id": "00ef"
     },
     {
       "projectHolder": "Naveen",
@@ -64,7 +69,8 @@
       "parentCompany": "Trigent",
       "onboardedDate": "10-02-2024",
       "projectStatus": "Active",
-      "projectDomain": "Payments"
+      "projectDomain": "Payments",
+      "id": "d032"
     },
     {
       "projectHolder": "Vimal",
@@ -75,7 +81,8 @@
       "parentCompany": "Accenture",
       "onboardedDate": "16-02-2024",
       "projectStatus": "Inactive",
-      "projectDomain": "Social Media"
+      "projectDomain": "Social Media",
+      "id": "d3af"
     },
     {
       "projectHolder": "Hari",
@@ -86,7 +93,8 @@
       "parentCompany": "Tech Mahindra",
       "onboardedDate": "20-02-2024",
       "projectStatus": "Active",
-      "projectDomain": "Entertainment"
+      "projectDomain": "Entertainment",
+      "id": "9cdf"
     },
     {
       "projectHolder": "Raghav",
@@ -97,7 +105,8 @@
       "parentCompany": "Trigent",
       "onboardedDate": "01-03-2024",
       "projectStatus": "Inactive",
-      "projectDomain": "Transportation"
+      "projectDomain": "Transportation",
+      "id": "d0cd"
     },
     {
       "projectHolder": "Yogesh",
@@ -108,7 +117,8 @@
       "parentCompany": "Wipro",
       "onboardedDate": "07-03-2024",
       "projectStatus": "Active",
-      "projectDomain": "CRM"
+      "projectDomain": "CRM",
+      "id": "e2c9"
     }
   ]
 }

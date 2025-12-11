@@ -19,7 +19,7 @@ ngOnInit(): void {
   this.router.events.subscribe(() => {
     this.setActiveTabFromUrl(this.router.url);
   });
-}
+} 
 
 private setActiveTabFromUrl(url: string) {
   if (url.includes('announcements')) this.activeNavItem = 'announcements';
