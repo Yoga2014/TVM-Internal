@@ -1,149 +1,149 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TeamProjectService } from './team-project.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TeamProjectService } from '../AllServices/TeamProjectService';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-team-project',
   templateUrl: './team-project.component.html',
   styleUrls: ['./team-project.component.scss']
 })
-export class TeamProjectComponent {
+export class TeamProjectComponent implements OnInit {
 
-  projectForm: FormGroup = this.fb.group({
-    projectHolder: ['', [Validators.required, Validators.minLength(3)]],
-    projectVoice: ['', [Validators.required, Validators.maxLength(100)]],
-    projectId: ['', Validators.required],
-    vendor: ['', Validators.required],
-    client: ['', [Validators.required, Validators.maxLength(100)]],
-    parentCompany: ['', Validators.required],
-    onboardedDate: ['', Validators.required],
-    projectDomain: ['', Validators.required],
-    projectStatus: ['', Validators.required],
-    assets: this.fb.array([]) // Initialize FormArray
-  });
+  projectForm!: FormGroup;
+  projects: any[] = [];
+  showForm = false;
+  selectedProject: any = null;
 
-  @ViewChild('offcanvasForm', { static: true }) offcanvasForm!: ElementRef;
+  // 🔹 Employee search
+  employeeResults: any[] = [];
+  employeeSearch$ = new Subject<string>();
+  activeField: 'holder' | 'voice' | null = null;
 
-  submittedData: any[] = [];
-  isEditMode: boolean = false;
-  showToast: boolean = false;
-  editID: any;
-
-  allAssets: string[] = ['laptop', 'charger', 'headset', 'mouse'];
-  selectedItem: any = null;
+  // 🔹 Display values (names shown in input)
+  projectHolderInput = '';
+  projectVoiceInput = '';
 
   constructor(
-    public fb: FormBuilder,
-    private teams: TeamProjectService,
-    private elRef: ElementRef
-  ) { }
+    private fb: FormBuilder,
+    private teamService: TeamProjectService
+  ) {}
 
-  ngOnInit() {
-    this.getdata();
+  ngOnInit(): void {
+    this.createForm();
+    this.loadProjects();
+
+    this.employeeSearch$
+      .pipe(
+        debounceTime(300),
+        switchMap(keyword => this.teamService.searchEmployees(keyword))
+      )
+      .subscribe({
+        next: (res: any) => this.employeeResults = res,
+        error: err => console.error('Search error', err)
+      });
   }
 
-    @HostListener('document:click', ['$event'])
-  handleClickOutside(event: Event) {
-    const clickedInside = this.elRef.nativeElement.contains(event.target);
-    if (!clickedInside) {
-      this.selectedItem = null; // close dropdown if clicked outside
-    }
-  }
-
-  get assetArray(): FormArray {
-    return this.projectForm.get('assets') as FormArray;
-  }
-
-  getdata() {
-    this.teams.getMethod().subscribe((res: any) => {
-      this.submittedData = res;
+  createForm() {
+    this.projectForm = this.fb.group({
+      projectHolder: [null, Validators.required], // EMP ID
+      projectVoice: [null, Validators.required],  // EMP ID
+      projectName: ['', Validators.required],
+      vendor: ['', Validators.required],
+      clientName: ['', Validators.required],
+      parentCompany: ['', Validators.required],
+      onboardedDate: ['', Validators.required],
+      projectDomain: ['', Validators.required],
+      projectStatus: ['', Validators.required]
     });
   }
 
-  populateForm(data: any) {
-    this.projectForm.patchValue({
-      projectHolder: data.projectHolder,
-      projectVoice: data.projectVoice,
-      projectId: data.projectId,
-      vendor: data.vendor,
-      client: data.client,
-      parentCompany: data.parentCompany,
-      onboardedDate: data.onboardedDate,
-      projectDomain: data.projectDomain,
-      projectStatus: data.projectStatus
+  openForm() {
+    this.showForm = true;
+    this.projectForm.reset();
+    this.projectHolderInput = '';
+    this.projectVoiceInput = '';
+  }
+
+  closeForm() {
+    this.showForm = false;
+  }
+
+  loadProjects() {
+    this.teamService.getProjects().subscribe({
+      next: res => this.projects = res,
+      error: err => console.error(err)
     });
-
-    this.assetArray.clear();
-    if (data.assets) {
-      data.assets.forEach((asset: string) => this.assetArray.push(new FormControl(asset)));
-    }
   }
 
-  openToast() {
-    this.showToast = true;
-    this.isEditMode = false;
-    this.projectForm.reset();
-    this.assetArray.clear();
-  }
+  // 🔹 Search input
+  onEmployeeInput(field: 'holder' | 'voice', value: string) {
+    this.activeField = field;
 
-  closeToast() {
-    this.showToast = false;
-    this.isEditMode = false;
-    this.projectForm.reset();
-    this.assetArray.clear();
-  }
-
-  onCheckboxChange(event: any) {
-    if (event.target.checked) {
-      this.assetArray.push(new FormControl(event.target.value));
+    if (field === 'holder') {
+      this.projectHolderInput = value;
     } else {
-      const index = this.assetArray.controls.findIndex(c => c.value === event.target.value);
-      this.assetArray.removeAt(index);
+      this.projectVoiceInput = value;
     }
+
+    if (value.length >= 3) {
+      this.employeeSearch$.next(value);
+    } else {
+      this.employeeResults = [];
+    }
+  }
+
+  // 🔹 Select employee
+  selectEmployee(emp: any) {
+    if (this.activeField === 'holder') {
+      this.projectForm.patchValue({ projectHolder: emp.id });
+      this.projectHolderInput = emp.employeeName;
+    }
+
+    if (this.activeField === 'voice') {
+      this.projectForm.patchValue({ projectVoice: emp.id });
+      this.projectVoiceInput = emp.employeeName;
+    }
+
+    this.employeeResults = [];
+    this.activeField = null;
   }
 
   onSubmit() {
-    if (this.projectForm.valid && !this.isEditMode) {
-      const newId = this.submittedData.length > 0
-        ? Math.max(...this.submittedData.map(p => p.id)) + 1
-        : 1;
-      const body = { ...this.projectForm.value, id: newId };
-      this.teams.postMethod(body).subscribe(() => {
-        this.getdata();
-        this.closeToast();
-      });
-    }
-  }
+    if (this.projectForm.invalid) return;
 
-  edit(id: any) {
-    const project = this.submittedData.find(p => p.id === id);
-    if (project) {
-      this.populateForm(project);
-      this.editID = id;
-      this.isEditMode = true;
-      this.showToast = true;
-      this.selectedItem = false;
+    const payload = {
+      projectHolderEmpId: this.projectForm.value.projectHolder,
+      projectVoiceEmpId: this.projectForm.value.projectVoice,
+      projectName: this.projectForm.value.projectName,
+      vendor: this.projectForm.value.vendor,
+      clientName: this.projectForm.value.clientName,
+      parentCompany: this.projectForm.value.parentCompany,
+      onboardedDate: this.projectForm.value.onboardedDate,
+      projectDomain: this.projectForm.value.projectDomain,
+      projectStatus: this.projectForm.value.projectStatus
+    };
 
-    }
-  }
-
-  update() {
-    if (this.projectForm.valid && this.isEditMode) {
-      this.teams.updateMethod(this.editID, this.projectForm.value).subscribe(() => {
-        this.getdata();
-        this.closeToast();
-      });
-    }
-  }
-
-  delete(id: any) {
-    this.teams.deleteMethod(id).subscribe(() => {
-      this.getdata();
+    this.teamService.addProject(payload).subscribe({
+      next: () => {
+        this.loadProjects();
+        this.closeForm();
+      },
+      error: err => console.error(err)
     });
   }
 
-  toggleDropdown(item: any) {
-    this.selectedItem = this.selectedItem === item ? null : item;
+  deleteProject(id: number) {
+    if (!confirm('Delete this project?')) return;
+
+    this.teamService.deleteProject(id).subscribe({
+      next: () => this.loadProjects(),
+      error: err => console.error(err)
+    });
   }
-  
+
+  toggleDropdown(project: any) {
+    this.selectedProject = this.selectedProject === project ? null : project;
+  }
 }

@@ -1,188 +1,110 @@
-<!-- Toast Notification -->
-<div class="container ">
-  <!-- Project List Tab -->
-  <div class="projectlist">
-    <div class="pro">Project List</div>
+<!-- Header -->
+<div class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Project List</h4>
+    <button class="btn btn-primary" (click)="openForm()">Add Project</button>
   </div>
-  <!-- Add Project Button  -->
-  <div class="card-body">
-    <button type="button" (click)="openToast()" class="btn btn-primary" data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasForm" aria-controls="offcanvasForm">Add Project</button>
-  </div>
-</div>
 
-<!-- Table to Display Project Data -->
-<div class="table-wrapper" >
+  <!-- Table -->
   <table class="project-table">
     <thead>
       <tr>
-        <th>Project Holder Name</th>
-        <th>Project Voice Name</th>
-        <th>Project Id</th>
+        <th>Project Holder</th>
+        <th>Project Voice</th>
+        <th>Project ID</th>
         <th>Vendor</th>
         <th>Client</th>
         <th>Parent Company</th>
         <th>Onboarded Date</th>
-        <th>Project Domain</th>
-        <th>Project Status</th>
-        <th>Actions</th>
+        <th>Domain</th>
+        <th>Status</th>
+        <th>Action</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor="let item of submittedData">
-        <td>{{ item.projectHolder }}</td>
-        <td>{{ item.projectVoice }}</td>
-        <td>{{ item.projectId }}</td>
-        <td>{{ item.vendor }}</td>
-        <td>{{ item.client }}</td>
-        <td>{{ item.parentCompany }}</td>
-        <td>{{ item.onboardedDate || '-' }}</td>
-        <td>{{ item.projectDomain }}</td>
-        <td>{{ item.projectStatus }}</td>
-        <td class="position-relative">
-          <button class="btn btn-link p-0" (click)="toggleDropdown(item)">
+      <tr *ngFor="let p of projects">
+        <td>{{ p.projectHolderName }}</td>
+        <td>{{ p.projectVoiceName }}</td>
+        <td>{{ p.projectId }}</td>
+        <td>{{ p.vendor }}</td>
+        <td>{{ p.clientName }}</td>
+        <td>{{ p.parentCompany }}</td>
+        <td>{{ p.onboardedDate }}</td>
+        <td>{{ p.projectDomain }}</td>
+        <td>{{ p.projectStatus }}</td>
+        <td>
+      <button class="btn btn-link p-0" (click)="toggleDropdown(p)">
             <i class="bi bi-three-dots-vertical"></i>
           </button>
-
-          <div *ngIf="selectedItem === item" class="dropdown-card">
-            <button (click)="edit(item.id)">Edit</button>
-            <button (click)="delete(item.id)">Delete</button>
-          </div>
-        </td>
+<div *ngIf="selectedProject === p" class="dropdown-card">
+            <button (click)="deleteProject(p.id)">Delete</button>
+          </div>        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<!-- Offcanvas -->
+<div class="offcanvas offcanvas-end"
+     [class.show]="showForm"
+     [style.visibility]="showForm ? 'visible' : 'hidden'">
 
-<!-- Add Project Form -->
-<div class="offcanvas offcanvas-end" tabindex="-1" [ngClass]="{'show': showToast, 'hide': !showToast}"
-  aria-labelledby="offcanvasFormLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasFormLabel">{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h5>
-    <button type="button" class="btn-close" data-bs-target="#offcanvasForm" data-bs-dismiss="offcanvas"
-      aria-label="Close" (click)="closeToast()"></button>
-
+    <h5>Add Project</h5>
+    <button class="btn-close" (click)="closeForm()"></button>
   </div>
-  <div class="offcanvas-body">
-    <form [formGroup]="projectForm" (ngSubmit)="isEditMode ? update() : onSubmit()">
-      <!-- Project Name -->
-      <div class="mb-3">
-        <label class="form-label">Project Name</label>
-        <input type="text" class="form-control" formControlName="projectHolder"
-          [class.is-invalid]="projectForm.get('projectHolder')?.invalid && projectForm.get('projectHolder')?.touched">
 
-        <div class="invalid-feedback" *ngIf="projectForm.get('projectHolder')?.errors">
-          <div *ngIf="projectForm.get('projectHolder')?.errors?.['required']">Project name is required.</div>
-          <div *ngIf="projectForm.get('projectHolder')?.errors?.['minlength']">
-            Minimum 3 characters required.
-          </div>
-        </div>
+  <div class="offcanvas-body">
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+      <!-- Project Holder -->
+      <div class="mb-3 position-relative">
+        <label>Project Holder</label>
+        <input class="form-control"
+               [value]="projectHolderInput"
+               (input)="onEmployeeInput('holder', $any($event.target).value)">
+        <ul *ngIf="employeeResults.length && activeField === 'holder'"
+            class="list-group position-absolute w-100">
+          <li class="list-group-item"
+              *ngFor="let emp of employeeResults"
+              (click)="selectEmployee(emp)">
+            {{ emp.employeeName }}
+          </li>
+        </ul>
       </div>
 
       <!-- Project Voice -->
-      <div class="mb-3">
-        <label class="form-label">Project Voice</label>
-        <input type="text" class="form-control" formControlName="projectVoice"
-          [class.is-invalid]="projectForm.get('projectVoice')?.invalid && projectForm.get('projectVoice')?.touched">
-
-        <div class="invalid-feedback" *ngIf="projectForm.get('projectVoice')?.errors">
-          <div *ngIf="projectForm.get('projectVoice')?.errors?.['required']">Project voice is required.</div>
-        </div>
+      <div class="mb-3 position-relative">
+        <label>Project Voice</label>
+        <input class="form-control"
+               [value]="projectVoiceInput"
+               (input)="onEmployeeInput('voice', $any($event.target).value)">
+        <ul *ngIf="employeeResults.length && activeField === 'voice'"
+            class="list-group position-absolute w-100">
+          <li class="list-group-item"
+              *ngFor="let emp of employeeResults"
+              (click)="selectEmployee(emp)">
+            {{ emp.employeeName }}
+          </li>
+        </ul>
       </div>
 
-      <!-- Project Id -->
-      <div class="mb-3">
-        <label class="form-label">Project Id</label>
-        <input type="text" class="form-control" formControlName="projectId"
-          [class.is-invalid]="projectForm.get('projectId')?.invalid && projectForm.get('projectId')?.touched">
+      <input class="form-control mb-2" placeholder="Project Name" formControlName="projectName">
+      <input class="form-control mb-2" placeholder="Vendor" formControlName="vendor">
+      <input class="form-control mb-2" placeholder="Client Name" formControlName="clientName">
+      <input class="form-control mb-2" placeholder="Parent Company" formControlName="parentCompany">
+      <input class="form-control mb-2" type="date" formControlName="onboardedDate">
+      <input class="form-control mb-2" placeholder="Domain" formControlName="projectDomain">
 
-        <div class="invalid-feedback" *ngIf="projectForm.get('projectId')?.errors">
-          <div *ngIf="projectForm.get('projectId')?.errors?.['required']">Project Id is required.</div>
-        </div>
-      </div>
+      <select class="form-select mb-3" formControlName="projectStatus">
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+      </select>
 
-      <!-- Vendor -->
-      <div class="mb-3">
-        <label class="form-label">Vendor</label>
-        <input type="date" class="form-control" formControlName="vendor"
-          [class.is-invalid]="projectForm.get('vendor')?.invalid && projectForm.get('vendor')?.touched">
-
-        <div class="invalid-feedback" *ngIf="projectForm.get('vendor')?.errors">
-          <div *ngIf="projectForm.get('vendor')?.errors?.['required']">Vendor is required.</div>
-        </div>
-      </div>
-
-      <!-- client -->
-      <div class="mb-3">
-        <label class="form-label">Client Name</label>
-        <input type="text" class="form-control" formControlName="client"
-          [class.is-invalid]="projectForm.get('client')?.invalid && projectForm.get('client')?.touched">
-
-        <div class="invalid-feedback" *ngIf="projectForm.get('client')?.errors">
-          <div *ngIf="projectForm.get('client')?.errors?.['required']">Client name is required.</div>
-          <div *ngIf="projectForm.get('client')?.errors?.['maxlength']">Max 100 chars allowed.</div>
-        </div>
-      </div>
-
-      <!-- Parent Company -->
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label class="form-label">Parent Company</label>
-          <input type="text" class="form-control" formControlName="parentCompany"
-            [class.is-invalid]="projectForm.get('parentCompany')?.invalid && projectForm.get('parentCompany')?.touched">
-
-          <div class="invalid-feedback" *ngIf="projectForm.get('parentCompany')?.errors">
-            <div *ngIf="projectForm.get('parentCompany')?.errors?.['required']">Required field.</div>
-          </div>
-        </div>
-
-      <!-- onboarded Date -->
-      <div class="mb-3">
-        <label class="form-label">onboarded Date</label>
-        <input type="date" class="form-control" formControlName="onboardedDate"
-          [class.is-invalid]="projectForm.get('onboardedDate')?.invalid && projectForm.get('onboardedDate')?.touched">
-        <div class="invalid-feedback" *ngIf="projectForm.get('onboardedDate')?.errors">
-          <div *ngIf="projectForm.get('onboardedDate')?.errors?.['required']">onboardedDate is required.</div>
-        </div>
-      </div>
-
-      <!-- Project Domain -->
-      <div class="mb-3">
-        <label class="form-label">Project Domain</label>
-        <input type="text" class="form-control" formControlName="projectDomain"
-          [class.is-invalid]="projectForm.get('projectDomain')?.invalid && projectForm.get('projectDomain')?.touched">
-
-        <div class="invalid-feedback" *ngIf="projectForm.get('projectDomain')?.errors">
-          <div *ngIf="projectForm.get('projectDomain')?.errors?.['required']">Project domain is required.</div>
-        </div>
-      </div>
-
-      <!-- Project Status -->
-      <div class="mb-3">
-        <label class="form-label">Project Status</label>
-        <select class="form-select" formControlName="projectStatus"
-          [class.is-invalid]="projectForm.get('projectStatus')?.invalid && projectForm.get('projectStatus')?.touched">
-
-          <option value="">--Select--</option>
-          <option value="Active">Active</option>
-          <option value="Inactive">Inactive</option>
-          <option value="Pending">Pending</option>
-        </select>
-
-        <div class="invalid-feedback" *ngIf="projectForm.get('projectStatus')?.errors">
-          <div *ngIf="projectForm.get('projectStatus')?.errors?.['required']">
-            Project status is required.
-          </div>
-        </div>
-      </div>
-
-      <!-- Buttons -->
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary me-2" [disabled]="!projectForm.valid || isEditMode">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="update()"
-          [disabled]="!projectForm.valid || !isEditMode">
-          Update
-        </button>
-      </div>
+      <button class="btn btn-success w-100" [disabled]="projectForm.invalid">
+        Submit
+      </button>
+    </form>
   </div>
+</div>
