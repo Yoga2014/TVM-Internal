@@ -78,7 +78,7 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     // Check if employeeId is not undefined
     if (request.employeeId) {
       if (confirm('Are you sure you want to approve this leave request?')) {
-        this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Approved' }).subscribe({
+        this.leaveService.updateLeaveRequest(Number(request.employeeId), { status: 'Approved' }).subscribe({
           next: () => {
             this.refreshData();
           },
@@ -97,7 +97,7 @@ export class ApprovalLeaveRequestComponent implements OnInit {
     if (request.employeeId) {
       const comment = prompt('Please enter the reason for rejection:');
       if (comment) {
-        this.leaveService.updateLeaveRequest(request.employeeId, { status: 'Rejected', comment }).subscribe({
+        this.leaveService.updateLeaveRequest(Number(request.employeeId), { status: 'Rejected', comment }).subscribe({
           next: () => {
             this.refreshData();
           },

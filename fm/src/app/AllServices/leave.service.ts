@@ -1,106 +1,131 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { API_CONFIG } from '../api-config';
 import { LeaveRequest } from '../Interface/leave-request.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class LeaveService {
-  
-  private leaveSummaryURL = 'http://localhost:3006/LeaveSummary';
-  private applyLeaveURL = 'http://localhost:3007/Leave';
-  private leaveApprovalURL = 'http://localhost:3001/leaveRequest';
 
-  private leaveAppliedSubject = new Subject<LeaveRequest>();
+  private baseUrl = `${API_CONFIG.BASE_URL}/api/leave`;
+  private adminUrl = `${API_CONFIG.BASE_URL}/api/admin/leave`;
 
   constructor(private http: HttpClient) {}
 
-  /** ---------------------------------------
-   *  GET LEAVE SUMMARY
-   * --------------------------------------- */
-  getLeaveSummary(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.applyLeaveURL);
+  // ================= AUTH HEADER =================
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
 
-  /** ---------------------------------------
-   *  GET ALL LEAVE REQUESTS
-   * --------------------------------------- */
-  getLeaves(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(this.applyLeaveURL);
-  }
+  // ================= EMPLOYEE SIDE =================
 
-  /** ---------------------------------------
-   *  ADD NEW LEAVE REQUEST
-   * --------------------------------------- */
-  addLeaveRequest(leaveRequest:any){
-    return this.http.post<LeaveRequest>(this.applyLeaveURL, leaveRequest);
-  }
-
-  /** ---------------------------------------
-   *  EMIT NEW LEAVE REQUEST EVENT
-   * --------------------------------------- */
-  setLeaveApplied(leave: LeaveRequest): void {
-    this.leaveAppliedSubject.next(leave);
-  }
-
-  getLeaveApplied(): Observable<LeaveRequest> {
-    return this.leaveAppliedSubject.asObservable();
-  }
-
-  /** ---------------------------------------
-   *  GET LEAVE TYPES FROM SUMMARY
-   * --------------------------------------- */
-  getLeaveTypes(): Observable<string[]> {
-    return this.http.get<LeaveRequest[]>(this.leaveSummaryURL).pipe(
-      map((summary: LeaveRequest[]) =>
-        summary
-          .map((item) => item.typeLeave)
-          .filter((type): type is string => !!type)
-      )
+  // ✅ Apply Leave
+  applyLeave(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/apply`,
+      payload,
+      { headers: this.getHeaders() }
     );
   }
 
-  /** ---------------------------------------
-   *  UPDATE LEAVE REQUEST
-   * --------------------------------------- */
-  updateLeaveRequest(
-    id: string,
-    leaveRequest: Partial<LeaveRequest>
-  ): Observable<LeaveRequest> {
-    return this.http.patch<LeaveRequest>(`${this.applyLeaveURL}/${id}`, leaveRequest);
+  // ✅ Employee Leave Summary
+  getLeaveSummary(employeeId: number): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/summary/${employeeId}`,
+      { headers: this.getHeaders() }
+    );
   }
 
-
-  /** ---------------------------------------
-   *  DELETE LEAVE REQUEST
-   * --------------------------------------- */
-deleteLeaveRequest(id: string): Observable<void> {
-  return this.http.delete<void>(`${this.applyLeaveURL}/${id}`);
-}
-
-  /** ---------------------------------------
-   *  APPROVE A LEAVE REQUEST
-   * --------------------------------------- */
-  approveLeaveRequest(id: string | number): Observable<void> {
-    return this.http.post<void>(`${this.leaveApprovalURL}/approve/${id}`, {});
+  // ✅ Employee Leave Requests
+  getMyLeaveRequests(employeeId: number): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(
+      `${this.baseUrl}/my-requests/${employeeId}`,
+      { headers: this.getHeaders() }
+    );
   }
 
-  /** ---------------------------------------
-   *  REJECT LEAVE REQUEST WITH COMMENT
-   * --------------------------------------- */
-  rejectLeaveRequest(id: string | number, comment: string): Observable<void> {
-    return this.http.post<void>(`${this.leaveApprovalURL}/reject/${id}`, { comment });
+  // ✅ Delete Leave Request (Employee)
+  deleteLeaveRequest(id: number): Observable<any> {
+    return this.http.delete(
+      `${this.baseUrl}/${id}`,
+      { headers: this.getHeaders() }
+    );
   }
 
-  /** ---------------------------------------
-   *  CALCULATE TOTAL AVAILABLE LEAVES
-   * --------------------------------------- */
-  getTotalAvailableLeaves(): Observable<number> {
-    return this.getLeaveSummary().pipe(
-      map((leaves) =>
-        leaves.reduce((sum, leave) => sum + (leave.available ? leave.available : 0), 0)
-      )
+  // ✅ Get All Leaves
+  getLeaves(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/all`, { headers: this.getHeaders() });
+  }
+
+  // ✅ Update Leave Request
+  updateLeaveRequest(employeeId: number, payload: any): Observable<any> {
+    return this.http.put(
+      `${this.adminUrl}/update/${employeeId}`,
+      payload,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ✅ Add Leave Request
+  addLeaveRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/add`,
+      payload,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ✅ Set Leave Applied
+  setLeaveApplied(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/set-applied`,
+      payload,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ================= ADMIN SIDE =================
+
+  // ✅ Admin – All Leave Requests
+  getAllLeaveRequests(): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(
+      `${this.adminUrl}/requests`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ✅ Admin – Pending Requests
+  getPendingLeaveRequests(): Observable<LeaveRequest[]> {
+    return this.http.get<LeaveRequest[]>(
+      `${this.adminUrl}/pending`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ✅ Admin – Approve / Reject Leave
+  updateLeaveStatus(payload: {
+    leaveId: number;
+    status: 'Approved' | 'Rejected';
+    approvedBy: string;
+  }): Observable<any> {
+    return this.http.put(
+      `${this.adminUrl}/action`,
+      payload,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ✅ Admin – Employee Leave Summary
+  getEmployeeLeaveSummary(employeeId: number): Observable<any> {
+    return this.http.get(
+      `${this.adminUrl}/summary/${employeeId}`,
+      { headers: this.getHeaders() }
     );
   }
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaveService } from '../AllServices/leave.service';
+import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 import { LeaveRequest } from '../Interface/leave-request.model';
-import { MatDialog } from '@angular/material/dialog';
-import { ApplyLeaveComponent } from '../leave-summary/apply-leave/apply-leave.component';
 
 @Component({
   selector: 'app-leave-request',
@@ -15,94 +14,81 @@ export class LeaveRequestsComponent implements OnInit {
   filteredRequests: LeaveRequest[] = [];
   selectedRequests: LeaveRequest[] = [];
 
-  constructor(private leaveService: LeaveService, private dialog: MatDialog) {}
+  employeeId!: number;
+
+  constructor(
+    private leaveService: LeaveService,
+    private authService: EmployeeAuthService
+  ) {}
 
   ngOnInit(): void {
+    const emp = this.authService.getAuthenticatedEmployee();
+    this.employeeId = emp.employeeId;
     this.loadLeaveRequests();
   }
 
-  loadLeaveRequests(): void {
-    this.leaveService.getLeaves().subscribe({
-      next: (data) => {
-        this.leaveRequests = data.map(req => ({
+  loadLeaveRequests() {
+    this.leaveService.getMyLeaveRequests(this.employeeId).subscribe({
+      next: data => {
+        this.leaveRequests = data.map((req: any) => ({
           ...req,
-          leavePeriod: `${req.startDate} to ${req.endDate}`,
-          approvedBy: req.approvedBy ?? "—"
+          leavePeriod: `${req.startDate} → ${req.endDate}`,
+          approvedBy: req.approvedBy ?? '—',
+          selected: false
         }));
-
         this.filteredRequests = [...this.leaveRequests];
       },
-      error: (err) => console.error('Error fetching leave requests:', err),
+      error: err => console.error(err)
     });
   }
 
-  applyFilter(event: any): void {
-    const value = event.target.value.toLowerCase();
-    this.filteredRequests = this.leaveRequests.filter(req =>
-      (req.leaveType ?? '').toLowerCase().includes(value) ||
-      (req.status ?? '').toLowerCase().includes(value)
-    );
-  }
-
-  applyLeave(): void {
-    const dialogRef = this.dialog.open(ApplyLeaveComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.leaveService.addLeaveRequest(result).subscribe({
-          next: () => this.loadLeaveRequests(),
-          error: (err) => console.error('Error adding leave request:', err),
-        });
-      }
-    });
-  }
-
-  selectAll(event: any): void {
+  selectAll(event: any) {
     const checked = event.target.checked;
-    this.filteredRequests.forEach(req => req.selected = checked);
-
+    this.filteredRequests.forEach(r => (r.selected = checked));
     this.selectedRequests = checked ? [...this.filteredRequests] : [];
   }
 
-  onRowSelect(event: any, request: LeaveRequest): void {
-    const checked = event.target.checked;
-
-    if (checked) {
-      this.selectedRequests.push(request);
+  onRowSelect(event: any, req: LeaveRequest) {
+    req.selected = event.target.checked;
+    if (req.selected) {
+      this.selectedRequests.push(req);
     } else {
-      this.selectedRequests = this.selectedRequests.filter(r => r !== request);
+      this.selectedRequests = this.selectedRequests.filter(r => r !== req);
     }
   }
 
+  deleteSelectedRequests() {
+    if (this.selectedRequests.length === 0) {
+      alert('Select at least one request');
+      return;
+    }
 
-  deleteSelectedRequests(): void {
-  if (this.selectedRequests.length === 0) {
-    alert("Select at least one request to delete.");
-    return;
-  }
-
-  if (confirm("Are you sure you want to delete selected leave requests?")) {
+    if (!confirm('Are you sure?')) return;
 
     this.selectedRequests.forEach(req => {
-
-      const id =
-        (req as any).id ||
-        (req as any).leaveId ||
-        (req as any)._id ||
-        (req as any).requestId;
-
-      if (!id) {
-        console.error("No valid ID found for:", req);
-        return;
-      }
-
-      this.leaveService.deleteLeaveRequest(id).subscribe({
+      this.leaveService.deleteLeaveRequest(Number(req.id)).subscribe({ // Ensure req.id is treated as a number
         next: () => this.loadLeaveRequests(),
-        error: err => console.error("Delete failed:", err)
+        error: err => console.error(err)
       });
-
     });
 
     this.selectedRequests = [];
   }
-}
+
+  applyLeave() {
+    const payload = {
+      employeeId: this.employeeId,
+      startDate: '2025-12-20',
+      endDate: '2025-12-25',
+      reason: 'Vacation'
+    };
+
+    this.leaveService.applyLeave(payload).subscribe({
+      next: () => {
+        alert('Leave applied successfully');
+        this.loadLeaveRequests();
+      },
+      error: err => console.error(err)
+    });
+  }
 }

@@ -1,69 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LeaveService } from '../AllServices/leave.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
+import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 import { LeaveRequest } from '../Interface/leave-request.model';
 
 @Component({
   selector: 'app-leave-summary',
   templateUrl: './leave-summary.component.html',
-  standalone: false,
   styleUrls: ['./leave-summary.component.scss']
 })
 export class LeaveSummaryComponent implements OnInit {
 
   page = 1;
-pageSize = 5;
-paginatedLeaves: LeaveRequest[] = [];
-totalPages = 1;
+  pageSize = 5;
+  totalPages = 1;
 
-totalUsedLeaves = 0;
-totalRemainingLeaves = 0;
+  leaves: LeaveRequest[] = [];
+  paginatedLeaves: LeaveRequest[] = [];
 
-// Add the missing property declaration for 'leaves'
-leaves: LeaveRequest[] = [];
+  totalUsedLeaves = 0;
+  totalRemainingLeaves = 0;
 
-constructor(private leaveService: LeaveService,
-     private dialog: MatDialog
-) {}
+  employeeId!: number;
 
-ngOnInit(): void {
-  this.loadLeaveSummary();
-}
+  constructor(
+    private leaveService: LeaveService,
+    private authService: EmployeeAuthService
+  ) {}
 
-loadLeaveSummary(): void {
-  this.leaveService.getLeaveSummary().subscribe({
-    next: (leavesSummary: LeaveRequest[]) => {
-      this.leaves = leavesSummary;
+  ngOnInit(): void {
+    const emp = this.authService.getAuthenticatedEmployee();
+    this.employeeId = emp.employeeId;
+    this.loadLeaveSummary();
+  }
 
-      // Calculate cards
-      this.totalUsedLeaves = this.leaves.reduce((sum, l) => sum + (l.booked || 0), 0);
-      this.totalRemainingLeaves = this.leaves.reduce((sum, l: LeaveRequest) => sum + (l.available || 0), 0);
+  loadLeaveSummary() {
+    this.leaveService.getLeaveSummary(this.employeeId).subscribe({
+      next: (data: any) => {
+        this.leaves = data.leaves || [];
 
-      this.totalPages = Math.ceil(this.leaves.length / this.pageSize);
+        this.totalUsedLeaves = data.usedLeave;
+        this.totalRemainingLeaves = data.remainingLeave;
+
+        this.totalPages = Math.ceil(this.leaves.length / this.pageSize);
+        this.updatePagination();
+      },
+      error: err => console.error(err)
+    });
+  }
+
+  updatePagination() {
+    const start = (this.page - 1) * this.pageSize;
+    this.paginatedLeaves = this.leaves.slice(start, start + this.pageSize);
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
       this.updatePagination();
     }
-  });
-}
-
-updatePagination() {
-  const start = (this.page - 1) * this.pageSize;
-  const end = start + this.pageSize;
-  this.paginatedLeaves = this.leaves.slice(start, end);
-}
-
-nextPage() {
-  if (this.page < this.totalPages) {
-    this.page++;
-    this.updatePagination();
   }
-}
 
-prevPage() {
-  if (this.page > 1) {
-    this.page--;
-    this.updatePagination();
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.updatePagination();
+    }
   }
-}
 }

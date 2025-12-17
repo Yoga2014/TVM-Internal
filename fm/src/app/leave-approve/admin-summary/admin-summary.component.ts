@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaveService } from 'src/app/AllServices/leave.service';
+import { AdminleaveService } from 'src/app/AllServices/adminleaveserivce';
 import { LeaveRequest } from 'src/app/Interface/leave-request.model';
 
 @Component({
@@ -14,49 +14,48 @@ export class AdminsummaryComponent implements OnInit {
   totalPages = 1;
 
   leaves: LeaveRequest[] = [];
-  paginatedLeaves: LeaveRequest[] = [];
   filteredLeaves: LeaveRequest[] = [];
+  paginatedLeaves: LeaveRequest[] = [];
 
-  searchTerm: string = '';
-  totalUsedLeaves = 0;
-  totalRemainingLeaves = 0;
+  searchTerm = '';
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(private AdminleaveService: AdminleaveService) {}
 
   ngOnInit(): void {
     this.loadSummary();
   }
 
   loadSummary() {
-    this.leaveService.getLeaveSummary().subscribe(summary => {
-      this.leaves = summary;
-       this.filteredLeaves = [...this.leaves];
-
-      this.totalUsedLeaves = this.leaves.reduce((a, b) => a + (b.booked || 0), 0);
-      this.totalRemainingLeaves = this.leaves.reduce((a, b) => a + (b.available || 0), 0);
-
-      this.totalPages = Math.ceil(this.leaves.length / this.pageSize);
-      this.updatePagination();
+    this.AdminleaveService.getLeaveSummary().subscribe({
+      next: data => {
+        this.leaves = data;
+        this.filteredLeaves = [...this.leaves];
+        this.totalPages = Math.ceil(this.filteredLeaves.length / this.pageSize);
+        this.updatePagination();
+      },
+      error: err => console.error('Summary load failed', err)
     });
   }
+
   filterLeaves() {
-  const term = this.searchTerm.toLowerCase();
-  this.filteredLeaves = this.leaves.filter(leave =>
-    (leave.employeeName?.toLowerCase() || '').includes(term) ||
-    (leave.leaveType?.toLowerCase() || '').includes(term) ||
-    (leave.startDate?.toLowerCase() || '').includes(term) ||
-    (leave.endDate?.toLowerCase() || '').includes(term)
-  );
+    const term = this.searchTerm.toLowerCase();
 
-  this.page = 1; // Reset to first page after search
-  this.totalPages = Math.ceil(this.filteredLeaves.length / this.pageSize);
-  this.updatePagination();
-}
+    this.filteredLeaves = this.leaves.filter(leave =>
+      (leave.employeeName || '').toLowerCase().includes(term) ||
+      (leave.leaveType || '').toLowerCase().includes(term) ||
+      (leave.startDate || '').toLowerCase().includes(term) ||
+      (leave.endDate || '').toLowerCase().includes(term)
+    );
 
+    this.page = 1;
+    this.totalPages = Math.ceil(this.filteredLeaves.length / this.pageSize);
+    this.updatePagination();
+  }
 
   updatePagination() {
     const start = (this.page - 1) * this.pageSize;
-    this.paginatedLeaves = this.filteredLeaves.slice(start, start + this.pageSize); 
+    this.paginatedLeaves =
+      this.filteredLeaves.slice(start, start + this.pageSize);
   }
 
   nextPage() {
@@ -72,5 +71,4 @@ export class AdminsummaryComponent implements OnInit {
       this.updatePagination();
     }
   }
-  
 }

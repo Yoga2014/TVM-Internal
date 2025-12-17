@@ -21,7 +21,8 @@ export class LeaveBalanceComponent implements OnInit {
   }
 
   loadLeaveSummary(): void {
-    this.leaveService.getLeaveSummary().subscribe({
+    const employeeId = 1; // Replace with actual employeeId retrieval logic
+    this.leaveService.getLeaveSummary(employeeId).subscribe({
       next: (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;

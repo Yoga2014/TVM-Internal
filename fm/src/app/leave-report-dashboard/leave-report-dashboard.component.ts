@@ -26,7 +26,8 @@ export class LeaveReportDashboardComponent implements OnInit {
   }
 
   loadLeaveReports(): void {
-    this.leaveService.getLeaveSummary().subscribe(
+    const employeeId = 1; // Replace with actual employeeId retrieval logic
+    this.leaveService.getLeaveSummary(employeeId).subscribe(
       (data: LeaveRequest[]) => {
         this.leaves = data;
         this.isLoading = false;

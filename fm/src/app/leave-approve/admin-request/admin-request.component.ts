@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaveService } from 'src/app/AllServices/leave.service';
+import { AdminleaveService } from 'src/app/AllServices/adminleaveserivce';
 import { LeaveRequest } from 'src/app/Interface/leave-request.model';
 
 @Component({
@@ -13,48 +13,38 @@ export class AdminrequestComponent implements OnInit {
   filteredRequests: LeaveRequest[] = [];
   selectedRequests: LeaveRequest[] = [];
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(private AdminleaveService: AdminleaveService) {}
 
   ngOnInit(): void {
     this.loadLeaveRequests();
   }
 
   loadLeaveRequests(): void {
-      
-    this.leaveService.getLeaves().subscribe({
+    this.AdminleaveService.getLeaves().subscribe({
       next: (data) => {
         this.leaveRequests = data.map(req => ({
           ...req,
           leavePeriod: `${req.startDate} → ${req.endDate}`,
-          approvedBy: req.approvedBy ?? "—",
-          selected: false 
+          approvedBy: req.approvedBy ?? '—',
+          selected: false
         }));
         this.filteredRequests = [...this.leaveRequests];
       },
-      error: (err) => console.error("Failed to load leaves", err)
+      error: err => console.error('Failed to load leaves', err)
     });
   }
 
-  updateStatus(req: LeaveRequest, status: "Approved" | "Rejected") {
-    const leaveId = String(req.id);
+  updateStatus(req: LeaveRequest, status: 'Approved' | 'Rejected') {
 
-    const updatedReq = {
-      ...req,
-      status,
-      approvedBy: "Admin"
-    };
-
-    this.leaveService.updateLeaveRequest(leaveId, updatedReq).subscribe({
-      next: (response) => {
-        const updatedRow = response ?? updatedReq;
-        const index = this.filteredRequests.findIndex(x => x.id === req.id);
-        if (index !== -1) this.filteredRequests[index] = updatedRow;
-
+    this.AdminleaveService.updateLeaveRequest(String(req.id), status).subscribe({
+      next: () => {
+        req.status = status;
+        req.approvedBy = 'Admin';
         alert(`Leave ${status} Successfully`);
       },
-      error: (err) => {
-        console.error("Update failed", err);
-        alert("Failed to update leave status.");
+      error: err => {
+        console.error(err);
+        alert('Failed to update leave');
       }
     });
   }
@@ -67,33 +57,34 @@ export class AdminrequestComponent implements OnInit {
 
   onRowSelect(event: any, request: LeaveRequest) {
     request.selected = event.target.checked;
+
     if (request.selected) {
       this.selectedRequests.push(request);
     } else {
-      this.selectedRequests = this.selectedRequests.filter(r => r.id !== request.id);
+      this.selectedRequests =
+        this.selectedRequests.filter(r => r.id !== request.id);
     }
   }
 
   deleteSelectedRequests() {
     if (this.selectedRequests.length === 0) {
-      alert("Select at least one request");
+      alert('Select at least one request');
       return;
     }
 
-    const deleteObservables = this.selectedRequests.map(req =>
-      this.leaveService.deleteLeaveRequest(String(req.id))
+    const deletes = this.selectedRequests.map(req =>
+      this.AdminleaveService.deleteLeaveRequest(String(req.id))
     );
 
-    // Execute all deletions and reload once
-    Promise.all(deleteObservables.map(obs => obs.toPromise()))
+    Promise.all(deletes.map(d => d.toPromise() as Promise<any>))
       .then(() => {
-        alert("Selected requests deleted successfully");
+        alert('Selected requests deleted');
         this.selectedRequests = [];
         this.loadLeaveRequests();
       })
       .catch(err => {
-        console.error("Delete failed", err);
-        alert("Failed to delete some requests.");
+        console.error(err);
+        alert('Delete failed');
       });
   }
 }
