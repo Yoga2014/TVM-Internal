@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
-
+import { API_CONFIG } from '../api-config';
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
-    private apiUrl = 'http://localhost:3000/Teams';
 
-    constructor(private http: HttpClient) { }
+  private apiUrl = `${API_CONFIG.BASE_URL}/api/teams`; // ✅ lowercase
 
-    getEmployees(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}`).pipe(
-        catchError(this.handleError<any[]>('getEmployees', []))
-      );
-    }
+  constructor(private http: HttpClient) {}
 
-    private handleError<T>(operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-        console.error(`${operation} failed: ${error.message}`);
-        return of(result as T);
-      };
-    }
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
+  // ✅ get all teams
+  getTeams(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl, { headers: this.getHeaders() });
+  }
+
+  // ✅ get employees by team
+  getEmployeesByTeam(teamName: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/${teamName}`,
+      { headers: this.getHeaders() }
+    );
+  }
 }

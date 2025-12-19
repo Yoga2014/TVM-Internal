@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../AllServices/team.service';
 
-
-
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
@@ -10,72 +8,53 @@ import { TeamService } from '../AllServices/team.service';
   styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
+
+  teams: string[] = [];
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  teams: any[] = [];
-  selectedTeam: string = '';
-  selectedEmployee: any = null;
-  avatarInitials: string = ''; // <-- For avatar
-  searchText: string = '';
+  selectedTeam = '';
 
-  currentPage: number = 1; 
-  itemsPerPage: number = 5;
+  // Added missing properties and methods to resolve template errors
+  selectedEmployee: any = null; // Holds the currently selected employee
+  searchText: string = ''; // Holds the search text input
 
-  constructor(
-    private teamService: TeamService
-  ) {}
+  constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-    this.getEmployees();
+    this.loadTeams();
   }
 
-  getEmployees(): void {
-    this.teamService.getEmployees().subscribe({
-      next: data => {
-        this.employees = data;
-
-        this.teams = [...new Set(data.map(emp => emp.team))];
-
-        if (this.teams.length > 0) {
-          this.selectTeam(this.teams[0]);
-        }
-      },
-      error: err => console.error('Error fetching employees:', err)
+  loadTeams() {
+    this.teamService.getTeams().subscribe(teams => {
+      this.teams = teams;
+      if (teams.length > 0) {
+        this.selectTeam(teams[0]);
+      }
     });
   }
 
- 
   selectTeam(team: string) {
     this.selectedTeam = team;
-    this.filteredEmployees = this.employees.filter(e => e.team === team);
-    this.applySearch();
+
+    this.teamService.getEmployeesByTeam(team).subscribe(data => {
+      this.employees = data;
+      this.filteredEmployees = data;
+    });
   }
 
-
-  applySearch() {
-    const text = this.searchText.toLowerCase();
-    this.filteredEmployees = this.employees
-      .filter(e => e.team === this.selectedTeam)
-      .filter(e =>
-        e.employeeId?.toString().toLowerCase().includes(text) ||
-        e.firstName.toLowerCase().includes(text) ||
-        e.lastName.toLowerCase().includes(text) ||
-        e.nickName?.toLowerCase().includes(text) ||
-        e.email.toLowerCase().includes(text) ||
-        e.designation.toLowerCase().includes(text)
-      );
+  // Filters employees based on the search text
+  applySearch(): void {
+    const lowerSearchText = this.searchText.toLowerCase();
+    this.filteredEmployees = this.employees.filter(emp =>
+      emp.firstName.toLowerCase().includes(lowerSearchText) ||
+      emp.email.toLowerCase().includes(lowerSearchText) ||
+      emp.project.toLowerCase().includes(lowerSearchText) ||
+      emp.designation.toLowerCase().includes(lowerSearchText)
+    );
   }
 
- 
-  viewEmployee(emp: any) {
+  // Sets the selected employee for viewing details
+  viewEmployee(emp: any): void {
     this.selectedEmployee = emp;
-    this.avatarInitials = this.getAvatarInitials(emp.firstName);
   }
-
-
-  getAvatarInitials(name: string): string {
-    return name ? name.charAt(0).toUpperCase() : '?';
-  }
-
-
 }

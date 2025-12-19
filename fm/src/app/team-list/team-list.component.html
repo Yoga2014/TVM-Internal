@@ -22,24 +22,27 @@
       <thead>
         <tr>
           <th>Employee ID</th>
-          <th>First Name</th>
-          <th>Email</th>
-           <th>Project</th>
-          <th>Designation</th>
-          <th>Action</th>
+          <th>Employee Name</th>
+          <th>Department</th>
+          <th>Project</th>
+          <th>Project Holders</th>
+          <th>Project Voices</th>
+          <th> Status</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let emp of filteredEmployees">
           <td>{{ emp.employeeCode }}</td>
-          <td>{{ emp.firstName }}</td>
-          <td>{{ emp.email }}</td>
+          <td>{{ emp.employeeName }}</td>
+          <td>{{ emp.department }}</td>
           <td>{{ emp.project }}</td>
-          <td>{{ emp.designation }}</td>
-          <td>
+          <td>{{ emp.projectHolderClientNames }}</td>
+          <td>{{ emp.projectVoiceClientNames }}</td>
+          <td>{{ emp.employeeStatus }}</td>
+          <!-- <td>
             <button class="view-btn" (click)="viewEmployee(emp)">View</button>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
