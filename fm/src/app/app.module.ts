@@ -113,6 +113,7 @@ import { TimeRequestComponent } from './time-request/time-request.component';
 import { AdminTimeSummaryComponent } from './Admin-Timesheet/admin-time-summary/admin-time-summary.component';
 import { AdminTimeTrackingComponent } from './Admin-Timesheet/admin-time-tracking/admin-time-tracking.component';
 import { AdminTimeSheetComponent } from './Admin-Timesheet/admin-time-sheet/admin-time-sheet.component';
+import { ToastComponent } from './toast/toast.component';
 
 
 @NgModule({
@@ -196,7 +197,8 @@ import { AdminTimeSheetComponent } from './Admin-Timesheet/admin-time-sheet/admi
     LeaveapproveComponent,
     AdminrequestComponent,
     AdminsummaryComponent,
-    PresentEmployeeComponent
+    PresentEmployeeComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

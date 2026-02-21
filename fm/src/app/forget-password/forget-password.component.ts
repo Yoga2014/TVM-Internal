@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ForgotPasswordService } from '../AllServices/forgetPasswordService';
 import { Router } from '@angular/router';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -21,7 +22,7 @@ export class ForgetPasswordComponent {
   otpResendInProgress: boolean = false;
 
 
-  constructor(private forgotPasswordService: ForgotPasswordService, private router: Router) {}
+  constructor(private forgotPasswordService: ForgotPasswordService, private router: Router, private toastService: ToastService) {}
 
 
   verifyEmailOrPhone() {
@@ -40,7 +41,7 @@ export class ForgetPasswordComponent {
           this.forgotPasswordService.sendTemporaryOTP(user.id).subscribe(
             (response: { otp: string; }) => {
               this.generatedOtp = response.otp;
-              alert(`Temporary OTP sent: ${this.generatedOtp} `);
+              this.toastService.success(`Temporary OTP sent: ${this.generatedOtp} `);
               this.otpSent = true;
             },
             (error: any) => {
@@ -85,7 +86,7 @@ export class ForgetPasswordComponent {
           this.forgotPasswordService.updateUserPassword(user.id, this.newPassword).subscribe(
             () => {
               this.successMessage = 'Password has been updated successfully.';
-              alert('Password updated successfully. Please log in again');
+              this.toastService.success('Password updated successfully. Please log in again');
               this.router.navigate(['/login']);
               this.emailOrPhone = '';
               this.newPassword = '';
@@ -122,7 +123,7 @@ export class ForgetPasswordComponent {
           this.forgotPasswordService.sendTemporaryOTP(user.id).subscribe(
             (response: { otp: string; }) => {
               this.generatedOtp = response.otp;
-              alert(`New OTP sent: ${this.generatedOtp}`);
+              this.toastService.success(`New OTP sent: ${this.generatedOtp}`);
               this.otpResendInProgress = false;
             },
             (error: any) => {

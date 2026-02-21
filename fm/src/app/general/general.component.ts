@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastService } from '../toast.service';
 import { ServerService } from '../server.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class GeneralComponent implements OnInit {
   constructor(
     private fbuilder: FormBuilder,
     private route: Router,
-    private serv: ServerService
+    private serv: ServerService,
+    private toastService:ToastService
   ) { }
 
   ngOnInit(): void {
@@ -53,13 +55,13 @@ export class GeneralComponent implements OnInit {
   }
   saveClick(): void {
     if (this.informationForm.invalid) {
-    alert('Please fill out the required fields.');
+    this.toastService.error('Please fill out the required fields.');
     this.informationForm.markAllAsTouched(); 
     return;
   }
   
     if (this.informationForm.invalid) {
-      alert('Please fill out the required fields.');
+      this.toastService.error('Please fill out the required fields.');
       this.informationForm.markAllAsTouched(); 
       return;
     }
@@ -99,9 +101,9 @@ export class GeneralComponent implements OnInit {
         };
         base64Reader.readAsDataURL(file);
       } else if (file.size > maxFileSize) {
-        alert('File size exceeds 2MB. Please select a smaller file.');
+        this.toastService.error('File size exceeds 2MB. Please select a smaller file.');
       } else {
-        alert('Please select a valid image file.');
+        this.toastService.error('Please select a valid image file.');
       }
     }
   }

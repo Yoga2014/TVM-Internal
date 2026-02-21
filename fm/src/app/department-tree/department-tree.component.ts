@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { details } from '../AllServices/details.service';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-department-tree',
@@ -11,7 +12,7 @@ export class DepartmentTreeComponent implements OnInit {
   employees!: any[];
   selectedDepartment: any = null;
   
-  constructor(private userRoleService:details ) {
+  constructor(private userRoleService:details, private toastservice: ToastService ) {
     
   }
 
@@ -28,7 +29,7 @@ export class DepartmentTreeComponent implements OnInit {
         this.transformData(data);
       },
       error: (err) => {
-        alert('Failed to fetch employee details');
+        this.toastservice.error('Failed to fetch employee details');
         console.error('Error fetching employee details', err);
       }
     });

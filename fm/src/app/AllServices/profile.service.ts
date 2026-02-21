@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ToastService } from '../toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ public userSubject = new BehaviorSubject<any>('Initial User');
 
 
 
-  constructor(private apihttp:HttpClient) { }
+  constructor(private apihttp:HttpClient, private toastService:ToastService) { }
 
   detailsValue(arrayValue: any){
     this.userSubject.next(arrayValue)
@@ -26,7 +27,7 @@ public userSubject = new BehaviorSubject<any>('Initial User');
   }
 
   EducationalMethod(data:any){
-    alert("data fetched")
+    this.toastService.success("data fetched")
     const api=' http://localhost:3000/Educational-detail'
     return this.apihttp.post(api,data)
   }

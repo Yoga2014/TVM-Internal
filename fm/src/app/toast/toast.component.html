@@ -1,0 +1,7 @@
+<div *ngIf="visible" class="toast" [ngClass]="type">
+
+  <span class="msg">{{message}}</span>
+
+  <span class="close" (click)="visible=false">✕</span>
+
+</div>

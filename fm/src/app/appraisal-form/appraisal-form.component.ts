@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppraisalService } from '../AllServices/appraisalFormService';
 import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-appraisal-form',
@@ -14,7 +15,7 @@ export class AppraisalFormComponent {
   
   appraisalForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private appraisalService: AppraisalService, private authenticate:EmployeeAuthService) {}
+  constructor(private fb: FormBuilder, private appraisalService: AppraisalService, private authenticate:EmployeeAuthService, private toastService:ToastService) {}
 
   ngOnInit() {
     this.appraisalForm = this.fb.group({
@@ -115,12 +116,12 @@ export class AppraisalFormComponent {
       this.appraisalService.addAppraisal(appraisalData).subscribe({
         next: (response) => {
           console.log('Appraisal data saved successfully:', response);
-          alert('Appraisal data submitted successfully!');
+          this.toastService.success('Appraisal data submitted successfully!');
           this.appraisalForm.reset();
         },
         error: (error) => {
           console.error('Error saving appraisal data:', error);
-          alert('Failed to submit appraisal data. Please try again.');
+          this.toastService.error('Failed to submit appraisal data. Please try again.');
         },
       });
     } else {

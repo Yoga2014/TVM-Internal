@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-personal-data-form',
@@ -23,7 +24,8 @@ export class PersonalDataFormComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toastservice: ToastService
   ) {
     this.personalDataForm = this.fb.group({
       photo: [''] ,
@@ -287,13 +289,13 @@ export class PersonalDataFormComponent {
         .subscribe({
           next: (response) => {
             console.log('Data submitted successfully', response);
-            alert('Form Submitted')
+            this.toastservice.success('Form Submitted successfully');
             console.log(this.personalDataForm)
             this.router.navigate(['/success']);
           },
           error: (error) => {
             console.error('Error submitting data', error);
-            alert(error)
+            this.toastservice.error('Failed to submit form');
           }
         });
     } else {

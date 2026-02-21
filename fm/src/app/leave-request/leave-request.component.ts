@@ -3,6 +3,7 @@ import { forkJoin } from 'rxjs';
 import { LeaveService } from '../AllServices/leave.service';
 import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 import { LeaveRequest } from '../Interface/leave-request.model';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-leave-request',
@@ -28,7 +29,8 @@ export class LeaveRequestsComponent implements OnInit {
 
   constructor(
     private leaveService: LeaveService,
-    private authService: EmployeeAuthService
+    private authService: EmployeeAuthService,
+    private toastservice: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -69,8 +71,8 @@ export class LeaveRequestsComponent implements OnInit {
   }
 
   deleteSelectedRequests() {
-    if (!this.selectedRequests || this.selectedRequests.length === 0) {
-      alert('Select at least one request');
+    if (this.selectedRequests.length === 0) {
+      this.toastservice.error('Select at least one request');
       return;
     }
 
@@ -124,7 +126,7 @@ export class LeaveRequestsComponent implements OnInit {
 
     this.leaveService.applyLeave(payload).subscribe({
       next: () => {
-        this.showNotification(`Leave submitted successfully for employee ${this.employeeId}`);
+        this.toastservice.success('Leave applied successfully');
         this.loadLeaveRequests();
         this.closeApplyModal();
       },

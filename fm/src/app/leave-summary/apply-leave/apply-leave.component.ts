@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { LeaveService } from 'src/app/AllServices/leave.service';
 import { EmployeeAuthService } from 'src/app/AllServices/EmployeeAuthService';
 import { NgForm } from '@angular/forms';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-apply-leave',
@@ -37,7 +38,8 @@ export class ApplyLeaveComponent implements OnInit {
     private leaveService: LeaveService,
     private employeeAuthService: EmployeeAuthService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private toastservice: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -88,13 +90,13 @@ export class ApplyLeaveComponent implements OnInit {
 
     this.leaveService.applyLeave(payload).subscribe({
       next: () => {
-        alert('Leave applied successfully');
+        this.toastservice.success('Leave applied successfully');
         form.resetForm();
         this.router.navigate(['/leave-summary']);
       },
       error: err => {
         console.error(err);
-        alert('Failed to apply leave');
+        this.toastservice.error('Failed to apply leave');
       }
     });
   }

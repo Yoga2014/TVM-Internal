@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminleaveService } from 'src/app/AllServices/adminleaveserivce';
 import { LeaveRequest } from 'src/app/Interface/leave-request.model';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-adminrequest',
@@ -13,7 +14,7 @@ export class AdminrequestComponent implements OnInit {
   filteredRequests: LeaveRequest[] = [];
   selectedRequests: LeaveRequest[] = [];
 
-  constructor(private AdminleaveService: AdminleaveService) {}
+  constructor(private AdminleaveService: AdminleaveService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.loadLeaveRequests();
@@ -40,11 +41,11 @@ export class AdminrequestComponent implements OnInit {
       next: () => {
         req.status = status;
         req.approvedBy = 'Admin';
-        alert(`Leave ${status} Successfully`);
+        this.toastService.success(`Leave ${status} Successfully`);
       },
       error: err => {
         console.error(err);
-        alert('Failed to update leave');
+        this.toastService.error('Failed to update leave');
       }
     });
   }
@@ -68,7 +69,7 @@ export class AdminrequestComponent implements OnInit {
 
   deleteSelectedRequests() {
     if (this.selectedRequests.length === 0) {
-      alert('Select at least one request');
+      this.toastService.error('Select at least one request');
       return;
     }
 
@@ -78,13 +79,13 @@ export class AdminrequestComponent implements OnInit {
 
     Promise.all(deletes.map(d => d.toPromise() as Promise<any>))
       .then(() => {
-        alert('Selected requests deleted');
+        this.toastService.success('Selected requests deleted');
         this.selectedRequests = [];
         this.loadLeaveRequests();
       })
       .catch(err => {
         console.error(err);
-        alert('Delete failed');
+        this.toastService.error('Delete failed');
       });
   }
 }

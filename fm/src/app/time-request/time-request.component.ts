@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TimeSheetService } from '../AllServices/TimeSheetService.service';
 import { WeekDay } from '@angular/common';
+import { ToastService } from '../toast.service';
+
 
 @Component({
   selector: 'app-time-request',
@@ -46,7 +48,8 @@ export class TimeRequestComponent {
 
   
     constructor(
-      private timesheetService: TimeSheetService
+      private timesheetService: TimeSheetService,
+      private toastservice: ToastService
     ) {}
   
     ngOnInit(): void {
@@ -80,7 +83,7 @@ export class TimeRequestComponent {
   // Delete selected
   deleteSelectedRequests(): void {
     if (this.selectedRequests.length === 0) {
-      alert("Select at least one request to delete.");
+      this.toastservice.error("Select at least one request to delete.");
       return;
     }
 
