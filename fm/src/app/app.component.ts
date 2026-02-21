@@ -59,20 +59,20 @@ export class AppComponent implements OnInit, OnDestroy {
   setupMenuByRole() {
     const role = localStorage.getItem('role');
 
-    if (role === 'admin') {
+    if (role === 'admin' || role ==='ADMIN') {
       this.menuItems = [
         { link: 'home', icon: 'fa-solid fa-house', title: 'Home', path: 'new-home' },
-        { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
+        // { link: 'profile', icon: 'fa-solid fa-id-card', title: 'Profile', path: 'header' },
         { link: 'leave-approve', icon: 'fa-solid fa-calendar-check', title: 'Leave Tracking', path: 'leave-approve' },
         { link: 'time-request', icon: 'fa-solid fa-clock', title: 'Time Tracking', path: 'admin-time-sheet' },
         { link: 'onboarding', icon: 'fa-regular fa-handshake', title: 'Onboarding', path: 'onboarding' },
         { link: 'goals', icon: 'fa-solid fa-trophy', title: 'Performance', path: 'perfomance-myData' },
         { link: 'task', icon: 'fa-solid fa-list-check', title: 'Task', path: 'task-tasks' },
-        { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
-        { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
+        // { link: 'operation', icon: 'fa-brands fa-ubuntu', title: 'Operation', path: 'operation' },
+        // { link: 'reports', icon: 'fa-solid fa-chart-pie', title: 'Reports', path: 'reports' },
         { link: 'logout', icon: 'fa-solid fa-right-from-bracket', title: 'Logout', path: 'logout' }
       ];
-    } else if (role === 'user') {
+    } else if (role === 'user' || role === 'EMPLOYEE') {
       this.menuItems = [
         { link: 'leave', icon: 'fa-solid fa-umbrella-beach fa-flip-horizontal', title: 'Leave Request', path: 'leave-tracking' },
         { link: 'time', icon: 'fa-solid fa-clock', title: 'Time Request', path: 'time-tracking' },

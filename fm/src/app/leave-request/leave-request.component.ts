@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { LeaveService } from '../AllServices/leave.service';
 import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
 import { LeaveRequest } from '../Interface/leave-request.model';
@@ -15,6 +16,15 @@ export class LeaveRequestsComponent implements OnInit {
   selectedRequests: LeaveRequest[] = [];
 
   employeeId!: number;
+  showApplyModal = false;
+  applyModel: { startDate: string; endDate: string; reason: string; leaveType?: string } = {
+    startDate: '',
+    endDate: '',
+    reason: '',
+    leaveType: 'Casual'
+  };
+  notificationMessage: string | null = null;
+  private _notifTimer: any = null;
 
   constructor(
     private leaveService: LeaveService,
@@ -51,44 +61,84 @@ export class LeaveRequestsComponent implements OnInit {
   onRowSelect(event: any, req: LeaveRequest) {
     req.selected = event.target.checked;
     if (req.selected) {
-      this.selectedRequests.push(req);
+      const exists = this.selectedRequests.find(r => r.id === req.id);
+      if (!exists) this.selectedRequests.push(req);
     } else {
-      this.selectedRequests = this.selectedRequests.filter(r => r !== req);
+      this.selectedRequests = this.selectedRequests.filter(r => r.id !== req.id);
     }
   }
 
   deleteSelectedRequests() {
-    if (this.selectedRequests.length === 0) {
+    if (!this.selectedRequests || this.selectedRequests.length === 0) {
       alert('Select at least one request');
       return;
     }
 
-    if (!confirm('Are you sure?')) return;
+    if (!confirm('Are you sure you want to delete selected request(s)?')) return;
 
-    this.selectedRequests.forEach(req => {
-      this.leaveService.deleteLeaveRequest(Number(req.id)).subscribe({ // Ensure req.id is treated as a number
-        next: () => this.loadLeaveRequests(),
-        error: err => console.error(err)
-      });
+    const ids = this.selectedRequests
+      .map(r => Number((r as any).id))
+      .filter(id => !isNaN(id));
+
+    if (ids.length === 0) {
+      alert('Selected requests do not have valid IDs');
+      return;
+    }
+
+    const calls = ids.map(id => this.leaveService.deleteLeaveRequest(id));
+
+    forkJoin(calls).subscribe({
+      next: () => {
+        this.loadLeaveRequests();
+        this.selectedRequests = [];
+      },
+      error: err => {
+        console.error('Error deleting requests', err);
+        alert('An error occurred while deleting requests');
+      }
     });
-
-    this.selectedRequests = [];
   }
 
   applyLeave() {
+    this.showApplyModal = true;
+  }
+
+  closeApplyModal() {
+    this.showApplyModal = false;
+    this.applyModel = { startDate: '', endDate: '', reason: '', leaveType: 'Casual' };
+  }
+
+  submitApply() {
+    if (!this.applyModel.startDate || !this.applyModel.endDate) {
+      alert('Please provide start and end dates');
+      return;
+    }
+
     const payload = {
       employeeId: this.employeeId,
-      startDate: '2025-12-20',
-      endDate: '2025-12-25',
-      reason: 'Vacation'
+      startDate: this.applyModel.startDate,
+      endDate: this.applyModel.endDate,
+      reason: this.applyModel.reason,
+      leaveType: this.applyModel.leaveType
     };
 
     this.leaveService.applyLeave(payload).subscribe({
       next: () => {
-        alert('Leave applied successfully');
+        this.showNotification(`Leave submitted successfully for employee ${this.employeeId}`);
         this.loadLeaveRequests();
+        this.closeApplyModal();
       },
       error: err => console.error(err)
     });
+  }
+
+  showNotification(message: string, ms = 4000) {
+    this.notificationMessage = message;
+    if (this._notifTimer) clearTimeout(this._notifTimer);
+    this._notifTimer = setTimeout(() => (this.notificationMessage = null), ms);
+  }
+
+  ngOnDestroy(): void {
+    if (this._notifTimer) clearTimeout(this._notifTimer);
   }
 }

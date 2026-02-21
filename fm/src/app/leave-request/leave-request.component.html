@@ -1,4 +1,5 @@
 <div class="container-fluid table-container">
+  <div *ngIf="notificationMessage" class="notification">{{ notificationMessage }}</div>
   <h2> Leave Request </h2>
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
@@ -59,3 +60,61 @@
   </div>
 
 </div>
+
+<div *ngIf="showApplyModal" class="custom-modal-backdrop">
+  <div class="custom-modal" tabindex="1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Leave Request</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeApplyModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Leave Type</label>
+              <select class="form-select" [(ngModel)]="applyModel.leaveType" name="leaveType">
+                <option>Casual</option>
+                <option>Sick</option>
+                <option>Privilege</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Start Date</label>
+              <input type="date" class="form-control" [(ngModel)]="applyModel.startDate" name="startDate" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">End Date</label>
+              <input type="date" class="form-control" [(ngModel)]="applyModel.endDate" name="endDate" />
+            </div>
+        <!-- Apply Leave Modal -->
+        <div *ngIf="showApplyModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" (click)="closeApplyModal()">&times;</span>
+            <h2>Add Leave Request</h2>
+            <form>
+              <label for="leaveType">Leave Type</label>
+              <select id="leaveType" [(ngModel)]="applyModel.leaveType" name="leaveType">
+                <option>Casual</option>
+                <option>Sick</option>
+                <option>Privilege</option>
+              </select>
+
+              <label for="startDate">Start Date</label>
+              <input type="date" id="startDate" [(ngModel)]="applyModel.startDate" name="startDate" />
+
+              <label for="endDate">End Date</label>
+              <input type="date" id="endDate" [(ngModel)]="applyModel.endDate" name="endDate" />
+
+              <label for="reason">Reason</label>
+              <textarea id="reason" [(ngModel)]="applyModel.reason" name="reason"></textarea>
+
+              <div class="form-buttons">
+                <button type="button" (click)="submitApply()">Submit</button>
+                <button type="button" (click)="closeApplyModal()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>

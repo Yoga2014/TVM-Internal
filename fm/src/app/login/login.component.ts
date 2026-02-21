@@ -52,9 +52,9 @@ enter(): void {
         this.loginSuccess.emit();
 
         // Redirect based on role
-        if (res.role === 'admin') {
+        if (res.role === 'admin'|| res.role === 'ADMIN') {
           this.router.navigate(['/new-home/my-space/overview']);
-        } else if (res.role === 'user') {
+        } else if (res.role === 'user' ||  res.role === 'EMPLOYEE') {
           this.router.navigate(['/leave-tracking/mydata/leave-summary']);
         }
       } else {

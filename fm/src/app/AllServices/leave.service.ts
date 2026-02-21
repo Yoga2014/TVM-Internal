@@ -27,10 +27,12 @@ export class LeaveService {
 
   // ✅ Apply Leave
   applyLeave(payload: any): Observable<any> {
+    // Server returns a plain text success message (HTTP 200) rather than JSON.
+    // Tell HttpClient to treat the response as text to avoid JSON parse errors.
     return this.http.post(
       `${this.baseUrl}/apply`,
       payload,
-      { headers: this.getHeaders() }
+      { headers: this.getHeaders(), responseType: 'text' as 'json' }
     );
   }
 
