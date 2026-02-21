@@ -22,10 +22,11 @@ export class NewHomeComponent {
         } else if (url.includes('/new-home/teams-dashboard')) {
           this.activeNavItem = 'teams-dashboard';
 
-        } else if (url.includes('/new-home/organization')) {
-          this.activeNavItem = 'organization';
-
         }
+        //  else if (url.includes('/new-home/organization')) {
+        //   this.activeNavItem = 'organization';
+
+        // }
       }
     });
   }
