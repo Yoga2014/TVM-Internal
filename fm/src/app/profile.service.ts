@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileService {
 
-  private apiUrl = 'http://localhost:3000/Teams';  // JSON server URL
+  private apiUrl = 'http://localhost:8080/new-home/emp-profile';  // JSON server URL
 
   constructor(private http: HttpClient) { }
 
