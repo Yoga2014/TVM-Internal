@@ -135,3 +135,142 @@
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* POPUP SIZE FIXED */
+.popup-box {
+  background: white;
+  padding: 20px;
+
+  width: 500px;      /* same width always */
+  height: 450px;     /* same height always */
+
+  border-radius: 10px;
+  text-align: center;
+
+  overflow: auto;    /* scroll if content big */
+}
+
+
+/* TABLE */
+.notes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notes-table th,
+.notes-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+.notes-table th {
+  background: #1976d2;
+  color: white;
+}
+.status-cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.reason-box {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #333;
+  color: #fff;
+
+  padding: 6px 10px;
+  font-size: 12px;
+
+  border-radius: 5px;
+
+  white-space: nowrap;
+
+  transition: opacity 0.3s ease;
+
+  z-index: 10;
+}
+
+/* arrow */
+.reason-box::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* hover show */
+.status-cell:hover .reason-box {
+  visibility: visible;
+  opacity: 1;
+}
+
+.reason-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+}
+
+.reason-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+
+  width: 350px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  text-align: center;
+}
+
+.reason-box h3 {
+  margin-top: 0;
+}
+
+.reason-box button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reason-box button:hover {
+  background: darkred;
+}

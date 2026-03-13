@@ -59,7 +59,7 @@ export class TimeRequestComponent {
   
     loadTimesheets(): void {
       this.timesheetService.getTimesheets().subscribe((data:any) => {
-        this.timesheetSummary = data;
+        this.timesheetSummary = data.timesheets;
       });
     }
 
@@ -106,4 +106,27 @@ export class TimeRequestComponent {
       this.selectedRequests = [];
     }
   }
+selectedEntry: any = null;
+showPopup = false;
+
+openNotes(entry: any) {
+  this.selectedEntry = entry;
+  this.showPopup = true;
+}
+
+closePopup() {
+  this.showPopup = false;
+}
+
+showReasonPopup = false;
+popupReason = '';
+
+showReason(reason: string) {
+  this.popupReason = reason;
+  this.showReasonPopup = true;
+}
+
+closeReasonPopup() {
+  this.showReasonPopup = false;
+}
 }
