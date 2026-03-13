@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { TimeSheetService } from '../AllServices/TimeSheetService.service';
-import { EmployeeAuthService } from '../AllServices/EmployeeAuthService';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TemplateRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
 
 enum WeekDay {
   Monday = 'Monday',
@@ -8,6 +10,11 @@ enum WeekDay {
   Wednesday = 'Wednesday',
   Thursday = 'Thursday',
   Friday = 'Friday',
+}
+interface TimeEntry {
+  project: string;
+  task: string;
+  hours: number[];
 }
 
 @Component({
@@ -17,193 +24,276 @@ enum WeekDay {
   styleUrls: ['./time-sheet.component.scss']
 })
 export class TimeSheetComponent {
-  years: number[] = [];
-  months: string[] = [];
-  weekendDates: string[] = [];
-  weekDays: WeekDay[] = [WeekDay.Monday, WeekDay.Tuesday, WeekDay.Wednesday, WeekDay.Thursday, WeekDay.Friday];
+  form!: FormGroup;
+  weekDates: Date[] = [];
+  currentDate = new Date();
+  showPopup = false;
+  popupForm!: FormGroup;
+  popupRowIndex!: number;
+  popupDayIndex!: number;
 
-  timesheet = {
-    year: new Date().getFullYear(),
-    month: '',
-    weekendDate: '',
-    employeeName: ''
-  };
 
-  timesheetEntry = {
-    wfol: false,
-    project: '',
-    location: '',
-    hrsType: '',
-    hours: {
-      [WeekDay.Monday]: '',
-      [WeekDay.Tuesday]: '',
-      [WeekDay.Wednesday]: '',
-      [WeekDay.Thursday]: '',
-      [WeekDay.Friday]: ''
-    } as { [key in WeekDay]: string },
-    totalHours: '',
-    description: '',
-     status: 'Pending' 
-  };
+  @ViewChild('entryDialog') entryDialog!: TemplateRef<any>;
 
-  popupVisible: { [day in WeekDay]: boolean } = {
-    [WeekDay.Monday]: false,
-    [WeekDay.Tuesday]: false,
-    [WeekDay.Wednesday]: false,
-    [WeekDay.Thursday]: false,
-    [WeekDay.Friday]: false,
-  };
+  taskOptions = [
+    'Development UI',
+    'Development Backend',
+    'Testing',
+    'Deployment',
+    'HR'
+  ];
 
-  dayNotes: { [key in WeekDay]: string } = {
-    [WeekDay.Monday]: '',
-    [WeekDay.Tuesday]: '',
-    [WeekDay.Wednesday]: '',
-    [WeekDay.Thursday]: '',
-    [WeekDay.Friday]: '',
-  };
+  constructor(private fb: FormBuilder, private http: HttpClient, private dialog: MatDialog) {}
 
-  timesheetSummary: any[] = [];
+  ngOnInit() {
+  this.generateWeek();
+  this.buildForm();
+  this.popupForm = this.fb.group({
+    tasks: this.fb.array([this.createTask()])
+  });
 
-  constructor(
-    private timesheetService: TimeSheetService,
-    private employeeAuthService: EmployeeAuthService
-  ) {}
-
-  ngOnInit(): void {
-    const employee = this.employeeAuthService.getAuthenticatedEmployee();
-    this.timesheet.employeeName = employee.employeeName;
-    this.initializeYears();
-    this.initializeMonths();
-    this.loadTimesheets();
   }
 
-  togglePopup(day: WeekDay): void {
-    this.openNotePopup(day);
-  }
+  generateWeek() {
+    const start = new Date(this.currentDate);
+    start.setDate(start.getDate() - start.getDay());
+    this.weekDates = [];
 
-  saveNoteForDay(day: WeekDay): void {
-    const selectedDate = this.getSelectedDateForDay(day);
-
-    if (this.dayNotes[day]?.trim()) {
-      const noteKey = `note_${selectedDate}`;
-      localStorage.setItem(noteKey, this.dayNotes[day]);
-      console.log(`Note for ${day} (${selectedDate}) saved:`, this.dayNotes[day]);
-    } else {
-      console.warn(`No note provided for ${day}`);
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start);
+      d.setDate(start.getDate() + i);
+      this.weekDates.push(d);
     }
-
-    this.popupVisible[day] = false;
   }
 
-  getSelectedDateForDay(day: WeekDay): string {
-    const mondayDate = new Date(this.timesheet.weekendDate);
-    const dayOffset = this.weekDays.indexOf(day);
-
-    if (dayOffset >= 0) {
-      const selectedDate = new Date(mondayDate);
-      selectedDate.setDate(mondayDate.getDate() + dayOffset);
-      return selectedDate.toISOString().split('T')[0];
-    }
-
-    return '';
-  }
-
-  openNotePopup(day: WeekDay): void {
-    const selectedDate = this.getSelectedDateForDay(day);
-    const noteKey = `note_${selectedDate}`;
-    this.dayNotes[day] = localStorage.getItem(noteKey) || '';
-    this.popupVisible[day] = true;
-  }
-
-  initializeYears(): void {
-    const currentYear = new Date().getFullYear();
-    this.years = Array.from({ length: 5 }, (_, i) => currentYear + i);
-  }
-
-  initializeMonths(): void {
-    this.months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-  }
-
-  loadTimesheets(): void {
-    this.timesheetService.getTimesheets().subscribe(data => {
-      this.timesheetSummary = data;
+  buildForm() {
+    this.form = this.fb.group({
+      rows: this.fb.array([this.createRow()])
     });
   }
 
-  onMonthChange(): void {
-    if (this.timesheet.month) {
-      this.updateMondays(this.timesheet.year, this.timesheet.month);
-    }
+ createRow(): FormGroup {
+  return this.fb.group({
+    project: ['', Validators.required],
+    task: ['', Validators.required],
+    billable: [true],
+    hours: this.fb.array(
+      this.weekDates.map(date =>
+        this.fb.control(
+          { value: '', disabled: this.isWeekend(date) },
+          [Validators.min(0), Validators.max(9)]
+        )
+      )
+    ),
+    details: this.fb.array(
+  this.weekDates.map(() =>
+    this.fb.array([]) // each day holds multiple tasks
+  )
+)
+
+  });
+}
+
+  get rows(): FormArray {
+    return this.form.get('rows') as FormArray;
   }
 
-  updateMondays(year: number, month: string): void {
-    const monthIndex = this.months.indexOf(month);
-    if (monthIndex >= 0) {
-      const date = new Date(year, monthIndex, 1);
-      this.weekendDates = [];
-      while (date.getMonth() === monthIndex) {
-        if (date.getDay() === 1) {                                  // Monday
-          this.weekendDates.push(date.toDateString());
+  getHours(rowIndex: number): FormArray {
+    return this.rows.at(rowIndex).get('hours') as FormArray;
+  }
+
+  isWeekend(date: Date): boolean {
+    return date.getDay() === 0 || date.getDay() === 6;
+  }
+
+  addRow() {
+    this.rows.push(this.createRow());
+  }
+
+  getRowTotal(rowIndex: number): number {
+    return this.getHours(rowIndex).controls
+      .reduce((sum, ctrl) => sum + Number(ctrl.value), 0);
+  }
+
+  getTotalForDay(dayIndex: number): number {
+    return this.rows.controls.reduce((sum, row: any) => {
+      return sum + Number(row.get('hours').at(dayIndex).value);
+    }, 0);
+  }
+
+  getTotalWeekHours(): number {
+    return this.weekDates.reduce((sum, _, i) => {
+      if (!this.isWeekend(this.weekDates[i])) {
+        return sum + this.getTotalForDay(i);
+      }
+      return sum;
+    }, 0);
+  }
+
+  getBillableTotal(): number {
+    return this.rows.controls.reduce((sum: number, row: any, i) => {
+      if (row.value.billable) {
+        return sum + this.getRowTotal(i);
+      }
+      return sum;
+    }, 0);
+  }
+
+  getNonBillableTotal(): number {
+    return this.getTotalWeekHours() - this.getBillableTotal();
+  }
+
+  validateMandatoryHours(): boolean {
+    for (let i = 0; i < 7; i++) {
+      if (!this.isWeekend(this.weekDates[i])) {
+        if (this.getTotalForDay(i) !== 9) {
+          return false;
         }
-        date.setDate(date.getDate() + 1);
       }
     }
+    return true;
+  }
+private getHeaders(): HttpHeaders {
+  const token = localStorage.getItem('token');
+
+  return new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+}
+
+submit() {
+  if (!this.validateMandatoryHours()) {
+    alert('Each weekday must total exactly 9 hours.');
+    return;
   }
 
-  onWeekendDateSelect(): void {
-    if (this.timesheet.weekendDate) {
-      this.populateWeekDays(this.timesheet.weekendDate);
+  const payload = {
+    username: localStorage.getItem('username'),
+    weekStart: this.weekDates[0],
+    weekEnd: this.weekDates[6],
+    rows: this.rows.value,
+    total: this.getTotalWeekHours(),
+    billable: this.getBillableTotal(),
+    nonBillable: this.getNonBillableTotal(),
+    status: 'PENDING'
+  };
+
+  this.http.post(
+    'http://localhost:8080/api/timesheets',
+    payload,
+    { headers: this.getHeaders() }   
+  ).subscribe({
+    next: (res) => {
+      alert('Timesheet Submitted Successfully');
+      this.buildForm();
+      this.generateWeek();
+    },
+    error: (err) => {
+      console.error('Submission Error:', err);
+
+      if (err.status === 401) {
+        alert('Unauthorized! Please login again.');
+      } else if (err.status === 403) {
+        alert('Access Denied!');
+      } else if (err.status === 500) {
+        alert('Server Error! Check backend logs.');
+      } else {
+        alert('Something went wrong!');
+      }
     }
-  }
+  });
+}
+  goPrevWeek() {
+  alert('You cant fill the Timesheet for the Previous Week.');
+}
 
-  populateWeekDays(selectedMonday: string): void {
-    const mondayDate = new Date(selectedMonday);
-    this.weekDays = [];
+goNextWeek() {
+  this.currentDate.setDate(this.currentDate.getDate() + 7);
+  this.generateWeek();
+}
 
-    for (let i = 0; i < 5; i++) {
-      const day = new Date(mondayDate);
-      day.setDate(mondayDate.getDate() + i);
+goToday() {
+  this.currentDate = new Date();
+  this.generateWeek();
+}
 
-      const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' }) as WeekDay;
-      this.weekDays.push(dayOfWeek);
-    }
-  }
+openDialog(rowIndex: number, dayIndex: number) {
+  this.popupRowIndex = rowIndex;
+  this.popupDayIndex = dayIndex;
+  this.showPopup = true;
 
-  calculateTotalHours(): void {
-    const hours = this.timesheetEntry.hours;
-    let total = 0;
-    for (const day of this.weekDays) {
-      const dailyHours = parseFloat(hours[day]) || 0;
-      total += dailyHours;
-    }
-    this.timesheetEntry.totalHours = total.toString();
-  }
+  // reset popup tasks array
+  this.popupForm.setControl('tasks', this.fb.array([]));
 
-  openFillYourTimesheetAccordion(): void {
-    // this.accordionState = [false, false, true];
-  }
+  // get the details array for this row
+  const detailsArray = this.rows.at(rowIndex).get('details') as FormArray;
+  const dayTasksArray = detailsArray.at(dayIndex) as FormArray;
 
-onSubmit(form: any): void {
-  if (form.valid) {
-    const payload = {
-      ...this.timesheetEntry,
-      status: 'Pending',  // Always store as Pending when submitting
-      employeeName: this.timesheet.employeeName
-    };
-
-    this.timesheetService.addTimesheet(payload).subscribe(() => {
-      this.loadTimesheets();
-      form.resetForm();
-      this.timesheetEntry.status = 'Pending';
+  if (dayTasksArray && dayTasksArray.length > 0) {
+    // load all existing tasks for this day
+    dayTasksArray.controls.forEach(ctrl => {
+      const group = ctrl as FormGroup; // cast AbstractControl to FormGroup
+      this.tasks.push(this.fb.group({
+        date: [group.value.date, Validators.required],
+        hours: [group.value.hours, [Validators.required, Validators.min(0), Validators.max(9)]],
+        billable: [group.value.billable],
+        notes: [group.value.notes]
+      }));
     });
+  } else {
+    this.addTask(this.weekDates[dayIndex]);
+  }
+}
+
+closeDialog() {
+  this.showPopup = false;
+}
+
+saveDialog() {
+  if (this.popupForm.valid) {
+    const tasks = this.tasks.value; // all tasks entered in popup
+    const detailsArray = this.rows.at(this.popupRowIndex).get('details') as FormArray;
+    const dayTasksArray = detailsArray.at(this.popupDayIndex) as FormArray;
+
+    // clear existing tasks for that day
+    dayTasksArray.clear();
+
+    // push all tasks
+    tasks.forEach((t: any) => {
+      dayTasksArray.push(this.fb.group(t));
+    });
+
+    // update hours for totals (sum of all tasks for that day)
+    const totalHours = tasks.reduce((sum: number, t: any) => sum + Number(t.hours), 0);
+    this.getHours(this.popupRowIndex).at(this.popupDayIndex).setValue(totalHours);
+
+    this.showPopup = false;
+  }
+}
+
+get tasks(): FormArray {
+  return this.popupForm.get('tasks') as FormArray;
+}
+
+
+createTask(date?: Date): FormGroup {
+  return this.fb.group({
+    date: [date ? date.toISOString().substring(0,10) : '', Validators.required],
+    hours: ['', [Validators.required, Validators.min(0), Validators.max(9)]],
+    billable: [true],
+    notes: ['']
+  });
+}
+
+addTask(date?: Date) {
+  if (this.tasks.length < 5) {
+    this.tasks.push(this.createTask(date));
+  } else {
+    alert('You can only add up to 5 tasks.');
   }
 }
 
 
-  validateWeekDay(day: string): boolean {
-    return this.weekDays.includes(day as WeekDay);
-  }
+
 }

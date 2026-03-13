@@ -56,8 +56,20 @@ export class AdminTimeTrackingComponent {
     
       loadTimesheets(): void {
         this.timesheetService.getTimesheets().subscribe((data:any) => {
-          this.timesheetSummary = data;
+          this.timesheetSummary = data.timesheets;
         });
       }
+
+      selectedEntry: any = null;
+showPopup = false;
+
+openNotes(entry: any) {
+  this.selectedEntry = entry;
+  this.showPopup = true;
+}
+
+closePopup() {
+  this.showPopup = false;
+}
 
 }

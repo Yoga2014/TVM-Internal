@@ -159,16 +159,65 @@ tbody td {
   }
 }
 
-
-/* Apply fade & disable ONLY to data columns */
-.disabled-row td:not(:nth-child(7)):not(:nth-child(8)) {
+/* Apply fade only to first 4 columns */
+.disabled-row td:nth-child(1),
+.disabled-row td:nth-child(2),
+.disabled-row td:nth-child(3),
+.disabled-row td:nth-child(4) {
   opacity: 0.45;
   pointer-events: none;
 }
 
-/* Ensure Action & Revert columns remain normal */
-.disabled-row td:nth-child(7),
-.disabled-row td:nth-child(8) {
+/* Keep buttons active */
+.disabled-row td:nth-child(5),
+.disabled-row td:nth-child(6) {
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* POPUP SIZE FIXED */
+.popup-box {
+  background: white;
+  padding: 20px;
+
+  width: 500px;      /* same width always */
+  height: 450px;     /* same height always */
+
+  border-radius: 10px;
+  text-align: center;
+
+  overflow: auto;    /* scroll if content big */
+}
+
+
+/* TABLE */
+.notes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notes-table th,
+.notes-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+.notes-table th {
+  background: #1976d2;
+  color: white;
 }

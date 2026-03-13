@@ -7,8 +7,8 @@
       <tr>
         <th>Name</th>
         <th>Project</th>
-        <th>Location</th>
-        <th>Hrs. Type</th>
+   
+        
         <th>Total Hrs.</th>
         <th>Description</th>
         <th>Action</th>
@@ -16,35 +16,118 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let entry of timesheetEntries"
-        [class.disabled-row]="entry.status === 'Approved' || entry.status === 'Rejected'">
-          <td>{{ entry.employeeName || name }}</td>
-          <td>{{ entry.project }}</td>
-          <td>{{ entry.location }}</td>
-          <td>{{ entry.hrsType }}</td>
-          <td>{{ entry.totalHours }}</td>
-          <td>{{ entry.description }}</td>
+     <tr *ngFor="let entry of timesheetEntries"
+  [class.disabled-row]="entry.status === 'Approved' || entry.status === 'Rejected'">
 
-        <td>
-          <!-- Approve button -->
-          <button *ngIf="entry.status !== 'Rejected'" (click)="updateStatus(entry, 'Approved')" class="approve-btn"
-            [disabled]="entry.status === 'Approved'">
-            Approve
-          </button>
+  <td>{{ entry.username }}</td>
 
-          <!-- Reject button -->
-          <button *ngIf="entry.status !== 'Approved'" (click)="updateStatus(entry, 'Rejected')" class="reject-btn"
-            [disabled]="entry.status === 'Rejected'">
-            Reject
-          </button>
-        </td>
+  <td>{{ entry.rows[0]?.project }}</td>
 
+  <td>{{ entry.total }}</td>
 
-        <td>
-          <button *ngIf="entry.status === 'Approved' || entry.status === 'Rejected'" (click)="revertStatus(entry)"
-            class="revert-btn">⟲</button>
-        </td>
-      </tr>
+  <!-- Description column -->
+  <td>
+    <button (click)="openNotes(entry)">
+      View
+    </button>
+  </td>
+
+  <!-- Action column -->
+  <td>
+
+    <button
+      *ngIf="entry.status !== 'Rejected'"
+      (click)="updateStatus(entry, 'Approved')"
+      class="approve-btn"
+      [disabled]="entry.status === 'Approved'">
+      Approve
+    </button>
+
+    <button
+      *ngIf="entry.status !== 'Approved'"
+      (click)="openRejectPopup(entry)"
+      class="reject-btn"
+      [disabled]="entry.status === 'Rejected'">
+      Reject
+    </button>
+
+    <button
+      *ngIf="entry.status === 'Approved' || entry.status === 'Rejected'"
+      (click)="revertStatus(entry)"
+      class="revert-btn">
+      ⟲
+    </button>
+
+  </td>
+
+</tr>
     </tbody>
   </table>
+</div>
+<div class="popup-overlay" *ngIf="showPopup">
+
+  <div class="popup-box">
+
+    <h3>Timesheet Notes</h3>
+
+    <table class="notes-table">
+
+      <tr>
+        <th>Date</th>
+        <th>Hours</th>
+        <th>Notes</th>
+      </tr>
+
+      <ng-container *ngFor="let row of selectedEntry?.rows">
+        <ng-container *ngFor="let day of row.details">
+          <ng-container *ngFor="let d of day">
+
+            <tr *ngIf="d.notes">
+
+              <td>{{ d.date }}</td>
+
+              <td>{{ d.hours }}</td>
+
+              <td>{{ d.notes }}</td>
+
+            </tr>
+
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+    </table>
+
+    <br>
+
+    <button (click)="closePopup()">Close</button>
+
+  </div>
+
+</div>  
+<div class="popup-overlay" *ngIf="rejectPopup">
+
+  <div class="popup-box">
+
+    <h3>Reject Reason</h3>
+
+    <textarea
+      [(ngModel)]="rejectReason"
+      rows="4"
+      style="width:100%"
+      placeholder="Enter reject reason">
+    </textarea>
+
+    <br><br>
+
+    <button class="approve-btn" (click)="confirmReject()">
+      Confirm
+    </button>
+
+    <button class="reject-btn" (click)="closeRejectPopup()">
+      Cancel
+    </button>
+
+  </div>
+
 </div>

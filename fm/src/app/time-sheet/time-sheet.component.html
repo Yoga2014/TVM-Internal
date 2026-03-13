@@ -1,123 +1,144 @@
-<div class="timesheet-classic-container">
-  <!-- Header Section -->
-  <!-- <header class="classic-header">
-      <h1>GLOBAL Timesheet System</h1>
-  </header> -->
-
-  <!-- Dropdown Section -->
-  <div class="classic-dropdown-section">
-    <div class="classic-form-group">
-      <label for="year">Year:</label>
-      <select id="year" [(ngModel)]="timesheet.year" name="year">
-        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-      </select>
+<div class="timesheet-container">
+  <!-- Week navigation + total badge -->
+  <div class="week-nav-bar">
+    <div class="week-nav-left">
+      <button (click)="goPrevWeek()">◀</button>
+      <span>{{ weekDates[0] | date:'MMM d' }} - {{ weekDates[6] | date:'MMM d, yyyy' }}</span>
+      <button (click)="goNextWeek()">▶</button>
+      <button (click)="goToday()">Today</button>
     </div>
-    <div class="classic-form-group">
-      <label for="month">Month:</label>
-      <select id="month" [(ngModel)]="timesheet.month" name="month" (change)="onMonthChange()">
-        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-      </select>
-    </div>
-    <div class="classic-form-group">
-      <label for="weekendDate">Weekend Date:</label>
-      <select id="weekendDate" [(ngModel)]="timesheet.weekendDate" name="weekendDate" (change)="onWeekendDateSelect()">
-        <option *ngFor="let date of weekendDates" [value]="date">{{ date }}</option>
-      </select>Enter hours for Monday
-    </div>
+    <div class="total-badge">{{ getTotalWeekHours() }}h 0m</div>
   </div>
 
-  <!-- Accordion Section -->
-  <div class="classic-accordion">
-    <!-- <div class="accordion-item">
-      <h2 class="accordion-header" (click)="toggleAccordion(0)">Timesheet Entry</h2>
-      <div class="accordion-content" *ngIf="accordionState[0]">
-        <p>You can now directly select fields from outside the accordion.</p>
-      </div>
-    </div> -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">Fill Your Timesheet</h2>
-      <div class="accordion-content">
-        <form #timesheetForm="ngForm" (ngSubmit)="onSubmit(timesheetForm)">
-          <table class="classic-table">
-            <thead>
-              <tr>
-                <th>WFOL</th>
-                <th>Project</th>
-                <th>Location</th>
-                <th>Hrs. Type</th>
-                <th *ngFor="let day of weekDays">{{ day }}</th>
-                <th>Total Hrs.</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" [(ngModel)]="timesheetEntry.wfol" name="wfol" /></td>
-                <td>
-                  <select [(ngModel)]="timesheetEntry.project" name="project" required>
-                    <option value="">Select Project</option>
-                    <option>Project 1</option>
-                    <option>Project 2</option>
-                  </select>
-                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.project" class="error">Project is required.
-                  </div>
-                </td>
-                <td>
-                  <select [(ngModel)]="timesheetEntry.location" name="location" required>
-                    <option value="">Select Location</option>
-                    <option>Bangalore</option>
-                    <option>Other Location</option>
-                  </select>
-                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.location" class="error">Location is required.
-                  </div>
-                </td>
-                <td>
-                  <select [(ngModel)]="timesheetEntry.hrsType" name="hrsType" required>
-                    <option value="">Select Hrs Type</option>
-                    <option>Offshore</option>
-                    <option>Onshore</option>
-                  </select>
-                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.hrsType" class="error">Hrs Type is required.
-                  </div>
-                </td>
-                
-                <td *ngFor="let day of weekDays" class="day-cell">
-                  <div class="input-container" [class.popup-visible]="popupVisible[day]">
-                    <input type="number" [(ngModel)]="timesheetEntry.hours[day]" name="hours-{{ day }}"
-                      (input)="calculateTotalHours()" placeholder="Enter hours for {{ day }}" min="0" required />
-                    <div *ngIf="timesheetForm.submitted && !timesheetEntry.hours[day]" class="error">
-                      Hours are required for {{ day }}.
-                    </div>
+  <!-- Logged, Workweek, Weekly Utilization + Capacity Breakdown side by side -->
+  <div class="summary-capacity-wrapper">
 
-                    <button type="button" class="plus-icon" (click)="togglePopup(day)">+</button>
-                    <div *ngIf="popupVisible[day]" class="popup-box">
-                      <input type="text" [(ngModel)]="dayNotes[day]" placeholder="Add a note for {{ day }}"
-                        (blur)="saveNoteForDay(day)" />
-                        <button (click)="saveNoteForDay(day)">Save</button>
-                    </div>
+    <!-- Summary -->
+    <!-- Summary + Capacity Breakdown Table -->
+<table class="summary-capacity-table">
+  <thead>
+    <tr>
+      <th>Logged</th>
+      <th>Workweek</th>
+      <th>Weekly Utilization</th>
+      <th >Capacity Breakdown</th>
+      <th>-</th><th>8</th><th>8</th><th>8</th><th>8</th><th>8</th><th>-</th>
+      <th><strong>45h 0m</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Row 1: Logged / Workweek / Utilization / Capacity -->
+    <tr>
+      <td><strong>{{ getTotalWeekHours() }}h</strong></td>
+      <td><strong>45h 0m</strong></td>
+      <td>
+        <strong>{{ (getTotalWeekHours() / 45) * 100 | number:'1.0-0' }}%</strong>
+      </td>
+      <td><strong>Billable Utilisation</strong></td>
+      <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+      <td>-</td>
+    </tr>
 
-                    <div class="note-display" *ngIf="dayNotes[day]">
-                      {{ dayNotes[day] }}
-                    </div>
-                  </div>
-                </td>
+    <!-- Row 2: Billable Utilisation -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><strong>Non-Billable Utilisation</strong></td>
+      <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+      <td>-</td>
+    </tr>
+
+  </tbody>
+</table>
+
+  </div>
+
+  <!-- Timesheet Table -->
+  <form [formGroup]="form" class="timesheet-form">
+    <table>
+      <thead>
+        <tr>
+          <th>PROJECT</th>
+          <th>TASK</th>
+          <th *ngFor="let date of weekDates">
+            <small>9h 0m</small><br>
+            <strong>{{ date | date:'EEE d' }}</strong>
+          </th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="rows">
+        <tr *ngFor="let row of rows.controls; let r = index" [formGroupName]="r">
+          <td><input formControlName="project" placeholder="Project" /></td>
+          <td>
+            <select formControlName="task">
+              <option value="">Select</option>
+              <option *ngFor="let t of taskOptions" [value]="t">{{ t }}</option>
+            </select>
+          </td>
+          <!-- <td *ngFor="let date of weekDates; let i = index" [formGroupName]="'hours'">
+            <input
+              type="number"
+              [formControlName]="i"
+              min="0"
+              max="9"
+              [disabled]="isWeekend(date)" />
+          </td> -->
+          <td *ngFor="let date of weekDates; let i = index" [formGroupName]="'hours'">
+  <button class="new" *ngIf="!isWeekend(date)" (click)="openDialog(r,i)">
+    {{ getHours(r).at(i).value ? getHours(r).at(i).value + 'h' : '' }}
+  </button>
+</td>
+          <td><strong>{{ getRowTotal(r) }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="status">UNSUBMITTED</div>
+    <div class="billable">BILLABLE: {{ getBillableTotal() }}h</div>
+    <div class="non-billable">NON-BILLABLE: {{ getNonBillableTotal() }}h</div>
+    <button class="add-row-btn" (click)="addRow()">+ Add Row</button>
+    <button class="submit-btn" (click)="submit()">Submit Timesheet</button>
+  </div>
+
+</div>
 
 
-
-                <td><input type="number" [(ngModel)]="timesheetEntry.totalHours" name="totalHours"
-                    placeholder="Total Hrs" disabled /></td>
-                <td>
-                  <textarea [(ngModel)]="timesheetEntry.description" name="description" placeholder="Description"
-                    required></textarea>
-                  <div *ngIf="timesheetForm.submitted && !timesheetEntry.description" class="error">Description is
-                    required.</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button type="submit" class="classic-submit-btn">Submit</button>
-        </form>
-      </div>
+<div class="custom-dialog-overlay" *ngIf="showPopup">
+  <div class="custom-dialog">
+    <div class="dialog-header">
+      <h3>Add Time Entry</h3>
+      <button class="dialog-close-btn" (click)="closeDialog()">×</button>
     </div>
+
+    <form [formGroup]="popupForm" class="dialog-form">
+      <div formArrayName="tasks" class="task-list">
+        <div *ngFor="let task of tasks.controls; let i = index" [formGroupName]="i" class="task-entry">
+          <label>Date</label>
+          <input type="date" formControlName="date" />
+
+          <label>Time Spent (hours)</label>
+          <input type="number" formControlName="hours" min="0" max="9" />
+          
+          <label class="billable-checkbox">
+  <input type="checkbox" formControlName="billable" />
+  Billable
+</label>
+
+          <label>Notes</label>
+          <textarea formControlName="notes"></textarea>
+        </div>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" (click)="closeDialog()">Cancel</button>
+        <button type="button" (click)="saveDialog()">Save</button>
+        <button type="button" class="add-task-btn" (click)="addTask()">+ Add Task</button>
+      </div>
+    </form>
   </div>
 </div>

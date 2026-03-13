@@ -41,6 +41,11 @@ export class AdminTimeSummaryComponent {
   accordionState = [false, false, false];
 
   name: any = localStorage.getItem('Name');
+  adminname:any= localStorage.getItem('username');
+
+  rejectPopup = false;
+rejectEntry: any = null;
+rejectReason = '';
 
 
   constructor(
@@ -57,29 +62,66 @@ export class AdminTimeSummaryComponent {
 loadTimesheets(): void {
   this.timesheetService.getTimesheets().subscribe((data: any) => {
     // Check if timesheetEntries exists in response
-    this.timesheetEntries = data;
+    this.timesheetEntries = data.timesheets;
   });
 }
-
 
 updateStatus(entry: any, status: 'Approved' | 'Rejected') {
-  entry.status = status;
 
-  this.timesheetService.updateTimesheetStatus(entry.id, status).subscribe({
-    next: (res) => console.log('Status updated', res),
-    error: (err) => console.error('Error updating status', err)
-  });
+  this.timesheetService
+    .updateTimesheetStatus(entry.id, status)
+    .subscribe({
+      next: () => entry.status = status
+    });
+
 }
-
 revertStatus(entry: any) {
-  entry.status = 'Pending';
 
-  this.timesheetService.updateTimesheetStatus(entry.id, 'Pending').subscribe({
-    next: (res) => console.log('Status reverted', res),
-    error: (err) => console.error('Error reverting status', err)
-  });
+  this.timesheetService
+    .updateTimesheetStatus(entry.id, 'Pending')
+    .subscribe({
+      next: () => entry.status = 'Pending'
+    });
+
 }
 
+selectedEntry: any = null;
+showPopup = false;
 
+openNotes(entry: any) {
+  this.selectedEntry = entry;
+  this.showPopup = true;
+}
 
+closePopup() {
+  this.showPopup = false;
+}
+
+openRejectPopup(entry: any) {
+  this.rejectEntry = entry;
+  this.rejectReason = '';
+  this.rejectPopup = true;
+}
+
+closeRejectPopup() {
+  this.rejectPopup = false;
+}
+
+confirmReject() {
+
+  this.timesheetService
+    .updateTimesheetStatus(
+      this.rejectEntry.id,
+      'Rejected',
+    this.rejectReason,
+    this.adminname
+    )
+    .subscribe({
+      next: () => {
+        this.rejectEntry.status = 'Rejected';
+        this.rejectPopup = false;
+      }
+    });
+
+}
 }
