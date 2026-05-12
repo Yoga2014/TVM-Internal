@@ -1,8 +1,14 @@
 <div class="admin-summary-container">
 
   <h2 class="page-title">Employee Leave Summary</h2>
-  <input type="text" placeholder="Search by Employee, Leave Type, or Date" [(ngModel)]="searchTerm"
-    (input)="filterLeaves()" class="search-box" />
+
+  <input
+    type="text"
+    placeholder="Search by Employee, Leave Type, or Date"
+    [(ngModel)]="searchTerm"
+    (input)="filterLeaves()"
+    class="search-box"
+  />
 
   <div class="leave-table-section">
     <table class="table">
@@ -10,41 +16,54 @@
         <tr>
           <th>Employee</th>
           <th>Leave Type</th>
-          <th>StartDate</th>
-          <th>EndDate</th>
-          <th>Booked</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Days</th>
           <th>Status</th>
+          <th>Approved By</th>
+
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let leave of paginatedLeaves">
-          <td>{{ leave.employeeName}}</td>
-          <td>{{ leave.leaveType }}</td>
-          <td>{{leave.startDate}}</td>
-          <td>{{leave.endDate}}</td>
-          <td>{{ leave.booked }}</td>
 
+        <!-- No Data -->
+        <tr *ngIf="paginatedLeaves.length === 0">
+          <td colspan="7" style="text-align:center;">No Data Found</td>
+        </tr>
+
+        <!-- Data Rows -->
+        <tr *ngFor="let leave of paginatedLeaves">
+          <td>{{ leave.employeeName }}</td>
+          <td>{{ leave.leaveType || '-' }}</td>
+          <td>{{ leave.fromDate }}</td>
+          <td>{{ leave.toDate }}</td>
+          <td>{{ leave.totalDays }}</td>
           <td>
-            <span class="status" [class.approved]="leave.status === 'Approved'"
-              [class.pending]="leave.status === 'Pending'" [class.rejected]="leave.status === 'Rejected'">
-              {{ leave.status }}
+            <span class="status"
+              [class.approved]="leave.status === 'approved'"
+              [class.pending]="leave.status === 'pending'"
+              [class.rejected]="leave.status === 'rejected'">
+              {{ leave.status | titlecase }}
             </span>
           </td>
+          <td>{{ leave.approvedBy }}</td>
         </tr>
       </tbody>
     </table>
 
     <!-- Pagination -->
     <div class="pagination">
-      <button class="btn" (click)="prevPage()" [disabled]="page === 1">
+      <button (click)="prevPage()" [disabled]="page === 1">
         Previous
       </button>
 
-      <span class="page-count">Page {{ page }} of {{ totalPages }}</span>
+      <span>Page {{ page }} of {{ totalPages }}</span>
 
-      <button class="btn" (click)="nextPage()" [disabled]="page === totalPages">
+      <button (click)="nextPage()" [disabled]="page === totalPages">
         Next
       </button>
     </div>
+
   </div>
+</div>

@@ -7,7 +7,7 @@ import { ToastService } from '../toast.service';
 @Component({
   selector: 'app-time-request',
   templateUrl: './time-request.component.html',
-  styleUrl: './time-request.component.scss'
+  styleUrls: ['./time-request.component.scss']
 })
 export class TimeRequestComponent {
   

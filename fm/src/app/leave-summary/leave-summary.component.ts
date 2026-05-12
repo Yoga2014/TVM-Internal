@@ -36,11 +36,20 @@ export class LeaveSummaryComponent implements OnInit {
   loadLeaveSummary() {
     this.leaveService.getLeaveSummary(this.employeeId).subscribe({
       next: (data: any) => {
-        this.leaves = data.leaves || [];
+        // Map leaveDetails to leaves
+        this.leaves = data.leaveDetails.map((detail: any) => ({
+          employeeName: data.employeeName,
+          leaveType: detail.leaveType,
+          startDate: detail.fromDate,
+          endDate: detail.toDate,
+          totalDays: detail.totalDays,
+          reasonforLeave: detail.reason,
+          status: detail.status,
+          approvedBy: detail.approvedBy || '—'
+        }));
 
         this.totalUsedLeaves = data.usedLeave;
         this.totalRemainingLeaves = data.remainingLeave;
-
         this.totalPages = Math.ceil(this.leaves.length / this.pageSize);
         this.updatePagination();
       },
@@ -67,3 +76,4 @@ export class LeaveSummaryComponent implements OnInit {
     }
   }
 }
+

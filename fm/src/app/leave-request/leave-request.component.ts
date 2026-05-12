@@ -39,20 +39,25 @@ export class LeaveRequestsComponent implements OnInit {
     this.loadLeaveRequests();
   }
 
-  loadLeaveRequests() {
-    this.leaveService.getMyLeaveRequests(this.employeeId).subscribe({
-      next: data => {
-        this.leaveRequests = data.map((req: any) => ({
+loadLeaveRequests() {
+  this.leaveService.getMyLeaveRequests(this.employeeId).subscribe({
+    next: data => {
+
+      // ✅ FILTER ONLY PENDING
+      this.leaveRequests = data
+        .filter((req: any) => req.status === 'PENDING')
+        .map((req: any) => ({
           ...req,
           leavePeriod: `${req.startDate} → ${req.endDate}`,
           approvedBy: req.approvedBy ?? '—',
           selected: false
         }));
-        this.filteredRequests = [...this.leaveRequests];
-      },
-      error: err => console.error(err)
-    });
-  }
+
+      this.filteredRequests = [...this.leaveRequests];
+    },
+    error: err => console.error(err)
+  });
+}
 
   selectAll(event: any) {
     const checked = event.target.checked;

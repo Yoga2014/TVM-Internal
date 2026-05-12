@@ -9,8 +9,7 @@ import { API_CONFIG } from '../api-config';
 })
 export class AdminleaveService {
 
-  // 🔴 MUST MATCH BACKEND CONTROLLER
-  // @RequestMapping("/api/admin/leave")
+  // ✅ Base URL → http://localhost:8080/api/admin/leave
   private baseUrl = `${API_CONFIG.BASE_URL}/api/admin/leave`;
 
   constructor(private http: HttpClient) {}
@@ -18,8 +17,9 @@ export class AdminleaveService {
   // ================= COMMON HEADERS =================
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
+
     return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,   // ✅ token attached
       'Content-Type': 'application/json'
     });
   }
@@ -41,26 +41,15 @@ export class AdminleaveService {
   // Payload:
   // {
   //   leaveId: number,
-  //   status: "Approved" | "Rejected",
-  //   approvedBy: string
+  //   status: "APPROVED" | "REJECTED",
+  //   role: "ADMIN"
   // }
   // =================================================
-  updateLeaveRequest(
-    leaveId: string,
-    status: 'Approved' | 'Rejected',
-    approvedBy: string = 'Admin'
-  ): Observable<any> {
-
-    const payload = {
-      leaveId: Number(leaveId),
-      status,
-      approvedBy
-    };
-
+  updateLeaveRequest(payload: any): Observable<any> {
     return this.http.put(
-      `${this.baseUrl}/action`,
-      payload,
-      { headers: this.getHeaders() }
+      `${this.baseUrl}/action`,   // ✅ FIXED URL
+      payload,                    // ✅ correct body
+      { headers: this.getHeaders() } // ✅ correct headers
     );
   }
 
@@ -79,17 +68,20 @@ export class AdminleaveService {
   // ✅ ADMIN – LEAVE SUMMARY (ALL EMPLOYEES)
   // GET /api/admin/leave/summary
   // =================================================
-  getLeaveSummary(): Observable<LeaveRequest[]> {
-    return this.http.get<LeaveRequest[]>(
+  getLeaveSummary(): Observable<any> {
+    return this.http.get(
       `${this.baseUrl}/summary`,
       { headers: this.getHeaders() }
     );
   }
 
-
+  // =================================================
+  // ✅ ADMIN – SINGLE EMPLOYEE SUMMARY
+  // GET /api/admin/leave/summary?employeeId=1
+  // =================================================
   getEmployeeLeaveSummary(employeeId: number): Observable<any> {
     return this.http.get(
-      `${this.baseUrl}/summary/${employeeId}`,
+      `${this.baseUrl}/summary?employeeId=${employeeId}`,
       { headers: this.getHeaders() }
     );
   }

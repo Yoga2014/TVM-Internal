@@ -14,12 +14,16 @@ export class AdminrequestComponent implements OnInit {
   filteredRequests: LeaveRequest[] = [];
   selectedRequests: LeaveRequest[] = [];
 
-  constructor(private AdminleaveService: AdminleaveService, private toastService: ToastService) {}
+  constructor(
+    private AdminleaveService: AdminleaveService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadLeaveRequests();
   }
 
+  // ================= LOAD REQUESTS =================
   loadLeaveRequests(): void {
     this.AdminleaveService.getLeaves().subscribe({
       next: (data) => {
@@ -29,33 +33,68 @@ export class AdminrequestComponent implements OnInit {
           approvedBy: req.approvedBy ?? '—',
           selected: false
         }));
+
         this.filteredRequests = [...this.leaveRequests];
       },
-      error: err => console.error('Failed to load leaves', err)
-    });
-  }
-
-  updateStatus(req: LeaveRequest, status: 'Approved' | 'Rejected') {
-
-    this.AdminleaveService.updateLeaveRequest(String(req.id), status).subscribe({
-      next: () => {
-        req.status = status;
-        req.approvedBy = 'Admin';
-        this.toastService.success(`Leave ${status} Successfully`);
-      },
       error: err => {
-        console.error(err);
-        this.toastService.error('Failed to update leave');
+        console.error('Failed to load leaves', err);
+        this.toastService.error('Failed to load leave requests');
       }
     });
   }
 
-  selectAll(event: any) {
-    const checked = event.target.checked;
-    this.filteredRequests.forEach(x => x.selected = checked);
-    this.selectedRequests = checked ? [...this.filteredRequests] : [];
+  // ================= SUMMARY + REFRESH =================
+  getSummaryAndRefresh(): void {
+    this.AdminleaveService.getLeaveSummary().subscribe({
+      next: () => {
+        // ✅ After summary success → reload requests
+        this.loadLeaveRequests();
+      },
+      error: err => {
+        console.error('Summary API failed', err);
+        this.toastService.error('Failed to refresh data');
+      }
+    });
   }
 
+  // ================= APPROVE / REJECT =================
+ updateStatus(req: LeaveRequest, status: 'Approved' | 'Rejected') {
+
+  const payload = {
+    leaveId: req.id,
+    status: status.toUpperCase(),
+    role: 'ADMIN'
+  };
+
+  this.AdminleaveService.updateLeaveRequest(payload).subscribe({
+    next: () => {
+      req.status = status;
+      req.approvedBy = 'Admin';
+
+      this.toastService.success(`Leave ${status} Successfully`);
+
+      // ✅ ONLY refresh list (NO summary call)
+      this.loadLeaveRequests();
+    },
+    error: err => {
+      console.error(err);
+      this.toastService.error('Failed to update leave');
+    }
+  });
+}
+
+  // ================= SELECT ALL =================
+  selectAll(event: any) {
+    const checked = event.target.checked;
+
+    this.filteredRequests.forEach(x => x.selected = checked);
+
+    this.selectedRequests = checked
+      ? [...this.filteredRequests]
+      : [];
+  }
+
+  // ================= SINGLE ROW SELECT =================
   onRowSelect(event: any, request: LeaveRequest) {
     request.selected = event.target.checked;
 
@@ -67,7 +106,9 @@ export class AdminrequestComponent implements OnInit {
     }
   }
 
+  // ================= DELETE =================
   deleteSelectedRequests() {
+
     if (this.selectedRequests.length === 0) {
       this.toastService.error('Select at least one request');
       return;
@@ -80,7 +121,10 @@ export class AdminrequestComponent implements OnInit {
     Promise.all(deletes.map(d => d.toPromise() as Promise<any>))
       .then(() => {
         this.toastService.success('Selected requests deleted');
+
         this.selectedRequests = [];
+
+        // ✅ Refresh after delete
         this.loadLeaveRequests();
       })
       .catch(err => {
